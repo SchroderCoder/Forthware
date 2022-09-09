@@ -15,9 +15,24 @@ exports.getProyectos = (request, response, next) => {
     response.render(path.join('..',"views", "proyectos.ejs"));
 };
 
+exports.getCrearProyecto = (request, response, next) => {
+
+    response.render(path.join('..',"views", "CrearProyecto.ejs"));
+};
+
+exports.getEditarProyecto = (request, response, next) => {
+
+    response.render(path.join('..',"views", "EditarProyecto.ejs"));
+};
+
 exports.getReportes = (request, response, next) => {
 
     response.render(path.join('..',"views", "reportes.ejs"));
+};
+
+exports.getCrearReporte = (request, response, next) => {
+
+    response.render(path.join('..',"views", "CrearReportes.ejs"));
 };
 
 exports.getColaboradores = (request, response, next) => {

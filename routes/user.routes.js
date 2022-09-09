@@ -13,9 +13,15 @@ router.get('/main', userController.getMain);
 
 router.get('/reportes', userController.getReportes);
 
+router.get('/crearReporte', userController.getCrearReporte);
+
 router.get('/tareas', userController.getTareas);
 
 router.get('/proyectos', userController.getProyectos);
+
+router.get('/crearProyecto', userController.getCrearProyecto);
+
+router.get('/editarReporte', userController.getEditarReporte);
 
 router.get('/colaboradores', userController.getColaboradores);
 
