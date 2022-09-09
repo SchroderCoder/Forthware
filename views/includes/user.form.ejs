@@ -1,0 +1,15 @@
+<h1>Registrar un nuevo usuario</h1>
+<form action="new" method="POST">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+    <fieldset>
+        <legend>Datos del usuario</legend>
+            <input placeholder="paul" id="username" name="username" type="text" required>
+            <label for="username">Nombre de usuario</label>
+            <input placeholder="**" id="password" name="password" type="password" required>
+            <label for="password">Password</label>
+            <input placeholder="Paul Rodríguez" id="nombre" name="nombre" type="text" required>
+            <label for="nombre">Nombre completo del usuario</label>
+    </fieldset>
+    <br>
+    <input type="submit" class="btn" value="Registrar">
+</form>

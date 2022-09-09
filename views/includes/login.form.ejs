@@ -1,0 +1,13 @@
+<h1>Acceder</h1>
+<form action="login" method="POST">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+    <fieldset>
+        <legend>Datos del usuario</legend>
+            <input placeholder="Pinguino Rodriguez" id="username" name="username" type="text" required>
+            <label for="username">Nombre de usuario</label>
+            <input placeholder="***" id="password" name="password" type="password" required>
+            <label for="password">Password</label>
+    </fieldset>
+    <br>
+    <input type="submit" class="btn" value="Entrar">
+</form>
