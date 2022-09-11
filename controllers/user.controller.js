@@ -7,8 +7,7 @@ exports.getNew = (request, response, next) => {
 };
 
 exports.postNew = (request, response, next) => {
-
-    const usuario = new Usuario(request.body.username, request.body.password, request.body.nombre);
+    const usuario = new Usuario(request.body.correo, request.body.password, request.body.nombre, request.body.disponibilidad, request.body.image);
     usuario.save()
         .then(() => {
             response.status(303).redirect('/user/login');
@@ -26,8 +25,10 @@ exports.getLogin = (request, response, next) => {
 };
 
 exports.getMain = (request, response, next) => {
-
-    response.render(path.join('..',"views", "principal.ejs"));
+    console.log(request.session.privilegios);
+    response.render(path.join('..',"views", "principal.ejs"), {
+        privilegios: request.session.privilegios,
+    });
 };
 
 exports.getProyectos = (request, response, next) => {
@@ -67,16 +68,31 @@ exports.getTareas = (request, response, next) => {
 
 exports.postLogin = (request, response, next) => {
     
-    return Usuario.fetchOne(request.body.username)
+    return Usuario.fetchOne(request.body.correo)
         .then(([rows, fielData]) => {
             if (rows.length == 1) {
-                bcrypt.compare(request.body.password, rows[0].password)
+                bcrypt.compare(request.body.password, rows[0].contraseña)
                     .then(doMatch => {
                         if (doMatch) {
                             request.session.isLoggedIn = true;
                             request.session.user = rows[0].nombre;
                             return request.session.save(err => {
-                                response.redirect('/user/main');
+                                //Obtener los permisos del usuario
+                                console.log(rows[0].id_empleado)
+                                Usuario.getPermisos(rows[0].id_empleado)
+                                    .then(([consulta_privilegios, fielData]) => {
+                                        //Guardar los permisos en una variable de sesión
+                                        request.session.privilegios = [];
+                                        for(let privilegio of consulta_privilegios) {
+                                            request.session.privilegios.push(privilegio.descripcion);
+                                        }
+                                        response.redirect('/user/main');
+                                    })
+                                    .catch();
+                                
+                                
+                                
+                                
                             });
                         } else {
                             console.log("El usuario o contraseña no existe");

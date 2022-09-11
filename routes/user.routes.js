@@ -3,31 +3,33 @@ const router = express.Router();
 
 const userController = require('../controllers/user.controller');
 
-router.get('/new', userController.getNew);
+const isAuth = require('../util/isAuth.js');
 
-router.post('/new', userController.postNew);
+router.get('/new', isAuth, userController.getNew);
+
+router.post('/new', isAuth, userController.postNew);
 
 router.get('/login', userController.getLogin);
 
 router.post('/login', userController.postLogin);
 
-router.get('/logout', userController.logout);
+router.get('/logout', isAuth, userController.logout);
 
-router.get('/main', userController.getMain);
+router.get('/main', isAuth, userController.getMain);
 
-router.get('/reportes', userController.getReportes);
+router.get('/reportes', isAuth, userController.getReportes);
 
-router.get('/crearReporte', userController.getCrearReporte);
+router.get('/crearReporte', isAuth, userController.getCrearReporte);
 
-router.get('/tareas', userController.getTareas);
+router.get('/tareas', isAuth, userController.getTareas);
 
-router.get('/proyectos', userController.getProyectos);
+router.get('/proyectos', isAuth, userController.getProyectos);
 
-router.get('/crearProyecto', userController.getCrearProyecto);
+router.get('/crearProyecto', isAuth, userController.getCrearProyecto);
 
-router.get('/editarProyecto', userController.getEditarProyecto);
+router.get('/editarProyecto', isAuth, userController.getEditarProyecto);
 
-router.get('/colaboradores', userController.getColaboradores);
+router.get('/colaboradores', isAuth, userController.getColaboradores);
 
 
 module.exports = router;
