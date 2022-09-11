@@ -33,37 +33,51 @@ exports.getMain = (request, response, next) => {
 
 exports.getProyectos = (request, response, next) => {
 
-    response.render(path.join('..',"views", "proyectos.ejs"));
+    response.render(path.join('..',"views", "proyectos.ejs"), {
+        privilegios: request.session.privilegios,
+    });
 };
 
 exports.getCrearProyecto = (request, response, next) => {
 
-    response.render(path.join('..',"views", "CrearProyecto.ejs"));
+    response.render(path.join('..',"views", "CrearProyecto.ejs"), {
+        privilegios: request.session.privilegios,
+    });
 };
 
 exports.getEditarProyecto = (request, response, next) => {
 
-    response.render(path.join('..',"views", "EditarProyecto.ejs"));
+    response.render(path.join('..',"views", "EditarProyecto.ejs"), {
+        privilegios: request.session.privilegios,
+    });
 };
 
 exports.getReportes = (request, response, next) => {
 
-    response.render(path.join('..',"views", "reportes.ejs"));
+    response.render(path.join('..',"views", "reportes.ejs"), {
+        privilegios: request.session.privilegios,
+    });
 };
 
 exports.getCrearReporte = (request, response, next) => {
 
-    response.render(path.join('..',"views", "CrearReportes.ejs"));
+    response.render(path.join('..',"views", "CrearReporte.ejs"), {
+        privilegios: request.session.privilegios,
+    });
 };
 
 exports.getColaboradores = (request, response, next) => {
 
-    response.render(path.join('..',"views", "colaboradores.ejs"));
+    response.render(path.join('..',"views", "colaboradores.ejs"), {
+        privilegios: request.session.privilegios,
+    });
 };
 
 exports.getTareas = (request, response, next) => {
 
-    response.render(path.join('..',"views", "tareas.ejs"));
+    response.render(path.join('..',"views", "tareas.ejs"), {
+        privilegios: request.session.privilegios,
+    });
 };
 
 exports.postLogin = (request, response, next) => {

@@ -4,8 +4,9 @@ const router = express.Router();
 const userController = require('../controllers/user.controller');
 
 const isAuth = require('../util/isAuth.js');
+const isRol = require('../util/isRol');
 
-router.get('/new', isAuth, userController.getNew);
+router.get('/new', isAuth, isRol, userController.getNew);
 
 router.post('/new', isAuth, userController.postNew);
 
