@@ -37,4 +37,8 @@ module.exports = class Usuario {
         
     }
 
+    static getRol(a_rol) {
+        return db.execute('SELECT descripcion FROM roles r, tiene t WHERE r.id_rol = t.id_rol AND t.id_empleado = ?', [a_rol]);
+    }
+
 }

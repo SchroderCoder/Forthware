@@ -1,6 +1,7 @@
 const path = require('path');
 const bcrypt = require('bcryptjs');
 const Usuario = require('../models/user.model');
+const isRol = require('../util/isRol');
 
 exports.getNew = (request, response, next) => {
     response.render(path.join('new.ejs'));
@@ -94,12 +95,22 @@ exports.postLogin = (request, response, next) => {
                                 //Obtener los permisos del usuario
                                 console.log(rows[0].id_empleado)
                                 Usuario.getPermisos(rows[0].id_empleado)
+
                                     .then(([consulta_privilegios, fielData]) => {
                                         //Guardar los permisos en una variable de sesión
                                         request.session.privilegios = [];
                                         for(let privilegio of consulta_privilegios) {
                                             request.session.privilegios.push(privilegio.descripcion);
                                         }
+                                        Usuario.getRol(rows[0].id_empleado)
+                                            .then(([consulta_roles, fielData]) => {
+                                                request.session.roles = "";
+                        
+                                                request.session.roles = consulta_roles[0].descripcion;
+                                            
+                                        
+                                            })
+                                            .catch(console.log('sirve'));
                                         response.redirect('/user/main');
                                     })
                                     .catch();
