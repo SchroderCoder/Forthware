@@ -12,6 +12,10 @@ router.get('/new', isAuth, isCoordinador, userController.getNew);
 
 router.post('/new', isAuth, isCoordinador, userController.postNew);
 
+router.get('/asignarRol', isAuth,  userController.getRol);
+
+router.post('/asignarRol', isAuth, userController.postRol);
+
 router.get('/login', userController.getLogin);
 
 router.post('/login', userController.postLogin);

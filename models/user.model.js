@@ -11,6 +11,7 @@ module.exports = class Usuario {
         this.imagen = una_imagen;
     }
 
+    
 
 
     save() {
@@ -32,6 +33,14 @@ module.exports = class Usuario {
         return db.execute('SELECT * FROM empleados WHERE correo_electronico = ?', [a_correo]);
     }
 
+    static fetchEmpleados() {
+        return db.execute('SELECT nombre FROM empleados');
+    }
+
+    static fetchRol() {
+        return db.execute('SELECT descripcion FROM roles');
+    }
+
     static getPermisos(a_empleado) {
         return db.execute('SELECT pri.descripcion FROM posee p, roles r, privilegios pri WHERE p.id_rol = r.id_rol AND pri.id_privilegio = p.id_privilegio AND r.id_rol = (SELECT t.id_rol FROM tiene t WHERE t.id_empleado = ?)', [a_empleado]) ;
         
@@ -39,6 +48,10 @@ module.exports = class Usuario {
 
     static getRol(a_rol) {
         return db.execute('SELECT descripcion FROM roles r, tiene t WHERE r.id_rol = t.id_rol AND t.id_empleado = ?', [a_rol]);
+    }
+
+    static changeRol(ch_rol, ch_name) {
+        return db.execute('UPDATE tiene SET id_rol = ? WHERE id_empleado = (SELECT e.id_empleado FROM empleados e WHERE e.nombre = ?)', [ch_rol, ch_name]);
     }
 
 }
