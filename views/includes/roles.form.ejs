@@ -1,0 +1,27 @@
+<h1>Asignar rol</h1>
+<form action="asignarRol" method="POST">
+    <fieldset>
+        <div>
+            <select name="empleados" id="empleados">
+                <option value="" disabled selected>Elige un empleado</option>
+                <% for (let e of empleados) { %>
+                    <option value="<%= e.nombre %>"><%= e.nombre %></option>
+                <% } %>
+            </select>
+            <label for="empleados">Empleados</label>
+        </div>
+        <br><br>
+        <div>
+            <select name="rol" id="rol">
+                <option value="" disabled selected>Elige tu rol</option>
+                <% for (let r of roles) { %>
+                    <option value="<%= r.descripcion %>"><%= r.descripcion %></option>
+                <% } %>
+            </select>
+            <label for="rol">rol</label>
+        </div>
+        <br>
+        <input type="submit" class="btn" value="Confirmar">
+    </fieldset>
+    <br>
+</form>
