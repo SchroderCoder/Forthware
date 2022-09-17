@@ -1,9 +1,9 @@
-
+<%- include('includes/head.ejs') %>
+<%- include('includes/nav.ejs') %>
+<%- include('includes/side.ejs') %>
 <h1>Entraste a proyectos</h1>
-
-<% if (privilegios.indexOf('Crear proyecto') > -1) { %>
-        <a href="/user/crearProyecto" button type="button">Crear proyecto</button>
-<% } %>  
-
-<br><br>
-
+<div>
+        <% if (privilegios.indexOf('Crear proyecto') > -1) { %>
+                <a href="/user/crearProyecto" button type="button">Crear proyecto</button>
+        <% } %>  
+</div>

@@ -12,10 +12,10 @@ h2{
     color: white;
 }   
 
-nav{
+.main-nav{
     position: fixed;
     width: 100%;
-    height: 95px;
+    height: 80px;
     left: 0px;
     top: 0px;
     background: #2C496A;
@@ -25,12 +25,11 @@ nav{
     border-right: hidden;
 }
 
-sidebar{
+.sidebar{
     position:fixed;
-    width: 240px;
-    height: 954px;
-    left: 0px;
-    top: 95px;
+    width: 190px;
+    height: 964px;
+    top: 80px;
     background: #25282B;
 }
 
@@ -62,7 +61,7 @@ sidebar{
 .opsidebar{
     font-family: 'Inter';
     font-style: bolder;
-    font-size: 26px;
+    font-size: 20px;
     color: white;
     position: absolute;
     top: 27px;

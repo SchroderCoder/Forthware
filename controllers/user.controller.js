@@ -74,7 +74,7 @@ exports.getLogin = (request, response, next) => {
 };
 
 exports.getMain = (request, response, next) => {
-    response.render(path.join('..',"views", "principal.ejs"), {
+    response.render(path.join('..',"views", "main.ejs"), {
         privilegios: request.session.privilegios,
     });
 };

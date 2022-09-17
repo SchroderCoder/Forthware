@@ -15,7 +15,7 @@ app.set('views', 'views');
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser('skbfssopgdwkpgpoejgjoewgewnhgwiogowipwjifiwejfwiofrjwoi'));
+app.use(cookieParser());
 
 app.use(session({
     secret: 'skbfssopgdwkpgpoejgjoewgewnhgwiogowipwjifiwejfwiofrjwoi', 
@@ -40,7 +40,7 @@ app.use('/user', rutas_usuario);
 
 app.use((request, response, next) => {
     response.status(404);
-    response.send('<h1>Error 404: El recurso solicitado no existe</h1>'); //Manda la respuesta
+    response.send('<h1>Error 404: El recurso solicitado no existe</h1>'); 
 });
 
 
