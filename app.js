@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const session = require('express-session');
+var session = require('express-session');
 const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
 
@@ -15,10 +15,10 @@ app.set('views', 'views');
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser());
+app.use(cookieParser('skbfssopgdwkpgpoejgjoewgewnhgwiogowipwjifiwejfwiofrjwoi'));
 
 app.use(session({
-    secret: 'skbfsopgdwkpgpoejgjoewgewnhgwiogowipwjifiwejfwiofrjwoi', 
+    secret: 'skbfssopgdwkpgpoejgjoewgewnhgwiogowipwjifiwejfwiofrjwoi', 
     resave: false, 
     saveUninitialized: false, 
 }));
