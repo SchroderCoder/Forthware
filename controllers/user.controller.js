@@ -1,8 +1,9 @@
 const path = require('path');
 const bcrypt = require('bcryptjs');
 const Usuario = require('../models/user.model');
-const isRol = require('../util/isRol');
 const { changeRol } = require('../models/user.model');
+const session = require('express-session');
+
 
 exports.getNew = (request, response, next) => {
     response.render(path.join('new.ejs'));
@@ -73,7 +74,6 @@ exports.getLogin = (request, response, next) => {
 };
 
 exports.getMain = (request, response, next) => {
-    console.log(request.session.privilegios);
     response.render(path.join('..',"views", "principal.ejs"), {
         privilegios: request.session.privilegios,
     });
