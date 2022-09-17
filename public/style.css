@@ -1,0 +1,79 @@
+body{
+    background: #343A40;
+}
+
+h3{
+    font-family: "Inter", Extra Bold, monospace;
+    color: white;
+}   
+
+h2{
+    font-family: "Inter", Extra Bold, monospace;
+    color: white;
+}   
+
+nav{
+    position: fixed;
+    width: 100%;
+    height: 95px;
+    left: 0px;
+    top: 0px;
+    background: #2C496A;
+    border: solid 0.1em #54B347;
+    border-top: hidden;
+    border-left: hidden;
+    border-right: hidden;
+}
+
+sidebar{
+    position:fixed;
+    width: 240px;
+    height: 954px;
+    left: 0px;
+    top: 95px;
+    background: #25282B;
+}
+
+.logo{
+    position: absolute;
+    width: auto;
+    height: 86px;
+    left: 20px;
+    top: auto;
+    bottom: 5px;
+    filter: drop-shadow(6px 5px 4px rgba(0, 0, 0, 0.35));
+}
+
+.rolnav{
+    font-family: 'Inter';
+    font-style: bolder;
+    font-weight: 800;
+    font-size: 32px;
+    color: white;
+    position: absolute;
+    width: auto;
+    height: 86px;
+    right: 150px;
+    left: auto;
+    top: 27px;
+    bottom: 20px;
+}
+
+.opsidebar{
+    font-family: 'Inter';
+    font-style: bolder;
+    font-size: 26px;
+    color: white;
+    position: absolute;
+    top: 27px;
+}
+
+.maintitle{
+    height: 100px;
+    width: 500px;
+    font-family: 'Inter';
+    font-style: bolder;
+    font-size: 46px;
+    color: white;
+    position: absolute;
+}
