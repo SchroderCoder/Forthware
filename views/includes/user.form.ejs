@@ -1,0 +1,19 @@
+<h1>Registrar un nuevo usuario</h1>
+<form action="new" method="POST">
+    <fieldset>
+        <legend>Datos del usuario</legend>
+            <input placeholder="paul@" id="correo" name="correo" type="text" required>
+            <label for="correo">correo electronico</label>
+            <input placeholder="**" id="password" name="password" type="password" required>
+            <label for="password">contraseña</label>
+            <input placeholder="Paul Rodríguez" id="nombre" name="nombre" type="text" required>
+            <label for="nombre">Nombre completo del usuario</label>
+            <input placeholder="35" id="disponibilidad" name="disponibilidad" type="text" required>
+            <label for="disponibilidad">Disponibilidad del empleado</label>
+            <input placeholder="https://st.depositphotos.com/2218212/2938/i/450/depositphotos_29387653-stock-photo-facebook-profile.jpg "
+             id="image" name="image" type="text" required>
+            <label for="image">Imagen de perfil</label>
+    </fieldset>
+    <br>
+    <input type="submit" class="btn" value="Registrar">
+</form>

@@ -1,0 +1,14 @@
+
+<h1>Entraste a pagina principal</h1>
+
+<nav>
+    <ul>
+        <% if (privilegios.indexOf('Generar reporte') > -1) { %>
+            <% if (privilegios.indexOf('Agregar Tarea') > -1) { %>
+                <li>Agregar tarea</li>
+            <% } %>  
+        <% } %>   
+
+        <li></li>
+    </ul>
+</nav>
