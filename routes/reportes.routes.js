@@ -9,6 +9,9 @@ const isCoordinador = require('../util/isCoordinador');
 
 const isRol = require('../util/isRol.js');
 
-router.get('/reportes', isAuth, reportesController.getReportes);
+router.get('/main', isAuth, reportesController.getReportes);
 
 router.get('/crearReporte', isAuth, reportesController.getCrearReporte);
+
+
+module.exports = router;

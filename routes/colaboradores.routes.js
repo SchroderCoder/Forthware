@@ -10,4 +10,7 @@ const isCoordinador = require('../util/isCoordinador');
 const isRol = require('../util/isRol.js');
 
 
-router.get('/colaboradores', isAuth, colabController.getColaboradores);
+router.get('/main', isAuth, colabController.getColaboradores);
+
+
+module.exports = router;

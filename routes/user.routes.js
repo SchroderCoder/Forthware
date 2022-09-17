@@ -25,19 +25,4 @@ router.get('/logout', isAuth, userController.logout);
 
 router.get('/main', isAuth, userController.getMain);
 
-router.get('/reportes', isAuth, userController.getReportes);
-
-router.get('/crearReporte', isAuth, userController.getCrearReporte);
-
-router.get('/tareas', isAuth,  userController.getTareas);
-
-router.get('/proyectos', isAuth, userController.getProyectos);
-
-router.get('/crearProyecto', isAuth, userController.getCrearProyecto);
-
-router.get('/editarProyecto', isAuth,userController.getEditarProyecto);
-
-router.get('/colaboradores', isAuth, userController.getColaboradores);
-
-
 module.exports = router;

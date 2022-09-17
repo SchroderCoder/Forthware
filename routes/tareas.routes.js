@@ -9,4 +9,7 @@ const isCoordinador = require('../util/isCoordinador');
 
 const isRol = require('../util/isRol.js');
 
-router.get('/tareas', isAuth,  tareasController.getTareas);
+router.get('/main', isAuth,  tareasController.getTareas);
+
+
+module.exports = router;

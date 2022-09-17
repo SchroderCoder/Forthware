@@ -36,7 +36,17 @@ app.use((request, response, next) => {
 const rutas_usuario = require('./routes/user.routes.js');
 app.use('/user', rutas_usuario);
 
+const rutas_colab = require('./routes/colaboradores.routes.js');
+app.use('/colaboradores', rutas_colab);
 
+const rutas_proyectos = require('./routes/proyectos.routes.js');
+app.use('/proyectos', rutas_proyectos);
+
+const rutas_reportes = require('./routes/reportes.routes.js');
+app.use('/reportes', rutas_reportes);
+
+const rutas_tareas = require('./routes/tareas.routes.js');
+app.use('/tareas', rutas_tareas);
 
 app.use((request, response, next) => {
     response.status(404);
