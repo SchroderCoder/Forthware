@@ -79,55 +79,6 @@ exports.getMain = (request, response, next) => {
     });
 };
 
-exports.getProyectos = (request, response, next) => {
-
-    response.render(path.join('..',"views", "proyectos.ejs"), {
-        privilegios: request.session.privilegios,
-    });
-};
-
-exports.getCrearProyecto = (request, response, next) => {
-
-    response.render(path.join('..',"views", "CrearProyecto.ejs"), {
-        privilegios: request.session.privilegios,
-    });
-};
-
-exports.getEditarProyecto = (request, response, next) => {
-
-    response.render(path.join('..',"views", "EditarProyecto.ejs"), {
-        privilegios: request.session.privilegios,
-    });
-};
-
-exports.getReportes = (request, response, next) => {
-
-    response.render(path.join('..',"views", "reportes.ejs"), {
-        privilegios: request.session.privilegios,
-    });
-};
-
-exports.getCrearReporte = (request, response, next) => {
-
-    response.render(path.join('..',"views", "CrearReporte.ejs"), {
-        privilegios: request.session.privilegios,
-    });
-};
-
-exports.getColaboradores = (request, response, next) => {
-
-    response.render(path.join('..',"views", "colaboradores.ejs"), {
-        privilegios: request.session.privilegios,
-    });
-};
-
-exports.getTareas = (request, response, next) => {
-
-    response.render(path.join('..',"views", "tareas.ejs"), {
-        privilegios: request.session.privilegios,
-    });
-};
-
 exports.postLogin = (request, response, next) => {
     
     return Usuario.fetchOne(request.body.correo)
@@ -138,6 +89,7 @@ exports.postLogin = (request, response, next) => {
                         if (doMatch) {
                             request.session.isLoggedIn = true;
                             request.session.user = rows[0].nombre;
+                            request.session.id_empleado= rows[0].id_empleado;
                             return request.session.save(err => {
                                 //Obtener los permisos del usuario
                                 console.log(rows[0].id_empleado)
@@ -150,9 +102,7 @@ exports.postLogin = (request, response, next) => {
                                             request.session.privilegios.push(privilegio.descripcion);
                                         }
                                         Usuario.getRol(rows[0].id_empleado)
-                                            .then(([consulta_roles, fielData]) => {
-                                                request.session.roles = "";
-                                                
+                                            .then(([consulta_roles, fielData]) => {    
                                                 request.session.roles = consulta_roles[0].descripcion;
                                                 console.log(request.session.roles);
                                                 
@@ -160,9 +110,7 @@ exports.postLogin = (request, response, next) => {
                                             .catch(console.log('sirve'));
                                         response.redirect('/user/main');
                                     })
-                                    .catch();
-                                
-                                
+                                    .catch(console.log('xd'));
                                 
                                 
                             });

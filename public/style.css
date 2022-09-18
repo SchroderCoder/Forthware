@@ -12,6 +12,10 @@ h2{
     color: white;
 }   
 
+h1{
+    font-family: "Inter", Extra Bold, monospace;
+    color: white;
+}   
 .main-nav{
     position: fixed;
     width: 100%;

@@ -13,6 +13,8 @@ router.get('/main', isAuth, proyectoController.getProyectos);
 
 router.get('/crearProyecto', isAuth, proyectoController.getCrearProyecto);
 
+router.post('/crearProyecto', isAuth, proyectoController.postCrearProyecto);
+
 router.get('/editarProyecto', isAuth,proyectoController.getEditarProyecto);
 
 
