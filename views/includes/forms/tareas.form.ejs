@@ -1,0 +1,31 @@
+<form action="crearTarea" method="POST">
+    <fieldset>
+        <legend>Datos del proyecto</legend>
+            <div class="multipleSelection">
+                <div class="selectBox" 
+                        onclick="showCheckboxes()">
+                            <select>
+                                <option>Colaboradores</option>
+                            </select>
+                    <div class="overSelect"></div>
+                </div>
+                <div id="checkBoxes">
+                    <% for (let e of empleados) { %>
+                        <input type="checkbox" id="empleados" name="empleados">
+                        <label for="empleados"><%= e %></label>  
+                    <% } %> 
+                </div>
+            </div>
+            <label for="descripcion">Descripción: </label>
+            <input placeholder="Junta" id="descripcion" name="descripcion" type="text" required>
+            <label for="duracion">Tiempo (hrs): </label>
+            <input placeholder=" 0.5" id="duracion" name="duracion" type="number" min = "0.1" max = "12" required>
+            <label for="estatus"> Estatus: </label>
+            <input placeholder="¿En qué etapa de desarrollo se encuentra el proyecto?" id="estatus" name="estatus" type="text" required>
+            <label for="fecha"> Fecha: </label>    
+            <input id="fecha" name="fecha" type="date" required> 
+            
+    </fieldset>
+    <br>
+    <input type="submit" class="btn" value="Crear">
+</form>

@@ -1,7 +1,6 @@
 const path = require('path');
 const bcrypt = require('bcryptjs');
 const Usuario = require('../models/user.model');
-const { changeRol } = require('../models/user.model');
 const session = require('express-session');
 
 
