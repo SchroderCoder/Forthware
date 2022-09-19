@@ -55,14 +55,19 @@ exports.postCrearTareas = (request, response, next) => {
             Tarea.fetchRecent()
             .then(([cols, fielData]) => {
                 let id_reciente= cols[0].reciente;
-                const realiza = new Realiza(e,id_reciente);
-                for (let e of request.body.empleados){
-                    const realiza = new Realiza(e,id_reciente);
-                    realiza.save();
-                    
+                let id_empleados = request.body.empleados;
+
+                for (e of id_empleados){    
+                    Realiza.registrar(e,id_reciente)
+                    .then(([rows, fielData]) => {
+                        response.status(303).redirect('/tareas/main');
+                        console.log("tarea creada con exito");
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        response.render('error.ejs');
+                    });
                 }
-                response.status(303).redirect('/tareas/main');
-                console.log("tarea creada con exito");
             })
             .catch(err => {
                 console.log(err);
