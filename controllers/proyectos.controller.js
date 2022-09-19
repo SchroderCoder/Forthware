@@ -1,12 +1,19 @@
 const path = require('path');
 const session = require('express-session');
 const Proyecto = require('../models/proyecto.model');
-const { saveEtiqueta } = require('../models/proyecto.model');
 
 exports.getProyectos = (request, response, next) => {
-
-    response.render(path.join('..',"views", "proyectos.ejs"), {
-        privilegios: request.session.privilegios,
+    Proyecto.fetchAll()
+    .then(([rows, fielData]) => {
+        console.log(rows);
+        response.render(path.join('..',"views", "proyectos.ejs"), {
+            proyectos: rows,
+            privilegios: request.session.privilegios,
+        });
+    })
+    .catch(err => {
+        console.log(err);
+        response.render('error.ejs');
     });
 };
 

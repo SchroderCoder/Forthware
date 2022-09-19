@@ -2,6 +2,7 @@ const path = require('path');
 const bcrypt = require('bcryptjs');
 const Usuario = require('../models/user.model');
 const session = require('express-session');
+const { request } = require('http');
 
 
 exports.getNew = (request, response, next) => {
@@ -100,9 +101,8 @@ exports.postLogin = (request, response, next) => {
                                             request.session.privilegios.push(privilegio.descripcion);
                                         }
                                         Usuario.getRol(rows[0].id_empleado)
-                                            .then(([consulta_roles, fielData]) => {    
-                                                request.session.roles = consulta_roles[0].descripcion;
-                                                
+                                            .then(([consulta_roles, fielData]) => {   
+                                                request.session.roles= consulta_roles[0].descripcion
                                             })
                                             .catch(err => {
                                                 console.log(err);

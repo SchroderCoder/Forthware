@@ -11,11 +11,11 @@ const isRol = require('../util/isRol.js');
 
 router.get('/main', isAuth, proyectoController.getProyectos);
 
-router.get('/crearProyecto', isAuth, proyectoController.getCrearProyecto);
+router.get('/crearProyecto', isAuth,   proyectoController.getCrearProyecto);
 
-router.post('/crearProyecto', isAuth, proyectoController.postCrearProyecto);
+router.post('/crearProyecto', isAuth,  proyectoController.postCrearProyecto);
 
-router.get('/editarProyecto', isAuth,proyectoController.getEditarProyecto);
+router.get('/editarProyecto', isAuth, proyectoController.getEditarProyecto);
 
 router.get('/crearEtiqueta', isAuth, proyectoController.getCrearEtiqueta);
 

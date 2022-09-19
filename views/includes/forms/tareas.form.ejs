@@ -1,6 +1,6 @@
 <form action="crearTarea" method="POST">
     <fieldset>
-        <legend>Datos del proyecto</legend>
+        <legend>Datos de la tarea</legend>
             <div class="multipleSelection">
                 <div class="selectBox" 
                         onclick="showCheckboxes()">
@@ -11,13 +11,13 @@
                 </div>
                 <div id="checkBoxes">
                     <% for (let e of empleados) { %>
-                        <input type="checkbox" id="empleados" name="empleados" value="<%= e.id_empleado %>" >
+                        <input type="checkbox"  id="empleados" name="empleados" value="<%= e.id_empleado %>">
                         <label for="empleados"><%= e.nombre %></label>  
                     <% } %> 
                 </div>
             </div>
             <div>
-                <select name="proyectos" id="proyectos">
+                <select name="proyectos" id="proyectos" required>
                     <option value="" disabled selected>Etiqueta</option>
                     <% for (let p of proyectos) { %>
                         <option value="<%= p.nombre %>"><%= p.nombre %></option>
@@ -30,8 +30,6 @@
             <input placeholder="Junta" id="descripcion" name="descripcion" type="text" required>
             <label for="duracion">Tiempo (hrs): </label>
             <input placeholder=" 0.5" id="duracion" name="duracion" type="number" min = "0" max = "12" required>
-            <label for="estatus"> Estatus: </label>
-            <input placeholder="¿En qué etapa de desarrollo se encuentra el proyecto?" id="estatus" name="estatus" type="text" required>
             <label for="fecha"> Fecha: </label>    
             <input id="fecha" name="fecha" type="date" required> 
             
