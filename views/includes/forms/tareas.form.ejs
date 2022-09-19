@@ -16,10 +16,20 @@
                     <% } %> 
                 </div>
             </div>
+            <div>
+            <select name="proyectos" id="proyectos">
+                <option value="" disabled selected>Etiqueta</option>
+                <% for (let p of proyectos) { %>
+                    <option value="<%= p %>"><%= p %></option>
+                <% } %>
+            </select>
+            <label for="proyectos">Etiquetas</label>
+            </div>
+
             <label for="descripcion">Descripción: </label>
             <input placeholder="Junta" id="descripcion" name="descripcion" type="text" required>
             <label for="duracion">Tiempo (hrs): </label>
-            <input placeholder=" 0.5" id="duracion" name="duracion" type="number" min = "0.1" max = "12" required>
+            <input placeholder=" 0.5" id="duracion" name="duracion" type="number" min = "0.5" max = "12" required>
             <label for="estatus"> Estatus: </label>
             <input placeholder="¿En qué etapa de desarrollo se encuentra el proyecto?" id="estatus" name="estatus" type="text" required>
             <label for="fecha"> Fecha: </label>    
