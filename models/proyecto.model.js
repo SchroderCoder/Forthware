@@ -18,6 +18,10 @@ module.exports = class Proyecto {
         return db.execute('INSERT INTO proyectos (nombre, descripcion, stack_tecnologia, importancia, estatus, es_etiqueta, image_url, id_empleado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [this.nombre, this.descripcion, this.stack,this.importancia,this.un_estatus,this.etiqueta, this.imagen,this.id]);
     }
 
+    static saveEtiqueta(un_nombre, un_bool, un_id) {
+        return db.execute('INSERT INTO proyectos (nombre,es_etiqueta,id_empleado) VALUES (?,?,?)', [un_nombre,un_bool,un_id]);
+    }
+
     static fetchAll() {
         return db.execute('SELECT * FROM proyectos');
     }

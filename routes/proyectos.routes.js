@@ -17,5 +17,9 @@ router.post('/crearProyecto', isAuth, proyectoController.postCrearProyecto);
 
 router.get('/editarProyecto', isAuth,proyectoController.getEditarProyecto);
 
+router.get('/crearEtiqueta', isAuth, proyectoController.getCrearEtiqueta);
+
+router.post('/crearEtiqueta', isAuth, proyectoController.postCrearEtiqueta);
+
 
 module.exports = router;

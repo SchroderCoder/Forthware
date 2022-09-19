@@ -1,6 +1,7 @@
 const path = require('path');
 const session = require('express-session');
 const Proyecto = require('../models/proyecto.model');
+const { saveEtiqueta } = require('../models/proyecto.model');
 
 exports.getProyectos = (request, response, next) => {
 
@@ -31,9 +32,32 @@ exports.postCrearProyecto = (request, response, next) => {
         });
 };  
 
+
+
 exports.getEditarProyecto = (request, response, next) => {
 
     response.render(path.join('..',"views", "EditarProyecto.ejs"), {
         privilegios: request.session.privilegios,
     });
 };
+
+exports.getCrearEtiqueta = (request, response, next) => {
+
+    response.render(path.join('..',"views", "CrearEtiqueta.ejs"), {
+        privilegios: request.session.privilegios,
+    });
+};
+
+exports.postCrearEtiqueta = (request, response, next) => {
+    id_empleado= request.session.id_empleado;
+
+    saveEtiqueta(request.body.nombre,1 ,id_empleado)
+        .then(() => {
+            response.status(303).redirect('/proyectos/main');
+            console.log("etiqueta creada con exito");
+        })
+        .catch(err => {
+            console.log(err);
+            response.render('error.ejs');
+        });
+};  
