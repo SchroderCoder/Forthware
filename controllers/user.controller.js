@@ -91,7 +91,6 @@ exports.postLogin = (request, response, next) => {
                             request.session.id_empleado= rows[0].id_empleado;
                             return request.session.save(err => {
                                 //Obtener los permisos del usuario
-                                console.log(rows[0].id_empleado)
                                 Usuario.getPermisos(rows[0].id_empleado)
 
                                     .then(([consulta_privilegios, fielData]) => {
@@ -103,13 +102,18 @@ exports.postLogin = (request, response, next) => {
                                         Usuario.getRol(rows[0].id_empleado)
                                             .then(([consulta_roles, fielData]) => {    
                                                 request.session.roles = consulta_roles[0].descripcion;
-                                                console.log(request.session.roles);
                                                 
                                             })
-                                            .catch(console.log('sirve'));
+                                            .catch(err => {
+                                                console.log(err);
+                                                response.render('error.ejs');
+                                            });
                                         response.redirect('/user/main');
                                     })
-                                    .catch(console.log('xd'));
+                                    .catch(err => {
+                                        console.log(err);
+                                        response.render('error.ejs');
+                                    });
                                 
                                 
                             });

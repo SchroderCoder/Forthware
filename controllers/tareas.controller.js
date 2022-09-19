@@ -3,7 +3,7 @@ const session = require('express-session');
 const Proyecto = require('../models/proyecto.model');
 const Tarea = require('../models/tarea.model');
 const Usuario = require('../models/user.model');
-const { fetchId } = require('../models/proyecto.model');
+const Realiza = require('../models/realiza.model');
 
 exports.getTareas = (request, response, next) => {
 
@@ -52,8 +52,22 @@ exports.postCrearTareas = (request, response, next) => {
         const tarea = new Tarea(request.body.descripcion,request.body.duracion,id,request.body.fecha);
         tarea.save()
         .then(() => {
-            response.status(303).redirect('/tareas/main');
-            console.log("tarea creada con exito");
+            Tarea.fetchRecent()
+            .then(([cols, fielData]) => {
+                let id_reciente= cols[0].reciente;
+                const realiza = new Realiza(e,id_reciente);
+                for (let e of request.body.empleados){
+                    const realiza = new Realiza(e,id_reciente);
+                    realiza.save();
+                    
+                }
+                response.status(303).redirect('/tareas/main');
+                console.log("tarea creada con exito");
+            })
+            .catch(err => {
+                console.log(err);
+                response.render('error.ejs');
+            });
         })
         .catch(err => {
             console.log(err);

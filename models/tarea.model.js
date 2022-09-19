@@ -21,4 +21,7 @@ module.exports = class Tarea {
         return db.execute('SELECT * FROM tareas WHERE id_tarea = ?', [un_id]);
     }
 
+    static fetchRecent() {
+        return db.execute('SELECT MAX(id_tarea) AS reciente FROM `tareas` ');
+    }
 }
