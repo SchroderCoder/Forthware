@@ -3,6 +3,7 @@ const session = require('express-session');
 const Proyecto = require('../models/proyecto.model');
 const Tarea = require('../models/tarea.model');
 const Usuario = require('../models/user.model');
+const { fetchId } = require('../models/proyecto.model');
 
 exports.getTareas = (request, response, next) => {
 
@@ -12,17 +13,17 @@ exports.getTareas = (request, response, next) => {
 };
 
 exports.getCrearTareas = (request, response, next) => {
-    Usuario.fetchEmpleados()
+    Usuario.fetchAll()
         .then(([rows, fielData]) => {
             request.session.empleados = [];
             for(let empleado of rows) {
-                request.session.empleados.push(empleado.nombre);
+                request.session.empleados.push(empleado);
             }
             Proyecto.fetchAll()
                 .then(([consulta, fielData]) => {
                     request.session.proyectos= [];
                     for(let proyecto of consulta) {
-                        request.session.proyectos.push(proyecto.nombre);
+                        request.session.proyectos.push(proyecto);
                     }
                     
                     response.render(path.join('..',"views", "CrearTarea.ejs"), {
@@ -33,19 +34,22 @@ exports.getCrearTareas = (request, response, next) => {
                 })
 
                 .catch(err => {
+                    console.log(err);
                     response.render('error.ejs');
                 }); 
         })
         .catch(err => {
+            console.log(err);
             response.render('error.ejs');
         }); 
 }
 
 exports.postCrearTareas = (request, response, next) => {
-    console.log(request.body.empleados);
-
-    const tarea = new Tarea("w",0.5,2,"2022/08/09");
-        
+    
+    Proyecto.fetchId(request.body.proyectos)
+    .then(([rows, fielData]) => {
+        let id = rows[0].id_proyecto;
+        const tarea = new Tarea(request.body.descripcion,request.body.duracion,id,request.body.fecha);
         tarea.save()
         .then(() => {
             response.status(303).redirect('/tareas/main');
@@ -55,4 +59,10 @@ exports.postCrearTareas = (request, response, next) => {
             console.log(err);
             response.render('error.ejs');
         });
+    })
+    .catch(err => {
+        console.log(err);
+        response.render('error.ejs');
+    }); 
+    
 }

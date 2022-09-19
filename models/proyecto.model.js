@@ -26,4 +26,8 @@ module.exports = class Proyecto {
         return db.execute('SELECT * FROM proyectos WHERE id_proyecto = ?', [un_id]);
     }
 
+    static fetchId(un_nombre) {
+        return db.execute('SELECT id_proyecto FROM proyectos WHERE proyectos.nombre = ?', [un_nombre]);
+    }
+
 }

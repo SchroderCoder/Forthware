@@ -37,6 +37,10 @@ module.exports = class Usuario {
         return db.execute('SELECT nombre FROM empleados');
     }
 
+    static fetchId() {
+        return db.execute('SELECT id_empleado FROM empleados');
+    }
+
     static fetchRol() {
         return db.execute('SELECT descripcion FROM roles');
     }

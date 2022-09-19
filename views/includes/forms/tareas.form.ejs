@@ -11,19 +11,19 @@
                 </div>
                 <div id="checkBoxes">
                     <% for (let e of empleados) { %>
-                        <input type="checkbox" id="empleados" name="empleados">
-                        <label for="empleados"><%= e %></label>  
+                        <input type="checkbox" id="empleados" name="empleados" value="<%= e.id_empleado %>" >
+                        <label for="empleados"><%= e.nombre %></label>  
                     <% } %> 
                 </div>
             </div>
             <div>
-            <select name="proyectos" id="proyectos">
-                <option value="" disabled selected>Etiqueta</option>
-                <% for (let p of proyectos) { %>
-                    <option value="<%= p %>"><%= p %></option>
-                <% } %>
-            </select>
-            <label for="proyectos">Etiquetas</label>
+                <select name="proyectos" id="proyectos">
+                    <option value="" disabled selected>Etiqueta</option>
+                    <% for (let p of proyectos) { %>
+                        <option value="<%= p.nombre %>"><%= p.nombre %></option>
+                    <% } %>
+                </select>
+                <label for="proyectos">Etiquetas</label>
             </div>
 
             <label for="descripcion">Descripción: </label>
