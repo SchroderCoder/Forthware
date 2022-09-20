@@ -14,10 +14,13 @@ exports.postNew = (request, response, next) => {
     usuario.save()
         .then(() => {
             response.status(303).redirect('/user/login');
+            console.log("usuario creado con exito");
         })
         .catch(err => {
             console.log(err);
-            response.render('error.ejs');
+            response.render('error.ejs', {
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+            });
         });
 };
 

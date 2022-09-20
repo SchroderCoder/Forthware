@@ -23,6 +23,10 @@ router.get('/editarProyecto/:id', isAuth, proyectoController.getEditarProyecto);
 
 router.post('/editarProyecto', isAuth, proyectoController.postEditarProyecto);
 
+router.get('/editarEtiqueta/:id', isAuth, proyectoController.getEditarEtiqueta);
+
+router.post('/editarEtiqueta', isAuth, proyectoController.postEditarEtiqueta);
+
 
 
 module.exports = router;

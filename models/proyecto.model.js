@@ -22,8 +22,12 @@ module.exports = class Proyecto {
         return db.execute('INSERT INTO proyectos (nombre,es_etiqueta,id_empleado) VALUES (?,?,?)', [un_nombre,un_bool,un_id]);
     }
 
-    static fetchAll() {
-        return db.execute('SELECT * FROM proyectos');
+    static fetchAllEtiquetas() {
+        return db.execute('SELECT * FROM proyectos WHERE es_etiqueta = 1');
+    }
+
+    static fetchAllProyectos() {
+        return db.execute('SELECT * FROM proyectos WHERE es_etiqueta = 0');
     }
 
     static fetchOne(un_id) {

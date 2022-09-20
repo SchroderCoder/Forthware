@@ -1,8 +1,22 @@
 <%- include('includes/head.ejs') %>
 <h1>Entraste a tareas</h1>
 
+<h3>Tareas</h3>
+    <% if (tareas.length > 0) { %>
+        <div>
+            <% for (let  t of tareas) { %>
+                <a href="/proyectos/editarProyecto/<%= t.id_proyecto %>" ><%= t.descripcion %></a>
+                <br>
+            <% } %>
+            </div>
+    <% } else { %>
+        <h2>No hay proyectos registrados</h2>
+    <% } %>  
+<br>
 <div>
     <% if (privilegios.indexOf('Agregar Tarea') > -1) { %>
             <a href="/tareas/crearTarea" button type="button">Crear tarea</button>
     <% } %>  
 </div>
+
+<%- include('includes/foot.ejs') %>

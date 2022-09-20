@@ -1,9 +1,15 @@
-<form action="crearEtiqueta" method="POST">
+<% if (proyectos=="") { %>
+    <form action="crearEtiqueta" method="POST">
+<% } else { %>
+    <form action="/proyectos/editarEtiqueta" method="POST">
+<%}%>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
     <fieldset>
         <legend>Datos de la etiqueta</legend>
-            <label for="nombre"> Nombre: </label>    
-            <input id="nombre" name="nombre" type="input" required> 
-            
+            <input id="id" name="id" type="hidden" value="<%= proyectos.id_proyecto %>">
+            <label for="nombre">Nombre: </label>
+            <input id="nombre" name="nombre" type="text" required>
+
     </fieldset>
     <br>
     <input type="submit" class="btn" value="Crear">

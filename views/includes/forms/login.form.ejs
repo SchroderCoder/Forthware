@@ -1,5 +1,6 @@
 <h1>Acceder</h1>
 <form action="login" method="POST">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
     <fieldset>
         <legend>Datos del usuario</legend>
             <label for="correo">Correo electronico</label>

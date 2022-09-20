@@ -6,21 +6,30 @@ const Usuario = require('../models/user.model');
 const Realiza = require('../models/realiza.model');
 
 exports.getTareas = (request, response, next) => {
-
-    response.render(path.join('..',"views", "tareas.ejs"), {
-        privilegios: request.session.privilegios,
+    Tarea.fetchAll()
+    .then(([rows, fielData]) => {
+        response.render(path.join('..',"views", "tareas.ejs"), {
+            tareas: rows,
+            privilegios: request.session.privilegios,
+        });
+    })
+    .catch(err => {
+        console.log(err);
+        response.render('error.ejs');
     });
 };
 
 exports.getCrearTareas = (request, response, next) => {
     Usuario.fetchAll()
         .then(([rows, fielData]) => {
+            request.session.isLoggedIn = true;
             request.session.empleados = [];
             for(let empleado of rows) {
                 request.session.empleados.push(empleado);
             }
             Proyecto.fetchAll()
                 .then(([consulta, fielData]) => {
+                    request.session.isLoggedIn = true;
                     request.session.proyectos= [];
                     for(let proyecto of consulta) {
                         request.session.proyectos.push(proyecto);

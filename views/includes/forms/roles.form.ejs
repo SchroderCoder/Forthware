@@ -1,5 +1,6 @@
 <h1>Asignar rol</h1>
 <form action="asignarRol" method="POST">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
     <fieldset>
         <div>
             <select name="empleados" id="empleados">
