@@ -2,11 +2,17 @@
 <% const importancia = ["Alto", "Medio", "Bajo"] %>
 <% const estatus = ["Planficación", "Análisis", "Diseño","Desarrollo", "Pruebas","Mantenimiento"] %>
 
-<form action="crearProyecto" method="POST">
-    <fieldset>
+<% if (proyectos=="") { %>
+    <form action="crearProyecto" method="POST">
+<% } else { %>
+    <form action="/proyectos/editarProyecto" method="POST">
+<%}%>
+
+    <fieldset>  
         <legend>Datos del proyecto</legend>
+            <input id="id" name="id" type="hidden" value="<%= proyectos.id_proyecto %>">
             <label for="nombre">Nombre: </label>
-            <input placeholder="Oasis" id="nombre" name="nombre" type="text" required>
+            <input id="nombre" name="nombre" type="text" required>
             <label for="descripcion">Descripción: </label>
             <input placeholder="¿Qué se va a hacer?" id="descripcion" name="descripcion" type="text" required>
             <label for="stack">Stack de tecnologías: </label>

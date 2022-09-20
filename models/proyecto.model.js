@@ -34,4 +34,10 @@ module.exports = class Proyecto {
         return db.execute('SELECT id_proyecto FROM proyectos WHERE proyectos.nombre = ?', [un_nombre]);
     }
 
+    static saveEdit(proyecto) {
+        return db.execute(
+            'UPDATE proyectos SET nombre = ?, descripcion= ?, stack_tecnologia= ?, importancia =?, estatus= ?, image_url= ? WHERE id_proyecto = ?', 
+            [proyecto.nombre, proyecto.descripcion,proyecto.stack_tecnologia,proyecto.importancia,proyecto.estatus,proyecto.image_url,proyecto.id_proyecto]);
+    }
+
 }

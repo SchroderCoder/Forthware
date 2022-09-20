@@ -15,11 +15,14 @@ router.get('/crearProyecto', isAuth,   proyectoController.getCrearProyecto);
 
 router.post('/crearProyecto', isAuth,  proyectoController.postCrearProyecto);
 
-router.get('/editarProyecto', isAuth, proyectoController.getEditarProyecto);
-
 router.get('/crearEtiqueta', isAuth, proyectoController.getCrearEtiqueta);
 
 router.post('/crearEtiqueta', isAuth, proyectoController.postCrearEtiqueta);
+
+router.get('/editarProyecto/:id', isAuth, proyectoController.getEditarProyecto);
+
+router.post('/editarProyecto', isAuth, proyectoController.postEditarProyecto);
+
 
 
 module.exports = router;

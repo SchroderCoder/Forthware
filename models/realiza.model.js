@@ -16,7 +16,7 @@ module.exports = class Realiza {
         
     //     return;
     // }
-
+    
     static registrar(id_empleado,id_tarea) {
         return db.execute('INSERT INTO Realiza (id_empleado, id_tarea) VALUES (?, ?)', [id_empleado,id_tarea]);
     }

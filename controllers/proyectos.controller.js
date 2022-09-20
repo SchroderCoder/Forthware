@@ -5,7 +5,6 @@ const Proyecto = require('../models/proyecto.model');
 exports.getProyectos = (request, response, next) => {
     Proyecto.fetchAll()
     .then(([rows, fielData]) => {
-        console.log(rows);
         response.render(path.join('..',"views", "proyectos.ejs"), {
             proyectos: rows,
             privilegios: request.session.privilegios,
@@ -21,6 +20,8 @@ exports.getCrearProyecto = (request, response, next) => {
 
     response.render(path.join('..',"views", "CrearProyecto.ejs"), {
         privilegios: request.session.privilegios,
+        proyectos: "",
+        titulo: "Crear Proyecto" 
     });
 };
 
@@ -39,14 +40,6 @@ exports.postCrearProyecto = (request, response, next) => {
         });
 };  
 
-
-
-exports.getEditarProyecto = (request, response, next) => {
-
-    response.render(path.join('..',"views", "EditarProyecto.ejs"), {
-        privilegios: request.session.privilegios,
-    });
-};
 
 exports.getCrearEtiqueta = (request, response, next) => {
 
@@ -68,3 +61,59 @@ exports.postCrearEtiqueta = (request, response, next) => {
             response.render('error.ejs');
         });
 };  
+
+exports.getEditarProyecto = (request, response, next) => {
+    Proyecto.fetchOne(request.params.id)
+    .then(([rows, fielData]) => { 
+        if (rows.length > 0) {
+            response.render(path.join('..',"views", "CrearProyecto.ejs"), {
+                proyectos: rows[0],
+                titulo: "Editar proyecto " + rows[0].nombre
+            });
+        } else {
+            console.log("no existe el id del equipo");
+            response.render('error.ejs', {
+            });
+        }
+    })
+    .catch(err => {
+        console.log(err);
+        response.render('error.ejs');
+    });
+
+};
+
+
+exports.postEditarProyecto = (request, response, next) => {
+
+    Proyecto.fetchOne(request.body.id)
+    .then(([rows, fielData]) => {
+        rows[0].nombre= request.body.nombre
+        rows[0].descripcion= request.body.descripcion
+        rows[0].stack_tecnologia= request.body.stack
+        rows[0].importancia= request.body.importancia
+        rows[0].estatus= request.body.estatus
+        rows[0].image_url= request.body.imagen
+        
+        console.log(rows[0].nombre);
+        console.log(rows[0].descripcion);
+        console.log(rows[0].stack_tecnologia);
+        console.log(rows[0].importancia);
+        console.log(rows[0].estatus);
+        console.log(rows[0].image_url);
+        console.log("xs");
+        
+        Proyecto.saveEdit(rows[0])
+        .then(() => {
+            response.status(303).redirect('/proyectos/main');
+        })
+        .catch(err => {
+            console.log(err);
+            response.render('error.ejs');
+        });
+    })
+    .catch(err => {
+        console.log(err);
+        response.render('error.ejs');
+    });
+};

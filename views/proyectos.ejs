@@ -3,16 +3,17 @@
     <% if (proyectos.length > 0) { %>
         <div>
             <% for (let  p of proyectos) { %>
-                <a href="#!" ><%= p.nombre %></a>
+                <a href="/proyectos/editarProyecto/<%= p.id_proyecto %>" ><%= p.nombre %></a>
             <% } %>
             </div>
     <% } else { %>
         <h2>No hay proyectos registrados</h2>
     <% } %>  
-<%- include('includes/foot.ejs') %>
 <div>
         <% if (privilegios.indexOf('Crear proyecto') > -1) { %>
                 <a href="/proyectos/crearProyecto" button type="button">Crear proyecto</button>
                 <!-- <a href="/proyectos/crearEtiqueta" button type="button">Crear etiqueta</button> -->
         <% } %>  
 </div>
+
+<%- include('includes/foot.ejs') %>
