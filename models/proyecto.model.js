@@ -56,4 +56,9 @@ module.exports = class Proyecto {
             [proyecto.nombre, proyecto.descripcion,proyecto.stack_tecnologia,proyecto.importancia,proyecto.estatus,proyecto.image_url,proyecto.id_proyecto]);
     }
 
+    static deleteEtiqueta(proyecto) {
+        return db.execute(
+            'DELETE FROM proyectos WHERE nombre = ?', [proyecto.nombre]);
+    }
+
 }

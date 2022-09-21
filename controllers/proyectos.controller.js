@@ -78,7 +78,7 @@ exports.getCrearEtiqueta = (request, response, next) => {
 exports.postCrearEtiqueta = (request, response, next) => {
     id_empleado= request.session.id_empleado;
 
-    saveEtiqueta(request.body.nombre,1 ,id_empleado)
+    Proyecto.saveEtiqueta(request.body.nombre,1 ,id_empleado)
         .then(() => {
             response.status(303).redirect('/proyectos/main');
             console.log("etiqueta creada con exito");
@@ -200,3 +200,25 @@ exports.postEditarEtiqueta = (request, response, next) => {
         });
     });
 };
+
+
+exports.getEliminarEtiqueta = (request, response, next) => {
+    console.log()
+};
+
+/* 
+exports.postEliminarEtiqueta = (request, response, next) => {
+    id_empleado= request.session.id_empleado;
+
+    Proyecto.deleteEtiqueta(request.body.nombre)
+        .then(() => {
+            response.status(303).redirect('/proyectos/main');
+            console.log("etiqueta elimin");
+        })
+        .catch(err => {
+            console.log(err);
+            response.render('error.ejs', {
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+            });
+        });
+};   */
