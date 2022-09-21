@@ -13,13 +13,13 @@
         <legend>Datos del proyecto</legend>
             <input id="id" name="id" type="hidden" value="<%= proyectos.id_proyecto %>">
             <label for="nombre">Nombre: </label>
-            <input id="nombre" name="nombre" type="text" required>
+            <input id="nombre" name="nombre" maxlength="40" type="text" required>
             <label for="descripcion">Descripción: </label>
-            <input placeholder="¿Qué se va a hacer?" id="descripcion" name="descripcion" type="text" required>
+            <input placeholder="¿Qué se va a hacer?" id="descripcion" name="descripcion" maxlength="256" type="text" required>
             <label for="stack">Stack de tecnologías: </label>
-            <input placeholder="¿Qué tecnologías se van a utilizar?" id="stack" name="stack" type="text" required>
+            <input placeholder="¿Qué tecnologías se van a utilizar?" id="stack" name="stack" maxlength="128" type="text" required>
             <div class="input-field col s12">
-                <select name="importancia" id="importancia">
+                <select name="importancia" id="importancia" required>
                     <option value="" disabled selected>¿Que prioridad le das al proyecto?</option>
                     <% for (let i of importancia) { %>
                         <option value="<%= i %>"><%= i %></option>
@@ -28,7 +28,7 @@
                 <label for="importancia">Importancia</label>
             </div>
             <div class="input-field col s12">
-                <select name="estatus" id="estatus">
+                <select name="estatus" id="estatus" required>
                     <option value="" disabled selected>¿En qué etapa de desarrollo se encuentra el proyecto?</option>
                     <% for (let e of estatus) { %>
                         <option value="<%= e %>"><%= e %></option>
@@ -40,5 +40,5 @@
             <input placeholder="Añade una imagen representativa del proyecto" id="imagen" name="imagen" type="text" required> 
     </fieldset>
     <br>
-    <input type="submit" class="btn" value="Crear">
+    <input type="submit" class="btn" value="<%= titulo %>">
 </form>

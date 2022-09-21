@@ -77,6 +77,12 @@ h2{
     padding-right: 3rem !important;
 }
 
+.card{
+    
+    color: black;
+    background-color: #2C496A !important;
+}
+
 .iconSide{
     margin-right: 10px; 
     vertical-align: middle;

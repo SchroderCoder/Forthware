@@ -8,9 +8,17 @@
         <legend>Datos de la etiqueta</legend>
             <input id="id" name="id" type="hidden" value="<%= proyectos.id_proyecto %>">
             <label for="nombre">Nombre: </label>
-            <input id="nombre" name="nombre" type="text" required>
+            <input id="nombre" name="nombre" maxlength="40" type="text" required>
 
     </fieldset>
     <br>
     <input type="submit" class="btn" value="Crear">
+
+    <button onclick="confirm()" type="button" id="Eliminar" class="btn btn-danger">Eliminar</button>
+    <script>
+        function confirm() {
+            confirm("¿Estas seguro que quieres eliminar la etiqueta?");
+        }
+    </script>
+
 </form>
