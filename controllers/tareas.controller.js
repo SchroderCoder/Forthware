@@ -64,7 +64,7 @@ exports.getCrearTareas = (request, response, next) => {
 }
 
 exports.postCrearTareas = (request, response, next) => {
-    
+        
         const tarea = new Tarea(request.body.descripcion,request.body.duracion,request.body.proyectos,request.body.fecha);
         tarea.save()
         .then(() => {

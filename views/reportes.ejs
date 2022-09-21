@@ -5,6 +5,18 @@
     <h3>Entraste a reportes</h3>
 </div>
 
+<h3>Reportes</h3>
+    <% if (reportes.length > 0) { %>
+        <div>
+            <% for (let  r of reportes) { %>
+                <a href=""><%= r.id_reporte %></a>
+                <br>
+            <% } %>
+            </div>
+    <% } else { %>
+        <h2>No hay reportes registrados</h2>
+    <% } %>  
+<br>
 
-<a href="/user/crearReporte" button type="button">Crear reporte</button>
+<a href="/reportes/crearReporte" button type="button">Crear reporte</button>
 

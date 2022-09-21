@@ -11,5 +11,6 @@ router.get('/main', isAuth, reporte_lock, reportesController.getReportes);
 
 router.get('/crearReporte', isAuth, reporte_lock, reportesController.getCrearReporte);
 
+router.post('/crearReporte', isAuth, reporte_lock, reportesController.postCrearReporte);
 
 module.exports = router;

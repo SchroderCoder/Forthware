@@ -1,0 +1,90 @@
+<form action="crearReporte" method="POST">
+
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+<fieldset>
+    <legend>Datos del reporte</legend>
+    <label for="fecha_inicio"> Fecha de inicio: </label>    
+    <input id="fecha_inicio" name="fecha_inicio" type="date" required> 
+    <label for="fecha_fin"> Fecha de corte: </label>    
+    <input id="fecha_fin" name="fecha_fin" type="date" required> 
+    <br><br>
+    <h5>Personal</h5>
+    <label for="completo">Tiempo completo: </label>    
+    <input id="completo" name="completo" type="int" required>
+    <label for="medio">Tiempo medio: </label>    
+    <input id="medio" name="medio" type="int" required>
+    <br><br>
+    <label for="proporcion_horas">Efectividad: </label>
+    <input placeholder="85" id="proporcion_horas" name="proporcion_horas" type="int" required><br><br>
+    <br>
+    <table>
+        <tr>
+            <th>Proyectos</th>
+            <th>Horas hombre</th>
+            <th>Horas ajustadas</th>
+        </tr>
+        <% if (proyectos.length > 0) { %>
+                <% for (let  p of proyectos) { %>
+                    <tr>
+                    <td>
+                    <p><%= p.nombre %></p>
+                    </td>
+                    <td><label for="proyectos_horas"></label>
+                        <input placeholder="500" id="" name="proyectos_horas" type="int" required></td>
+                    <td><label for="proyectos_horas_adj"></label>
+                        <input placeholder="500" id="proyectos_horas_adj" name="proyectos_horas_adj" type="int" required></td></td>
+                    </tr>
+                <% } %>
+            
+            <% } else { %>
+                <h2>No hay proyectos registrados</h2>
+            <% } %> 
+        <tr>
+            <td>Total:</td>
+            <td>Suma</td>
+            <td>Suma ajustada</td>
+        </tr>
+    </table>
+    <br>
+    <table>
+        <tr>
+            <th>Valores</th>
+            <th>Horas</th>
+        </tr>
+        <tr>
+            <td>Tiempo completo</td>
+            <td><label for="suma_completo"></label>
+                <input placeholder="500" id="suma_completo" name="suma_completo" type="int" required></td>
+        </tr>
+        <tr>
+            <td>Tiempo medio</td>
+            <td><label for="suma_medio"></label>
+                <input placeholder="500" id="suma_medio" name="suma_medio" type="int" required></td>
+        </tr>
+        <tr>
+            <td>Horas base</td>
+            <td><label for="horas_base"></label>
+                <input placeholder="500" id="horas_base" name="horas_base" type="int" required></td>
+        </tr>
+        <tr>
+            <td>Horas de ausencia</td>
+            <td><label for="horas_ausencia"></label>
+                <input placeholder="500" id="horas_ausencia" name="horas_ausencia" type="int" required></td>
+        </tr>
+        <tr>
+            <td>Horas hombre</td>
+            <td><label for="horas_hombre"></label>
+                <input placeholder="500" id="horas_hombre" name="horas_hombre" type="int" required></td>
+        </tr>
+        <tr>
+            <td>Efectividad ajustada</td>
+            <td><label for="Efectividad_ajustada"></label>
+                <input placeholder="85" id="Efectividad_ajustada" name="Efectividad_ajustada" type="int" required><br></td>
+        </tr>
+    </table>
+    
+</fieldset>
+<br>
+<input type="submit" class="btn" value="Generar">
+
+</form>
