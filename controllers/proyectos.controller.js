@@ -1,6 +1,7 @@
 const path = require('path');
 const session = require('express-session');
 const Proyecto = require('../models/proyecto.model');
+const { fetchColaboradores, fetchLideres } = require('../models/proyecto.model');
 
 exports.getProyectos = (request, response, next) => {
     
@@ -27,12 +28,16 @@ exports.getProyectos = (request, response, next) => {
 };
 
 exports.getCrearProyecto = (request, response, next) => {
-
+    let colaboradores = fetchColaboradores;
+    let lideres = fetchLideres;
+    // <const importancia = ['Alto','Medio','Bajo'];
+    // const estatus = ['']>
     response.render(path.join('..',"views", "CrearProyecto.ejs"), {
         privilegios: request.session.privilegios,
         proyectos: "",
         titulo: "Crear Proyecto", 
         es_etiqueta: "¿Es etiqueta?",
+        
     });
 };
 
