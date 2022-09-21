@@ -18,21 +18,12 @@ module.exports = class Proyecto {
         return db.execute('INSERT INTO proyectos (nombre, descripcion, stack_tecnologia, importancia, estatus, es_etiqueta, image_url, id_empleado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [this.nombre, this.descripcion, this.stack,this.importancia,this.un_estatus,this.etiqueta, this.imagen,this.id]);
     }
 
-    
     static saveEtiqueta(un_nombre, un_bool, un_id) {
         return db.execute('INSERT INTO proyectos (nombre,es_etiqueta,id_empleado) VALUES (?,?,?)', [un_nombre,un_bool,un_id]);
     }
 
     static fetchAll() {
         return db.execute('SELECT * FROM proyectos');
-    }
-
-    static fetchAllEtiquetas() {
-        return db.execute('SELECT * FROM proyectos WHERE es_etiqueta = 1');
-    }
-
-    static fetchAllProyectos() {
-        return db.execute('SELECT * FROM proyectos WHERE es_etiqueta = 0');
     }
 
     static fetchOne(un_id) {
@@ -49,4 +40,12 @@ module.exports = class Proyecto {
             [proyecto.nombre, proyecto.descripcion,proyecto.stack_tecnologia,proyecto.importancia,proyecto.estatus,proyecto.image_url,proyecto.id_proyecto]);
     }
 
+    static fetchAllProyectos() {
+        return db.execute('SELECT * FROM proyectos WHERE es_etiqueta = 0');
+    }
+
+    static fetchAllEtiquetas() {
+        return db.execute('SELECT * FROM proyectos WHERE es_etiqueta = 1');
+    }
+            
 }

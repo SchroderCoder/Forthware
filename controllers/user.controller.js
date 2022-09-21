@@ -38,14 +38,14 @@ exports.getRol = (request, response, next) => {
                     });
                 })
                 .catch(err => {
-                    console.log('no salio cols');
+                    console.log(err);
                     response.render('error.ejs', {
                         isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
                     });
                 });
         })
         .catch(err => {
-            console.log('no salio');
+            console.log(err);
             response.render('error.ejs', {
                 isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
             });
@@ -68,11 +68,10 @@ exports.postRol = (request, response, next) => {
 
     Usuario.changeRol(rol,empleado)
     .then(([]) => {
-        console.log('Rol ha sido cambiado');
         response.redirect('/user/main');
     })
     .catch(err => {
-        console.log('no salio cols');
+        console.log(err);
         response.render('error.ejs', {
             isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
         });
@@ -86,7 +85,6 @@ exports.getLogin = (request, response, next) => {
 };
 
 exports.getMain = (request, response, next) => {
-    console.log(request.session.roles)
     response.render(path.join('..',"views", "main.ejs"), {
         privilegios: request.session.privilegios,
         rol: request.session.roles,
@@ -118,11 +116,7 @@ exports.postLogin = (request, response, next) => {
                                             .then(([consulta_roles, fielData]) => {  
                                                 request.session.roles = []; 
                                                 
-                                                request.session.roles.push(consulta_roles[0].descripcion);
-                                                console.log(request.session.roles)
-                                                console.log(request.session.privilegios)
-                                                
-                        
+                                                request.session.roles.push(consulta_roles[0].descripcion);                                                                 
                                             })
                                             .catch(err => {
                                                 console.log(err);

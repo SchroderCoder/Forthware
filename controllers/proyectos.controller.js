@@ -72,7 +72,7 @@ exports.getCrearEtiqueta = (request, response, next) => {
 exports.postCrearEtiqueta = (request, response, next) => {
     id_empleado= request.session.id_empleado;
 
-    saveEtiqueta(request.body.nombre,1 ,id_empleado)
+    Proyecto.saveEtiqueta(request.body.nombre,1 ,id_empleado)
         .then(() => {
             response.status(303).redirect('/proyectos/main');
             console.log("etiqueta creada con exito");
@@ -173,8 +173,6 @@ exports.postEditarEtiqueta = (request, response, next) => {
     Proyecto.fetchOne(request.body.id)
     .then(([rows, fielData]) => {
         rows[0].nombre= request.body.nombre
-        
-        console.log(rows[0].nombre);
         
         Proyecto.saveEdit(rows[0])
         .then(() => {
