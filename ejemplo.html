@@ -1,5 +1,41 @@
-<%- include('views/includes/head.ejs') %>
-<%- include('views/includes/navD.ejs') %>   
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Nat Dev</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="public/css/style.css" media="screen, projection"/>
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="public/favicon.ico" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-light main-nav justify-content-between navbar-expand-lg">
+            <a class="navbar-brand" href="#">
+                <img src="public/media/natgas-logo-simple.png" width="60" height="60" class="d-inline-block align-top logo" alt=" Logo NatGas">
+                </a>
+            <form class="form-inline" style="display: -webkit-box;; box-sizing: content-box;">
+                <h3 class="rolnav" style="display:block ;width:auto;"> Colaborador: Walter Blanco  </h3>
+                <!--Campo dependiente de el ususario ingresado-->
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         <i class="material-icons iconSide"style="display:block ; width:auto; font-size: 40px; " >account_circle</i></a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#!">Perfil</a>
+                        <a class="dropdown-item" href="#!">Configuracion</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#!">Logout</a>
+                    </div>
+                </li>
+            </form>
+        </nav>
+    </header>
+    <div class="d-flex" id="wrapper"> 
         <!-- Sidebar-->
         <div class="border-end bg-white" id="sidebar-wrapper">
             

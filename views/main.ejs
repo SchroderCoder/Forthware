@@ -1,13 +1,27 @@
 <%- include('includes/head.ejs') %>
-<h1>Entraste a pagina principal</h1>
-    <br><br><br>
-    <ul>
-        <% if (privilegios.indexOf('Generar reporte') > -1) { %>
-            <% if (privilegios.indexOf('Agregar Tarea') > -1) { %>
-                <li>Agregar tarea</li>
-                
-            <% } %>  
-        <% } %>   
+<%- include('includes/navD.ejs') %>   
+<%- include('includes/sidebar.ejs') %>   
+            <h1 class="p-2" >Pagina Principal</h1>
+            <div class="p-3">
+                <h3>Proyectos activos</h3>
+                <p >
+                    Make sure to keep all page content within the
+                    <code>#page-content-wrapper</code>
+                </p>
+                <ul>
+                    <% if (privilegios.indexOf('Generar reporte') > -1) { %>
+                        <% if (privilegios.indexOf('Agregar Tarea') > -1) { %>
+                            <li>Agregar tarea</li>
+                            
+                        <% } %>  
+                    <% } %>   
+            
+                </ul>
+            </div>
 
-    </ul>
-
+        </div>
+    </div>  
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+</body>
+</html>
