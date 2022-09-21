@@ -25,7 +25,7 @@ exports.getReportes = (request, response, next) => {
 
 exports.getCrearReporte = (request, response, next) => {
 
-    Proyecto.fetchAllProyectos()
+    Reporte.getHoras_proyectos('2022/01/01', '2023/12/31')
     .then(([rows, fielData]) => {
         response.render(path.join('..',"views", "CrearReporte.ejs"), {
             proyectos: rows,
@@ -46,9 +46,12 @@ exports.postCrearReporte = (request, response, next) => {
 
     id_empleado= request.session.id_empleado;
     const reporte = new Reporte(request.body.fecha_inicio, request.body.fecha_fin, request.body.Efectividad_ajustada, request.body.horas_base, request.body.horas_hombre, request.body.horas_ausencia, request.body.proporcion_horas, id_empleado);
-    console.log(reporte)
     reporte.save()
         .then(() => {
+            Reporte.getHoras_proyectos(request.body.fecha_inicio, request.body.fecha_fin)
+            .then(([rows,fielData]) => {
+                console.log(rows);
+            })
             response.status(303).redirect('/reportes/main');
             console.log("reporte creado con exito");
         })

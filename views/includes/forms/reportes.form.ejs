@@ -24,13 +24,14 @@
             <th>Horas ajustadas</th>
         </tr>
         <% if (proyectos.length > 0) { %>
+            <% var horas = 0  %>
                 <% for (let  p of proyectos) { %>
+                    <% horas = p.Horas + horas %>
                     <tr>
                     <td>
                     <p><%= p.nombre %></p>
                     </td>
-                    <td><label for="proyectos_horas"></label>
-                        <input placeholder="500" id="" name="proyectos_horas" type="int" required></td>
+                    <td><%= p.Horas %></td>
                     <td><label for="proyectos_horas_adj"></label>
                         <input placeholder="500" id="proyectos_horas_adj" name="proyectos_horas_adj" type="int" required></td></td>
                     </tr>
@@ -41,7 +42,7 @@
             <% } %> 
         <tr>
             <td>Total:</td>
-            <td>Suma</td>
+            <td><%= horas %></td>
             <td>Suma ajustada</td>
         </tr>
     </table>
@@ -54,12 +55,12 @@
         <tr>
             <td>Tiempo completo</td>
             <td><label for="suma_completo"></label>
-                <input placeholder="500" id="suma_completo" name="suma_completo" type="int" required></td>
+                <input placeholder="Horas esperadas de empleados de tiempo completo" id="suma_completo" name="suma_completo" type="int" required></td>
         </tr>
         <tr>
             <td>Tiempo medio</td>
             <td><label for="suma_medio"></label>
-                <input placeholder="500" id="suma_medio" name="suma_medio" type="int" required></td>
+                <input placeholder="Horas esperadas de empleados de tiempo medio" id="suma_medio" name="suma_medio" type="int" required></td>
         </tr>
         <tr>
             <td>Horas base</td>

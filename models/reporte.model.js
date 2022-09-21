@@ -22,5 +22,10 @@ module.exports = class Reporte {
         return db.execute('SELECT * FROM reportes');
     }
 
+    static getHoras_proyectos(fechainicio, fechafin) {
+        return db.execute('SELECT P.nombre, SUM(T.duracion) AS Horas FROM tareas T, proyectos P WHERE T.id_proyecto = P.id_proyecto AND T.fecha_creacion BETWEEN ? AND ? GROUP BY P.nombre',
+        [fechainicio, fechafin]);
+    }
+
 
 }
