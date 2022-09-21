@@ -5,13 +5,11 @@ const reportesController = require('../controllers/reportes.controller');
 
 const isAuth = require('../util/isAuth.js');
 
-const isCoordinador = require('../util/isCoordinador');
+const reporte_lock = require('../util/Reporte_lock');
 
-const isRol = require('../util/isRol.js');
+router.get('/main', isAuth, reporte_lock, reportesController.getReportes);
 
-router.get('/main', isAuth, reportesController.getReportes);
-
-router.get('/crearReporte', isAuth, reportesController.getCrearReporte);
+router.get('/crearReporte', isAuth, reporte_lock, reportesController.getCrearReporte);
 
 
 module.exports = router;

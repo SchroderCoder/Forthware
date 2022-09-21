@@ -11,11 +11,14 @@ exports.getTareas = (request, response, next) => {
         response.render(path.join('..',"views", "tareas.ejs"), {
             tareas: rows,
             privilegios: request.session.privilegios,
+            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
         });
     })
     .catch(err => {
         console.log(err);
-        response.render('error.ejs');
+        response.render('error.ejs', {
+            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+        });
     });
 };
 
@@ -39,17 +42,22 @@ exports.getCrearTareas = (request, response, next) => {
                         privilegios: request.session.privilegios,
                         empleados: request.session.empleados,
                         proyectos: request.session.proyectos,
+                        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
                     });
                 })
 
                 .catch(err => {
                     console.log(err);
-                    response.render('error.ejs');
+                    response.render('error.ejs', {
+                        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                    });
                 }); 
         })
         .catch(err => {
             console.log(err);
-            response.render('error.ejs');
+            response.render('error.ejs', {
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+            });
         }); 
 }
 
@@ -74,23 +82,31 @@ exports.postCrearTareas = (request, response, next) => {
                     })
                     .catch(err => {
                         console.log(err);
-                        response.render('error.ejs');
+                        response.render('error.ejs', {
+                            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                        });
                     });
                 }
             })
             .catch(err => {
                 console.log(err);
-                response.render('error.ejs');
+                response.render('error.ejs', {
+                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                });
             });
         })
         .catch(err => {
             console.log(err);
-            response.render('error.ejs');
+            response.render('error.ejs', {
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+            });
         });
     })
     .catch(err => {
         console.log(err);
-        response.render('error.ejs');
+        response.render('error.ejs', {
+            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+        });
     }); 
     
 }

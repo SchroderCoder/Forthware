@@ -6,7 +6,9 @@ const { request } = require('http');
 
 
 exports.getNew = (request, response, next) => {
-    response.render(path.join('new.ejs'));
+    response.render(path.join('new.ejs'), {
+        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+    });
 };
 
 exports.postNew = (request, response, next) => {
@@ -32,16 +34,21 @@ exports.getRol = (request, response, next) => {
                     response.render(path.join('..',"views", "asignarRol.ejs"), {
                         empleados: rows,
                         roles: cols,
+                        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
                     });
                 })
                 .catch(err => {
                     console.log('no salio cols');
-                    response.render('error.ejs');
+                    response.render('error.ejs', {
+                        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                    });
                 });
         })
         .catch(err => {
             console.log('no salio');
-            response.render('error.ejs');
+            response.render('error.ejs', {
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+            });
         });
 };
 
@@ -66,7 +73,9 @@ exports.postRol = (request, response, next) => {
     })
     .catch(err => {
         console.log('no salio cols');
-        response.render('error.ejs');
+        response.render('error.ejs', {
+            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+        });
     });
 };
 
@@ -79,6 +88,7 @@ exports.getLogin = (request, response, next) => {
 exports.getMain = (request, response, next) => {
     response.render(path.join('..',"views", "main.ejs"), {
         privilegios: request.session.privilegios,
+        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
     });
 };
 
@@ -109,13 +119,17 @@ exports.postLogin = (request, response, next) => {
                                             })
                                             .catch(err => {
                                                 console.log(err);
-                                                response.render('error.ejs');
+                                                response.render('error.ejs', {
+                                                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                                                });
                                             });
                                         response.redirect('/user/main');
                                     })
                                     .catch(err => {
                                         console.log(err);
-                                        response.render('error.ejs');
+                                        response.render('error.ejs', {
+                                            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                                        });
                                     });
                                 
                                 

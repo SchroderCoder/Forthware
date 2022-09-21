@@ -1,6 +1,6 @@
 
 module.exports = (request, response, next) => {
-    if (!( request.params.roles == 'coordinador' ||  request.params.roles == 'lider')) {
+    if (request.session.privilegios.indexOf('Generar reporte') == -1) {
         return response.redirect('/user/main');
     } 
     next();
