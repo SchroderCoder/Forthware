@@ -115,14 +115,12 @@ exports.getEditarTareas = (request, response, next) => {
                     for(let proyecto of consulta) {
                         request.session.proyectos.push(proyecto);
                     }
-                    
-                    console.log(rows)
                     response.render(path.join('..',"views", "CrearTarea.ejs"), {
                         privilegios: request.session.privilegios,
                         proyectos: request.session.proyectos,
                         tareas: rows[0],
                         isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
-                        titulo: "Editar tarea ",
+                        titulo: "Editar tarea:  " + rows[0].descripcion,
                     });
                 })
 
@@ -149,28 +147,13 @@ exports.getEditarTareas = (request, response, next) => {
 }
 
 exports.postEditarTareas = (request, response, next) => {
-    console.log(request.body.proyectos)
-    console.log(request.body.fecha)
-    console.log(request.body.descripcion)
-    console.log(request.body.duracion)
 
-
-    console.log(request.body.id)
     Tarea.fetchOne(request.body.id)
     .then(([rows, fielData]) => {
-        console.log(rows)
         rows[0].fecha_creacion= request.body.fecha
         rows[0].descripcion= request.body.descripcion
         rows[0].id_proyecto= request.body.proyectos
         rows[0].duracion= request.body.duracion
-
-        
-        console.log(rows[0].fecha_creacion);
-        console.log(rows[0].descripcion);
-        console.log(rows[0].id_proyecto);
-        console.log(rows[0].duracion);
-        console.log("xs");
-        
         Tarea.saveEdit(rows[0])
                     .then(() => {
                         response.status(303).redirect('/tareas/main');

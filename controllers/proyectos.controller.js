@@ -180,8 +180,6 @@ exports.postEditarEtiqueta = (request, response, next) => {
     .then(([rows, fielData]) => {
         rows[0].nombre= request.body.nombre
         
-        console.log(rows[0].nombre);
-        
         Proyecto.saveEdit(rows[0])
         .then(() => {
             response.status(303).redirect('/proyectos/main');
