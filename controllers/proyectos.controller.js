@@ -38,7 +38,6 @@ exports.getCrearProyecto = (request, response, next) => {
         isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
         proyectos: "",
         titulo: "Crear Proyecto", 
-        es_etiqueta: "¿Es etiqueta?",
     });
 };
 
@@ -93,7 +92,6 @@ exports.getEditarProyecto = (request, response, next) => {
             response.render(path.join('..',"views", "CrearProyecto.ejs"), {
                 proyectos: rows[0],
                 titulo: "Editar proyecto " + rows[0].nombre,
-                es_etiqueta: "",
                 isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
             });
         } else {

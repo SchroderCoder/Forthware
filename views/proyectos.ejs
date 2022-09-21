@@ -1,4 +1,6 @@
 <%- include('includes/head.ejs') %>
+<%- include('includes/navD.ejs') %>   
+<%- include('includes/sidebar.ejs') %>   
 <h1>Entraste a proyectos</h1>
 
 <h3>Proyectos</h3>
@@ -28,8 +30,11 @@
 <div>   
         <% if (privilegios.indexOf('Crear proyecto') > -1) { %>
                 <a href="/proyectos/crearProyecto" button type="button">Crear proyecto</a>
-                <!-- <a href="/proyectos/crearEtiqueta" button type="button">Crear etiqueta</button> -->
         <% } %>  
+        <br><br>
+        <% if (privilegios.indexOf('Crear etiqueta') > -1) { %>
+            <a href="/proyectos/crearEtiqueta" button type="button">Crear etiqueta</a>
+    <% } %>  
 </div>
 
 <%- include('includes/foot.ejs') %>
