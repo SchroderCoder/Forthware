@@ -11,4 +11,8 @@ router.get('/crearTarea', isAuth,  tareasController.getCrearTareas);
 
 router.post('/crearTarea', isAuth,  tareasController.postCrearTareas);
 
+router.get('/editarTarea/:id', isAuth,  tareasController.getEditarTareas);
+
+router.post('/editarTarea', isAuth,  tareasController.postEditarTareas);
+
 module.exports = router;

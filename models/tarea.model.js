@@ -24,4 +24,10 @@ module.exports = class Tarea {
     static fetchRecent() {
         return db.execute('SELECT MAX(id_tarea) AS reciente FROM `tareas` ');
     }
+
+    static saveEdit(tarea) {
+        return db.execute(
+            'UPDATE tareas SET fecha_creacion = ?, descripcion= ?, id_proyecto= ?, duracion= ? WHERE id_tarea = ?', 
+            [tarea.fecha_creacion, tarea.descripcion, tarea.id_proyecto ,tarea.duracion, tarea.id_tarea]);
+    }
 }

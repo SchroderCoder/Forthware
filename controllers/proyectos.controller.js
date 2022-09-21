@@ -124,14 +124,6 @@ exports.postEditarProyecto = (request, response, next) => {
         rows[0].estatus= request.body.estatus
         rows[0].image_url= request.body.imagen
         
-        console.log(rows[0].nombre);
-        console.log(rows[0].descripcion);
-        console.log(rows[0].stack_tecnologia);
-        console.log(rows[0].importancia);
-        console.log(rows[0].estatus);
-        console.log(rows[0].image_url);
-        console.log("xs");
-        
         Proyecto.saveEdit(rows[0])
         .then(() => {
             response.status(303).redirect('/proyectos/main');

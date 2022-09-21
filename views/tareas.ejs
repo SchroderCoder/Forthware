@@ -5,7 +5,7 @@
     <% if (tareas.length > 0) { %>
         <div>
             <% for (let  t of tareas) { %>
-                <a href="/proyectos/editarProyecto/<%= t.id_proyecto %>" ><%= t.descripcion %></a>
+                <a href="/tareas/editarTarea/<%= t.id_tarea %>" ><%= t.descripcion %></a>
                 <br>
             <% } %>
             </div>
