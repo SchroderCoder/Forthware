@@ -1,6 +1,7 @@
 const path = require('path');
 const session = require('express-session');
 const Proyecto = require('../models/proyecto.model');
+const { fetchColaboradores, fetchLideres } = require('../models/proyecto.model');
 
 exports.getProyectos = (request, response, next) => {
     
@@ -32,12 +33,17 @@ exports.getProyectos = (request, response, next) => {
 };
 
 exports.getCrearProyecto = (request, response, next) => {
-
+    let colaboradores = fetchColaboradores;
+    let lideres = fetchLideres;
+    // <const importancia = ['Alto','Medio','Bajo'];
+    // const estatus = ['']>
     response.render(path.join('..',"views", "CrearProyecto.ejs"), {
         privilegios: request.session.privilegios,
         isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
         proyectos: "",
         titulo: "Crear Proyecto", 
+        es_etiqueta: "¿Es etiqueta?",
+        
     });
 };
 
@@ -72,7 +78,7 @@ exports.getCrearEtiqueta = (request, response, next) => {
 exports.postCrearEtiqueta = (request, response, next) => {
     id_empleado= request.session.id_empleado;
 
-    saveEtiqueta(request.body.nombre,1 ,id_empleado)
+    Proyecto.saveEtiqueta(request.body.nombre,1 ,id_empleado)
         .then(() => {
             response.status(303).redirect('/proyectos/main');
             console.log("etiqueta creada con exito");
@@ -174,8 +180,6 @@ exports.postEditarEtiqueta = (request, response, next) => {
     .then(([rows, fielData]) => {
         rows[0].nombre= request.body.nombre
         
-        console.log(rows[0].nombre);
-        
         Proyecto.saveEdit(rows[0])
         .then(() => {
             response.status(303).redirect('/proyectos/main');
@@ -194,3 +198,25 @@ exports.postEditarEtiqueta = (request, response, next) => {
         });
     });
 };
+
+
+exports.getEliminarEtiqueta = (request, response, next) => {
+    console.log()
+};
+
+/* 
+exports.postEliminarEtiqueta = (request, response, next) => {
+    id_empleado= request.session.id_empleado;
+
+    Proyecto.deleteEtiqueta(request.body.nombre)
+        .then(() => {
+            response.status(303).redirect('/proyectos/main');
+            console.log("etiqueta elimin");
+        })
+        .catch(err => {
+            console.log(err);
+            response.render('error.ejs', {
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+            });
+        });
+};   */

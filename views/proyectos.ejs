@@ -1,25 +1,39 @@
 <%- include('includes/head.ejs') %>
 <%- include('includes/navD.ejs') %>   
 <%- include('includes/sidebar.ejs') %>   
-<h1>Entraste a proyectos</h1>
-
-<h3>Proyectos</h3>
-    <% if (proyectos.length > 0) { %>
-        <div>
-            <% for (let  p of proyectos) { %>
-                <a href="/proyectos/editarProyecto/<%= p.id_proyecto %>" ><%= p.nombre %></a>
-                <br>
-            <% } %>
+<h1 class="p-2">Entraste a proyectos</h1>
+<div class="p-3">
+    <h3>Proyectos</h3>
+        <% if (proyectos.length > 0) { %>
+            <div class="p-3">
+                <div class="row">
+                    <% for (let  p of proyectos) { %>
+                            <div class="col-sm-3 p-3">
+                                <div class="card" style="width: 18rem;height: 25rem ; ">
+                                    <img src="/media/FWPNGB&W.png" class="card-img-top" alt="">
+                                    <div class="card-body textBlack">
+                                    <h5 class="card-title "><a href="/proyectos/editarProyecto/<%= p.id_proyecto %>" ><%= p.nombre %></a></h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                    <% } %>
+                </div>
             </div>
-    <% } else { %>
-        <h2>No hay proyectos registrados</h2>
-    <% } %>  
-<br>
+        <% } else { %>
+            <h2>No hay proyectos registrados</h2>
+        <% } %>  
+    <br>
+</div>
 <h3>Etiquetas</h3>
     <% if (etiquetas.length > 0) { %>
         <div>
             <% for (let  e of etiquetas) { %>
-                <a href="/proyectos/editarEtiqueta/<%= e.id_proyecto %>" ><%= e.nombre %></a>
+                <a class="p-3" href="/proyectos/editarEtiqueta/<%= e.id_proyecto %>" ><%= e.nombre %></a>
+                <button type="button" href="/proyectos/EliminarEtiqueta/<%= e.id_proyecto %>" class="btn btn-danger">Eliminar</button>
+
                 <br>
             <% } %>
             </div>
