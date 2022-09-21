@@ -5,9 +5,6 @@ const userController = require('../controllers/user.controller');
 
 const isAuth = require('../util/isAuth.js');
 
-const isCoordinador = require('../util/isCoordinador');
-
-const isRol = require('../util/isRol.js');
 
 router.get('/new', isAuth,  userController.getNew);
 

@@ -6,7 +6,9 @@ const { request } = require('http');
 
 
 exports.getNew = (request, response, next) => {
-    response.render(path.join('new.ejs'));
+    response.render(path.join('new.ejs'), {
+        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+    });
 };
 
 exports.postNew = (request, response, next) => {
@@ -32,16 +34,21 @@ exports.getRol = (request, response, next) => {
                     response.render(path.join('..',"views", "asignarRol.ejs"), {
                         empleados: rows,
                         roles: cols,
+                        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
                     });
                 })
                 .catch(err => {
                     console.log('no salio cols');
-                    response.render('error.ejs');
+                    response.render('error.ejs', {
+                        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                    });
                 });
         })
         .catch(err => {
             console.log('no salio');
-            response.render('error.ejs');
+            response.render('error.ejs', {
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+            });
         });
 };
 
@@ -66,7 +73,9 @@ exports.postRol = (request, response, next) => {
     })
     .catch(err => {
         console.log('no salio cols');
-        response.render('error.ejs');
+        response.render('error.ejs', {
+            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+        });
     });
 };
 
@@ -77,8 +86,11 @@ exports.getLogin = (request, response, next) => {
 };
 
 exports.getMain = (request, response, next) => {
+    console.log(request.session.roles)
     response.render(path.join('..',"views", "main.ejs"), {
         privilegios: request.session.privilegios,
+        rol: request.session.roles,
+        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
     });
 };
 
@@ -96,7 +108,6 @@ exports.postLogin = (request, response, next) => {
                             return request.session.save(err => {
                                 //Obtener los permisos del usuario
                                 Usuario.getPermisos(rows[0].id_empleado)
-
                                     .then(([consulta_privilegios, fielData]) => {
                                         //Guardar los permisos en una variable de sesión
                                         request.session.privilegios = [];
@@ -104,18 +115,28 @@ exports.postLogin = (request, response, next) => {
                                             request.session.privilegios.push(privilegio.descripcion);
                                         }
                                         Usuario.getRol(rows[0].id_empleado)
-                                            .then(([consulta_roles, fielData]) => {   
-                                                request.session.roles= consulta_roles[0].descripcion
+                                            .then(([consulta_roles, fielData]) => {  
+                                                request.session.roles = []; 
+                                                
+                                                request.session.roles.push(consulta_roles[0].descripcion);
+                                                console.log(request.session.roles)
+                                                console.log(request.session.privilegios)
+                                                
+                        
                                             })
                                             .catch(err => {
                                                 console.log(err);
-                                                response.render('error.ejs');
+                                                response.render('error.ejs', {
+                                                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                                                });
                                             });
                                         response.redirect('/user/main');
                                     })
                                     .catch(err => {
                                         console.log(err);
-                                        response.render('error.ejs');
+                                        response.render('error.ejs', {
+                                            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                                        });
                                     });
                                 
                                 

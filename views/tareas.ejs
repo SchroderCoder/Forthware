@@ -1,11 +1,13 @@
 <%- include('includes/head.ejs') %>
+<%- include('includes/navD.ejs') %>   
+<%- include('includes/sidebar.ejs') %>   
 <h1>Entraste a tareas</h1>
 
 <h3>Tareas</h3>
     <% if (tareas.length > 0) { %>
         <div>
             <% for (let  t of tareas) { %>
-                <a href="/proyectos/editarProyecto/<%= t.id_proyecto %>" ><%= t.descripcion %></a>
+                <a href="/tareas/editarTarea/<%= t.id_tarea %>" ><%= t.descripcion %></a>
                 <br>
             <% } %>
             </div>

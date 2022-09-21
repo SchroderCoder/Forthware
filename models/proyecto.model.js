@@ -18,6 +18,7 @@ module.exports = class Proyecto {
         return db.execute('INSERT INTO proyectos (nombre, descripcion, stack_tecnologia, importancia, estatus, es_etiqueta, image_url, id_empleado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [this.nombre, this.descripcion, this.stack,this.importancia,this.un_estatus,this.etiqueta, this.imagen,this.id]);
     }
 
+    
     static saveEtiqueta(un_nombre, un_bool, un_id) {
         return db.execute('INSERT INTO proyectos (nombre,es_etiqueta,id_empleado) VALUES (?,?,?)', [un_nombre,un_bool,un_id]);
     }
@@ -27,6 +28,10 @@ module.exports = class Proyecto {
     }
     static fetchLideres(){
         return db.execute('SELECT T.id_empleado,E.nombre,T.id_rol,R.descripcion FROM empleados E, tiene T, roles R WHERE e.id_empleado=T.id_empleado AND R.id_rol=T.id_rol AND E.id_empleado IN (SELECT id_empleado FROM tiene WHERE id_rol=2) ');
+    }
+
+    static fetchAll() {
+        return db.execute('SELECT * FROM proyectos');
     }
 
     static fetchAllEtiquetas() {

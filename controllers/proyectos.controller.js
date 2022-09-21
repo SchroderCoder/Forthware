@@ -13,16 +13,21 @@ exports.getProyectos = (request, response, next) => {
                 proyectos: rows,
                 etiquetas: cols,
                 privilegios: request.session.privilegios,
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
             });
         })
         .catch(err => {
             console.log(err);
-            response.render('error.ejs');
+            response.render('error.ejs', {
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+            });
         });
     })
     .catch(err => {
         console.log(err);
-        response.render('error.ejs');
+        response.render('error.ejs', {
+            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+        });
     });
     
 };
@@ -34,6 +39,7 @@ exports.getCrearProyecto = (request, response, next) => {
     // const estatus = ['']>
     response.render(path.join('..',"views", "CrearProyecto.ejs"), {
         privilegios: request.session.privilegios,
+        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
         proyectos: "",
         titulo: "Crear Proyecto", 
         es_etiqueta: "¿Es etiqueta?",
@@ -52,7 +58,9 @@ exports.postCrearProyecto = (request, response, next) => {
         })
         .catch(err => {
             console.log(err);
-            response.render('error.ejs');
+            response.render('error.ejs', {
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+            });
         });
 };  
 
@@ -61,6 +69,7 @@ exports.getCrearEtiqueta = (request, response, next) => {
 
     response.render(path.join('..',"views", "CrearEtiqueta.ejs"), {
         privilegios: request.session.privilegios,
+        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
         proyectos: "",
         titulo: "Crear etiqueta",
     });
@@ -76,7 +85,9 @@ exports.postCrearEtiqueta = (request, response, next) => {
         })
         .catch(err => {
             console.log(err);
-            response.render('error.ejs');
+            response.render('error.ejs', {
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+            });
         });
 };  
 
@@ -87,17 +98,20 @@ exports.getEditarProyecto = (request, response, next) => {
             response.render(path.join('..',"views", "CrearProyecto.ejs"), {
                 proyectos: rows[0],
                 titulo: "Editar proyecto " + rows[0].nombre,
-                es_etiqueta: "",
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
             });
         } else {
             console.log("no existe el id del equipo");
             response.render('error.ejs', {
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
             });
         }
     })
     .catch(err => {
         console.log(err);
-        response.render('error.ejs');
+        response.render('error.ejs', {
+            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+        });
     });
 
 };
@@ -114,26 +128,22 @@ exports.postEditarProyecto = (request, response, next) => {
         rows[0].estatus= request.body.estatus
         rows[0].image_url= request.body.imagen
         
-        console.log(rows[0].nombre);
-        console.log(rows[0].descripcion);
-        console.log(rows[0].stack_tecnologia);
-        console.log(rows[0].importancia);
-        console.log(rows[0].estatus);
-        console.log(rows[0].image_url);
-        console.log("xs");
-        
         Proyecto.saveEdit(rows[0])
         .then(() => {
             response.status(303).redirect('/proyectos/main');
         })
         .catch(err => {
             console.log(err);
-            response.render('error.ejs');
+            response.render('error.ejs', {
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+            });
         });
     })
     .catch(err => {
         console.log(err);
-        response.render('error.ejs');
+        response.render('error.ejs', {
+            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+        });
     });
 };
 
@@ -144,17 +154,21 @@ exports.getEditarEtiqueta = (request, response, next) => {
         if (rows.length > 0) {
             response.render(path.join('..',"views", "CrearEtiqueta.ejs"), {
                 proyectos: rows[0],
-                titulo: "Editar etiqueta " + rows[0].nombre
+                titulo: "Editar etiqueta " + rows[0].nombre,
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
             });
         } else {
             console.log("no existe el id del equipo");
             response.render('error.ejs', {
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
             });
         }
     })
     .catch(err => {
         console.log(err);
-        response.render('error.ejs');
+        response.render('error.ejs', {
+            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+        });
     });
 
 };
@@ -174,11 +188,15 @@ exports.postEditarEtiqueta = (request, response, next) => {
         })
         .catch(err => {
             console.log(err);
-            response.render('error.ejs');
+            response.render('error.ejs', {
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+            });
         });
     })
     .catch(err => {
         console.log(err);
-        response.render('error.ejs');
+        response.render('error.ejs', {
+            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+        });
     });
 };

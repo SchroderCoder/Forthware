@@ -5,27 +5,25 @@ const proyectoController = require('../controllers/proyectos.controller');
 
 const isAuth = require('../util/isAuth.js');
 
-const isCoordinador = require('../util/isCoordinador');
-
-const isRol = require('../util/isRol.js');
+const proyecto_lock = require('../util/Proyecto_lock');
 
 router.get('/main', isAuth, proyectoController.getProyectos);
 
-router.get('/crearProyecto', isAuth,   proyectoController.getCrearProyecto);
+router.get('/crearProyecto', isAuth, proyecto_lock, proyectoController.getCrearProyecto);
 
-router.post('/crearProyecto', isAuth,  proyectoController.postCrearProyecto);
+router.post('/crearProyecto', isAuth, proyecto_lock,  proyectoController.postCrearProyecto);
 
-router.get('/crearEtiqueta', isAuth, proyectoController.getCrearEtiqueta);
+router.get('/crearEtiqueta', isAuth, proyecto_lock, proyectoController.getCrearEtiqueta);
 
-router.post('/crearEtiqueta', isAuth, proyectoController.postCrearEtiqueta);
+router.post('/crearEtiqueta', isAuth, proyecto_lock, proyectoController.postCrearEtiqueta);
 
-router.get('/editarProyecto/:id', isAuth, proyectoController.getEditarProyecto);
+router.get('/editarProyecto/:id', isAuth, proyecto_lock, proyectoController.getEditarProyecto);
 
-router.post('/editarProyecto', isAuth, proyectoController.postEditarProyecto);
+router.post('/editarProyecto', isAuth, proyecto_lock, proyectoController.postEditarProyecto);
 
-router.get('/editarEtiqueta/:id', isAuth, proyectoController.getEditarEtiqueta);
+router.get('/editarEtiqueta/:id', isAuth, proyecto_lock, proyectoController.getEditarEtiqueta);
 
-router.post('/editarEtiqueta', isAuth, proyectoController.postEditarEtiqueta);
+router.post('/editarEtiqueta', isAuth,proyecto_lock,  proyectoController.postEditarEtiqueta);
 
 
 

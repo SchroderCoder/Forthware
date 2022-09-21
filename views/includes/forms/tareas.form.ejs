@@ -1,7 +1,12 @@
-<form action="crearTarea" method="POST">
+<% if (tareas=="") { %>
+    <form action="crearTarea" method="POST">
+<% } else { %>
+    <form action="/tareas/editarTarea" method="POST">
+<%}%>
     <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
     <fieldset>
         <legend>Datos de la tarea</legend>
+        <% if (tareas=="") { %>
             <div class="multipleSelection">
                 <div class="selectBox" 
                         onclick="showCheckboxes()">
@@ -17,20 +22,23 @@
                     <% } %> 
                 </div>
             </div>
+            <% } else { %>
+                <%}%>
             <div>
                 <select name="proyectos" id="proyectos" required>
                     <option value="" disabled selected>Etiqueta</option>
                     <% for (let p of proyectos) { %>
-                        <option value="<%= p.nombre %>"><%= p.nombre %></option>
+                        <option value="<%= p.id_proyecto %>"><%= p.nombre %></option>
                     <% } %>
                 </select>
                 <label for="proyectos">Etiquetas</label>
             </div>
-
+            <% console.log(tareas.id_tarea) %>
+            <input id="id" name="id" type="hidden" value="<%= tareas.id_tarea %>">
             <label for="descripcion">Descripción: </label>
             <input placeholder="Junta" id="descripcion" name="descripcion" type="text" required>
             <label for="duracion">Tiempo (hrs): </label>
-            <input placeholder=" 0.5" id="duracion" name="duracion" type="number" min = "0" max = "12" required>
+            <input placeholder=" 0.5" id="duracion" name="duracion" type="number" min = "0.15" max = "10" required>
             <label for="fecha"> Fecha: </label>    
             <input id="fecha" name="fecha" type="date" required> 
             

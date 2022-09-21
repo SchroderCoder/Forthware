@@ -21,6 +21,8 @@ module.exports = class Realiza {
         return db.execute('INSERT INTO Realiza (id_empleado, id_tarea) VALUES (?, ?)', [id_empleado,id_tarea]);
     }
 
+
+
     static fetchAll() {
         return db.execute('SELECT * FROM Realiza');
     }
@@ -28,5 +30,6 @@ module.exports = class Realiza {
     static fetchOne(un_id) {
         return db.execute('SELECT * FROM Realiza WHERE id_tarea = ?', [un_id]);
     }
+
 
 }
