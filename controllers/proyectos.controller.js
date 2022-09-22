@@ -154,7 +154,8 @@ exports.getEditarEtiqueta = (request, response, next) => {
         if (rows.length > 0) {
             response.render(path.join('..',"views", "CrearEtiqueta.ejs"), {
                 proyectos: rows[0],
-                titulo: "Editar etiqueta " + rows[0].nombre,
+                titulo: "Editar etiqueta " + rows[0].id_proyecto,
+                etiqueta:rows[0].nombre,
                 isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
             });
         } else {

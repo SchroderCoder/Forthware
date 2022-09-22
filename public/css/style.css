@@ -182,3 +182,8 @@ li {
     color: white;
     position: absolute;
 }*/
+
+.anyClass {
+    height: 27rem;
+    overflow-y: scroll;
+}
