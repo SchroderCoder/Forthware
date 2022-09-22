@@ -8,7 +8,7 @@
     <h3>Reporte semanal</h3>
     <%- include('includes/forms/reportes.form.ejs') %>  
 
-    <a href="/reportes/main" button type="button">Cancelar</a> 
+    <a href="/reportes/main" class="btn btn-danger" button type="button">Cancelar</a> 
     </div>
 
 
@@ -16,17 +16,27 @@
         const accion_asincrona = () => {
             const fecha_fin = document.getElementById('fecha_fin').value;
             const fecha_inicio = document.getElementById('fecha_inicio').value;
-            console.log(fecha_fin)
-            console.log(fecha_inicio)
+            data = new Object ();
+            console.log(data)
+
+            data.fecha_fin=fecha_fin;
+            data.fecha_inicio=fecha_inicio;
+
+            const csrf = document.getElementById('_csrf').value;
+            console.log(csrf)
             //función que manda la petición asíncrona
-            fetch('/reportes/buscar/' + fecha_fin, {
-                method: 'GET',
+            fetch('/reportes/buscar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'csrf-token': csrf  
+                },
+                body: JSON.stringify(data),
             }).then(result => {
                 return result.json(); //Regresa otra promesa
             }).then(data => {
                 //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
                 console.log(data);
-
                 let html = '';
 
                 html += '<table>';
@@ -35,31 +45,34 @@
                 html += '<th>Horas hombre</th>';
                 html += '<th>Horas ajustadas</th>';
                 html += '</tr>';
-                if (proyectos.length > 0) {
-                    var horas = 0
-                    for (p of proyectos) {
-                        horas = p.Horas + horas
+
+                let horas = 0;
+
+                if (data.proyectos.length > 0) {
+                    
+                    for (p of data.proyectos) {
+                        horas = p.Horas + horas;
                         html += '<tr>';
                         html += '<td>';
                         html += '<p>';
-                        p.nombre;
+                        html += p.nombre;
                         html += '</p>';
                         html += '</td>';
                         html += '<td>';
-                        p.Horas;
+                        html += p.Horas;
                         html += '</td>';
                         html += '<td><label for="proyectos_horas_adj"></label>';
                         html += '<input placeholder="500" id="proyectos_horas_adj" name="proyectos_horas_adj" type="int" required></td></td>';
-                        html += '</tr>'
-                        }
-
-                    } else {
-                        html += '<h2>No hay proyectos registrados</h2>';                
+                        html += '</tr>';
                     }
+
+                } else {
+                    html += '<h2>No hay proyectos registrados</h2>';                
+                }
                 html += '<tr>';
                 html += '<td>Total:</td>';
                 html += '<td>';
-                horas;
+                html += horas;
                 html += '</td>';
                 html += '<td>Suma ajustada</td>';
                 html += '</tr>';
@@ -70,7 +83,6 @@
                 console.log(err);
             });
         };
-        
 
-        document.getElementById('fecha_fin').onclick = accion_asincrona;
+        document.getElementById('fecha_fin').oninput = accion_asincrona;
     </script>

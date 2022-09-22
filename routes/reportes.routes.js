@@ -13,6 +13,6 @@ router.get('/crearReporte', isAuth, reporte_lock, reportesController.getCrearRep
 
 router.post('/crearReporte', isAuth, reporte_lock, reportesController.postCrearReporte);
 
-router.get('/buscar/:valor', reportesController.getBuscar);
+router.post('/buscar', reportesController.postBuscar);
 
 module.exports = router;

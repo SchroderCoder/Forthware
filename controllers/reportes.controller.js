@@ -37,6 +37,7 @@ exports.postCrearReporte = (request, response, next) => {
 
     id_empleado= request.session.id_empleado;
     const reporte = new Reporte(request.body.fecha_inicio, request.body.fecha_fin, request.body.Efectividad_ajustada, request.body.horas_base, request.body.horas_hombre, request.body.horas_ausencia, request.body.proporcion_horas, id_empleado);
+    console.log(reporte  )
     reporte.save()
         .then(() => {
             Reporte.getHoras_proyectos(request.body.fecha_inicio, request.body.fecha_fin)
@@ -55,11 +56,11 @@ exports.postCrearReporte = (request, response, next) => {
 
 };
 
-exports.getBuscar = (request, response, next) => {
-
-    console.log(request.params.fecha_inicio)
-    console.log(request.params.fecha_fin)
-    Reporte.getHoras_proyectos(request.params.fecha_inicio, request.params.fecha_fin)
+exports.postBuscar = (request, response, next) => {
+    console.log(request.body)
+    console.log(request.body.fecha_inicio)
+    console.log(request.body.fecha_fin)
+    Reporte.getHoras_proyectos(request.body.fecha_inicio, request.body.fecha_fin)
         .then(([rows, fieldData]) => {
             response.status(200).json({proyectos: rows});
         })
