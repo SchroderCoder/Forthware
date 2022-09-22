@@ -1,5 +1,5 @@
 <%- include('includes/head.ejs') %>
-<%- include('includes/navD.ejs') %>   
+<%- include('includes/nav.ejs') %>   
 <%- include('includes/sidebar.ejs') %>   
 <h1 class="p-2">Entraste a proyectos</h1>
 <div class="p-3">
@@ -8,8 +8,8 @@
             <div class="p-3">
                 <div class="row">
                     <% for (let  p of proyectos) { %>
-                            <div class="col-sm-3 p-3">
-                                <div class="card" style="width: 18rem;height: 25rem ; ">
+                            <div class="col-sm-3 p-2">
+                                <div class="card" style="width: 16rem;height: 25rem ; ">
                                     <img src="/media/FWPNGB&W.png" class="card-img-top" alt="">
                                     <div class="card-body textBlack">
                                     <h5 class="card-title "><a href="/proyectos/editarProyecto/<%= p.id_proyecto %>" ><%= p.nombre %></a></h5>
