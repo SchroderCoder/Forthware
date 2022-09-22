@@ -1,6 +1,6 @@
 <form action="crearReporte" method="POST">
 
-    <input type="hidden" id="_csrf" value="<%= csrfToken %>" >
+    <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
 <fieldset>
     <legend>Datos del reporte</legend>
 
@@ -56,7 +56,7 @@
                     <h2>No hay proyectos registrados</h2>
                 <% } %> 
             <tr>
-                <% var horasajutadas = 220 %>
+                <% let horasajutadas = 220 %>
                 <td>Total:</td>
                 <td>horas suma</td>
                 <td><%= horasajutadas %></td>
@@ -87,28 +87,31 @@
             <td>Horas base</td>
             <td><label for="horas_base"></label>
                 <%= horasbase= value1 + value2 %></td>
+            <td><int id="horas_base" name="horas_base" type="int"></td>
         </tr>
-        <tr>    
-            <td>Horas de ausencia</td>
+        <tr>
+            <td>Horas ausencia</td>
             <td><label for="horas_ausencia"></label>
-                <%= ausencia=15 %></td>
+                <%= horas_ausencia=35 %></td>
+            <td><int id="horas_ausencia" name="horas_ausencia" type="int"></td>
         </tr>
         <tr>
             <td>Horas esperadas</td>
             <td><label for="horas_base"></label>
-                <%= horasesperadas= horasbase - ausencia%></td>
+                <%= horasesperadas= horasbase - horas_ausencia%></td>
         </tr>
         <tr>
             <td>Horas hombre</td>
             <td><label for="horas_hombre"></label>
-                <%= horasajutadas %></td>
+                <%= horas_hombre=horasajutadas %></td>
+            <td><int id="horas_hombre" name="horas_hombre" type="int"></td>
         </tr>
         <tr>
             <% var proporcion_horas = horasajutadas/horasesperadas %>
             <% verdadero= 95/100 %>
             <td>Efectividad ajustada</td>
             <td><label for="Efectividad_ajustada"></label>
-                <%= (proporcion_horas/verdadero).toFixed(2) %> </td>
+                <%= efectividad = (proporcion_horas/verdadero).toFixed(2) %> </td>
     </table>
     
 </fieldset>

@@ -36,8 +36,9 @@ exports.getCrearReporte = (request, response, next) => {
 exports.postCrearReporte = (request, response, next) => {
 
     id_empleado= request.session.id_empleado;
-    const reporte = new Reporte(request.body.fecha_inicio, request.body.fecha_fin, request.body.Efectividad_ajustada, request.body.horas_base, request.body.horas_hombre, request.body.horas_ausencia, request.body.proporcion_horas, id_empleado);
-    console.log(reporte  )
+    console.log(horasbase);
+    const reporte = new Reporte(request.body.fecha_inicio, request.body.fecha_fin, efectividad, horasbase, horas_hombre, horas_ausencia, request.body.proporcion_horas, id_empleado);
+    console.log(reporte)
     reporte.save()
         .then(() => {
             Reporte.getHoras_proyectos(request.body.fecha_inicio, request.body.fecha_fin)
