@@ -77,6 +77,15 @@ h2{
     padding-right: 3rem !important;
 }
 
+.p-5 {
+    padding: 1rem !important;
+    padding-left: 2rem !important;
+    padding-right: 3rem !important;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
 .card{
     
     color: black;
@@ -136,6 +145,17 @@ li {
     position: relative;
     display: block;
     padding: .45rem 1rem;
+}
+
+.rolnav2{
+
+    font-weight: bold;
+    font-size: 45px;
+    padding-right: 20px;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .opsidebar{

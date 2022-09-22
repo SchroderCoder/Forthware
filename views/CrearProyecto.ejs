@@ -2,8 +2,18 @@
 <%- include('includes/nav.ejs') %>    
 <%- include('includes/sidebar.ejs') %>   
 
+<div class="container">
+    <div class="row">
+      <div class="col-6">
+        <h1><%= titulo %></h1>
+      </div>
+      <div class="col">
+        <a href="/proyectos/main" class="btn btn-danger btn-primary btn-sm" button type="button">Cancelar</a> 
+      </div>
+    </div>
+  </div>
 <h1><%= titulo %></h1>
 
-<a href="/proyectos/main" button type="button">Cancelar</a> 
+<a href="/proyectos/main" class="btn btn-danger btn-primary btn-sm" button type="button">Cancelar</a> 
 
 <%- include('includes/forms/proyectos.form.ejs') %> 

@@ -57,6 +57,8 @@ exports.postCrearReporte = (request, response, next) => {
 
 exports.getBuscar = (request, response, next) => {
 
+    console.log(request.params.fecha_inicio)
+    console.log(request.params.fecha_fin)
     Reporte.getHoras_proyectos(request.params.fecha_inicio, request.params.fecha_fin)
         .then(([rows, fieldData]) => {
             response.status(200).json({proyectos: rows});

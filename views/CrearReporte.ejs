@@ -7,6 +7,8 @@
     <div class="p-3">
     <h3>Reporte semanal</h3>
     <%- include('includes/forms/reportes.form.ejs') %>  
+
+    <a href="/reportes/main" button type="button">Cancelar</a> 
     </div>
 
 
@@ -14,7 +16,8 @@
         const accion_asincrona = () => {
             const fecha_fin = document.getElementById('fecha_fin').value;
             const fecha_inicio = document.getElementById('fecha_inicio').value;
-            console.log('saddaff')
+            console.log(fecha_fin)
+            console.log(fecha_inicio)
             //función que manda la petición asíncrona
             fetch('/reportes/buscar/' + fecha_fin, {
                 method: 'GET',
