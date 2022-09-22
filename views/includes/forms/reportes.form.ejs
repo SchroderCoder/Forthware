@@ -3,10 +3,15 @@
     <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
 <fieldset>
     <legend>Datos del reporte</legend>
+
+    <div class="input-field">
+
     <label for="fecha_inicio"> Fecha de inicio: </label>    
     <input id="fecha_inicio" name="fecha_inicio" type="date" required> 
     <label for="fecha_fin"> Fecha de corte: </label>    
     <input id="fecha_fin" name="fecha_fin" type="date" required> 
+    
+    </div>
     <br><br>
     <h5>Personal</h5>
     <label for="completo">Tiempo completo: </label>    
@@ -17,36 +22,39 @@
     <label for="proporcion_horas">Efectividad: </label>
     <input placeholder="85" id="proporcion_horas" name="proporcion_horas" type="int" required><br><br>
     <br>
-    <table>
-        <tr>
-            <th>Proyectos</th>
-            <th>Horas hombre</th>
-            <th>Horas ajustadas</th>
-        </tr>
-        <% if (proyectos.length > 0) { %>
-            <% var horas = 0  %>
-                <% for (let  p of proyectos) { %>
-                    <% horas = p.Horas + horas %>
-                    <tr>
-                    <td>
-                    <p><%= p.nombre %></p>
-                    </td>
-                    <td><%= p.Horas %></td>
-                    <td><label for="proyectos_horas_adj"></label>
-                        <input placeholder="500" id="proyectos_horas_adj" name="proyectos_horas_adj" type="int" required></td></td>
-                    </tr>
-                <% } %>
-            
-            <% } else { %>
-                <h2>No hay proyectos registrados</h2>
-            <% } %> 
-        <tr>
-            <td>Total:</td>
-            <td><%= horas %></td>
-            <td>Suma ajustada</td>
-        </tr>
-    </table>
+    <div id="lista_proyectos">
+        <table>
+            <% let proyectos = ['Smo', 'sdsad','dassd']; %>
+            <tr>
+                <th>Proyectos</th>
+                <th>Horas hombre</th>
+                <th>Horas ajustadas</th>
+            </tr>
+            <% if (proyectos.length > 0) { %>
+                    <% for (let  p of proyectos) { %>
+                        <tr>
+                        <td>
+                        <p><%= p %></p>
+                        </td>
+                        <td>horas</td>
+                        <td><label for="proyectos_horas_adj"></label>
+                            <input placeholder="500" id="proyectos_horas_adj" name="proyectos_horas_adj" type="int" required></td></td>
+                        </tr>
+                    <% } %>
+                
+                <% } else { %>
+                    <h2>No hay proyectos registrados</h2>
+                <% } %> 
+            <tr>
+                <td>Total:</td>
+                <td>horas suma</td>
+                <td>Suma ajustada</td>
+            </tr>
+        </table>
+    </div>
+
     <br>
+
     <table>
         <tr>
             <th>Valores</th>

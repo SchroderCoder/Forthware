@@ -1,3 +1,4 @@
+const bodyParser = require('body-parser');
 const db = require('../util/database');
 
 module.exports = class Reporte {

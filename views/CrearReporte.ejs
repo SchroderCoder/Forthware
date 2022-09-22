@@ -3,9 +3,71 @@
 <%- include('includes/sidebar.ejs') %>   
 
 <h1>Generar reporte</h1>
+
     <div class="p-3">
     <h3>Reporte semanal</h3>
     <%- include('includes/forms/reportes.form.ejs') %>  
     </div>
 
 
+    <script>
+        const accion_asincrona = () => {
+            const fecha_fin = document.getElementById('fecha_fin').value;
+            const fecha_inicio = document.getElementById('fecha_inicio').value;
+            console.log('saddaff')
+            //función que manda la petición asíncrona
+            fetch('/reportes/buscar/' + fecha_fin, {
+                method: 'GET',
+            }).then(result => {
+                return result.json(); //Regresa otra promesa
+            }).then(data => {
+                //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
+                console.log(data);
+
+                let html = '';
+
+                html += '<table>';
+                html += '<tr>';
+                html += '<th>Proyectos</th>';
+                html += '<th>Horas hombre</th>';
+                html += '<th>Horas ajustadas</th>';
+                html += '</tr>';
+                if (proyectos.length > 0) {
+                    var horas = 0
+                    for (p of proyectos) {
+                        horas = p.Horas + horas
+                        html += '<tr>';
+                        html += '<td>';
+                        html += '<p>';
+                        p.nombre;
+                        html += '</p>';
+                        html += '</td>';
+                        html += '<td>';
+                        p.Horas;
+                        html += '</td>';
+                        html += '<td><label for="proyectos_horas_adj"></label>';
+                        html += '<input placeholder="500" id="proyectos_horas_adj" name="proyectos_horas_adj" type="int" required></td></td>';
+                        html += '</tr>'
+                        }
+
+                    } else {
+                        html += '<h2>No hay proyectos registrados</h2>';                
+                    }
+                html += '<tr>';
+                html += '<td>Total:</td>';
+                html += '<td>';
+                horas;
+                html += '</td>';
+                html += '<td>Suma ajustada</td>';
+                html += '</tr>';
+                html += '</table>';
+
+                document.getElementById("lista_proyectos").innerHTML = html;
+            }).catch(err => {
+                console.log(err);
+            });
+        };
+        
+
+        document.getElementById('fecha_fin').onclick = accion_asincrona;
+    </script>

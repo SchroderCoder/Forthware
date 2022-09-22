@@ -25,20 +25,11 @@ exports.getReportes = (request, response, next) => {
 
 exports.getCrearReporte = (request, response, next) => {
 
-    Reporte.getHoras_proyectos('2022/01/01', '2023/12/31')
-    .then(([rows, fielData]) => {
         response.render(path.join('..',"views", "CrearReporte.ejs"), {
-            proyectos: rows,
             privilegios: request.session.privilegios,
             isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
         });
-    })
-    .catch(err => {
-        console.log(err);
-            response.render('error.ejs', {
-                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
-            });
-    });
+
 
 };
 
@@ -62,4 +53,16 @@ exports.postCrearReporte = (request, response, next) => {
             });
         });
 
+};
+
+exports.getBuscar = (request, response, next) => {
+
+    Reporte.getHoras_proyectos(request.params.fecha_inicio, request.params.fecha_fin)
+        .then(([rows, fieldData]) => {
+            response.status(200).json({proyectos: rows});
+        })
+        .catch(err => { 
+            console.log(err);
+            response.status(500).json({message: "ERROR 500"});
+        });
 };
