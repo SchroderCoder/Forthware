@@ -38,12 +38,11 @@
             <label for="descripcion">Descripción: </label>
             <input placeholder="Junta" id="descripcion" name="descripcion" maxlength="40" type="text" required>
             <label for="duracion">Tiempo (hrs): </label>
-            <input placeholder=" 0.15" id="duracion" name="duracion" type="number" min = "0" max = "10" required>
+            <input placeholder=" 0.15" id="duracion" name="duracion" type="number" min = "0" max = "10"  step= "0.1" required>
             <label for="fecha"> Fecha: </label>    
             <input id="fecha" name="fecha" type="date" min="2000-01-01" required> 
             
     </fieldset>
     <br>
     <input type="submit" class="btn" value="<%= titulo %>">
-    <script src="/js/checkbox.js"></script>
 </form>
