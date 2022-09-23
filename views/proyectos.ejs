@@ -9,15 +9,60 @@
             <div class="p-3">
                 <div class="row">
                     <% for (let  p of proyectos) { %>
-                            <div class="col-sm-3 pt-2 over">
-                                <div class="card" style="width: 16rem;height: 25rem ; ">
+                            <div class="col-sm-4 pt-2 over">
+                                <div class="card" style="width: auto;height: 25rem ; ">
                                     <h5 class="card-title bg-success text-dark h-25 text-center align-middle py-auto  list-group-item"><a href="/proyectos/editarProyecto/<%= p.id_proyecto %>" class="text-white" ><%= p.nombre %></a></h5>
-                                    <img src="/media/FWPNGB&W.png" class="card-img-top" alt="">
+                                    <img src="<%= p.image_url %>" class="card-img-top" alt="">
                                     <div class="card-body textBlack">
+<<<<<<< HEAD
                                     <h5 class="card-title "><a href="/proyectos/editarProyecto/<%= p.id_proyecto %>" ><%= p.nombre %></a></h5>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                     <a href="#" class="btn btn-primary">Go somewhere</a>
                                     </div>
+=======
+                                        <div class="row">
+
+                                                <p class="card-text col-sm pt-2 over mx-auto align-middle py-auto  list-group-item">Importancia:</p>
+                                                <% if (p.importancia == "Alto") { %>
+                                                    <p class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.importancia %></p>
+                                                <% } %>
+                                                <% if (p.importancia == "Medio") { %>
+                                                    <p class="card-text bg-warning col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.importancia %></p>
+                                                <% } %>
+                                                <% if (p.importancia == "Bajo") { %>
+                                                    <p class="card-text bg-light text-dark col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.importancia %></p>
+                                                <% } %>
+                                            
+
+                                        </div>
+                                        <div class="row pt-2"  >
+                                            <p class="card-text col-sm pt-1 over mx-auto align-middle py-auto  list-group-item">Importancia:</p>
+                                                <% if (p.estatus == "Planeación") { %>
+                                                    <p style="background-color: #9B38CA !important;" class="card-text col-sm  over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                                <% } %>
+                                                <% if (p.estatus == "Diseño") { %>
+                                                    <p style="background-color: #00C4D0 !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                                <% } %>
+                                                <% if (p.estatus == "Análisis") { %>
+                                                    <p style="background-color: #1A02AC !important;"class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                                <% } %>
+                                                <% if (p.estatus == "Pruebas") { %>
+                                                    <p style="background-color: #ca3838 !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                                <% } %>
+                                                <% if (p.estatus == "Mantenimiento") { %>
+                                                    <p style="background-color: #e0ce04 !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                                <% } %>
+                                                <% if (p.estatus == "Construcción") { %>
+                                                    <p style="background-color: #DC6F0B !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                                <% } %>
+                                                <% if (p.estatus == "Documentación") { %>
+                                                    <p style="background-color: #434342 !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                                <% } %>
+                                                <% if (p.estatus == "Despliegue") { %>
+                                                    <p style="background-color: #0a752c !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                                <% } %>
+                                        </div>
+>>>>>>> 4ebfb147986bab79791412d876fda0de20bab301
                                         <p class="card-text"></p>
                                         <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                                 </div>
