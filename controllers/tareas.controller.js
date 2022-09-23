@@ -7,7 +7,9 @@ const Realiza = require('../models/realiza.model');
 
 exports.getTareas = (request, response, next) => {
     Tarea.fetchAll()
+
     .then(([rows, fielData]) => {
+        console.log(rows)
         response.render(path.join('..',"views", "tareas.ejs"), {
             tareas: rows,
             privilegios: request.session.privilegios,
