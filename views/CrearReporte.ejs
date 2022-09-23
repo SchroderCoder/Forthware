@@ -23,7 +23,7 @@
             data.fecha_inicio=fecha_inicio;
 
             const csrf = document.getElementById('_csrf').value;
-            console.log(csrf)
+            
             //función que manda la petición asíncrona
             fetch('/reportes/buscar', {
                 method: 'POST',
@@ -43,7 +43,7 @@
                 html += '<tr>';
                 html += '<th>Proyectos</th>';
                 html += '<th>Horas hombre</th>';
-                html += '<th>Horas ajustadas</th>';
+                // html += '<th>Horas ajustadas</th>';
                 html += '</tr>';
 
                 let horas = 0;
@@ -61,8 +61,8 @@
                         html += '<td>';
                         html += p.Horas;
                         html += '</td>';
-                        html += '<td><label for="proyectos_horas_adj"></label>';
-                        html += '<input placeholder="500" id="proyectos_horas_adj" name="proyectos_horas_adj" type="int" required></td></td>';
+                        // html += '<td><label for="proyectos_horas_ad"></label>';
+                        // html += '<input placeholder="500" id="proyectos_horas_adj" name="proyectos_horas_adj" type="int" required></td></td>';
                         html += '</tr>';
                     }
 
@@ -71,10 +71,11 @@
                 }
                 html += '<tr>';
                 html += '<td>Total:</td>';
-                html += '<td>';
+                html += '<td><label for="horas_hombre"></label>';
                 html += horas;
                 html += '</td>';
-                html += '<td>Suma ajustada</td>';
+                html += '<td><int id="horas_hombre" name="horas_hombre" type="int"></td>';
+                // html += '<td>Suma ajustada</td>';
                 html += '</tr>';
                 html += '</table>';
 
@@ -84,5 +85,116 @@
             });
         };
 
+        const accion_asincrona2 =() =>{ 
+            const tiempo_completo = document.getElementById('completo').value;
+            const tiempo_medio = document.getElementById('medio').value;
+            const horas_ausencia = document.getElementById('horas_ausencia_').value;
+            const eficiencia = document.getElementById('proporcion_horas').value;
+
+            data=new Object()
+
+            console.log(data)
+            data.tiempo_completo = tiempo_completo;
+            data.tiempo_medio = tiempo_medio;
+            data.horas_ausencia = horas_ausencia;
+            data.eficiencia = eficiencia;
+
+            const csrf = document.getElementById('csrf_').value;
+
+            fetch('/reportes/suma_completo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'csrf-token': csrf  
+                },
+                body: JSON.stringify(data),
+            }).then(result => {
+                return result.json(); //Regresa otra promesa
+            }).then(data => {
+                //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
+                let html = '';
+                html += '<table>';
+                html += '<tr>';
+                html += '<th>Valores</th>';
+                html += '<th>Horas</th>';
+                html += '</tr>';
+                html += '<tr>';
+                html += '<td>Tiempo completo</td>';
+                html += '<td><label for="suma_completo"></label>';
+                html +=  value1= data.completos.tiempo_completo * 35;
+                html += '</td>';
+                html += '</tr>';
+                html += '<tr>';
+                html += '<td>Tiempo medio</td>';
+                html += '<td><label for="suma_medio"></label>';
+                html += value2= data.completos.tiempo_medio * 18;
+                html += '</td>';
+                html += '</tr>';
+                html += '<td>Horas base</td>';
+                html += '<td><label for="horas_base"></label>';
+                html += horasbase= value1 + value2;
+                html += '</td>';
+                html += '<td><int id="horas_base" name="horas_base" type="int"></td>';
+                html += '</tr>';
+                html += '<tr>';
+                html += '<td>Horas ausencia</td>';
+                html += '<td><label for="horas_ausencia"></label>';
+                html += horas_ausencias= data.completos.horas_ausencia;
+                html += '</td>';
+                html += '<td><int id="horas_ausencia" name="horas_ausencia" type="int"></td>'
+                html += '</tr>';
+                html += '<tr>';
+                html += '<td>Horas habiles</td>';
+                html += '<td><label for="horas_base"></label>';
+                html += horasesperadas = horasbase - horas_ausencias;
+                html += '<td><int id="horas_base" name="horas_base" type="int"></td>'
+                html += '</td>';
+                html += '</tr>';
+                html += '</table>';
+
+            
+                document.getElementById("suma_completo").innerHTML = html;
+            }).catch(err => {
+                console.log(err);
+            });
+   
+        };
+
+        const accion_asincrona3 =() =>{ 
+            const horas_ajustadas = document.getElementById('proyectos_horas_adj').value;
+
+            data= new Object()
+
+            data.tiempo_completo = tiempo_completo;
+
+            console.log(data)
+
+            const csrf = document.getElementById('_csrf').value;
+
+            fetch('/reportes/horas_hombre', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'csrf-token': csrf  
+                },
+                body: JSON.stringify(data),
+            }).then(result => {
+                return result.json(); //Regresa otra promesa
+            }).then(data => {
+
+                let html = '';
+
+                document.getElementById("horas_hombre").innerHTML = html;
+            }).catch(err => {
+                console.log(err);
+            });
+
+        };
+
         document.getElementById('fecha_fin').oninput = accion_asincrona;
+
+        document.getElementById('proporcion_horas').oninput = accion_asincrona2;
+
+        document.getElementById('proyectos_horas_adj').oninput = accion_asincrona3;
+
     </script>

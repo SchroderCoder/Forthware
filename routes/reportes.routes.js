@@ -15,4 +15,8 @@ router.post('/crearReporte', isAuth, reporte_lock, reportesController.postCrearR
 
 router.post('/buscar', reportesController.postBuscar);
 
+router.post('/suma_completo', reportesController.postCompleto);
+
+router.post('/horas_hombre', reportesController.postCompleto);
+
 module.exports = router;
