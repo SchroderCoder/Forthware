@@ -5,6 +5,7 @@ const Proyecto = require('../models/proyecto.model');
 
 exports.getReportes = (request, response, next) => {
 
+
     Reporte.fetchAll()
     .then(([rows, fielData]) => {
         response.render(path.join('..',"views", "reportes.ejs"), {

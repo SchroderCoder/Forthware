@@ -14,7 +14,7 @@ module.exports = class Tarea {
     }
 
     static fetchAll() {
-        return db.execute('SELECT * FROM tareas');
+        return db.execute('SELECT t.id_tarea, t.fecha_creacion , t.descripcion, t.duracion, t.id_proyecto, p.nombre FROM tareas t, proyectos p WHERE t.id_proyecto = p.id_proyecto');
     }
 
     static fetchOne(un_id) {

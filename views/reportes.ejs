@@ -1,36 +1,38 @@
 <%- include('includes/head.ejs') %>
 <%- include('includes/nav.ejs') %>   
 <%- include('includes/sidebar.ejs') %>   
+
+
 <div>
     <h3>Entraste a reportes</h3>
 </div>
 
 <h3>Reportes</h3>
-<div class="overflow-auto anyClass">
-    <% if (reportes.length > 0) { %>
-        <div class="p-3">
-            <div class="row">
-            <% for (let  r of reportes) { %>
-                <div class="col-sm-3 pt-2 over">
-                    <div class="card" style="width: 16rem;height: 25rem ; ">
-                        <h5 class="card-title bg-success text-dark h-25 text-center align-middle py-auto  list-group-item"><a href="" class="text-white" ><%= r.id_reporte %></a></h5>
-                        <img src="/media/FWPNGB&W.png" class="card-img-top" alt="">
-                        <div class="card-body textBlack">
-                        <h5 class="card-title "><a href="" ><% r.id_reporte %></a></h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+
+<div class="p-3">
+    <div class="row">
+        <div class="col-10 pt-1 list-group-item">
+            <div class="overflow-auto anyClass" style="height: 34rem !important;">
+                <% if (reportes.length > 0) { %>
+                    <div class="p-3">
+                        <div class="row">
+                        <% for (let  r of reportes) { %>
+                            <div class="col-sm-4 pt-2 over">
+                                <div class="" style="width: auto; height: 25rem ; ">
+                                    <p class="card-title bg-success text-dark h-25 text-center align-middle py-auto  list-group-item"><a class="text-white" ><%= moment().format('dddd Do MMM YYYY') %></a></p>
+                                    <img src="/media/templatereportes.png" class="card-img-top" alt="">
+                    
+                                </div>
+                            </div>
+                        <% } %>
                         </div>
-                            <p class="card-text"></p>
-                            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                     </div>
-                </div>
-            <% } %>
+                <% } else { %>
+                    <h2>No hay reportes registrados</h2>
+                <% } %>  
             </div>
         </div>
-    <% } else { %>
-        <h2>No hay reportes registrados</h2>
-    <% } %>  
-<br>
+    </div>
 </div>
 
 <a href="/reportes/crearReporte" class="btn btn-success" button type="button">Crear reporte</button>
