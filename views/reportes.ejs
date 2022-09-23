@@ -7,12 +7,18 @@
 
 <h3>Reportes</h3>
     <% if (reportes.length > 0) { %>
-        <div>
+        <div class="p-3">
             <% for (let  r of reportes) { %>
-                <a href=""><%= r.id_reporte %></a>
-                <br>
+                <div class="col-sm-3 p-2">
+                    <div class="card" style="width: 16rem;height: 25rem ; ">
+                        <img src="/media/templatereportes.png" class="card-img-top" alt="">
+                        <div class="card-body textBlack">
+                        <h5 class="card-title "><a href="""><% r.id_reporte %></a></h5>
+                    </div>
+                    </div>
+                </div>
             <% } %>
-            </div>
+        </div>
     <% } else { %>
         <h2>No hay reportes registrados</h2>
     <% } %>  

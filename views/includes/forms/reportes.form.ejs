@@ -1,6 +1,7 @@
 <form action="crearReporte" method="POST">
 
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+    <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
+    <input type="hidden" name="csrf_" id="csrf_" value="<%= csrfToken %>" >
 <fieldset>
     <legend>Datos del reporte</legend>
 
@@ -14,21 +15,36 @@
     </div>
     <br><br>
     <h5>Personal</h5>
-    <label for="completo">Tiempo completo: </label>    
-    <input id="completo" name="completo" type="int" required>
-    <label for="medio">Tiempo medio: </label>    
-    <input id="medio" name="medio" type="int" required>
+    <table>
+        <tr>
+            <td><label for="completo">Tiempo completo: </label></td>
+            <td>5</td>
+            <td><input id="completo" name="completo" min="0" max="100" type="int" required></td>
+        </tr>
+        <tr>
+            <td><label for="medio">Tiempo medio: </label></td>
+            <td>6</td>
+            <td><input id="medio" name="medio" min="0" max="100" type="int" required></td>
+        </tr>
+        <tr>
+            <td><label for="horas_ausencia_">horas de ausencia: </label></td>
+            <td>35</td>
+            <td><input id="horas_ausencia_" name="horas_ausencia_" min="0" max="100" type="int" required></td>
+        </tr>
+        <tr>
+            <td><label for="proporcion_horas">Eficiencia: </label></td>
+            <td>85</td>
+            <td><input placeholder="85% " id="proporcion_horas" name="proporcion_horas" min="50" max="100" type="int" required></td>
+        </tr>
+    </table>
     <br><br>
-    <label for="proporcion_horas">Efectividad: </label>
-    <input placeholder="85" id="proporcion_horas" name="proporcion_horas" type="int" required><br><br>
-    <br>
     <div id="lista_proyectos">
         <table>
-            <% let proyectos = ['Smo', 'sdsad','dassd']; %>
+            <% let proyectos = ['Proyecto 1', 'Proyecto 2']; %>
             <tr>
                 <th>Proyectos</th>
                 <th>Horas hombre</th>
-                <th>Horas ajustadas</th>
+                <!-- <th>Horas ajustadas</th> -->
             </tr>
             <% if (proyectos.length > 0) { %>
                     <% for (let  p of proyectos) { %>
@@ -37,8 +53,8 @@
                         <p><%= p %></p>
                         </td>
                         <td>horas</td>
-                        <td><label for="proyectos_horas_adj"></label>
-                            <input placeholder="500" id="proyectos_horas_adj" name="proyectos_horas_adj" type="int" required></td></td>
+                        <!-- <td><label for="proyectos_horas_adj"></label>
+                            <input placeholder="500" id="proyectos_horas_adj" name="proyectos_horas_adj" type="int" required></td></td> -->
                         </tr>
                     <% } %>
                 
@@ -46,54 +62,73 @@
                     <h2>No hay proyectos registrados</h2>
                 <% } %> 
             <tr>
+                <% let horasajutadas = 220 %>
                 <td>Total:</td>
                 <td>horas suma</td>
-                <td>Suma ajustada</td>
+                <!-- <td><%= horasajutadas %></td> -->
             </tr>
         </table>
     </div>
 
     <br>
-
+    
+    <div id="suma_completo">
     <table>
         <tr>
             <th>Valores</th>
             <th>Horas</th>
         </tr>
+            <tr>
+                    <% var completo = 0 %>
+                    <td>Tiempo completo</td>
+                    <td><label for="suma_completo"></label>
+                        <%= value1= completo * 35 %> </td>
+            </tr>
         <tr>
-            <td>Tiempo completo</td>
-            <td><label for="suma_completo"></label>
-                <input placeholder="Horas esperadas de empleados de tiempo completo" id="suma_completo" name="suma_completo" type="int" required></td>
-        </tr>
-        <tr>
+            <% var medio = 0 %>
             <td>Tiempo medio</td>
             <td><label for="suma_medio"></label>
-                <input placeholder="Horas esperadas de empleados de tiempo medio" id="suma_medio" name="suma_medio" type="int" required></td>
+                <%= value2= medio * 18%></td>
         </tr>
         <tr>
             <td>Horas base</td>
             <td><label for="horas_base"></label>
-                <input placeholder="500" id="horas_base" name="horas_base" type="int" required></td>
+                <%= horasbase= value1 + value2 %></td>
+            <td><int id="horas_base" name="horas_base" type="int"></td>
         </tr>
         <tr>
-            <td>Horas de ausencia</td>
+            <td>Horas ausencia</td>
             <td><label for="horas_ausencia"></label>
-                <input placeholder="500" id="horas_ausencia" name="horas_ausencia" type="int" required></td>
+                <%= horas_ausencia=0 %></td>
+            <td><int id="horas_ausencia" name="horas_ausencia" type="int"></td>
         </tr>
+        <tr>
+            <td>Horas habiles</td>
+            <td><label for="horas_base"></label>
+                <%= horasesperadas= horasbase - horas_ausencia%></td>
+        </tr>
+    </table>
+    </div>
+
+    <!-- <div id="horas_hombre">
+    <table>
         <tr>
             <td>Horas hombre</td>
             <td><label for="horas_hombre"></label>
-                <input placeholder="500" id="horas_hombre" name="horas_hombre" type="int" required></td>
+                <%= horas_hombre=horasajutadas %></td>
+            <td><int id="horas_hombre" name="horas_hombre" type="int"></td>
         </tr>
         <tr>
+            <% var proporcion_horas = horasajutadas/horasesperadas %>
+            <% verdadero= 95/100 %>
             <td>Efectividad ajustada</td>
             <td><label for="Efectividad_ajustada"></label>
-                <input placeholder="85" id="Efectividad_ajustada" name="Efectividad_ajustada" type="int" required><br></td>
-        </tr>
+                <%= efectividad = (proporcion_horas/verdadero).toFixed(2) %> </td>
     </table>
+    </div> -->
     
 </fieldset>
 <br>
-<input type="submit" class="btn" value="Generar">
+<input type="submit" class="btn btn-success" value="Generar">
 
 </form>
