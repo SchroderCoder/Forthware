@@ -58,9 +58,9 @@
                                         </div>
                                         <p class="card-text"></p>
                                         <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                                    </div>
                                 </div>
                             </div>
-                            
                     <% } %>
                     
                 </div>
@@ -68,30 +68,30 @@
         <% } else { %>
             <h2>No hay proyectos registrados</h2>
         <% } %>  
-    <br>
-</div>
-<h3>Etiquetas</h3>
-    <% if (etiquetas.length > 0) { %>
-        <div>
-            <% for (let  e of etiquetas) { %>
-                <a class="p-3" href="/proyectos/editarEtiqueta/<%= e.id_proyecto %>" ><%= e.nombre %></a>
-                <button type="button" href="/proyectos/EliminarEtiqueta/<%= e.id_proyecto %>" class="btn btn-danger">Eliminar</button>
+    </div>
 
-                <br>
-            <% } %>
-            </div>
-    <% } else { %>
-        <h2>No hay proyectos registrados</h2>
-    <% } %>  
-<br>
-<div>   
-        <% if (privilegios.indexOf('Crear proyecto') > -1) { %>
-                <a href="/proyectos/crearProyecto" class="btn btn-success" button type="button">Crear proyecto</a>
+    <h3>Etiquetas</h3>
+        <% if (etiquetas.length > 0) { %>
+            <div>
+                <% for (let  e of etiquetas) { %>
+                    <a class="p-3" href="/proyectos/editarEtiqueta/<%= e.id_proyecto %>" ><%= e.nombre %></a>
+                    <!-- <button type="button" href="/proyectos/EliminarEtiqueta/<%= e.id_proyecto %>" class="btn btn-danger">Eliminar</button> -->
+
+                    <br>
+                <% } %>
+                </div>
+        <% } else { %>
+            <h2>No hay proyectos registrados</h2>
         <% } %>  
-        <br><br>
-        <% if (privilegios.indexOf('Crear etiqueta') > -1) { %>
-            <a href="/proyectos/crearEtiqueta" class="btn btn-success" button type="button">Crear etiqueta</a>
-    <% } %>  
+    <br>
+    <div>   
+            <% if (privilegios.indexOf('Crear proyecto') > -1) { %>
+                    <a href="/proyectos/crearProyecto" button type="button">Crear proyecto</a>
+            <% } %>  
+            <br><br>
+            <% if (privilegios.indexOf('Crear etiqueta') > -1) { %>
+                <a href="/proyectos/crearEtiqueta" button type="button">Crear etiqueta</a>
+        <% } %>  
+    </div>
 </div>
-
 <%- include('includes/foot.ejs') %>
