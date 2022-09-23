@@ -184,6 +184,7 @@ li {
 }*/
 
 .anyClass {
-    height: 28rem;
+    height: 32rem;
+    /* width: 10rem !important; */
     overflow-y: scroll;
 }
