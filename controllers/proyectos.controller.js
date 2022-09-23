@@ -66,12 +66,22 @@ exports.postCrearProyecto = (request, response, next) => {
 
 
 exports.getCrearEtiqueta = (request, response, next) => {
-
-    response.render(path.join('..',"views", "CrearEtiqueta.ejs"), {
-        privilegios: request.session.privilegios,
-        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
-        proyectos: "",
-        titulo: "Crear etiqueta",
+    Proyecto.fetchAllEtiquetas()
+    .then(([rows, fielData]) => {
+        response.render(path.join('..',"views", "CrearEtiqueta.ejs"), {
+            privilegios: request.session.privilegios,
+            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+            proyectos: "",
+            titulo: "Crear etiqueta",
+            etiqueta: rows,
+        });
+        console.log(rows)
+    })
+    .catch(err => {
+        console.log(err);
+        response.render('error.ejs', {
+            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+        });
     });
 };
 
@@ -155,7 +165,7 @@ exports.getEditarEtiqueta = (request, response, next) => {
             response.render(path.join('..',"views", "CrearEtiqueta.ejs"), {
                 proyectos: rows[0],
                 titulo: "Editar etiqueta " + rows[0].id_proyecto,
-                etiqueta:rows[0].nombre,
+                etiqueta:rows[0],
                 isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
             });
         } else {
@@ -176,7 +186,6 @@ exports.getEditarEtiqueta = (request, response, next) => {
 
 
 exports.postEditarEtiqueta = (request, response, next) => {
-
     Proyecto.fetchOne(request.body.id)
     .then(([rows, fielData]) => {
         rows[0].nombre= request.body.nombre

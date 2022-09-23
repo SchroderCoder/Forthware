@@ -88,7 +88,7 @@
                 <ul class="list-group list-group-flush">
                     <% if (etiquetas.length > 0) { %>
                         <% for (let  e of etiquetas) { %>
-                            <li  href="/proyectos/editarEtiqueta/<%= e.id_proyecto %>"  class="list-group-item border-bottom border-dark" style="width:50rem;"> <a class="p-3" ><%= e.nombre %></a></li>
+                          <a href="/proyectos/editarEtiqueta/<%= e.id_proyecto %>"> <li class="list-group-item border-bottom border-dark" style="width:50rem;"> <a class="p-3" href="/proyectos/editarEtiqueta/<%= e.id_proyecto %>" ><%= e.nombre %></a></li></a> 
                         <% } %>
                     <% } else { %>
                         <h2>No hay proyectos registrados</h2>
