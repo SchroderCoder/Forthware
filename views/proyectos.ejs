@@ -14,6 +14,7 @@
                                     <h5 class="card-title bg-success text-dark h-25 text-center align-middle py-auto  list-group-item"><a href="/proyectos/editarProyecto/<%= p.id_proyecto %>" class="text-white" ><%= p.nombre %></a></h5>
                                     <img src="<%= p.image_url %>" class="card-img-top" alt="">
                                     <div class="card-body textBlack">
+
                                         <div class="row">
 
                                                 <p class="card-text col-sm pt-2 over mx-auto align-middle py-auto  list-group-item">Importancia:</p>
@@ -56,11 +57,12 @@
                                                     <p style="background-color: #0a752c !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
                                                 <% } %>
                                         </div>
+
                                         <p class="card-text"></p>
                                         <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                                    </div>
                                 </div>
                             </div>
+                            
                     <% } %>
                     
                 </div>
@@ -68,30 +70,30 @@
         <% } else { %>
             <h2>No hay proyectos registrados</h2>
         <% } %>  
-    </div>
-
-    <h3>Etiquetas</h3>
-        <% if (etiquetas.length > 0) { %>
-            <div>
-                <% for (let  e of etiquetas) { %>
-                    <a class="p-3" href="/proyectos/editarEtiqueta/<%= e.id_proyecto %>" ><%= e.nombre %></a>
-                    <!-- <button type="button" href="/proyectos/EliminarEtiqueta/<%= e.id_proyecto %>" class="btn btn-danger">Eliminar</button> -->
-
-                    <br>
-                <% } %>
-                </div>
-        <% } else { %>
-            <h2>No hay proyectos registrados</h2>
-        <% } %>  
     <br>
-    <div>   
-            <% if (privilegios.indexOf('Crear proyecto') > -1) { %>
-                    <a href="/proyectos/crearProyecto" button type="button">Crear proyecto</a>
-            <% } %>  
-            <br><br>
-            <% if (privilegios.indexOf('Crear etiqueta') > -1) { %>
-                <a href="/proyectos/crearEtiqueta" button type="button">Crear etiqueta</a>
-        <% } %>  
-    </div>
 </div>
+<h3>Etiquetas</h3>
+    <% if (etiquetas.length > 0) { %>
+        <div>
+            <% for (let  e of etiquetas) { %>
+                <a class="p-3" href="/proyectos/editarEtiqueta/<%= e.id_proyecto %>" ><%= e.nombre %></a>
+                <button type="button" href="/proyectos/EliminarEtiqueta/<%= e.id_proyecto %>" class="btn btn-danger">Eliminar</button>
+
+                <br>
+            <% } %>
+            </div>
+    <% } else { %>
+        <h2>No hay proyectos registrados</h2>
+    <% } %>  
+<br>
+<div>   
+        <% if (privilegios.indexOf('Crear proyecto') > -1) { %>
+                <a href="/proyectos/crearProyecto" class="btn btn-success" button type="button">Crear proyecto</a>
+        <% } %>  
+        <br><br>
+        <% if (privilegios.indexOf('Crear etiqueta') > -1) { %>
+            <a href="/proyectos/crearEtiqueta" class="btn btn-success" button type="button">Crear etiqueta</a>
+    <% } %>  
+</div>
+
 <%- include('includes/foot.ejs') %>

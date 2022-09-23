@@ -36,7 +36,9 @@ exports.getCrearReporte = (request, response, next) => {
 exports.postCrearReporte = (request, response, next) => {
 
     id_empleado= request.session.id_empleado;
-    const reporte = new Reporte(request.body.fecha_inicio, request.body.fecha_fin, request.body.Efectividad_ajustada, request.body.horas_base, request.body.horas_hombre, request.body.horas_ausencia, request.body.proporcion_horas, id_empleado);
+    console.log(horasbase);
+    const reporte = new Reporte(request.body.fecha_inicio, request.body.fecha_fin, 85, 350, 310, request.body.horas_ausencia_, request.body.proporcion_horas, id_empleado);
+    console.log(reporte)
     reporte.save()
         .then(() => {
             Reporte.getHoras_proyectos(request.body.fecha_inicio, request.body.fecha_fin)
@@ -55,11 +57,8 @@ exports.postCrearReporte = (request, response, next) => {
 
 };
 
-exports.getBuscar = (request, response, next) => {
-
-    console.log(request.params.fecha_inicio)
-    console.log(request.params.fecha_fin)
-    Reporte.getHoras_proyectos(request.params.fecha_inicio, request.params.fecha_fin)
+exports.postBuscar = (request, response, next) => {
+    Reporte.getHoras_proyectos(request.body.fecha_inicio, request.body.fecha_fin)
         .then(([rows, fieldData]) => {
             response.status(200).json({proyectos: rows});
         })
@@ -67,4 +66,14 @@ exports.getBuscar = (request, response, next) => {
             console.log(err);
             response.status(500).json({message: "ERROR 500"});
         });
+};
+
+exports.postCompleto = (request, response, next) => {
+    console.log(request.body)
+    response.status(200).json({completos: request.body});
+};
+
+exports.postHorasHombre = (request, response, next) => {
+    console.log(request.body)
+    response.status(200).json({horasHombre: request.body});
 };
