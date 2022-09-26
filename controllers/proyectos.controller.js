@@ -155,7 +155,7 @@ exports.getEditarEtiqueta = (request, response, next) => {
             response.render(path.join('..',"views", "CrearEtiqueta.ejs"), {
                 proyectos: rows[0],
                 titulo: "Editar etiqueta " + rows[0].id_proyecto,
-                etiqueta:rows[0].nombre,
+                etiqueta:rows[0],
                 isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
             });
         } else {
@@ -176,7 +176,6 @@ exports.getEditarEtiqueta = (request, response, next) => {
 
 
 exports.postEditarEtiqueta = (request, response, next) => {
-
     Proyecto.fetchOne(request.body.id)
     .then(([rows, fielData]) => {
         rows[0].nombre= request.body.nombre
