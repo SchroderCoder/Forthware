@@ -66,7 +66,7 @@ exports.postCrearProyecto = (request, response, next) => {
 
 
 exports.getCrearEtiqueta = (request, response, next) => {
-
+    
     response.render(path.join('..',"views", "CrearEtiqueta.ejs"), {
         privilegios: request.session.privilegios,
         isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
