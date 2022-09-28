@@ -86,8 +86,8 @@ exports.getLogin = (request, response, next) => {
 
 exports.getMain = (request, response, next) => {
     response.render(path.join('..',"views", "main.ejs"), {
-        privilegios: request.session.privilegios,
-        rol: request.session.roles,
+        // privilegios: request.session.privilegios,
+        // rol: request.session.roles,
         isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
     });
 };
