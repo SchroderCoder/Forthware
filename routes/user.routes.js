@@ -12,6 +12,12 @@ router.get('/asignarRol',  requiresAuth(), userController.getRol);
 
 router.post('/asignarRol', requiresAuth(), userController.postRol);
 
+router.get('/login', userController.getLogin);
+
+router.post('/login', userController.postLogin);
+
+router.get('/logout', userController.logout);
+
 router.get('/main',requiresAuth(), userController.getMain);
 
 module.exports = router;
