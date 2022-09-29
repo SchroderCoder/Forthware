@@ -1,18 +1,16 @@
 const express = require('express');
 const router = express.Router();
-
+const { requiresAuth } = require('express-openid-connect');
 const tareasController = require('../controllers/tareas.controller');
 
-const isAuth = require('../util/isAuth.js');
+router.get('/main', requiresAuth(), tareasController.getTareas);
 
-router.get('/main', isAuth,  tareasController.getTareas);
+router.get('/crearTarea', requiresAuth(), tareasController.getCrearTareas);
 
-router.get('/crearTarea', isAuth,  tareasController.getCrearTareas);
+router.post('/crearTarea', requiresAuth(), tareasController.postCrearTareas);
 
-router.post('/crearTarea', isAuth,  tareasController.postCrearTareas);
+router.get('/editarTarea/:id', requiresAuth(), tareasController.getEditarTareas);
 
-router.get('/editarTarea/:id', isAuth,  tareasController.getEditarTareas);
-
-router.post('/editarTarea', isAuth,  tareasController.postEditarTareas);
+router.post('/editarTarea',requiresAuth(),  tareasController.postEditarTareas);
 
 module.exports = router;

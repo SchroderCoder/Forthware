@@ -1,25 +1,23 @@
 const express = require('express');
 const router = express.Router();
-
+const { requiresAuth } = require('express-openid-connect');
 const userController = require('../controllers/user.controller');
 
-const isAuth = require('../util/isAuth.js');
 
+router.get('/new',  requiresAuth(),userController.getNew);
 
-router.get('/new', isAuth,  userController.getNew);
+router.post('/new', requiresAuth(), userController.postNew);
 
-router.post('/new', isAuth,  userController.postNew);
+router.get('/asignarRol',  requiresAuth(), userController.getRol);
 
-router.get('/asignarRol', isAuth,  userController.getRol);
-
-router.post('/asignarRol', isAuth, userController.postRol);
+router.post('/asignarRol', requiresAuth(), userController.postRol);
 
 router.get('/login', userController.getLogin);
 
 router.post('/login', userController.postLogin);
 
-router.get('/logout', isAuth, userController.logout);
+router.get('/logout', userController.logout);
 
-router.get('/main', isAuth, userController.getMain);
+router.get('/main',requiresAuth(), userController.getMain);
 
 module.exports = router;

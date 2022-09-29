@@ -1,29 +1,25 @@
 const express = require('express');
 const router = express.Router();
-
+const { requiresAuth } = require('express-openid-connect');
 const proyectoController = require('../controllers/proyectos.controller');
 
-const isAuth = require('../util/isAuth.js');
+router.get('/main',requiresAuth(), proyectoController.getProyectos);
 
-const proyecto_lock = require('../util/Proyecto_lock');
+router.get('/crearProyecto',requiresAuth(), proyectoController.getCrearProyecto);
 
-router.get('/main', isAuth, proyectoController.getProyectos);
+router.post('/crearProyecto',requiresAuth(),  proyectoController.postCrearProyecto);
 
-router.get('/crearProyecto', isAuth, proyecto_lock, proyectoController.getCrearProyecto);
+router.get('/crearEtiqueta',requiresAuth(), proyectoController.getCrearEtiqueta);
 
-router.post('/crearProyecto', isAuth, proyecto_lock,  proyectoController.postCrearProyecto);
+router.post('/crearEtiqueta', requiresAuth() ,proyectoController.postCrearEtiqueta);
 
-router.get('/crearEtiqueta', isAuth, proyecto_lock, proyectoController.getCrearEtiqueta);
+router.get('/editarProyecto/:id',requiresAuth(), proyectoController.getEditarProyecto);
 
-router.post('/crearEtiqueta', isAuth, proyecto_lock, proyectoController.postCrearEtiqueta);
+router.post('/editarProyecto', requiresAuth(), proyectoController.postEditarProyecto);
 
-router.get('/editarProyecto/:id', isAuth, proyecto_lock, proyectoController.getEditarProyecto);
+router.get('/editarEtiqueta/:id', requiresAuth(),proyectoController.getEditarEtiqueta);
 
-router.post('/editarProyecto', isAuth, proyecto_lock, proyectoController.postEditarProyecto);
-
-router.get('/editarEtiqueta/:id', isAuth, proyecto_lock, proyectoController.getEditarEtiqueta);
-
-router.post('/editarEtiqueta', isAuth,proyecto_lock,  proyectoController.postEditarEtiqueta);
+router.post('/editarEtiqueta',requiresAuth()  ,proyectoController.postEditarEtiqueta);
 
 
 
