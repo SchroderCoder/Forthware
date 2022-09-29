@@ -61,8 +61,8 @@
                         html += '<td>';
                         html += p.Horas;
                         html += '</td>';
-                        html += '<td><label for="proyectos_horas_ad"></label>';
-                        html += '<input placeholder="500" id="proyectos_horas_adj" name="proyectos_horas_adj" type="int" required></td></td>';
+                        html += '<td><label for="proyectos_horas_adj[' + p.id_proyecto + ']"> Ajuste de horas</label>';
+                        html += '<input placeholder="500" id="proyectos_horas_adj[' + p.id_proyecto + ']" name="proyectos_horas_adj[' + p.id_proyecto + ']" type="int" required></td></td>';
                         html += '</tr>';
                     }
 
@@ -161,7 +161,7 @@
         };
 
         const accion_asincrona3 =() =>{ 
-            const horas_ajustadas = document.getElementById('proyectos_horas_adj').value;
+            const horas_ajustadas = document.getElementById('proyectos_horas_adj[]').value;
 
             data= new Object()
 
@@ -183,6 +183,29 @@
             }).then(data => {
 
                 let html = '';
+
+                html += '<table>';
+                html += '<tr>';
+                html += '<td><label for= "horas_hombre">Horas hombre</label>';
+                    let horas_hombre;
+                    for (let p of proyectos_horas_adj){
+                        horas_hombre += p.Horas;
+                    }
+
+                    console.log(horas_hombre);
+
+                html +=  horas_hombre;
+                html += '</td>';
+                html += '<td><int id="horas_hombre" name="horas_hombre" type="int"></td>';
+                html += '</tr>';
+                html += '<tr>';
+                html += proporcion_horas = horasajustadas/horasesperadas;
+                html += verdadero = 95/100
+                html += '<td><label for="Efectividad_ajustada">Efectividad ajustada</label>';
+                html += efectividad = (proporcion_horas/verdadero).toFixed(2);
+                html += '</td>';
+                html += '</table>';
+
 
                 document.getElementById("horas_hombre").innerHTML = html;
             }).catch(err => {

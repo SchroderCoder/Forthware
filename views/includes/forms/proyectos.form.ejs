@@ -18,6 +18,60 @@
             <label for="descripcion">Descripción: </label>
             <input placeholder="¿Qué se va a hacer?" id="descripcion" name="descripcion" maxlength="256" type="text" required>
             <br>
+            <% if (proyectos=="") { %>
+                <div class="multipleSelection">
+                    <div class="selectBox"
+                        onclick="showCheckboxes()">
+                        <select>
+                            <option>Colaboradores</option>
+                        </select>
+                    <div class="overSelect"></div>
+                    </div>
+                    <div id="checkBoxes">
+                        <% for (let e of empleados) { %>
+                            <input type="checkbox" id="empleados" name="empleados" value="<%= e.id_empleado %>">
+                            <label for="empleados"><%= e.nombre %></label>
+                        <% } %>
+                    </div>
+                </div>
+            <% } else { %>
+                <%}%>
+                <% if (!(proyectos=="")) { %>
+                    <div class="multipleSelection">
+                        <div class="selectBox"
+                            onclick="showCheckboxes()">
+                            <select>
+                                <option>Agregar colaboradores</option>
+                            </select>
+                        <div class="overSelect"></div>
+                        </div>
+                        <div id="checkBoxes">
+                            <% for (let t of registrados) { %>
+                                <input type="checkbox" id="empleados" name="empleados" value="<%= t.id_empleado %>">
+                                <label for="empleados"><%= t.nombre %></label>
+                            <% } %>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <%}%>
+                    <% if (!(proyectos=="")) { %>
+                        <div class="multipleSelection">
+                            <div class="selectBox"
+                                onclick="showCheckboxes()">
+                                <select>
+                                    <option>Eliminar colaboradores</option>
+                                </select>
+                            <div class="overSelect"></div>
+                            </div>
+                            <div id="checkBoxes">
+                                <% for (let n of no_registrados) { %>
+                                    <input type="checkbox" id="empleados" name="empleados" value="<%= n.id_empleado %>">
+                                    <label for="empleados"><%= n.nombre %></label>
+                                <% } %>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <%}%>
             <label for="stack">Stack de tecnologías:</label>
             <input placeholder="¿Qué tecnologías se van a utilizar?" id="stack" name="stack" maxlength="128" type="text" required>
             <br>

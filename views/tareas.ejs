@@ -28,7 +28,7 @@
                                 <div class="row bg-light text-dark m-2 border rounded">
                                     
                                     <div class="col border-right border-dark">
-                                        <%=  (t.fecha_creacion) %>
+                                        <%=  new Date(t.fecha_creacion).toLocaleDateString("ES-mx") %>
                                     </div>
                                     <div class="col-6 border-right border-dark">
                                         <%=  t.descripcion %>

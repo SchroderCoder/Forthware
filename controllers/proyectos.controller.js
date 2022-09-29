@@ -2,6 +2,8 @@ const path = require('path');
 const session = require('express-session');
 const Proyecto = require('../models/proyecto.model');
 const { fetchColaboradores, fetchLideres } = require('../models/proyecto.model');
+const Crea = require('../models/crea');
+const Usuario = require('../models/user.model');
 
 exports.getProyectos = (request, response, next) => {
     
@@ -37,14 +39,28 @@ exports.getCrearProyecto = (request, response, next) => {
     let lideres = fetchLideres;
     // <const importancia = ['Alto','Medio','Bajo'];
     // const estatus = ['']>
-    response.render(path.join('..',"views", "CrearProyecto.ejs"), {
-        privilegios: request.session.privilegios,
-        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
-        proyectos: "",
-        titulo: "Crear Proyecto", 
-        es_etiqueta: "¿Es etiqueta?",
-        
-    });
+    Usuario.fetchAll()
+        .then(([rows, fielData]) => {
+            request.session.isLoggedIn = true;
+            request.session.empleados = [];
+            for(let empleado of rows) {
+                request.session.empleados.push(empleado);
+            }
+            response.render(path.join('..',"views", "CrearProyecto.ejs"), {
+                privilegios: request.session.privilegios,
+                empleados: request.session.empleados,
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                proyectos: "",
+                titulo: "Crear Proyecto", 
+                es_etiqueta: "¿Es etiqueta?",
+            })
+        })
+        .catch(err => {
+            console.log(err);
+            response.render('error.ejs', {
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+            });
+        }); 
 };
 
 exports.postCrearProyecto = (request, response, next) => {
@@ -95,11 +111,41 @@ exports.getEditarProyecto = (request, response, next) => {
     Proyecto.fetchOne(request.params.id)
     .then(([rows, fielData]) => { 
         if (rows.length > 0) {
-            response.render(path.join('..',"views", "CrearProyecto.ejs"), {
-                proyectos: rows[0],
-                titulo: "Editar proyecto " + rows[0].nombre,
-                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
-            });
+            Crea.fetchRegistrados(request.params.id)
+                .then(([registered, fielData]) => {
+                    request.session.empleados_r = [];
+                    for(let empleado of registered) {
+                        request.session.empleados_r.push(empleado);
+                    }
+                    Crea.fetchNoRegistrados(request.params.id)
+                    .then(([noregistered, fielData]) => {
+                        request.session.empleados_no_r = [];
+                        for(let empleado of noregistered) {
+                            request.session.empleados_no_r.push(empleado);
+                        }
+
+
+                        response.render(path.join('..',"views", "CrearProyecto.ejs"), {
+                            proyectos: rows[0],
+                            registrados: request.session.empleados_r,
+                            no_registrados: request.session.empleados_no_r,
+                            titulo: "Editar proyecto " + rows[0].nombre,
+                            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                        });
+                    })
+                    .catch(err => {
+                        console.log(err);
+                            response.render('error.ejs', {
+                                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                            });
+                        }); 
+                })
+                .catch(err => {
+                    console.log(err);
+                    response.render('error.ejs', {
+                        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                    });
+            })     
         } else {
             console.log("no existe el id del equipo");
             response.render('error.ejs', {
