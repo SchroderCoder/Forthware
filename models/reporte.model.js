@@ -20,11 +20,11 @@ module.exports = class Reporte {
     }
 
     static fetchAll() {
-        return db.execute('SELECT * FROM reportes');
+        return db.execute('SELECT * FROM `reportes` ORDER BY id_reporte DESC LIMIT 3');
     }
 
     static getHoras_proyectos(fechainicio, fechafin) {
-        return db.execute('SELECT P.nombre, SUM(T.duracion) AS Horas FROM tareas T, proyectos P WHERE T.id_proyecto = P.id_proyecto AND T.fecha_creacion BETWEEN ? AND ? GROUP BY P.nombre',
+        return db.execute('SELECT P.nombre, P.id_proyecto, SUM(T.duracion) AS Horas FROM tareas T, proyectos P WHERE T.id_proyecto = P.id_proyecto AND T.fecha_creacion BETWEEN ? AND ? GROUP BY P.nombre',
         [fechainicio, fechafin]);
     }
 
