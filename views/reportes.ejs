@@ -3,15 +3,7 @@
 <%- include('includes/sidebar.ejs') %>   
 
 
-<<<<<<< HEAD
-<div>
-    <h1>Reportes</h1>
-</div>
-
-<h3>Reportes recientes</h3>
-=======
 <h2 class="pt-2 pl-2" >Reportes</h2>
->>>>>>> diego
 
 <div class="p-1">
     <div class="row">
@@ -21,7 +13,6 @@
                     <div class="p-1">
                         <div class="row">
                         <% for (let  r of reportes) { %>
-<<<<<<< HEAD
                                 <div class="col-sm-4 pt-2 over">
                                     <div class="" style="width: auto; ">
                                         <p class="card-title bg-success text-dark h-25 text-center align-middle py-auto  list-group-item"><a class="text-white" ><%= new Date(r.fecha_inicio).toLocaleDateString("ES-mx")  %> 
@@ -29,13 +20,6 @@
                                         <img src="/media/templatereportes.png" class="card-img-top" alt="">
                         
                                     </div>
-=======
-                            <div class="col-sm-4 p-3 over">
-                                <div class="card " style="width: auto; height: 31rem ; ">
-                                    <p class="card-title bg-success text-dark h-25 text-center align-middle py-auto  list-group-item"><a class="text-white" ><%= r.fecha_fin %></a></p>
-                                    <img src="/media/templatereportes.png" class="card-img-top" alt="">
-                    
->>>>>>> diego
                                 </div>
                         <% } %>
                         </div>

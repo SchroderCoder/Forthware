@@ -16,7 +16,7 @@ router.post('/suma_completo', reportesController.postCompleto);
 
 router.post('/horas_hombre', reportesController.postCompleto);
 
-router.get('/download', reportesController.download);
+// router.get('/download', reportesController.download);
 
 
 module.exports = router;

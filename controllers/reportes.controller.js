@@ -1,5 +1,4 @@
 const path = require('path');
-const fs = require('fs');
 const session = require('express-session');
 const Reporte = require('../models/reporte.model');
 const Proyecto = require('../models/proyecto.model');
@@ -9,7 +8,6 @@ exports.getReportes = (request, response, next) => {
 
     Reporte.fetchAll()
     .then(([rows, fielData]) => {
-        
         response.render(path.join('..',"views", "reportes.ejs"), {
             reportes: rows,
             privilegios: request.session.privilegios,
@@ -80,13 +78,3 @@ exports.postHorasHombre = (request, response, next) => {
     console.log(request.body)
     response.status(200).json({horasHombre: request.body});
 };
-
-exports.download = (request, response, next) => {
-    console.log('fileController.download: started')
-    console.log(request.body)
-    const path = request.body.path
-    const file = fs.createReadStream(path)
-    const filename = (new Date()).toISOString()
-    res.setHeader('Content-Disposition', 'attachment: filename="' + filename + '"')
-    file.pipe(response)
-  }
