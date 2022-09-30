@@ -18,7 +18,6 @@
             const fecha_fin = document.getElementById('fecha_fin').value;
             const fecha_inicio = document.getElementById('fecha_inicio').value;
             data = new Object ();
-            console.log(data)
 
             data.fecha_fin=fecha_fin;
             data.fecha_inicio=fecha_inicio;
@@ -37,7 +36,6 @@
                 return result.json(); //Regresa otra promesa
             }).then(data => {
                 //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
-                console.log(data);
                 let html = '';
 
                 html += '<table>';
@@ -65,10 +63,12 @@
                         html += '</td>';
                         html += '<td><label for="proyectos_horas_adj2">Ajuste de horas</label>';
                         html += '<input placeholder="500" id="proyectos_horas_adj2" oninput="calcularHoras()" name="proyectos_horas_adj2" type="int" required></td></td>';
-                        html += '</tr>';  
-                        console.log(horas);
-                        console.log("jijai")
-                    }
+                        html += '</tr>'; 
+                    }   
+
+                        html +=  horashombre = 0; 
+                        html += function calcularHoras () {horashombre = horashombre + document.getElementById("proyectos_horas_adj2").value;} 
+                        console.log("horashombre: " + horashombre);
 
                 } else {
                     html += '<h2>No hay proyectos registrados</h2>';                
@@ -97,7 +97,6 @@
 
             data=new Object()
 
-            console.log(data)
             data.tiempo_completo = tiempo_completo;
             data.tiempo_medio = tiempo_medio;
             data.horas_ausencia = horas_ausencia;
@@ -223,7 +222,7 @@
         document.getElementById('proporcion_horas').oninput = accion_asincrona2;
 
         // document.getElementById('proyectos_horas_adj').oninput = accion_asincrona3;
-        var horashombre = 0;
+        var horashombre = 0;    
         function calcularHoras () {
             horashombre = horashombre + document.getElementById("proyectos_horas_adj2").value;
         
