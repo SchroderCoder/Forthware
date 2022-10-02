@@ -9,7 +9,6 @@ exports.getTareas = (request, response, next) => {
     Tarea.fetchAll()
 
     .then(([rows, fielData]) => {
-        console.log(rows)
         response.render(path.join('..',"views", "tareas.ejs"), {
             tareas: rows,
             privilegios: request.session.privilegios,
@@ -78,8 +77,9 @@ exports.postCrearTareas = (request, response, next) => {
                 for (e of id_empleados){    
                     Realiza.registrar(e,id_reciente)
                     .then(([rows, fielData]) => {
+                        console.log("xd");
                         response.status(303).redirect('/tareas/main');
-                        console.log("tarea creada con exito");
+                        console.log(    "tarea creada con exito");
                     })
                     .catch(err => {
                         console.log(err);

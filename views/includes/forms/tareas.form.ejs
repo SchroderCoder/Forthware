@@ -1,7 +1,7 @@
 <% if (tareas=="") { %>
     <form action="crearTarea" method="POST">
 <% } else { %>
-    <form action="/tareas/editarTarea" method="POST">
+    <form action="/tareas/editarTarea" name = "crear" id= "crear" method="POST">
 <%}%>
     <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
     <fieldset>
@@ -44,6 +44,22 @@
             
     </fieldset>
     <br>
-    <input type="submit" class="btn btn-success"value="<%= titulo %>">
+    <input type="submit" class="btn btn-success" value="<%= titulo %>" onclick = "checkOne()">
+
     <script src="/js/checkbox.js"></script>
+    <script>
+        function checkOne(){
+            console.log("jijja");
+            var checkboxes2 = document.querySelectorAll('input[type="checkbox"]');
+            var checkedOne = Array.prototype.slice.call(checkboxes2).some(x => x.checked);
+
+            if(checkedOne){
+
+            } else{
+                const errorMessage = "Elige al menos un colaborador"
+                checkboxes2.setCustomValidity(errorMessage);
+                console.log("jij");
+            }
+        }
+    </script>
 </form>
