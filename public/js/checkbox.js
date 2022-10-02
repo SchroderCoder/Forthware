@@ -11,13 +11,3 @@ var show = true;
             show = true;
         }
     }
-
-    function checkOne(){
-        var checkboxes2 = document.querySelectorAll('input[type="checkbox"]');
-        var checkedOne = Array.prototype.slice.call(checkboxes2).some(x => x.checked);
-
-        const errorMessage = !checkedOne ? 'At least one checkbox must be selected.' : '';
-        console.log(errorMessage);
-        alert(errorMessage)
-
-    }

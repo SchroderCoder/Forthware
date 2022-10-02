@@ -17,7 +17,7 @@
                 </div>
                 <div id="checkBoxes">
                     <% for (let e of empleados) { %>
-                        <input type="checkbox"  id="empleados" name="empleados" value="<%= e.id_empleado %>">
+                        <input type="checkbox" id="empleados" name="empleados" value="<%= e.id_empleado %>">
                         <label for="empleados"><%= e.nombre %></label>  
                     <% } %> 
                 </div>
@@ -44,22 +44,8 @@
             
     </fieldset>
     <br>
-    <input type="submit" class="btn btn-success" value="<%= titulo %>" onclick = "checkOne()">
+    <input type="submit" class="btn btn-success" value="<%= titulo %>" onmouseover = "checkOne()">
 
     <script src="/js/checkbox.js"></script>
-    <script>
-        function checkOne(){
-            console.log("jijja");
-            var checkboxes2 = document.querySelectorAll('input[type="checkbox"]');
-            var checkedOne = Array.prototype.slice.call(checkboxes2).some(x => x.checked);
-
-            if(checkedOne){
-
-            } else{
-                const errorMessage = "Elige al menos un colaborador"
-                checkboxes2.setCustomValidity(errorMessage);
-                console.log("jij");
-            }
-        }
-    </script>
+    <script src="/js/checkedone.js"> </script>
 </form>
