@@ -176,11 +176,7 @@ exports.postEditarTareas = (request, response, next) => {
     
 }
 
-exports.postdeleteTareas = (request, response, next) => {
-    console.log("Entrase a delete");
-    console.log(request.body.id);
-    console.log("ESE ERA EL ID");
-    
+exports.postdeleteTareas = (request, response, next) => {    
     Tarea.erase(request.body.id)
     .then(([]) => {
         console.log("Tarea eliminada con éxito")

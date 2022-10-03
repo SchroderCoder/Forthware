@@ -176,14 +176,6 @@ li {
     /* width: 10rem !important; */
     overflow-y: scroll;
 }
-
-pm{
-    color: #25282B;
-}
-
-pmtitle{
-    font-family: 'Inter';
-    font-style: bolder;
-    font-size: 20px;
-    color: #25282B;
-}
+.modal-content {
+    background-color:#25282B;
+ }

@@ -10,12 +10,10 @@
 <script>
      const accion_asincrona = () => {
         const id= document.getElementById('id').value;
-        console.log(id);
-        console.log("EL ID");
         data=new Object();
 
         data.id= id;
-        const csrf = document.getElementById('csrf').value;
+        const csrf = document.getElementById('_csrf').value;
 
         fetch('/tareas/delete', {
             method: 'POST',

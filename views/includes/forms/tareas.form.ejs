@@ -4,7 +4,7 @@
 <% } else { %>
     <form action="/tareas/editarTarea" name = "crear" id= "crear" method="POST">
 <%}%>
-    <input type="hidden" name="csrf" id="csrf" value= "<%= csrfToken %>" >
+    <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
     <fieldset>
         <legend>Datos de la tarea</legend>
         <% if (tareas=="") { %>
@@ -34,7 +34,6 @@
                 </select>
                 <label for="proyectos">Etiquetas</label>
             </div>
-            <% console.log(tareas.id_tarea) %>
             <input id="id" name="id" type="hidden" value="<%= tareas.id_tarea %>">
             <label for="descripcion">Descripción: </label>
             <input placeholder="Junta" id="descripcion" name="descripcion" maxlength="40" type="text" required>
@@ -44,6 +43,7 @@
             <input id="fecha" name="fecha" type="date" min="2000-01-01" required> 
             
     </fieldset>
+
     <% if (tareas=="") { %>
         <input type="submit" class="btn btn-success" value="<%= titulo %>" onmouseover = "checkOne()">
     <% } else { %>  
@@ -56,18 +56,16 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <pmtitle class="modal-title" id="exampleModalLabel">Eliminar Tarea</pmtitle>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <h5 class="modal-title" id="exampleModalLabel">Eliminar Tarea</h5>
+                  <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <pm> ¿Estás seguro de que quieres eliminar esta Tarea?</pm>
+                    <p> ¿Estás seguro de que quieres eliminar esta tarea?</p>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                  <button type="button" class="btn btn-danger"  data-dismiss="modal" id="eliminar">Eliminar</button>
-                </div> 
+                  <button type="button" class="btn btn-danger" data-dismiss="modal" id="eliminar">Eliminar</button>
+                </div>
               </div>
             </div>
           </div>
