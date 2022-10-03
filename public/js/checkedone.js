@@ -8,4 +8,4 @@ function checkOne(){
         const errorMessage = "Elige al menos un colaborador"
         alert(errorMessage);
     }
-}
+}   

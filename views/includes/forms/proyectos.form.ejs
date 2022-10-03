@@ -16,7 +16,7 @@
             <input id="nombre" name="nombre" maxlength="40" type="text" required>
             <br>
             <label for="descripcion">Descripción: </label>
-            <input placeholder="¿Qué se va a hacer?" id="descripcion" name="descripcion" maxlength="256" type="text" required>
+            <input placeholder="¿Qué se va a hacer?" id="descripcion" name="descripcion" maxlength="128" type="text" required>
             <br>
             <% if (proyectos=="") { %>
                 <div class="multipleSelection">
@@ -99,6 +99,12 @@
             <label for="imagen"> Imagen: </label>       
             <input placeholder="Añade una imagen representativa del proyecto" id="imagen" name="imagen" type="text" required> 
     </fieldset>
+    <% if (proyectos=="") { %>
+        <input type="submit" class="btn btn-success" value="<%= titulo %>" onmouseover = "checkOne()">
+    <% } else { %>  
+        <input type="submit" class="btn btn-success" value="<%= titulo %>">
+    <%}%>
     <br>
-    <input type="submit" class="btn btn-success" value="<%= titulo %>">
+    <script src="/js/checkbox.js"></script>
+    <script src="/js/checkedone.js"> </script>
 </form>

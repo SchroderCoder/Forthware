@@ -1,4 +1,4 @@
-<% if (proyectos=="") { %>
+<% if (etiquetas=="") { %>
     <form action="crearEtiqueta" method="POST">
 <% } else { %>
     <form action="/proyectos/editarEtiqueta" method="POST">
@@ -6,11 +6,11 @@
     <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
     <fieldset class="pl-4">
         <legend class="p-2">Datos de la etiqueta</legend>
+
         <div class="pl-5">
-            <!-- <input id="id" name="id" type="hidden" value="<%= proyectos.id_proyecto %>"> -->
                 <label for="nombre">Nombre: </label>
                 <input id="nombre" name="nombre" maxlength="40" type="text" required>
-                <input id="id" name="id" type="hidden" value="<%= etiqueta.id_proyecto %>">
+                <input id="id" name="id" type="hidden" value="<%= etiquetas.id_proyecto %>">
                 
         </div>    
     </fieldset>

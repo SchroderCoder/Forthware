@@ -3,7 +3,34 @@
 <%- include('includes/sidebar.ejs') %>   
 <h1><%= titulo %></h1>
 
-<a href="/tareas/main"  class="btn btn-danger" button type="button">Cancelar</a> 
+<a href="/tareas/main" button type="button" class="mt-3" style="display:block ;"> <i class="material-icons iconSide" >arrow_back</i> Regresar</a> 
 
 <%- include('includes/forms/tareas.form.ejs') %> 
+
+<script>
+     const accion_asincrona = () => {
+        const id= document.getElementById('id').value;
+        console.log(id);
+        console.log("EL ID");
+        data=new Object();
+
+        data.id= id;
+        const csrf = document.getElementById('csrf').value;
+
+        fetch('/tareas/delete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'csrf-token': csrf  
+            },
+            body: JSON.stringify(data),
+        }).then(result => {
+            return result.json(); 
+        }).then(data => {
+
+        })
+     }
+
+    document.getElementById('eliminar').onclick = accion_asincrona;
+</script>
 <%- include('includes/foot.ejs') %> 

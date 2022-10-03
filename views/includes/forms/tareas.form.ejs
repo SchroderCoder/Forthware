@@ -1,9 +1,10 @@
 <% if (tareas=="") { %>
     <form action="crearTarea" method="POST">
+    
 <% } else { %>
     <form action="/tareas/editarTarea" name = "crear" id= "crear" method="POST">
 <%}%>
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+    <input type="hidden" name="csrf" id="csrf" value= "<%= csrfToken %>" >
     <fieldset>
         <legend>Datos de la tarea</legend>
         <% if (tareas=="") { %>
@@ -43,9 +44,36 @@
             <input id="fecha" name="fecha" type="date" min="2000-01-01" required> 
             
     </fieldset>
-    <br>
-    <input type="submit" class="btn btn-success" value="<%= titulo %>" onmouseover = "checkOne()">
+    <% if (tareas=="") { %>
+        <input type="submit" class="btn btn-success" value="<%= titulo %>" onmouseover = "checkOne()">
+    <% } else { %>  
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" >
+            Eliminar Tarea
+        </button>
+        <input type="submit" class="btn btn-success" value="<%= titulo %>">
+        
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <pmtitle class="modal-title" id="exampleModalLabel">Eliminar Tarea</pmtitle>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <pm> ¿Estás seguro de que quieres eliminar esta Tarea?</pm>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-danger"  data-dismiss="modal" id="eliminar">Eliminar</button>
+                </div> 
+              </div>
+            </div>
+          </div>
+    <%}%>
 
+    <br>
     <script src="/js/checkbox.js"></script>
     <script src="/js/checkedone.js"> </script>
 </form>

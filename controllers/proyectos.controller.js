@@ -64,8 +64,8 @@ exports.getCrearProyecto = (request, response, next) => {
 };
 
 exports.postCrearProyecto = (request, response, next) => {
-    id_empleado= request.session.id_empleado;
-    const proyecto = new Proyecto(request.body.nombre,request.body.descripcion, request.body.stack,request.body.importancia, request.body.estatus,0,request.body.imagen, id_empleado);
+
+    const proyecto = new Proyecto(request.body.nombre,request.body.descripcion, request.body.stack,request.body.importancia, request.body.estatus,0,request.body.imagen);
 
     proyecto.save()
         .then(() => {
@@ -86,15 +86,14 @@ exports.getCrearEtiqueta = (request, response, next) => {
     response.render(path.join('..',"views", "CrearEtiqueta.ejs"), {
         privilegios: request.session.privilegios,
         isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
-        proyectos: "",
+        etiquetas: "",
         titulo: "Crear etiqueta",
     });
 };
 
 exports.postCrearEtiqueta = (request, response, next) => {
-    id_empleado= request.session.id_empleado;
 
-    Proyecto.saveEtiqueta(request.body.nombre,1 ,id_empleado)
+    Proyecto.saveEtiqueta(request.body.nombre,1)
         .then(() => {
             response.status(303).redirect('/proyectos/main');
             console.log("etiqueta creada con exito");
@@ -201,7 +200,7 @@ exports.getEditarEtiqueta = (request, response, next) => {
             response.render(path.join('..',"views", "CrearEtiqueta.ejs"), {
                 proyectos: rows[0],
                 titulo: "Editar etiqueta " + rows[0].id_proyecto,
-                etiqueta:rows[0],
+                etiquetas :rows[0],
                 isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
             });
         } else {
@@ -222,6 +221,7 @@ exports.getEditarEtiqueta = (request, response, next) => {
 
 
 exports.postEditarEtiqueta = (request, response, next) => {
+    
     Proyecto.fetchOne(request.body.id)
     .then(([rows, fielData]) => {
         rows[0].nombre= request.body.nombre

@@ -77,7 +77,6 @@ exports.postCrearTareas = (request, response, next) => {
                 for (e of id_empleados){    
                     Realiza.registrar(e,id_reciente)
                     .then(([rows, fielData]) => {
-                        console.log("xd");
                         response.status(303).redirect('/tareas/main');
                         console.log(    "tarea creada con exito");
                     })
@@ -176,3 +175,21 @@ exports.postEditarTareas = (request, response, next) => {
         }); 
     
 }
+
+exports.postdeleteTareas = (request, response, next) => {
+    console.log("Entrase a delete");
+    console.log(request.body.id);
+    console.log("ESE ERA EL ID");
+    
+    Tarea.erase(request.body.id)
+    .then(([]) => {
+        console.log("Tarea eliminada con éxito")
+        response.status(303).redirect('/tareas/main');
+    })  
+    .catch(err => {
+        console.log(err);
+        response.render('error.ejs', {
+            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+        });
+    }); 
+}   
