@@ -17,8 +17,6 @@
             </div>
             <div class="col" >
                 Nombre de proyecto
-            <div class="col">
-                Etiqueta
             </div>
             <div class="col ">
                 
@@ -26,45 +24,39 @@
         </div>
         <div class="row">
             <div class="col-sm over list-group-item">
-                    <div class="overflow-auto anyClass" style="height: 28rem !important;">
-                        
-                        <% for (let  t of tareas) { %>
-                            <!-- <a href="/tareas/editarTarea/<%= t.id_tarea %>"> -->
-                                <div class="row bg-light text-dark m-1 mt-2 border rounded">
-                                    
-                                    <div class="col border-right border-dark">
-                                        <%=  new Date(t.fecha_creacion).toLocaleDateString("ES-mx") %>
-                                    </div>
-                                    <div class="col-6 border-right border-dark">
-                                        <%=  t.descripcion %>
-                                    </div>
-                                    <div class="col border-right border-dark">
-                                        <%=  t.duracion.toFixed(1) %>
-                                    </div>
-                                    <div class="col border-right border-dark">
-                                        <%=  t.nombre %>
-                                    </div>
-
-                                    <div class="col ">
-                                        <a href="/tareas/editarTarea/<%= t.id_tarea %>"  >
+                <div class="overflow-auto anyClass" style="height: 28rem !important;">
+                    <% for (let  t of tareas) { %>
+                        <!-- <a href="/tareas/editarTarea/<%= t.id_tarea %>"> -->
+                            <div class="row bg-light text-dark m-1 mt-2 border rounded">
+                                <div class="col border-right border-dark">
+                                    <%=  new Date(t.fecha_creacion).toLocaleDateString("ES-mx") %>
+                                </div>
+                                <div class="col-6 border-right border-dark">
+                                    <%=  t.descripcion %>
+                                </div>
+                                <div class="col border-right border-dark">
+                                    <%=  t.duracion.toFixed(1) %>
+                                </div>
+                                <div class="col border-right border-dark">
+                                    <%=  t.nombre %>
+                                </div>
+                                <div class="col ">
+                                    <a href="/tareas/editarTarea/<%= t.id_tarea %>"  >
                                         <button type="button" class="btn btn-outline-primary btn-sm m-2" href="/tareas/editarTarea/<%= t.id_tarea %>">
                                             Editar
                                         </button>
-                                        </a>
-                                    </div>
-
-
+                                    </a>
                                 </div>
-                            <!-- </a> -->
-                        <% } %>
+                            </div>
+                        <!-- </a> -->
+                    <% } %>
                 </div>
             </div>
         </div>
-    </div>
 <% } else { %>
     <h2>No hay proyectos registrados</h2>
 <% } %>  
-
+</div>
 
 <div>
     <a href="/tareas/crearTarea">
