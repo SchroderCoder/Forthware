@@ -35,10 +35,6 @@ exports.getProyectos = (request, response, next) => {
 };
 
 exports.getCrearProyecto = (request, response, next) => {
-    let colaboradores = fetchColaboradores;
-    let lideres = fetchLideres;
-    // <const importancia = ['Alto','Medio','Bajo'];
-    // const estatus = ['']>
     Usuario.fetchAll()
         .then(([rows, fielData]) => {
             request.session.isLoggedIn = true;
@@ -145,8 +141,6 @@ exports.getEditarProyecto = (request, response, next) => {
                         for(let empleado of noregistered) {
                             request.session.empleados_no_r.push(empleado);
                         }
-
-
                         response.render(path.join('..',"views", "CrearProyecto.ejs"), {
                             proyectos: rows[0],
                             registrados: request.session.empleados_r,
@@ -198,6 +192,58 @@ exports.postEditarProyecto = (request, response, next) => {
         
         Proyecto.saveEdit(rows[0])
         .then(() => {
+            if (request.body.registrados){
+                Proyecto.fetchRecent()
+                .then(([cols, fielData]) => {
+                    let id_reciente= cols[0].reciente;
+                    let id_empleados = request.body.registrados;
+
+                    for (e of id_empleados){    
+                        Crea.eliminar(e,id_reciente)
+                        .then(() => {
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            response.render('error.ejs', {
+                                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                            });
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                    response.render('error.ejs', {
+                        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                    });
+                });
+            }
+
+            if (request.body.no_registrados){
+                Proyecto.fetchRecent()
+                .then(([cols, fielData]) => {
+                    let id_reciente= cols[0].reciente;
+                    let id_empleados = request.body.no_registrados;
+
+                    for (e of id_empleados){    
+                        Crea.registrar(e,id_reciente)
+                        .then(() => {
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            response.render('error.ejs', {
+                                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                            });
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                    response.render('error.ejs', {
+                        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                    });
+                });
+            }
+            
             response.status(303).redirect('/proyectos/main');
         })
         .catch(err => {

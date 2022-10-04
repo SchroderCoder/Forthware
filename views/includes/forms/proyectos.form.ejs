@@ -41,14 +41,14 @@
                         <div class="selectBox"
                             onclick="showCheckboxes()">
                             <select>
-                                <option>Agregar colaboradores</option>
+                                <option>Eliminar colaboradores</option>
                             </select>
                         <div class="overSelect"></div>
                         </div>
                         <div id="checkBoxes">
                             <% for (let t of registrados) { %>
-                                <input type="checkbox" id="empleados" name="empleados" value="<%= t.id_empleado %>">
-                                <label for="empleados"><%= t.nombre %></label>
+                                <input type="checkbox" id="registrados" name="registrados" value="<%= t.id_empleado %>">
+                                <label for="regsitrados"><%= t.nombre %></label>
                             <% } %>
                         </div>
                     </div>
@@ -59,14 +59,14 @@
                             <div class="selectBox"
                                 onclick="showCheckboxes()">
                                 <select>
-                                    <option>Eliminar colaboradores</option>
+                                    <option>Agregar colaboradores</option>
                                 </select>
                             <div class="overSelect"></div>
                             </div>
                             <div id="checkBoxes">
                                 <% for (let n of no_registrados) { %>
-                                    <input type="checkbox" id="empleados" name="empleados" value="<%= n.id_empleado %>">
-                                    <label for="empleados"><%= n.nombre %></label>
+                                    <input type="checkbox" id="no_registrados" name="no_registrados" value="<%= n.id_empleado %>">
+                                    <label for="no_registrados"><%= n.nombre %></label>
                                 <% } %>
                             </div>
                         </div>

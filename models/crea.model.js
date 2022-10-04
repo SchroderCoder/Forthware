@@ -14,7 +14,7 @@ module.exports = class Crea {
     }
     
     static eliminar(id_empleado,id_proyecto) {
-        return db.execute('DELETE FROM `crea` WHERE `crea`.`id_empleado` = ? AND `crea`.`id_proyecto` = ?', [id_empleado, id_proyecto]);
+        return db.execute('DELETE FROM `crea` WHERE crea.id_empleado = ? AND crea.id_proyecto = ?', [id_empleado, id_proyecto]);
     }
 
     static fetchAll() {
@@ -22,13 +22,11 @@ module.exports = class Crea {
     }
 
     static fetchRegistrados(un_id) {
-        return db.execute('SELECT nombre FROM empleados, crea WHERE empleados.id_empleado = crea.id_empleado AND id_proyecto = ?', [un_id]);
+        return db.execute('SELECT E.nombre, E.id_empleado FROM empleados E, crea C WHERE E.id_empleado = C.id_empleado AND C.id_proyecto = ?', [un_id]);
     }
 
     static fetchNoRegistrados(un_id) {
-        return db.execute('SELECT nombre FROM empleados, crea WHERE empleados.id_empleado = crea.id_empleado AND NOT id_proyecto = ?', [un_id]);
+        return db.execute('SELECT E.nombre, E.id_empleado FROM empleados E WHERE E.id_empleado NOT IN (SELECT E.id_empleado FROM empleados E, crea C WHERE E.id_empleado = C.id_empleado AND C.id_proyecto = ?) ', [un_id]);
     }
-
-
 
 }
