@@ -14,7 +14,7 @@ router.post('/buscar', reportesController.postBuscar);
 
 router.post('/suma_completo', reportesController.postCompleto);
 
-router.post('/horas_hombre', reportesController.postCompleto);
+router.post('/horas_hombre', reportesController.postHorasHombre);
 
 // router.get('/download', reportesController.download);
 

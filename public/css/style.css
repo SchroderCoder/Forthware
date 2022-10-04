@@ -5,6 +5,7 @@ body{
     color: white;
 }
 
+
 h1{
     font-family: "Inter", Extra Bold, monospace;
     color: white;
@@ -170,21 +171,12 @@ li {
     position: absolute;
     top: 27px;
 }
-
-
-/*
-.maintitle{
-    height: 100px;
-    width: 500px;
-    font-family: 'Inter';
-    font-style: bolder;
-    font-size: 46px;
-    color: white;
-    position: absolute;
-}*/
-
 .anyClass {
     height: 32rem;
     /* width: 10rem !important; */
     overflow-y: scroll;
 }
+
+.modal-content {
+    background-color:#25282B;
+ }

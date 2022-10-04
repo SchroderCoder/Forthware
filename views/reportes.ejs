@@ -18,7 +18,11 @@
                                         <p class="card-title bg-success text-dark h-25 text-center align-middle py-auto  list-group-item"><a class="text-white" ><%= new Date(r.fecha_inicio).toLocaleDateString("ES-mx")  %> 
                                         - <%= new Date(r.fecha_fin).toLocaleDateString("ES-mx")  %></a><a href="/reportes/download" class="btn btn-primary btn-sm ml-3" button type="button">Descargar</a></p>
                                         <img src="/media/templatereportes.png" class="card-img-top" alt="">
-                        
+
+                                        <button id="<%= r.id_reporte %>" type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" value="<%= r.id_reporte %>" >
+                                            Eliminar Reporte
+                                        </button>
+
                                     </div>
                                 </div>
                         <% } %>
@@ -31,6 +35,24 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Eliminar Proyecto </h5>
+          <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p> ¿Estás seguro de que quieres eliminar esta proyecto?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" id="eliminarp">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <a href="/reportes/crearReporte" class="btn btn-success" button type="button">Crear reporte</button>
 <%- include('includes/foot.ejs') %>  

@@ -9,7 +9,6 @@ exports.getTareas = (request, response, next) => {
     Tarea.fetchAll()
 
     .then(([rows, fielData]) => {
-        console.log(rows)
         response.render(path.join('..',"views", "tareas.ejs"), {
             tareas: rows,
             privilegios: request.session.privilegios,
@@ -79,7 +78,7 @@ exports.postCrearTareas = (request, response, next) => {
                     Realiza.registrar(e,id_reciente)
                     .then(([rows, fielData]) => {
                         response.status(303).redirect('/tareas/main');
-                        console.log("tarea creada con exito");
+                        console.log(    "tarea creada con exito");
                     })
                     .catch(err => {
                         console.log(err);
@@ -176,3 +175,17 @@ exports.postEditarTareas = (request, response, next) => {
         }); 
     
 }
+
+exports.postdeleteTareas = (request, response, next) => {    
+    Tarea.erase(request.body.id)
+    .then(([]) => {
+        console.log("Tarea eliminada con éxito")
+        response.status(303).redirect('/tareas/main');
+    })  
+    .catch(err => {
+        console.log(err);
+        response.render('error.ejs', {
+            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+        });
+    }); 
+}   
