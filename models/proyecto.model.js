@@ -54,5 +54,9 @@ module.exports = class Proyecto {
     static fetchAllEtiquetas() {
         return db.execute('SELECT * FROM proyectos WHERE es_etiqueta = 1');
     }
+
+    static borrar(un_id) {
+        return db.execute('DELETE FROM proyectos WHERE id_proyecto = ?', [un_id]);
+    }
             
 }

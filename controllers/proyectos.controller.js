@@ -4,6 +4,7 @@ const Proyecto = require('../models/proyecto.model');
 const { fetchColaboradores, fetchLideres } = require('../models/proyecto.model');
 const Crea = require('../models/crea');
 const Usuario = require('../models/user.model');
+const { response } = require('express');
 
 exports.getProyectos = (request, response, next) => {
     
@@ -192,7 +193,6 @@ exports.postEditarProyecto = (request, response, next) => {
         });
     });
 };
-
 
 exports.getEditarEtiqueta = (request, response, next) => {
     Proyecto.fetchOne(request.params.id)

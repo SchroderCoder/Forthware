@@ -30,4 +30,8 @@ module.exports = class Tarea {
             'UPDATE tareas SET fecha_creacion = ?, descripcion= ?, id_proyecto= ?, duracion= ? WHERE id_tarea = ?', 
             [tarea.fecha_creacion, tarea.descripcion, tarea.id_proyecto ,tarea.duracion, tarea.id_tarea]);
     }
+
+    static borrar(un_id) {
+        return db.execute('DELETE FROM tareas WHERE id_tarea = ?', [un_id]);
+    }
 }

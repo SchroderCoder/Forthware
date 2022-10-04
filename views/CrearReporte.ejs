@@ -51,6 +51,7 @@
                 if (data.proyectos.length > 0) {
                     
                     for (p of data.proyectos) {
+                        let count = 0;
                         horas = p.Horas + horas;
                         html += '<tr>';
                         html += '<td>';
@@ -61,10 +62,16 @@
                         html += '<td>';
                         html += p.Horas;
                         html += '</td>';
-                        html += '<td><label for="proyectos_horas_adj[' + p.id_proyecto + ']"> Ajuste de horas</label>';
-                        html += '<input placeholder="500" id="proyectos_horas_adj[' + p.id_proyecto + ']" name="proyectos_horas_adj[' + p.id_proyecto + ']" type="int" required></td></td>';
+                        html += '<td><label for="proyectos_horas_adj' + count + '"> Ajuste de horas</label>';
+                        html += '<input placeholder="500" id="proyectos_horas_adj' + count + '" name="proyectos_horas_adj' + count + '" type="int" required></td></td>';
                         html += '</tr>';
+                        count += 1;
                     }
+                    
+                    for (i = 0; i < count; i++){
+
+                    }
+                    console.log(proyectos_horas_adj)
 
                 } else {
                     html += '<h2>No hay proyectos registrados</h2>';                
@@ -161,7 +168,8 @@
         };
 
         const accion_asincrona3 =() =>{ 
-            const horas_ajustadas = document.getElementById('proyectos_horas_adj[]').value;
+            console.log('entro')
+            const horas_ajustadas = document.getElementById('proyectos_horas_adj').value;
 
             data= new Object()
 
