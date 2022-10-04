@@ -14,10 +14,10 @@
 
     <script>
         const accion_asincrona = () => {
+
             const fecha_fin = document.getElementById('fecha_fin').value;
             const fecha_inicio = document.getElementById('fecha_inicio').value;
             data = new Object ();
-            console.log(data)
 
             data.fecha_fin=fecha_fin;
             data.fecha_inicio=fecha_inicio;
@@ -36,7 +36,6 @@
                 return result.json(); //Regresa otra promesa
             }).then(data => {
                 //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
-                console.log(data);
                 let html = '';
 
                 html += '<table>';
@@ -62,16 +61,14 @@
                         html += '<td>';
                         html += p.Horas;
                         html += '</td>';
-                        html += '<td><label for="proyectos_horas_adj' + count + '"> Ajuste de horas</label>';
-                        html += '<input placeholder="500" id="proyectos_horas_adj' + count + '" name="proyectos_horas_adj' + count + '" type="int" required></td></td>';
-                        html += '</tr>';
-                        count += 1;
-                    }
-                    
-                    for (i = 0; i < count; i++){
+                        html += '<td><label for="proyectos_horas_adj2">Ajuste de horas</label>';
+                        html += '<input placeholder="500" id="proyectos_horas_adj2" oninput="calcularHoras()" name="proyectos_horas_adj2" type="int" required></td></td>';
+                        html += '</tr>'; 
+                    }   
 
-                    }
-                    console.log(proyectos_horas_adj)
+                        html +=  horashombre = 0; 
+                        html += function calcularHoras () {horashombre = horashombre + document.getElementById("proyectos_horas_adj2").value;} 
+                        console.log("horashombre: " + horashombre);
 
                 } else {
                     html += '<h2>No hay proyectos registrados</h2>';                
@@ -100,7 +97,6 @@
 
             data=new Object()
 
-            console.log(data)
             data.tiempo_completo = tiempo_completo;
             data.tiempo_medio = tiempo_medio;
             data.horas_ausencia = horas_ausencia;
@@ -167,65 +163,69 @@
    
         };
 
-        const accion_asincrona3 =() =>{ 
-            console.log('entro')
-            const horas_ajustadas = document.getElementById('proyectos_horas_adj').value;
+        // const accion_asincrona3 =() =>{ 
+        //     const horas_ajustadas = document.getElementById('proyectos_horas_adj[]').value;
 
-            data= new Object()
+        //     data= new Object()
 
-            data.tiempo_completo = tiempo_completo;
+        //     data.tiempo_completo = tiempo_completo;
 
-            console.log(data)
+        //     console.log(data)
 
-            const csrf = document.getElementById('_csrf').value;
+        //     const csrf = document.getElementById('_csrf').value;
 
-            fetch('/reportes/horas_hombre', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'csrf-token': csrf  
-                },
-                body: JSON.stringify(data),
-            }).then(result => {
-                return result.json(); //Regresa otra promesa
-            }).then(data => {
+        //     fetch('/reportes/horas_hombre', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'csrf-token': csrf  
+        //         },
+        //         body: JSON.stringify(data),
+        //     }).then(result => {
+        //         return result.json(); //Regresa otra promesa
+        //     }).then(data => {
 
-                let html = '';
+        //         let html = '';
 
-                html += '<table>';
-                html += '<tr>';
-                html += '<td><label for= "horas_hombre">Horas hombre</label>';
-                    let horas_hombre;
-                    for (let p of proyectos_horas_adj){
-                        horas_hombre += p.Horas;
-                    }
+        //         html += '<table>';
+        //         html += '<tr>';
+        //         html += '<td><label for= "horas_hombre">Horas hombre</label>';
+        //             let horas_hombre;
+        //             for (let p of proyectos_horas_adj){
+        //                 horas_hombre += p.Horas;
+        //             }
 
-                    console.log(horas_hombre);
+        //             console.log(horas_hombre);
 
-                html +=  horas_hombre;
-                html += '</td>';
-                html += '<td><int id="horas_hombre" name="horas_hombre" type="int"></td>';
-                html += '</tr>';
-                html += '<tr>';
-                html += proporcion_horas = horasajustadas/horasesperadas;
-                html += verdadero = 95/100
-                html += '<td><label for="Efectividad_ajustada">Efectividad ajustada</label>';
-                html += efectividad = (proporcion_horas/verdadero).toFixed(2);
-                html += '</td>';
-                html += '</table>';
+        //         html +=  horas_hombre;
+        //         html += '</td>';
+        //         html += '<td><int id="horas_hombre" name="horas_hombre" type="int"></td>';
+        //         html += '</tr>';
+        //         html += '<tr>';
+        //         html += proporcion_horas = horasajustadas/horasesperadas;
+        //         html += verdadero = 95/100
+        //         html += '<td><label for="Efectividad_ajustada">Efectividad ajustada</label>';
+        //         html += efectividad = (proporcion_horas/verdadero).toFixed(2);
+        //         html += '</td>';
+        //         html += '</table>';
 
 
-                document.getElementById("horas_hombre").innerHTML = html;
-            }).catch(err => {
-                console.log(err);
-            });
+        //         document.getElementById("horas_hombre").innerHTML = html;
+        //     }).catch(err => {
+        //         console.log(err);
+        //     });
 
-        };
+        // };
 
         document.getElementById('fecha_fin').oninput = accion_asincrona;
 
         document.getElementById('proporcion_horas').oninput = accion_asincrona2;
 
-        document.getElementById('proyectos_horas_adj').oninput = accion_asincrona3;
+        // document.getElementById('proyectos_horas_adj').oninput = accion_asincrona3;
+        var horashombre = 0;    
+        function calcularHoras () {
+            horashombre = horashombre + document.getElementById("proyectos_horas_adj2").value;
+        
+        }
 
     </script>

@@ -14,7 +14,7 @@ module.exports = class Tarea {
     }
 
     static fetchAll() {
-        return db.execute('SELECT t.id_tarea, t.fecha_creacion , t.descripcion, t.duracion, t.id_proyecto, p.nombre FROM tareas t, proyectos p WHERE t.id_proyecto = p.id_proyecto');
+        return db.execute('SELECT t.id_tarea, t.fecha_creacion , t.descripcion, t.duracion, t.id_proyecto, p.nombre FROM tareas t, proyectos p WHERE t.id_proyecto = p.id_proyecto AND t.is_deleted= 0 GROUP BY id_tarea ORDER BY id_tarea DESC');
     }
 
     static fetchOne(un_id) {
@@ -31,7 +31,7 @@ module.exports = class Tarea {
             [tarea.fecha_creacion, tarea.descripcion, tarea.id_proyecto ,tarea.duracion, tarea.id_tarea]);
     }
 
-    static borrar(un_id) {
-        return db.execute('DELETE FROM tareas WHERE id_tarea = ?', [un_id]);
+    static erase(un_id){
+        return db.execute('UPDATE tareas SET is_deleted = 1 WHERE id_tarea = ?;', [un_id]);
     }
 }

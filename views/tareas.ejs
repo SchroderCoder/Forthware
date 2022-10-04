@@ -1,10 +1,9 @@
 <%- include('includes/head.ejs') %>
 <%- include('includes/nav.ejs') %>     
 <%- include('includes/sidebar.ejs') %>   
-<h1>Entraste a tareas</h1>
 
-<h3>Tareas</h3>
-    <% if (tareas.length > 0) { %>
+<h1 class=" py-2 pl-2 font-weight-bold">Tareas</h1>
+<% if (tareas.length > 0) { %>
     <div class="container text-center">
         <div class="row bg-success text-white m-2 rounded">
             <div class="col">
@@ -16,45 +15,54 @@
             <div class="col">
                 Duración
             </div>
-            <div class="col">
+            <div class="col" >
                 Nombre de proyecto
+            </div>
+            <div class="col ">
+                
             </div>
         </div>
         <div class="row">
             <div class="col-sm over list-group-item">
-                    <div class="overflow-auto anyClass" style="height: 34rem !important;">
-                        <% for (let  t of tareas) { %>
-                            <a href="/tareas/editarTarea/<%= t.id_tarea %>">
-                                <div class="row bg-light text-dark m-2 border rounded">
-                                    
-                                    <div class="col border-right border-dark">
-                                        <%=  new Date(t.fecha_creacion).toLocaleDateString("ES-mx") %>
-                                    </div>
-                                    <div class="col-6 border-right border-dark">
-                                        <%=  t.descripcion %>
-                                    </div>
-                                    <div class="col border-right border-dark">
-                                        <%=  t.duracion %>
-                                    </div>
-                                    <div class="col border-right border-dark">
-                                        <%=  t.nombre %>
-                                    </div>
+                <div class="overflow-auto anyClass" style="height: 28rem !important;">
+                    <% for (let  t of tareas) { %>
+                        <!-- <a href="/tareas/editarTarea/<%= t.id_tarea %>"> -->
+                            <div class="row bg-light text-dark m-1 mt-2 border rounded">
+                                <div class="col border-right border-dark">
+                                    <%=  new Date(t.fecha_creacion).toLocaleDateString("ES-mx") %>
                                 </div>
-                            </a>
-                            <div>
-                                <a href="/tareas/borrarTarea/<%= t.id_tarea %>" class="btn btn-danger" button type="button">Borrar</a> 
+                                <div class="col-6 border-right border-dark">
+                                    <%=  t.descripcion %>
+                                </div>
+                                <div class="col border-right border-dark">
+                                    <%=  t.duracion.toFixed(1) %>
+                                </div>
+                                <div class="col border-right border-dark">
+                                    <%=  t.nombre %>
+                                </div>
+                                <div class="col ">
+                                    <a href="/tareas/editarTarea/<%= t.id_tarea %>"  >
+                                        <button type="button" class="btn btn-outline-primary btn-sm m-2" href="/tareas/editarTarea/<%= t.id_tarea %>">
+                                            Editar
+                                        </button>
+                                    </a>
+                                </div>
                             </div>
-                     <% } %>
+                        <!-- </a> -->
+                    <% } %>
                 </div>
             </div>
         </div>
-    </div>
-    <% } else { %>
-        <h2>No hay proyectos registrados</h2>
-    <% } %>  
-<br>
+<% } else { %>
+    <h2>No hay proyectos registrados</h2>
+<% } %>  
 </div>
-<div>
-            <a href="/tareas/crearTarea" class="btn btn-success" button type="button">Crear tarea</a>
+
+<div class="col-sm over align-middle py-auto  m-2" style="display: -webkit-box;; box-sizing: content-box;" >
+    <a href="/tareas/crearTarea" class="align-middle m-auto center-block text-center text-white" type="button"  style="display: -webkit-box;; box-sizing: content-box; " >
+        <button type="button" class="btn btn-primary " >
+            Crear
+        </button>
+    </a>
 </div>
 <%- include('includes/foot.ejs') %>

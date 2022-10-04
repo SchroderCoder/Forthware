@@ -2,11 +2,42 @@
 <%- include('includes/nav.ejs') %>   
 <%- include('includes/sidebar.ejs') %>  
 
+<div class="col-sm over" style="display: -webkit-box;; box-sizing: content-box;" >
 <a href="/proyectos/main" button type="button" class="mt-3" style="display:block ;"> <i class="material-icons iconSide" >arrow_back</i> Regresar</a> 
+</div>
+
+<div class="pl-3">
 <div class="p-4">
     <h1 ><%= titulo %></h1>
-    <!-- <h1 class="pl-5 text-uppercase"><%= etiqueta %></h1> -->
     <%- include('includes/forms/etiquetas.form.ejs') %> 
 </div>
+
+<script>
+    const accion_asincrona = () => {
+       const id= document.getElementById('id').value;
+       data=new Object();
+
+       data.id= id;
+       const csrf = document.getElementById('_csrf').value;
+
+       fetch('/proyectos/delete', {
+           method: 'POST',
+           headers: {
+               'Content-Type': 'application/json',
+               'csrf-token': csrf  
+           },
+           body: JSON.stringify(data),
+       }).then(result => {
+           return result.json(); 
+       }).then(data => {
+           
+       })
+    }
+
+   document.getElementById('eliminare').onclick = accion_asincrona;
+</script>
+</div>
+
+
 
 <%- include('includes/foot.ejs') %> 

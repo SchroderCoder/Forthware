@@ -1,9 +1,10 @@
 <% if (tareas=="") { %>
     <form action="crearTarea" method="POST">
+    
 <% } else { %>
-    <form action="/tareas/editarTarea" method="POST">
+    <form action="/tareas/editarTarea" name = "crear" id= "crear" method="POST">
 <%}%>
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+    <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
     <fieldset>
         <legend>Datos de la tarea</legend>
         <% if (tareas=="") { %>
@@ -17,7 +18,7 @@
                 </div>
                 <div id="checkBoxes">
                     <% for (let e of empleados) { %>
-                        <input type="checkbox"  id="empleados" name="empleados" value="<%= e.id_empleado %>">
+                        <input type="checkbox" id="empleados" name="empleados" value="<%= e.id_empleado %>">
                         <label for="empleados"><%= e.nombre %></label>  
                     <% } %> 
                 </div>
@@ -33,7 +34,6 @@
                 </select>
                 <label for="proyectos">Etiquetas</label>
             </div>
-            <% console.log(tareas.id_tarea) %>
             <input id="id" name="id" type="hidden" value="<%= tareas.id_tarea %>">
             <label for="descripcion">Descripción: </label>
             <input placeholder="Junta" id="descripcion" name="descripcion" maxlength="40" type="text" required>
@@ -43,7 +43,35 @@
             <input id="fecha" name="fecha" type="date" min="2000-01-01" required> 
             
     </fieldset>
+
+    <% if (tareas=="") { %>
+        <input type="submit" class="btn btn-success" value="<%= titulo %>" onmouseover = "checkOne()">
+    <% } else { %>  
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" >
+            Eliminar Tarea
+        </button>
+        <input type="submit" class="btn btn-success" value="<%= titulo %>">
+        
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Eliminar Tarea</h5>
+                  <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p> ¿Estás seguro de que quieres eliminar esta tarea?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal" id="eliminar">Eliminar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    <%}%>
+        
     <br>
-    <input type="submit" class="btn btn-success"value="<%= titulo %>">
     <script src="/js/checkbox.js"></script>
+    <script src="/js/checkedone.js"> </script>
 </form>

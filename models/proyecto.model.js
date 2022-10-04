@@ -15,11 +15,11 @@ module.exports = class Proyecto {
     }
 
     save() {
-        return db.execute('INSERT INTO proyectos (nombre, descripcion, stack_tecnologia, importancia, estatus, es_etiqueta, image_url, id_empleado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [this.nombre, this.descripcion, this.stack,this.importancia,this.un_estatus,this.etiqueta, this.imagen,this.id]);
+        return db.execute('INSERT INTO proyectos (nombre, descripcion, stack_tecnologia, importancia, estatus, es_etiqueta, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)', [this.nombre, this.descripcion, this.stack,this.importancia,this.un_estatus,this.etiqueta, this.imagen]);
     }
 
-    static saveEtiqueta(un_nombre, un_bool, un_id) {
-        return db.execute('INSERT INTO proyectos (nombre,es_etiqueta,id_empleado) VALUES (?,?,?)', [un_nombre,un_bool,un_id]);
+    static saveEtiqueta(un_nombre, un_bool) {
+        return db.execute('INSERT INTO proyectos (nombre,es_etiqueta) VALUES (?,?)', [un_nombre,un_bool]);
     }
 
     static fetchColaboradores(){
@@ -48,15 +48,23 @@ module.exports = class Proyecto {
     }
 
     static fetchAllProyectos() {
-        return db.execute('SELECT * FROM proyectos WHERE es_etiqueta = 0');
+        return db.execute('SELECT * FROM proyectos p WHERE p.is_deleted= 0 AND p.es_etiqueta= 0 GROUP BY id_proyecto ORDER BY id_proyecto DESC');
     }
 
     static fetchAllEtiquetas() {
-        return db.execute('SELECT * FROM proyectos WHERE es_etiqueta = 1');
+        return db.execute('SELECT * FROM proyectos p WHERE p.is_deleted= 0 AND p.es_etiqueta= 1 GROUP BY id_proyecto ORDER BY id_proyecto DESC');
+    }
+
+    static erase(un_id){
+        return db.execute('UPDATE proyectos SET is_deleted = 1 WHERE id_proyecto = ?; ', [un_id]);
     }
 
     static borrar(un_id) {
         return db.execute('DELETE FROM proyectos WHERE id_proyecto = ?', [un_id]);
     }
             
+    static fetchRecent() {
+        return db.execute('SELECT MAX(id_proyecto) AS reciente FROM `proyectos`');
+    }
+
 }

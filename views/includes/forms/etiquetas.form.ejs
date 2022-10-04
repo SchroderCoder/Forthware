@@ -1,29 +1,44 @@
-<% if (proyectos=="") { %>
+<% if (etiquetas=="") { %>
     <form action="crearEtiqueta" method="POST">
 <% } else { %>
     <form action="/proyectos/editarEtiqueta" method="POST">
 <%}%>
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+    <input type="hidden" id="_csrf" name="_csrf" value="<%= csrfToken %>" >
     <fieldset class="pl-4">
         <legend class="p-2">Datos de la etiqueta</legend>
+
         <div class="pl-5">
-            <!-- <input id="id" name="id" type="hidden" value="<%= proyectos.id_proyecto %>"> -->
                 <label for="nombre">Nombre: </label>
                 <input id="nombre" name="nombre" maxlength="40" type="text" required>
-                <input id="id" name="id" type="hidden" value="<%= etiqueta.id_proyecto %>">
-                <%= console.log(etiqueta.id_proyecto) %>
+                <input id="id" name="id" type="hidden" value="<%= etiquetas.id_proyecto %>">
+                
         </div>    
     </fieldset>
-    <div class="row pt-4">
-        <div class="col-sm-2 mx-auto">
-            <input type="submit" class="btn btn-primary mx-5" class="btn" value="Confirmar">
-        </div>
-        <div class="col-sm-4 mx-auto">
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-danger mx-5" data-toggle="modal" data-target="#exampleModal">
-                Eliminar
-            </button>
-        </div>
-    </div>         
-    <%- include('../modal.ejs') %> 
+    <% if (etiquetas=="") { %>
+        <input type="submit" class="btn btn-success" value="<%= titulo %>">
+    <% } else { %>  
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" >
+            Eliminar Etiqueta
+        </button>
+        <input type="submit" class="btn btn-success" value="<%= titulo %>">
+        
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Eliminar Etiqueta </h5>
+                  <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p> ¿Estás seguro de que quieres eliminar esta Etiqueta?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal" id="eliminare">Eliminar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    <%}%>
+
 </form>
