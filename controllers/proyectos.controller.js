@@ -2,7 +2,7 @@ const path = require('path');
 const session = require('express-session');
 const Proyecto = require('../models/proyecto.model');
 const { fetchColaboradores, fetchLideres } = require('../models/proyecto.model');
-const Crea = require('../models/crea');
+const Crea = require('../models/crea.model');
 const Usuario = require('../models/user.model');
 
 exports.getProyectos = (request, response, next) => {
@@ -69,8 +69,31 @@ exports.postCrearProyecto = (request, response, next) => {
 
     proyecto.save()
         .then(() => {
-            response.status(303).redirect('/proyectos/main');
-            console.log("proyecto creado con exito");
+            Proyecto.fetchRecent()
+            .then(([cols, fielData]) => {
+                let id_reciente= cols[0].reciente;
+                let id_empleados = request.body.empleados;
+
+                for (e of id_empleados){    
+                    Crea.registrar(e,id_reciente)
+                    .then(([rows, fielData]) => {
+                        response.status(303).redirect('/proyectos/main');
+                        console.log("proyecto creado con exito");
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        response.render('error.ejs', {
+                            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                        });
+                    });
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                response.render('error.ejs', {
+                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                });
+            });
         })
         .catch(err => {
             console.log(err);
@@ -246,11 +269,12 @@ exports.postEditarEtiqueta = (request, response, next) => {
 };
 
 
-exports.postDeleteTarea = (request, response, next) => {
+exports.postDeleteProyecto = (request, response, next) => {
     Proyecto.erase(request.body.id)
-    .then(([]) => {
+    .then(() => {
         console.log("Proyecto eliminado con éxito")
-        response.status(303).redirect('/tareas/main');
+        response.status(303).redirect('/proyectos/main');
+        console.log("Proyecto eliminado con éxito 2")
     })  
     .catch(err => {
         console.log(err);

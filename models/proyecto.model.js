@@ -15,7 +15,7 @@ module.exports = class Proyecto {
     }
 
     save() {
-        return db.execute('INSERT INTO proyectos (nombre, descripcion, stack_tecnologia, importancia, estatus, es_etiqueta, image_url, id_empleado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [this.nombre, this.descripcion, this.stack,this.importancia,this.un_estatus,this.etiqueta, this.imagen,this.id]);
+        return db.execute('INSERT INTO proyectos (nombre, descripcion, stack_tecnologia, importancia, estatus, es_etiqueta, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)', [this.nombre, this.descripcion, this.stack,this.importancia,this.un_estatus,this.etiqueta, this.imagen]);
     }
 
     static saveEtiqueta(un_nombre, un_bool) {
@@ -59,4 +59,8 @@ module.exports = class Proyecto {
         return db.execute('UPDATE proyectos SET is_deleted = 1 WHERE id_proyecto = ?; ', [un_id]);
     }
             
+    static fetchRecent() {
+        return db.execute('SELECT MAX(id_proyecto) AS reciente FROM `proyectos`');
+    }
+
 }

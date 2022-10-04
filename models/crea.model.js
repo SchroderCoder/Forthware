@@ -10,7 +10,7 @@ module.exports = class Crea {
     
     
     static registrar(id_empleado,id_proyecto) {
-        return db.execute('INSERT INTO Realiza (id_empleado, id_tarea) VALUES (?, ?)', [id_empleado,id_proyecto]);
+        return db.execute('INSERT INTO crea (id_empleado, id_proyecto) VALUES (?, ?)', [id_empleado,id_proyecto]);
     }
     
     static eliminar(id_empleado,id_proyecto) {
