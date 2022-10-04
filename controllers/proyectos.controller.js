@@ -246,23 +246,16 @@ exports.postEditarEtiqueta = (request, response, next) => {
 };
 
 
-exports.getEliminarEtiqueta = (request, response, next) => {
-    console.log()
-};
-
-/* 
-exports.postEliminarEtiqueta = (request, response, next) => {
-    id_empleado= request.session.id_empleado;
-
-    Proyecto.deleteEtiqueta(request.body.nombre)
-        .then(() => {
-            response.status(303).redirect('/proyectos/main');
-            console.log("etiqueta elimin");
-        })
-        .catch(err => {
-            console.log(err);
-            response.render('error.ejs', {
-                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
-            });
+exports.postDeleteTarea = (request, response, next) => {
+    Proyecto.erase(request.body.id)
+    .then(([]) => {
+        console.log("Proyecto eliminado con éxito")
+        response.status(303).redirect('/tareas/main');
+    })  
+    .catch(err => {
+        console.log(err);
+        response.render('error.ejs', {
+            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
         });
-};   */
+    }); 
+}
