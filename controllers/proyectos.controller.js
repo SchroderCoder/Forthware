@@ -72,10 +72,7 @@ exports.postCrearProyecto = (request, response, next) => {
 
                 for (e of id_empleados){    
                     Crea.registrar(e,id_reciente)
-                    .then(([rows, fielData]) => {
-                        response.status(303).redirect('/proyectos/main');
-                        console.log("proyecto creado con exito");
-                    })
+                    .then(() => {})
                     .catch(err => {
                         console.log(err);
                         response.render('error.ejs', {
@@ -83,6 +80,10 @@ exports.postCrearProyecto = (request, response, next) => {
                         });
                     });
                 }
+
+                console.log("proyecto creado con exito");
+                
+                response.status(303).redirect('/proyectos/main');
             })
             .catch(err => {
                 console.log(err);

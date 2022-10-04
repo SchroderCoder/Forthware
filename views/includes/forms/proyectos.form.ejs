@@ -100,7 +100,7 @@
             <input placeholder="Añade una imagen representativa del proyecto" id="imagen" name="imagen" type="text" required> 
     </fieldset>
     <% if (proyectos=="") { %>
-        <input type="submit" class="btn btn-success" value="<%= titulo %>">
+        <input type="submit" class="btn btn-success" value="<%= titulo %>" onmouseover = "checkOne()">
     <% } else { %>  
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" >
             Eliminar Proyecto
