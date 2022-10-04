@@ -7,7 +7,7 @@
 <% } else { %>
     <form action="/proyectos/editarProyecto" method="POST">
 <%}%>
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+    <input type="hidden" id = "_csrf" name="_csrf" value="<%= csrfToken %>" >
 
     <fieldset>  
         <legend>Datos del proyecto</legend>
@@ -16,7 +16,7 @@
             <input id="nombre" name="nombre" maxlength="40" type="text" required>
             <br>
             <label for="descripcion">Descripción: </label>
-            <input placeholder="¿Qué se va a hacer?" id="descripcion" name="descripcion" maxlength="256" type="text" required>
+            <input placeholder="¿Qué se va a hacer?" id="descripcion" name="descripcion" maxlength="128" type="text" required>
             <br>
             <% if (proyectos=="") { %>
                 <div class="multipleSelection">
@@ -41,14 +41,14 @@
                         <div class="selectBox"
                             onclick="showCheckboxes()">
                             <select>
-                                <option>Agregar colaboradores</option>
+                                <option>Eliminar colaboradores</option>
                             </select>
                         <div class="overSelect"></div>
                         </div>
                         <div id="checkBoxes">
                             <% for (let t of registrados) { %>
-                                <input type="checkbox" id="empleados" name="empleados" value="<%= t.id_empleado %>">
-                                <label for="empleados"><%= t.nombre %></label>
+                                <input type="checkbox" id="registrados" name="registrados" value="<%= t.id_empleado %>">
+                                <label for="regsitrados"><%= t.nombre %></label>
                             <% } %>
                         </div>
                     </div>
@@ -59,14 +59,14 @@
                             <div class="selectBox"
                                 onclick="showCheckboxes()">
                                 <select>
-                                    <option>Eliminar colaboradores</option>
+                                    <option>Agregar colaboradores</option>
                                 </select>
                             <div class="overSelect"></div>
                             </div>
                             <div id="checkBoxes">
                                 <% for (let n of no_registrados) { %>
-                                    <input type="checkbox" id="empleados" name="empleados" value="<%= n.id_empleado %>">
-                                    <label for="empleados"><%= n.nombre %></label>
+                                    <input type="checkbox" id="no_registrados" name="no_registrados" value="<%= n.id_empleado %>">
+                                    <label for="no_registrados"><%= n.nombre %></label>
                                 <% } %>
                             </div>
                         </div>
@@ -99,6 +99,34 @@
             <label for="imagen"> Imagen: </label>       
             <input placeholder="Añade una imagen representativa del proyecto" id="imagen" name="imagen" type="text" required> 
     </fieldset>
+    <% if (proyectos=="") { %>
+        <input type="submit" class="btn btn-success" value="<%= titulo %>" onmouseover = "checkOne()">
+    <% } else { %>  
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" >
+            Eliminar Proyecto
+        </button>
+        <input type="submit" class="btn btn-success" value="<%= titulo %>">
+        
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Eliminar Proyecto </h5>
+                  <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p> ¿Estás seguro de que quieres eliminar esta proyecto?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal" id="eliminarp">Eliminar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    <%}%>
+
     <br>
-    <input type="submit" class="btn btn-success" value="<%= titulo %>">
+    <script src="/js/checkbox.js"></script>
+    <script src="/js/checkedone.js"> </script>
 </form>

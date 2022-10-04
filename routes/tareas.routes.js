@@ -13,4 +13,6 @@ router.get('/editarTarea/:id', requiresAuth(), tareasController.getEditarTareas)
 
 router.post('/editarTarea',requiresAuth(),  tareasController.postEditarTareas);
 
+router.post('/delete',requiresAuth(),tareasController.postdeleteTareas);
+
 module.exports = router;

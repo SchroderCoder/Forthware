@@ -1,8 +1,7 @@
 var show = true;
-
     function showCheckboxes() {
-        var checkboxes = 
-            document.getElementById("checkBoxes");
+        const  checkboxes =  document.getElementById("checkBoxes");
+
 
         if (show) {
             checkboxes.style.display = "block";

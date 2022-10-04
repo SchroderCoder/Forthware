@@ -7,28 +7,19 @@ module.exports = class Realiza {
         this.id_tarea = id_tarea;
     }
 
-    // save(id_empleado) {
-
-    //     for(let e of id_empleado){
-    //         console.log(e);
-    //         db.execute('INSERT INTO Realiza (id_empleado, id_tarea) VALUES (?, ?)', [e, this.id_tarea]);
-    //     }
-        
-    //     return;
-    // }
     
     static registrar(id_empleado,id_tarea) {
-        return db.execute('INSERT INTO Realiza (id_empleado, id_tarea) VALUES (?, ?)', [id_empleado,id_tarea]);
+        return db.execute('INSERT INTO realiza (id_empleado, id_tarea) VALUES (?, ?)', [id_empleado,id_tarea]);
     }
 
 
 
     static fetchAll() {
-        return db.execute('SELECT * FROM Realiza');
+        return db.execute('SELECT * FROM realiza');
     }
 
     static fetchOne(un_id) {
-        return db.execute('SELECT * FROM Realiza WHERE id_tarea = ?', [un_id]);
+        return db.execute('SELECT * FROM realiza WHERE id_tarea = ?', [un_id]);
     }
 
 

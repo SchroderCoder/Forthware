@@ -2,7 +2,7 @@ const path = require('path');
 const session = require('express-session');
 const Proyecto = require('../models/proyecto.model');
 const { fetchColaboradores, fetchLideres } = require('../models/proyecto.model');
-const Crea = require('../models/crea');
+const Crea = require('../models/crea.model');
 const Usuario = require('../models/user.model');
 
 exports.getProyectos = (request, response, next) => {
@@ -35,10 +35,6 @@ exports.getProyectos = (request, response, next) => {
 };
 
 exports.getCrearProyecto = (request, response, next) => {
-    let colaboradores = fetchColaboradores;
-    let lideres = fetchLideres;
-    // <const importancia = ['Alto','Medio','Bajo'];
-    // const estatus = ['']>
     Usuario.fetchAll()
         .then(([rows, fielData]) => {
             request.session.isLoggedIn = true;
@@ -64,13 +60,37 @@ exports.getCrearProyecto = (request, response, next) => {
 };
 
 exports.postCrearProyecto = (request, response, next) => {
-    id_empleado= request.session.id_empleado;
-    const proyecto = new Proyecto(request.body.nombre,request.body.descripcion, request.body.stack,request.body.importancia, request.body.estatus,0,request.body.imagen, id_empleado);
+
+    const proyecto = new Proyecto(request.body.nombre,request.body.descripcion, request.body.stack,request.body.importancia, request.body.estatus,0,request.body.imagen);
 
     proyecto.save()
         .then(() => {
-            response.status(303).redirect('/proyectos/main');
-            console.log("proyecto creado con exito");
+            Proyecto.fetchRecent()
+            .then(([cols, fielData]) => {
+                let id_reciente= cols[0].reciente;
+                let id_empleados = request.body.empleados;
+
+                for (e of id_empleados){    
+                    Crea.registrar(e,id_reciente)
+                    .then(() => {})
+                    .catch(err => {
+                        console.log(err);
+                        response.render('error.ejs', {
+                            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                        });
+                    });
+                }
+
+                console.log("proyecto creado con exito");
+                
+                response.status(303).redirect('/proyectos/main');
+            })
+            .catch(err => {
+                console.log(err);
+                response.render('error.ejs', {
+                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                });
+            });
         })
         .catch(err => {
             console.log(err);
@@ -86,15 +106,14 @@ exports.getCrearEtiqueta = (request, response, next) => {
     response.render(path.join('..',"views", "CrearEtiqueta.ejs"), {
         privilegios: request.session.privilegios,
         isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
-        proyectos: "",
+        etiquetas: "",
         titulo: "Crear etiqueta",
     });
 };
 
 exports.postCrearEtiqueta = (request, response, next) => {
-    id_empleado= request.session.id_empleado;
 
-    Proyecto.saveEtiqueta(request.body.nombre,1 ,id_empleado)
+    Proyecto.saveEtiqueta(request.body.nombre,1)
         .then(() => {
             response.status(303).redirect('/proyectos/main');
             console.log("etiqueta creada con exito");
@@ -123,8 +142,6 @@ exports.getEditarProyecto = (request, response, next) => {
                         for(let empleado of noregistered) {
                             request.session.empleados_no_r.push(empleado);
                         }
-
-
                         response.render(path.join('..',"views", "CrearProyecto.ejs"), {
                             proyectos: rows[0],
                             registrados: request.session.empleados_r,
@@ -176,6 +193,58 @@ exports.postEditarProyecto = (request, response, next) => {
         
         Proyecto.saveEdit(rows[0])
         .then(() => {
+            if (request.body.registrados){
+                Proyecto.fetchRecent()
+                .then(([cols, fielData]) => {
+                    let id_reciente= cols[0].reciente;
+                    let id_empleados = request.body.registrados;
+
+                    for (e of id_empleados){    
+                        Crea.eliminar(e,id_reciente)
+                        .then(() => {
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            response.render('error.ejs', {
+                                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                            });
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                    response.render('error.ejs', {
+                        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                    });
+                });
+            }
+
+            if (request.body.no_registrados){
+                Proyecto.fetchRecent()
+                .then(([cols, fielData]) => {
+                    let id_reciente= cols[0].reciente;
+                    let id_empleados = request.body.no_registrados;
+
+                    for (e of id_empleados){    
+                        Crea.registrar(e,id_reciente)
+                        .then(() => {
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            response.render('error.ejs', {
+                                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                            });
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                    response.render('error.ejs', {
+                        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                    });
+                });
+            }
+            
             response.status(303).redirect('/proyectos/main');
         })
         .catch(err => {
@@ -200,8 +269,8 @@ exports.getEditarEtiqueta = (request, response, next) => {
         if (rows.length > 0) {
             response.render(path.join('..',"views", "CrearEtiqueta.ejs"), {
                 proyectos: rows[0],
-                titulo: "Editar etiqueta " + rows[0].id_proyecto,
-                etiqueta:rows[0],
+                titulo: "Editar etiqueta " + rows[0].nombre,
+                etiquetas :rows[0],
                 isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
             });
         } else {
@@ -222,6 +291,7 @@ exports.getEditarEtiqueta = (request, response, next) => {
 
 
 exports.postEditarEtiqueta = (request, response, next) => {
+    
     Proyecto.fetchOne(request.body.id)
     .then(([rows, fielData]) => {
         rows[0].nombre= request.body.nombre
@@ -246,23 +316,17 @@ exports.postEditarEtiqueta = (request, response, next) => {
 };
 
 
-exports.getEliminarEtiqueta = (request, response, next) => {
-    console.log()
-};
-
-/* 
-exports.postEliminarEtiqueta = (request, response, next) => {
-    id_empleado= request.session.id_empleado;
-
-    Proyecto.deleteEtiqueta(request.body.nombre)
-        .then(() => {
-            response.status(303).redirect('/proyectos/main');
-            console.log("etiqueta elimin");
-        })
-        .catch(err => {
-            console.log(err);
-            response.render('error.ejs', {
-                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
-            });
+exports.postDeleteProyecto = (request, response, next) => {
+    Proyecto.erase(request.body.id)
+    .then(() => {
+        console.log("Proyecto eliminado con éxito")
+        response.status(303).redirect('/proyectos/main');
+        console.log("Proyecto eliminado con éxito 2")
+    })  
+    .catch(err => {
+        console.log(err);
+        response.render('error.ejs', {
+            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
         });
-};   */
+    }); 
+}
