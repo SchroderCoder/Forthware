@@ -97,7 +97,7 @@
                 <br>
             <!-- </div> -->
             <label for="imagen"> Imagen: </label>       
-            <input type="file" name="archivo"> 
+            <input type="file" id="archivo" name="archivo"> 
     </fieldset>
     <% if (proyectos=="") { %>
         <input type="submit" class="btn btn-success" value="<%= titulo %>" onmouseover = "checkOne()">
@@ -129,4 +129,6 @@
     <br>
     <script src="/js/checkbox.js"></script>
     <script src="/js/checkedone.js"> </script>
+    <script src="/js/checkimagen.js"></script>
+    <script src="/js/checkimagenproyecto.js"></script>
 </form>
