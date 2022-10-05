@@ -34,7 +34,7 @@ router.get('/editarEtiqueta/:id', requiresAuth(),proyectoController.getEditarEti
 
 router.post('/editarEtiqueta',requiresAuth(),proyectoController.postEditarEtiqueta);
 
-router.post('/delete',requiresAuth(),proyectoController.postDeleteProyecto);
+router.get('/delete/:id',requiresAuth(),proyectoController.getDeleteProyecto);
 
 
 module.exports = router;

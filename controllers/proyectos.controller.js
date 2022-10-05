@@ -165,7 +165,7 @@ exports.getEditarProyecto = (request, response, next) => {
                     });
             })     
         } else {
-            console.log("no existe el id del equipo");
+            console.log("no existe el id del proyecto");
             response.render('error.ejs', {
                 isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
             });
@@ -316,12 +316,10 @@ exports.postEditarEtiqueta = (request, response, next) => {
 };
 
 
-exports.postDeleteProyecto = (request, response, next) => {
-    Proyecto.erase(request.body.id)
+exports.getDeleteProyecto = (request, response, next) => {
+    Proyecto.erase(request.params.id)
     .then(() => {
-        console.log("Proyecto eliminado con éxito")
         response.status(303).redirect('/proyectos/main');
-        console.log("Proyecto eliminado con éxito 2")
     })  
     .catch(err => {
         console.log(err);
