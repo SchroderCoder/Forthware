@@ -105,7 +105,7 @@
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" >
             Eliminar Proyecto
         </button>
-        <input type="submit" class="btn btn-success" value="<%= titulo %>">
+        <input type="submit" class="btn btn-success" value="Registrar Cambios">
         
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -119,7 +119,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal" id="eliminarp">Eliminar</button>
+                  <a href="/proyectos/delete/<%= proyectos.id_proyecto %>" class="btn btn-danger" id="eliminar">Eliminar</a>
                 </div>
               </div>
             </div>

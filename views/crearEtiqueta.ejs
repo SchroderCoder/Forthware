@@ -8,31 +8,5 @@
     <%- include('includes/forms/etiquetas.form.ejs') %> 
 </div>
 
-<script>
-    const accion_asincrona = () => {
-       const id= document.getElementById('id').value;
-       data=new Object();
-
-       data.id= id;
-       const csrf = document.getElementById('_csrf').value;
-
-       fetch('/proyectos/delete', {
-           method: 'POST',
-           headers: {
-               'Content-Type': 'application/json',
-               'csrf-token': csrf  
-           },
-           body: JSON.stringify(data),
-       }).then(result => {
-           return result.json(); 
-       }).then(data => {
-           
-       })
-    }
-
-   document.getElementById('eliminare').onclick = accion_asincrona;
-</script>
-
-
 
 <%- include('includes/foot.ejs') %> 
