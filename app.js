@@ -9,6 +9,7 @@ const csrfProtection = csrf();
 const { requiresAuth } = require('express-openid-connect');
 const PDF = require('pdfkit');
 const fs = require('fs');
+const multer = require('multer');
 
 
 const config = {
@@ -28,6 +29,30 @@ app.engine('html', require('ejs').renderFile);
 app.set('views', 'views');
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+const fileStorage = multer.diskStorage({
+    destination: (request, file, callback) => {
+        //'uploads': Es el directorio del servidor donde se subirán los archivos 
+        callback(null, 'public/project_images');
+    },
+    filename: (request, file, callback) => {
+        //aquí configuramos el nombre que queremos que tenga el archivo en el servidor, 
+        //para que no haya problema si se suben 2 archivos con el mismo nombre concatenamos el timestamp
+        callback(null, Date.now() + '-' +file.originalname);
+    },
+});
+
+const fileFilter = (request, file, callback) => {
+    if (file.mimetype == 'image/png' || 
+        file.mimetype == 'image/jpg' ||
+        file.mimetype == 'image/jpeg' ) {
+            callback(null, true);
+    } else {
+            callback(null, false);
+    }
+}
+
+app.use(multer({ storage: fileStorage, fileFilter: fileFilter }).single('archivo')); 
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
