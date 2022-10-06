@@ -7,15 +7,17 @@
         const horasmedio= document.getElementById("horasmedio");
 
         let proyectos=[] 
-        proyectos= document.getElementById("proyectos");
-        
-        // for( i=1; i<)
-        // proyectos= document.getElementById("proyectos");
-
+        let proyecto;
+    
         console.log(horascompleto.value);
         console.log(horasmedio.value);
         console.log(tiempocompleto.value);
         console.log(tiempomedio.value);
         console.log(efectividad.value);
-        console.log(proyectos.length);
+
+        for (i=0; i<iterar;i++){
+            proyecto= document.getElementById("proyectos["+i+"]");
+            proyectos.push(proyecto);
+            console.log(proyecto.value);
+        }
     }
