@@ -16,6 +16,8 @@ router.post('/suma_completo', reportesController.postCompleto);
 
 router.post('/horas_hombre', reportesController.postHorasHombre);
 
+router.get('/delete/:id',requiresAuth(),reportesController.getDeleteReporte);
+
 // router.get('/download', reportesController.download);
 
 
