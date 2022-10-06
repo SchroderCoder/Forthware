@@ -23,6 +23,10 @@ module.exports = class Reporte {
         return db.execute('SELECT * FROM `reportes` ORDER BY id_reporte DESC LIMIT 3');
     }
 
+    static fetchOne(un_id) {
+        return db.execute('SELECT * FROM reportes WHERE id_reporte = ?', [un_id]);
+    }
+
     static getHoras_proyectos(fechainicio, fechafin) {
         return db.execute('SELECT P.nombre, SUM(T.duracion) AS horas FROM horas_tarea T, proyectos P WHERE P.id_proyecto = T.id_proyecto AND P.is_deleted= 0   GROUP BY T.id_proyecto',
         [fechainicio, fechafin]);

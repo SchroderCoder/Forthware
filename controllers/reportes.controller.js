@@ -48,6 +48,29 @@ exports.postCrearReporte = (request, response, next) => {
             .then(([rows,fielData]) => {
                 console.log(rows);
             })
+
+            var doc = new PDF();
+
+            doc.pipe(fs.createWriteStream(__dirname + '/public/pdf/reporte' + request.session.id_reporte + '.pdf'));
+            
+            doc.text('Reporte semanal Natdev' , {
+                align: 'center'
+            });
+            
+            var parrafo = 'Este es un documento PDF'; 
+            
+            doc.image('./public/media/natgas-logo-simple.png', {
+                scale: 0.1
+            });
+            
+            doc.text(parrafo, {
+                columns: 1,
+                align: 'justify'
+            });
+            
+            doc.end();
+            
+            console.log('Archivo Generado');
             response.status(303).redirect('/reportes/main');
             console.log("reporte creado con exito");
         })

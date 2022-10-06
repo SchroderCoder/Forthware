@@ -58,6 +58,10 @@ module.exports = class Proyecto {
     static erase(un_id){
         return db.execute('UPDATE proyectos SET is_deleted = 1 WHERE id_proyecto = ?; ', [un_id]);
     }
+
+    static borrar(un_id) {
+        return db.execute('DELETE FROM proyectos WHERE id_proyecto = ?', [un_id]);
+    }
             
     static fetchRecent() {
         return db.execute('SELECT MAX(id_proyecto) AS reciente FROM `proyectos`');

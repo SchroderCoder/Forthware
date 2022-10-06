@@ -3,8 +3,8 @@
 <% const estatus = ["Planficación", "Análisis", "Diseño","Desarrollo", "Pruebas","Mantenimiento"] %>
 
 <% if (proyectos=="") { %>
-    <form action="crearProyecto" method="POST">
-<% } else { %>
+    <form action="crearProyecto" method="POST" enctype="multipart/form-data">
+<% } else { %> 
     <form action="/proyectos/editarProyecto" method="POST">
 <%}%>
     <input type="hidden" id = "_csrf" name="_csrf" value="<%= csrfToken %>" >
@@ -97,7 +97,7 @@
                 <br>
             <!-- </div> -->
             <label for="imagen"> Imagen: </label>       
-            <input placeholder="Añade una imagen representativa del proyecto" id="imagen" name="imagen" type="text" required> 
+            <input type="file" id="archivo" name="archivo"> 
     </fieldset>
     <% if (proyectos=="") { %>
         <input type="submit" class="btn btn-success" value="<%= titulo %>" onmouseover = "checkOne()">
@@ -129,4 +129,6 @@
     <br>
     <script src="/js/checkbox.js"></script>
     <script src="/js/checkedone.js"> </script>
+    <script src="/js/checkimagen.js"></script>
+    <script src="/js/checkimagenproyecto.js"></script>
 </form>
