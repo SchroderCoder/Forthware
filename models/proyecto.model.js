@@ -67,4 +67,10 @@ module.exports = class Proyecto {
         return db.execute('SELECT MAX(id_proyecto) AS reciente FROM `proyectos`');
     }
 
+
+    // main 
+
+    static fetchProyectosImportancia() {
+        return db.execute('SELECT * FROM proyectos p WHERE p.is_deleted= 0 AND p.es_etiqueta= 0 GROUP BY id_proyecto ORDER BY importancia ASC, id_proyecto DESC LIMIT 5 ');
+    }
 }

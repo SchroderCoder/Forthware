@@ -177,6 +177,31 @@ li {
     overflow-y: scroll;
 }
 
+
 .modal-content {
     background-color:#25282B;
- }
+}
+
+
+.parent {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.image1 {
+position: relative;
+
+}
+.image2 {
+position: absolute;
+bottom: 20px;
+left: 60px;
+/* border: 1px rgb(0, 0, 0) solid; */
+}
+
+.image3 {
+position: absolute;
+bottom: 20px;
+right:60px;
+/* border: 1px rgb(0, 0, 0) solid; */
+}
