@@ -26,14 +26,24 @@
             <td><input id="medio" name="medio" min="0" max="100" type="int" required></td>
         </tr>
         <tr>
+            <td><label for="completo">Horas esperadas tiempo completo: </label></td>
+            <td>5</td>
+            <td><input id="horascompleto" name="horascompleto" min="0" max="100" type="int" required></td>
+        </tr>
+        <tr>
+            <td><label for="completo">Horas esperadas tiempo medio: </label></td>
+            <td>5</td>
+            <td><input id="horasmedio" name="horasmedio" min="0" max="100" type="int" required></td>
+        </tr>
+        <tr>
             <td><label for="horas_ausencia_">horas de ausencia: </label></td>
             <td>35</td>
             <td><input id="horas_ausencia_" name="horas_ausencia_" min="0" max="100" type="int" required></td>
         </tr>
         <tr>
-            <td><label for="proporcion_horas">Eficiencia: </label></td>
+            <td><label for="efectividad">Efectividad: </label></td>
             <td>85</td>
-            <td><input placeholder="85% " id="proporcion_horas" name="proporcion_horas" min="50" max="100" type="int" required></td>
+            <td><input placeholder="85% " id="efectividad" name="efectividad" min="50" max="100" type="int" required></td>
         </tr>
     </table>
     <br><br>
@@ -71,63 +81,14 @@
 
     <br>
     
-    <div id="suma_completo">
-    <table>
-        <tr>
-            <th>Valores</th>
-            <th>Horas</th>
-        </tr>
-            <tr>
-                    <% var completo = 0 %>
-                    <td>Tiempo completo</td>
-                    <td><label for="suma_completo"></label>
-                        <%= value1= completo * 35 %> </td>
-            </tr>
-        <tr>
-            <% var medio = 0 %>
-            <td>Tiempo medio</td>
-            <td><label for="suma_medio"></label>
-                <%= value2= medio * 18%></td>
-        </tr>
-        <tr>
-            <td>Horas base</td>
-            <td><label for="horas_base"></label>
-                <%= horasbase= value1 + value2 %></td>
-            <td><int id="horas_base" name="horas_base" type="int"></td>
-        </tr>
-        <tr>
-            <td>Horas ausencia</td>
-            <td><label for="horas_ausencia"></label>
-                <%= horas_ausencia=0 %></td>
-            <td><int id="horas_ausencia" name="horas_ausencia" type="int"></td>
-        </tr>
-        <tr>
-            <td>Horas habiles</td>
-            <td><label for="horas_base"></label>
-                <%= horasesperadas= horasbase - horas_ausencia%></td>
-        </tr>
-    </table>
-    </div>
-
-    <div id="horas_hombre">
-    <table>
-        <tr>
-            <td>Horas hombre</td>
-            <td><label for="horas_hombre"></label>
-                <%= horas_hombre=horasajutadas %></td>
-            <td><int id="horas_hombre" name="horas_hombre" type="int"></td>
-        </tr>
-        <tr>
-            <% var proporcion_horas = horasajutadas/horasesperadas %>
-            <% verdadero= 95/100 %>
-            <td>Efectividad ajustada</td>
-            <td><label for="Efectividad_ajustada"></label>
-                <%= efectividad = (proporcion_horas/verdadero).toFixed(2) %> </td>
-    </table>
-    </div>
     
 </fieldset>
+
 <br>
 <input type="submit" class="btn btn-success" value="Generar">
 
 </form>
+
+<button class="btn btn-info" onclick = "calculate()">Actualizar Datos</button>
+
+<script src="/js/calculate.js" ></script>

@@ -35,11 +35,13 @@ exports.getCrearReporte = (request, response, next) => {
 };
 
 exports.postCrearReporte = (request, response, next) => {
-    
-    console.log(request.session)
-    id_empleado= request.body.id_empleado;
-    const reporte = new Reporte(request.body.fecha_inicio, request.body.fecha_fin, 85, 350, 310, request.body.horas_ausencia_, request.body.proporcion_horas, 2);
-    console.log(reporte)
+    console.log(request.body.proyectos);
+    console.log(request.body.efectividad);
+    console.log(request.body.horas_base);
+    console.log(request.body.horas_ausencia);
+
+    id_empleado= request.session.id_empleado;
+    const reporte = new Reporte(request.body.fecha_inicio, request.body.fecha_fin, request.body.efectividad, 350, request.body.horas_base, request.body.horas_ausencia, .76, 2);
     reporte.save()
         .then(() => {
             Reporte.getHoras_proyectos(request.body.fecha_inicio, request.body.fecha_fin)
