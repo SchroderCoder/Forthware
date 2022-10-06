@@ -3,6 +3,8 @@ const bcrypt = require('bcryptjs');
 const Usuario = require('../models/user.model');
 const session = require('express-session');
 const { request } = require('http');
+const Proyecto = require('../models/proyecto.model');
+const Tarea = require('../models/tarea.model');
 
 
 exports.getNew = (request, response, next) => {
@@ -85,10 +87,19 @@ exports.getLogin = (request, response, next) => {
 };
 
 exports.getMain = (request, response, next) => {
-    response.render(path.join('..',"views", "main.ejs"), {
-        // privilegios: request.session.privilegios,
-        // rol: request.session.roles,
-        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+    Proyecto.fetchProyectosImportancia()
+    .then(([rows, fielData]) => {
+        response.render(path.join('..',"views", "main.ejs"), {
+            proyectos: rows,
+            privilegios: request.session.privilegios,
+            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+        });
+    })
+    .catch(err => {
+        console.log(err);
+        response.render('error.ejs', {
+            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+        });
     });
 };
 
