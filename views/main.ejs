@@ -1,29 +1,20 @@
 <%- include('includes/head.ejs') %>
 <%- include('includes/nav.ejs') %>   
 <%- include('includes/sidebar.ejs') %>   
-    <h1 class="p-2" >Pagina Principal</h1>
-    <div class="p-3">
-        <h3>Proyectos activos</h3>
-        <p >
-            Make sure to keep all page content within the
-            <code>#page-content-wrapper</code>
-        </p>
-        <ul>
-        </ul>
-    </div>
-    <% if (proyectos.length > 0) { %>
-        <div class="p-5">
-            <div class="row">
-                <% for (let  p of proyectos) { %>
-                    <div class="col-sm over">
-                        <div class="card" style="width: auto;height: 29rem ; ">
-                            <h5 class="card-title bg-success text-dark text-center align-middle py-auto  list-group-item" style="height:15% ;"><a href="/proyectos/editarProyecto/<%= p.id_proyecto %>" class="text-white" ><%= p.nombre %></a></h5>
-                            <img src="<%= p.image_url %>" class="card-img-top" alt="" onerror="this.onerror=null; this.src='https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png'">
-                            <div class="card-body textBlack">
-                                <div class="row">
-                                        <p class="card-text col-sm pt-2 over mx-auto align-middle py-auto  list-group-item">Importancia:</p>
+    <h2 class="p-2" >Pagina Principal</h2>
+    <div class="pl-5">
+        <h4>Proyectos activos</h4>
+        <% if (proyectos.length > 0) { %>
+            <div class="centered1 pl-2 pr-4">
+                <div class="row">
+                    <% for (let  p of proyectos) { %>
+                        <div class="col-sm over">
+                            <div class="card" style="width: auto ; background-color: rgba(0,0,0,.0) !important; border-color: rgba(0,0,0,.0) !important ; ">
+                                <div class="card-body ">
+                                    <div class="row">
+                                
                                         <% if (p.importancia == "Alto") { %>
-                                            <p class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.importancia %></p>
+                                            <p class="card-text bg-success text-white col-sm px-auto over mx-auto align-middle py-auto list-group-item-main py-1 "><%= p.importancia %></p>
                                         <% } %>
                                         <% if (p.importancia == "Medio") { %>
                                             <p class="card-text bg-warning col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.importancia %></p>
@@ -31,49 +22,60 @@
                                         <% if (p.importancia == "Bajo") { %>
                                             <p class="card-text bg-light text-dark col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.importancia %></p>
                                         <% } %>
+                                    </div>
                                 </div>
-                                <div class="row pt-2"  >
-                                    <p class="card-text col-sm pt-1 over mx-auto align-middle py-auto  list-group-item">Estatus:</p>
+                                
+                                <div class="circular--landscape mx-auto "><img src="<%= p.image_url %>"  alt="ImagenPerfilProyecto" onerror="this.onerror=null; this.src='https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png'""></div>
+
+                                <!-- <img src="<%= p.image_url %>"  class="card-img-top rounded-circle container" alt="" onerror="this.onerror=null; this.src='https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png'"> -->
+                                <h5 class="card-title text-dark text-center align-middle pt-3 " style="height:15%;  object-fit: cover; ;"><a href="/proyectos/editarProyecto/<%= p.id_proyecto %>" class="text-white" ><%= p.nombre %></a></h5>
+                                <div class="card-body list-group-item" style="background-color: rgba(0,0,0,.0) !important; border-color:rgba(0,0,0,.0) ;" >
+                                    <div class="row "  >
                                         <% if (p.estatus == "Planeación") { %>
-                                            <p style="background-color: #9B38CA !important;" class="card-text col-sm  over mx-auto align-middle py-auto  list-group-item" ><%= p.estatus %></p>
-                                        <% } %>
+                                            <p style="background-color: #9B38CA !important;" class="card-text py-1 over mx-auto align-middle py-auto  list-group-item-main" > Estatus: <br> <%= p.estatus %> </p>
+                                        
+                                            <% } %>
                                         <% if (p.estatus == "Diseño") { %>
-                                            <p style="background-color: #00C4D0 !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
-                                        <% } %>
+                                            <p style="background-color: #00C4D0 !important;" class="card-text py-1 over mx-auto align-middle py-auto  list-group-item-main" > Estatus: <br> <%= p.estatus %> </p>
+                                        
+                                            <% } %>
                                         <% if (p.estatus == "Análisis") { %>
-                                            <p style="background-color: #1A02AC !important;"class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
-                                        <% } %>
+                                            <p style="background-color: #1A02AC !important;" class="card-text py-1 over mx-auto align-middle py-auto  list-group-item-main" > Estatus: <br> <%= p.estatus %> </p>
+                                        
+                                            <% } %>
                                         <% if (p.estatus == "Pruebas") { %>
-                                            <p style="background-color: #ca3838 !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
-                                        <% } %>
+                                            <p style="background-color: #ca3838 !important;" class="card-text py-1 over mx-auto align-middle py-auto  list-group-item-main" > Estatus: <br> <%= p.estatus %> </p>
+                                        
+                                            <% } %>
                                         <% if (p.estatus == "Mantenimiento") { %>
-                                            <p style="background-color: #e0ce04 !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
-                                        <% } %>
+                                            <p style="background-color: #e0ce04 !important;" class="card-text py-1 over mx-auto align-middle py-auto  list-group-item-main" > Estatus: <br> <%= p.estatus %> </p>
+                                        
+                                            <% } %>
                                         <% if (p.estatus == "Construcción") { %>
-                                            <p style="background-color: #DC6F0B !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
-                                        <% } %>
+                                            <p style="background-color: #DC6F0B !important;" class="card-text py-1 over mx-auto align-middle py-auto  list-group-item-main" > Estatus: <br> <%= p.estatus %> </p>
+                                        
+                                            <% } %>
                                         <% if (p.estatus == "Documentación") { %>
-                                            <p style="background-color: #434342 !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
-                                        <% } %>
+                                            <p style="background-color: #434342 !important;" class="card-text py-1 over mx-auto align-middle py-auto  list-group-item-main" > Estatus: <br> <%= p.estatus %> </p>
+                                        
+                                            <% } %>
                                         <% if (p.estatus == "Despliegue") { %>
-                                            <p style="background-color: #0a752c !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                            <p style="background-color: #0a752c !important;" class="card-text py-1 over mx-auto align-middle py-auto  list-group-item-main" > Estatus: <br> <%= p.estatus %> </p>
                                         <% } %>
                                         <% if (p.estatus == "Planficación") { %>
-                                            <p style="background-color: #000000 !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                            <p style="background-color: #8d70d8 !important;" class="card-text py-1 over mx-auto align-middle py-auto  list-group-item-main" > Estatus: <br> <%= p.estatus %> </p>
                                         <% } %>
                                         <% if (p.estatus == "Desarrollo") { %>
-                                            <p style="background-color: #48041b !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                            <p style="background-color: #0095f9 !important;" class="card-text py-1 over mx-auto align-middle py-auto  list-group-item-main" > Estatus: <br> <%= p.estatus %> </p>
                                         <% } %>
-
+                                    </div>
+                                    <p class="card-text"></p>
                                 </div>
-                                <p class="card-text"></p>
                             </div>
                         </div>
-                    </div>
-               
-        <% } %>
-    </div>
-</div>
+                    <% } %>
+                </div>
+            </div>
         <% } else { %>
             <h2>No hay proyectos registrados</h2>
         <% } %>  
