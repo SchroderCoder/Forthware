@@ -4,6 +4,7 @@ const Proyecto = require('../models/proyecto.model');
 const { fetchColaboradores, fetchLideres } = require('../models/proyecto.model');
 const Crea = require('../models/crea.model');
 const Usuario = require('../models/user.model');
+const { response } = require('express');
 
 exports.getProyectos = (request, response, next) => {
     
@@ -61,7 +62,7 @@ exports.getCrearProyecto = (request, response, next) => {
 
 exports.postCrearProyecto = (request, response, next) => {
 
-    const proyecto = new Proyecto(request.body.nombre,request.body.descripcion, request.body.stack,request.body.importancia, request.body.estatus,0,request.body.imagen);
+    const proyecto = new Proyecto(request.body.nombre,request.body.descripcion, request.body.stack,request.body.importancia, request.body.estatus,0,'/project_images/' + request.file.filename);
 
     proyecto.save()
         .then(() => {
@@ -164,7 +165,7 @@ exports.getEditarProyecto = (request, response, next) => {
                     });
             })     
         } else {
-            console.log("no existe el id del equipo");
+            console.log("no existe el id del proyecto");
             response.render('error.ejs', {
                 isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
             });
@@ -262,7 +263,6 @@ exports.postEditarProyecto = (request, response, next) => {
     });
 };
 
-
 exports.getEditarEtiqueta = (request, response, next) => {
     Proyecto.fetchOne(request.params.id)
     .then(([rows, fielData]) => { 
@@ -316,12 +316,10 @@ exports.postEditarEtiqueta = (request, response, next) => {
 };
 
 
-exports.postDeleteProyecto = (request, response, next) => {
-    Proyecto.erase(request.body.id)
+exports.getDeleteProyecto = (request, response, next) => {
+    Proyecto.erase(request.params.id)
     .then(() => {
-        console.log("Proyecto eliminado con éxito")
         response.status(303).redirect('/proyectos/main');
-        console.log("Proyecto eliminado con éxito 2")
     })  
     .catch(err => {
         console.log(err);

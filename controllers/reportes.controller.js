@@ -35,17 +35,42 @@ exports.getCrearReporte = (request, response, next) => {
 };
 
 exports.postCrearReporte = (request, response, next) => {
+    console.log(request.body.proyectos);
+    console.log(request.body.efectividad);
+    console.log(request.body.horas_base);
+    console.log(request.body.horas_ausencia);
 
     id_empleado= request.session.id_empleado;
-    console.log(horasbase);
-    const reporte = new Reporte(request.body.fecha_inicio, request.body.fecha_fin, 85, 350, 310, request.body.horas_ausencia_, request.body.proporcion_horas, id_empleado);
-    console.log(reporte)
+    const reporte = new Reporte(request.body.fecha_inicio, request.body.fecha_fin, request.body.efectividad, 350, request.body.horas_base, request.body.horas_ausencia, .76, 2);
     reporte.save()
         .then(() => {
             Reporte.getHoras_proyectos(request.body.fecha_inicio, request.body.fecha_fin)
             .then(([rows,fielData]) => {
                 console.log(rows);
             })
+
+            var doc = new PDF();
+
+            doc.pipe(fs.createWriteStream(__dirname + '/public/pdf/reporte' + request.session.id_reporte + '.pdf'));
+            
+            doc.text('Reporte semanal Natdev' , {
+                align: 'center'
+            });
+            
+            var parrafo = 'Este es un documento PDF'; 
+            
+            doc.image('./public/media/natgas-logo-simple.png', {
+                scale: 0.1
+            });
+            
+            doc.text(parrafo, {
+                columns: 1,
+                align: 'justify'
+            });
+            
+            doc.end();
+            
+            console.log('Archivo Generado');
             response.status(303).redirect('/reportes/main');
             console.log("reporte creado con exito");
         })
@@ -77,4 +102,19 @@ exports.postCompleto = (request, response, next) => {
 exports.postHorasHombre = (request, response, next) => {
     console.log(request.body)
     response.status(200).json({horasHombre: request.body});
+};
+
+exports.getDeleteReporte = (request, response, next) => {
+    console.log(request.params.id);
+    Reporte.erase(request.params.id)
+    .then(([]) => {
+        console.log("Reporte eliminado con éxito");
+        response.redirect('/reportes/main');
+    })  
+    .catch(err => {
+        console.log(err);
+        response.render('error.ejs', {
+            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+        });
+    }); 
 };

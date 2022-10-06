@@ -30,7 +30,7 @@ module.exports = class Proyecto {
     }
 
     static fetchAll() {
-        return db.execute('SELECT * FROM proyectos');
+        return db.execute('SELECT * FROM proyectos P WHERE P.is_deleted= 0 ');
     }
 
     static fetchOne(un_id) {
@@ -57,6 +57,10 @@ module.exports = class Proyecto {
 
     static erase(un_id){
         return db.execute('UPDATE proyectos SET is_deleted = 1 WHERE id_proyecto = ?; ', [un_id]);
+    }
+
+    static borrar(un_id) {
+        return db.execute('DELETE FROM proyectos WHERE id_proyecto = ?', [un_id]);
     }
             
     static fetchRecent() {

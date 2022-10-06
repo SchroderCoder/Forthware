@@ -24,7 +24,40 @@
                 </div>
             </div>
             <% } else { %>
-                <%}%>
+
+                <div class="multipleSelection">
+                    <div class="selectBox"
+                        onclick="showCheckboxes()">
+                        <select>
+                            <option>Eliminar colaboradores</option>
+                        </select>
+                    <div class="overSelect"></div>
+                    </div>
+                    <div id="checkBoxes">
+                        <% for (let t of registrados) { %>
+                            <input type="checkbox" id="registrados" name="registrados" value="<%= t.id_empleado %>">
+                            <label for="regsitrados"><%= t.nombre %></label>
+                        <% } %>
+                    </div>
+                </div>
+
+                <div class="multipleSelection">
+                    <div class="selectBox"
+                        onclick="showCheckboxes()">
+                        <select>
+                            <option>Agregar colaboradores</option>
+                        </select>
+                    <div class="overSelect"></div>
+                    </div>
+                    <div id="checkBoxes">
+                        <% for (let n of no_registrados) { %>
+                            <input type="checkbox" id="no_registrados" name="no_registrados" value="<%= n.id_empleado %>">
+                            <label for="no_registrados"><%= n.nombre %></label>
+                        <% } %>
+                    </div>
+                </div>
+
+            <%}%>
             <div>
                 <select name="proyectos" id="proyectos" required>
                     <option value="" disabled selected>Etiqueta</option>
@@ -50,7 +83,7 @@
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" >
             Eliminar Tarea
         </button>
-        <input type="submit" class="btn btn-success" value="<%= titulo %>">
+        <input type="submit" class="btn btn-success" value="Registrar Cambios">
         
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -64,12 +97,13 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal" id="eliminar">Eliminar</button>
+                  <a href="/tareas/delete/<%= tareas.id_tarea %>" class="btn btn-danger" id="eliminar">Eliminar</a>
                 </div>
+
               </div>
             </div>
           </div>
-    <%}%>
+    <% } %>
         
     <br>
     <script src="/js/checkbox.js"></script>
