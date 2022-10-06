@@ -12,7 +12,7 @@
                         <div class="p-2">
                             <div class="row">
                                 <% for (let  p of proyectos) { %>
-                                    <div class="col-sm-4 pt-1 over">
+                                    <div class="col-sm-4 pb-3 over">
                                         <div class="card" style="width: auto;height: 29rem ; ">
                                             <h5 class="card-title bg-success text-dark text-center align-middle py-auto  list-group-item" style="height:15% ;"><a href="/proyectos/editarProyecto/<%= p.id_proyecto %>" class="text-white" ><%= p.nombre %></a></h5>
                                             <img src="<%= p.image_url %>" class="card-img-top" alt="" onerror="this.onerror=null; this.src='https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png'">
