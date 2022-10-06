@@ -47,7 +47,7 @@
                 html += '</tr>';
 
                 let horas = 0;
-                let count = 1; 
+                var count = 1; 
                 if (data.proyectos.length > 0) {
                     for (p of data.proyectos) {
                         horas = p.horas + horas;
@@ -61,8 +61,9 @@
                         html += p.horas.toFixed(2);
                         html += '</td>';
                         html += '<td><label for="proyectos_horas_adj2"></label>';
-                        html += '<input placeholder="500" id="<%=count %>" name="<%=count %>" type="double" required></td></td>';
+                        html += '<input placeholder="500" id= "proyect'+ count +'" name=count type="double" value= " 6 " required></td></td>';
                         html += '</tr>'; 
+                        console.log(document.getElementById('"proyect'+ count +'"'))
                         count +=1;
                     }  
 
@@ -73,9 +74,16 @@
                 html += '<td>Total:</td>';
                 html += '<td><label for="horas_hombre"></label>';
                 html += horas.toFixed(2);
+                for(let i = 1; i < count; i++){
+                    let name = "proyect" + i.toString() ;
+                    console.log(name)
+                    horas = horas + document.getElementById(name).value;
+                }
                 html += '</td>';
                 html += '<td><int id="horas_hombre" name="horas_hombre" type="double"></td>';
-                html += '<td>Suma ajustada</td>';
+                html += '<td>';
+                html += horas;
+                html += '</td>';
                 html += '</tr>';
                 html += '</table>';
 

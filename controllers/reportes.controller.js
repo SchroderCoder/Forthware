@@ -102,3 +102,17 @@ exports.postHorasHombre = (request, response, next) => {
     response.status(200).json({horasHombre: request.body});
 };
 
+exports.getDeleteReporte = (request, response, next) => {
+    console.log(request.params.id);
+    Reporte.erase(request.params.id)
+    .then(([]) => {
+        console.log("Reporte eliminado con éxito");
+        response.redirect('/reportes/main');
+    })  
+    .catch(err => {
+        console.log(err);
+        response.render('error.ejs', {
+            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+        });
+    }); 
+};
