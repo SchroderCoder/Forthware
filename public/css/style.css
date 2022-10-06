@@ -237,12 +237,12 @@ right:60px;
     height: 160px;
     overflow: hidden;
     border-radius: 50%;
-    
-    
   }
   
-  .circular--landscape img {
+  .circular--landscape-img {
     width: auto;
     height: 100%;
-    margin-left: -40%  ;
+    margin-left:-50%;
   }
+
+  
