@@ -28,12 +28,12 @@ module.exports = class Reporte {
     }
 
     static getHoras_proyectos(fechainicio, fechafin) {
-        return db.execute('SELECT P.nombre, P.id_proyecto, SUM(T.duracion) AS Horas FROM tareas T, proyectos P WHERE T.id_proyecto = P.id_proyecto AND T.fecha_creacion BETWEEN ? AND ? GROUP BY P.nombre',
+        return db.execute('SELECT P.nombre, SUM(T.duracion) AS horas FROM horas_tarea T, proyectos P WHERE P.id_proyecto = T.id_proyecto AND P.is_deleted= 0   GROUP BY T.id_proyecto',
         [fechainicio, fechafin]);
     }
 
-    static borrar(un_id) {
-        return db.execute('DELETE FROM reportes WHERE id_reporte = ?', [un_id]);
+    static erase(un_id){
+        return db.execute('UPDATE reportes SET is_deleted = 1 WHERE id_reporte = ?', [un_id]);
     }
 
 

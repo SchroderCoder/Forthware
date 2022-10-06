@@ -30,7 +30,7 @@ module.exports = class Proyecto {
     }
 
     static fetchAll() {
-        return db.execute('SELECT * FROM proyectos');
+        return db.execute('SELECT * FROM proyectos P WHERE P.is_deleted= 0 ');
     }
 
     static fetchOne(un_id) {
