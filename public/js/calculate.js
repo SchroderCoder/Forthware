@@ -17,7 +17,7 @@
         let efectividadaj= 0;
         let horastotalescompleto = 0;
         let horastotalesmedio = 0;
-
+        let nombres2 = [];
         horastotalescompleto =(tiempocompleto.value *  horascompleto.value);
         horastotalesmedio = (tiempomedio.value * horasmedio.value);
         horastotales = horastotalescompleto + horastotalesmedio;
@@ -27,11 +27,15 @@
         for (i=0; i<iterar;i++){
              proyecto += parseFloat(document.getElementById("proyectos["+i+"]").value);
              horas.push(document.getElementById("proyectos["+i+"]").value);
-             nombres.push(document.getElementById("proyectos["+i+"]").name);
+             nombres.push(String(document.getElementById("proyectos["+i+"]").name));
         }   
 
+        for (let i of nombres ){
+            console.log(i);
+            nombres2.push(String(i));
+        }
+        
         console.log("xdddd");
-        console.log(nombres)
 
         proyecto = proyecto.toFixed(2);     
 
@@ -78,9 +82,8 @@
                 ' <input id="efectividadA" name="efectividadA" type="hidden" value = '+ efectividadaj+' ></td> ' +
                 '<td>'+efectividadaj+' </td> ' +
                 '</tr> ' +
-                ' <input id="horas" name="horas" type="hidden" value = '+ horas+' ></td> ' +
-                '   <input id="nombres" name="nombres" type="hidden" value = '+nombres+' ></td> ' +
-
+                ' <input id="horas" name="horas" type="hidden" value = '+ horas+' ></td> '+
+                ' <input id="nombres" name="nombres" type="hidden" value = '+nombres2+' ></td> ' +
             '</table> ' 
         '</div>' 
 
