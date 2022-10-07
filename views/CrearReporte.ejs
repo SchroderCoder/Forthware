@@ -61,7 +61,7 @@
                         html += p.horas.toFixed(2);
                         html += '</td>';
                         html += '<td><label for="proyectos_horas_adj2"></label>';
-                        html += '<input placeholder="500" id= "proyectos[' +count+']" name="proyectos[' +count+']" type="number" step = 0.1 value = "' + p.horas.toFixed(2)+ '" min = 0.1 max = 1000 required></td></td>';
+                        html += '<input placeholder="500" id= "proyectos[' +count+']" name=" '+p.nombre+' " type="number" step = 0.1 value = "' + p.horas.toFixed(2)+ '" min = 0.1 max = 1000 required></td></td>';
                         html += '</tr>'; 
                         count++;
                     }  
