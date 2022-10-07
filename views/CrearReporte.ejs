@@ -75,11 +75,6 @@
                 html += '<td>Total:</td>';
                 html += '<td><label for="horas_hombre"></label>';
                 html += horas.toFixed(2);
-                for(let i = 1; i < count; i++){
-                    let name = "proyect" + i.toString() ;
-                    console.log(name)
-                    horas = horas + document.getElementById(name).value;
-                }
                 html += '</td>';
                 html += '<td><int id="horas_hombre" name="horas_hombre" type="double"></td>';
                 html += '</tr>';
