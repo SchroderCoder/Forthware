@@ -4,108 +4,131 @@
 <% } else { %>
     <form action="/tareas/editarTarea" name = "crear" id= "crear" method="POST">
 <%}%>
-    <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
-    <fieldset>
-        <legend>Datos de la tarea</legend>
+
+<input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
+<fieldset>
+    <legend>Datos de la tarea</legend>
+    <div class="pl-4"> 
         <% if (tareas=="") { %>
-            <div class="multipleSelection">
-                <div class="selectBox" 
-                        onclick="showCheckboxes()">
-                            <select>
-                                <option>Colaboradores</option>
-                            </select>
-                    <div class="overSelect"></div>
+            <div class="py-3">
+                <div class="dropdown pb-2">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" onclick="showCheckboxes()">
+                        Colaboradores
+                    </button>
                 </div>
-                <div id="checkBoxes">
-                    <% for (let e of empleados) { %>
-                        <input type="checkbox" id="empleados" name="empleados" value="<%= e.id_empleado %>">
-                        <label for="empleados"><%= e.nombre %></label>  
-                    <% } %> 
+                <div id="checkBoxes" style="display:none ;" aria-expanded="false" >
+                    <div class="col-sm list-group-item" >
+                        <% for (let e of empleados) { %>
+                            <div class="badge badge-light m-1 px-3"  >
+                                <input type="checkbox" id="empleados" name="empleados" value="<%= e.id_empleado %>">
+                                <label for="empleados" class="pl-3" ><%= e.nombre %></label>  
+                            </div>
+                        <% } %> 
+                    </div>
                 </div>
             </div>
-            <% } else { %>
-
-                <div class="multipleSelection">
-                    <div class="selectBox"
-                        onclick="showCheckboxes()">
-                        <select>
-                            <option>Eliminar colaboradores</option>
-                        </select>
+        <% } else { %>
+            <div class="py-3">
+                <div class="dropdown pb-2">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" onclick="showCheckboxes()">
+                        Eliminar Colaboradores
+                    </button>
                     <div class="overSelect"></div>
-                    </div>
-                    <div id="checkBoxes">
+                </div>
+                <div id="checkBoxes" style="display:none ;" aria-expanded="false" >
+                    <div class="col-sm list-group-item" >
                         <% for (let t of registrados) { %>
-                            <input type="checkbox" id="registrados" name="registrados" value="<%= t.id_empleado %>">
-                            <label for="regsitrados"><%= t.nombre %></label>
-                        <% } %>
+                            <div class="badge badge-light m-1 px-3"  >
+                                <input type="checkbox" id="registrados" name="registrados" value="<%= t.id_empleado %>">
+                                <label for="regsitrados" class="pl-3"><%= t.nombre %></label>
+                            </div>
+                        <% } %>  
                     </div>
                 </div>
-
-                <div class="multipleSelection">
-                    <div class="selectBox"
-                        onclick="showCheckboxes()">
-                        <select>
-                            <option>Agregar colaboradores</option>
-                        </select>
+            </div>   
+            <div class="py-1">
+                <div class="dropdown pb-2">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" onclick="showCheckboxes2()">
+                        Agregar Colaboradores
+                    </button>
                     <div class="overSelect"></div>
-                    </div>
-                    <div id="checkBoxes">
+                </div>
+                <div id="checkBoxes2" style="display:none ;" aria-expanded="false" >
+                    <div class="col-sm list-group-item" >
                         <% for (let n of no_registrados) { %>
-                            <input type="checkbox" id="no_registrados" name="no_registrados" value="<%= n.id_empleado %>">
-                            <label for="no_registrados"><%= n.nombre %></label>
-                        <% } %>
+                            <div class="badge badge-light m-1 px-3"  >
+                                <input type="checkbox" id="no_registrados" name="no_registrados" value="<%= n.id_empleado %>">
+                                <label for="no_registrados"><%= n.nombre %></label>
+                            </div>
+                        <% } %>  
                     </div>
                 </div>
-
-            <%}%>
-            <div>
-                <select name="proyectos" id="proyectos" required>
-                    <option value="" disabled selected>Etiqueta</option>
-                    <% for (let p of proyectos) { %>
-                        <option value="<%= p.id_proyecto %>"><%= p.nombre %></option>
-                    <% } %>
-                </select>
-                <label for="proyectos">Etiquetas</label>
-            </div>
-            <input id="id" name="id" type="hidden" value="<%= tareas.id_tarea %>">
-            <label for="descripcion">Descripción: </label>
-            <input placeholder="Junta" id="descripcion" name="descripcion" maxlength="40" type="text" required>
-            <label for="duracion">Tiempo (hrs): </label>
-            <input placeholder=" 0.15" id="duracion" name="duracion" type="number" min = "0" max = "10"  step= "0.1" required>
-            <label for="fecha"> Fecha: </label>    
-            <input id="fecha" name="fecha" type="date" min="2000-01-01" required> 
+            </div>                
+        <%}%>
+        <div class="pb-3">
             
-    </fieldset>
+            <table class="table border-dark text-white">
+                <tbody>
+                    <tr>
+                        <th scope="row"><label class="pr-3" for="duracion">Etiqueta:  </label></th>
+                        <td>
+                            <select class="btn btn-secondary dropdown-toggle" type="button" name="proyectos" id="proyectos" required>
+                                <option value="" disabled selected>Etiquetas</option>
+                                <% for (let p of proyectos) { %>
+                                    <option value="<%= p.id_proyecto %>"><%= p.nombre %></option>
+                                <% } %>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="descripcion">Descripción: </label></th>
+                        <td><input placeholder="Junta" id="descripcion" name="descripcion" maxlength="40" type="text" required></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="fecha"> Fecha: </label></th>
+                        <td><input id="fecha" name="fecha" type="date" min="2000-01-01" required> </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="duracion">Tiempo (hrs): </label></th>
+                        <td>   <input placeholder=" 0.15" id="duracion" name="duracion" type="number" min = "0" max = "10"  step= "0.1" required></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</fieldset>
 
+<div class="pl-4"> 
     <% if (tareas=="") { %>
-        <input type="submit" class="btn btn-success" value="<%= titulo %>" onmouseover = "checkOne()">
+        <input type="submit" class="btn btn-success btn-lg ml-5 d-block mx-auto mt-3" value="<%= titulo %>" onmouseover = "checkOne()" >
     <% } else { %>  
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" >
-            Eliminar Tarea
-        </button>
-        <input type="submit" class="btn btn-success" value="Registrar Cambios">
-        
+        <div class="col-sm 5" style="display: -webkit-box;; box-sizing: content-box;">
+            <input type="submit" class="btn btn-success btn-lg  mx-auto my-2 " style="display: -webkit-box; box-sizing: content-box;" value="Registrar Cambios">
+            <button type="button" class="btn btn-danger   mx-auto my-2" style="display: -webkit-box; box-sizing: content-box;" data-toggle="modal" data-target="#exampleModal" >
+                Eliminar Tarea
+            </button>
+        </div>
+
+
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Eliminar Tarea</h5>
-                  <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Eliminar Tarea</h5>
+                        <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p> ¿Estás seguro de que quieres eliminar esta tarea?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <a href="/tareas/delete/<%= tareas.id_tarea %>" class="btn btn-danger" id="eliminar">Eliminar</a>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <p> ¿Estás seguro de que quieres eliminar esta tarea?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                  <a href="/tareas/delete/<%= tareas.id_tarea %>" class="btn btn-danger" id="eliminar">Eliminar</a>
-                </div>
-
-              </div>
             </div>
-          </div>
+        </div>
     <% } %>
-        
-    <br>
-    <script src="/js/checkbox.js"></script>
-    <script src="/js/checkedone.js"> </script>
+</div>    
+<script src="/js/checkbox.js"></script>
+<script src="/js/checkedone.js"> </script>
 </form>
