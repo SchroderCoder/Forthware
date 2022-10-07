@@ -20,7 +20,7 @@ module.exports = class Reporte {
     }
 
     static fetchAll() {
-        return db.execute('SELECT * FROM `reportes` ORDER BY id_reporte DESC LIMIT 3');
+        return db.execute('SELECT * FROM reportes R WHERE R.is_deleted = 0 ORDER BY id_reporte DESC LIMIT 3');
     }
 
     static fetchOne(un_id) {
@@ -28,7 +28,7 @@ module.exports = class Reporte {
     }
 
     static getHoras_proyectos(fechainicio, fechafin) {
-        return db.execute('SELECT P.nombre, SUM(T.duracion) AS horas FROM horas_tarea T, proyectos P WHERE P.id_proyecto = T.id_proyecto AND P.is_deleted= 0   GROUP BY T.id_proyecto',
+        return db.execute('SELECT P.nombre, SUM(H.duracion) AS horas FROM horas_tarea H, tareas T, proyectos P WHERE P.id_proyecto = H.id_proyecto AND T.id_tarea = H.id_tarea AND T.fecha_creacion BETWEEN ? AND ? AND P.is_deleted= 0 GROUP BY H.id_proyecto',
         [fechainicio, fechafin]);
     }
 

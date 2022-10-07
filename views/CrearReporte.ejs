@@ -13,6 +13,7 @@
 
 
     <script>
+        let iterar = -1;
         const accion_asincrona = () => {
 
             const fecha_fin = document.getElementById('fecha_fin').value;
@@ -45,11 +46,9 @@
                 html += '<th>Ajuste de horas hombre</th>';
                 // html += '<th>Horas ajustadas</th>';
                 html += '</tr>';
-                var count =1;
-                let horas =0;
-
+                    let horas =0;
                 if (data.proyectos.length > 0) {
-                    let count= 1;
+                    let count= 0;
                     for (p of data.proyectos) {
                         horas = p.horas + horas;
                         html += '<tr>';
@@ -62,9 +61,12 @@
                         html += p.horas.toFixed(2);
                         html += '</td>';
                         html += '<td><label for="proyectos_horas_adj2"></label>';
-                        html += '<input placeholder="500" id= "proyectos' +count+'" name="proyectos' +count+'" type="number" required></td></td>';
+                        html += '<input placeholder="500" id= "proyectos[' +count+']" name=" '+p.nombre+' " type="number" step = 0.1 value = "' + p.horas.toFixed(2)+ '" min = 0.1 max = 1000 required></td></td>';
                         html += '</tr>'; 
+                        count++;
                     }  
+
+                    iterar = count;
 
                 } else {
                     html += '<h2>No hay proyectos registrados</h2>';                
