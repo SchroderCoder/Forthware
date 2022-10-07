@@ -17,35 +17,39 @@
     <table>
         <tr>
             <td><label for="completo">Tiempo completo: </label></td>
-            <td>5</td>
-            <td><input id="completo" name="completo" min="0" max="100" type="int" required></td>
+            <td><input id="completo" name="completo" min="0" max="100" type="int"  value = 12 required></td>
         </tr>
         <tr>
             <td><label for="medio">Tiempo medio: </label></td>
-            <td>6</td>
-            <td><input id="medio" name="medio" min="0" max="100" type="int" required></td>
+            <td><input id="medio" name="medio" min="0" max="100" type="int" value = 6 required></td>
         </tr>
         <tr>
-            <td><label for="completo">Horas esperadas tiempo completo: </label></td>
-            <td>5</td>
-            <td><input id="horascompleto" name="horascompleto" min="0" max="100" type="int" required></td>
+            <td><label for="completo">Horas esperadas semanales tiempo completo: </label></td>
+            <td><input id="horascompleto" name="horascompleto" min="0" max="100" type="int" value = 35 required></td>
         </tr>
         <tr>
-            <td><label for="completo">Horas esperadas tiempo medio: </label></td>
-            <td>5</td>
-            <td><input id="horasmedio" name="horasmedio" min="0" max="100" type="int" required></td>
-        </tr>
-        <tr>
-            <td><label for="horas_ausencia_">horas de ausencia: </label></td>
-            <td>35</td>
-            <td><input id="horas_ausencia_" name="horas_ausencia_" min="0" max="100" type="int" required></td>
+            <td><label for="completo">Horas esperadas semanales tiempo medio: </label></td>
+            <td><input id="horasmedio" name="horasmedio" min="0" max="100" type="int"  value= 18 required></td>
         </tr>
         <tr>
             <td><label for="efectividad">Efectividad: </label></td>
-            <td>85</td>
-            <td><input placeholder="85% " id="efectividad" name="efectividad" min="50" max="100" type="int" required></td>
+            <td><input placeholder="85% " id="efectividad" name="efectividad" min="50" max="100" value = 85 type="int" required></td>
+            <td>%</td>
         </tr>
     </table>
+
+    <h5>Personal en ausencia</h5>
+    <table>
+        <tr>
+            <td><label for="completo">Tiempo completo: </label></td>
+            <td><input id="ausentescompleto" name="ausentescompleto" min="0" max="100" type="int" value = 1 required></td>
+        </tr>
+        <tr>
+            <td><label for="medio">Tiempo medio: </label></td>
+            <td><input id="ausentesmedio" name="ausentesmedio" min="0" max="100" type="int" value = 2  required></td>
+        </tr>
+    </table>
+
     <br><br>
     <div id="lista_proyectos">
         <table>

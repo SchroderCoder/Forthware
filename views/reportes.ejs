@@ -12,25 +12,20 @@
                 <% if (reportes.length > 0) { %>
                     <div class="p-1">
                         <div class="row">
+                            <% let id = 0; %>
                         <% for (let  r of reportes) { %>
+                            <% id= r.id_reporte %>
                                 <div class="col-sm-4 pt-2 p-4 over">
                                     <div class="card " style="width: auto; height: 28rem ;">
                                         <p class="card-title bg-success text-dark h-25 text-center align-middle py-auto  list-group-item"><a class="text-white" ><%= new Date(r.fecha_inicio).toLocaleDateString("ES-mx")  %> 
-                                        - <%= new Date(r.fecha_fin).toLocaleDateString("ES-mx")  %></a><!-- <a href="/reportes/download" class="btn btn-primary btn-sm ml-3" button type="button">Descargar</a> --></p>
-                                        <!-- <img src="/media/templatereportes.png" class="card-img-top" style="position:relative ;" alt="reporte"> -->
-
+                                        - <%= new Date(r.fecha_fin).toLocaleDateString("ES-mx")  %></a>
                                         <div class="parent">
                                             <img src="/media/templatereportes.png" class=" p-1 w-75 image1 card-img-top mx-auto d-block" style="position:relative ;  " alt="reporte" />
-                                            <button id="<%= r.id_reporte %>" type="button" class="image2 btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal" value="<%= r.id_reporte %>" >
+                                            <button id="<%= r.id_reporte %>" type="button" class="image2 btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal" onclick = "eliminareporte(id)" >
                                                 Eliminar Reporte
                                             </button>
                                             <a href="/reportes/download" class="btn-sm btn-primary image3" type="button" >Descargar</a>
                                           </div>
-
-                                        <!-- <button id="<%= r.id_reporte %>" type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" value="<%= r.id_reporte %>" >
-                                            Eliminar Reporte
-                                        </button> -->
-
                                     </div>
                                 </div>
                         <% } %>
@@ -44,22 +39,11 @@
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Eliminar Proyecto </h5>
-          <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <p> ¿Estás seguro de que quieres eliminar esta proyecto?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<div id="modal">
+    
+</div>
+<script src="/js/eliminarreporte.js"> </script>
 
 <a href="/reportes/crearReporte" class="btn btn-success" button type="button">Crear reporte</button>
+
 <%- include('includes/foot.ejs') %>  

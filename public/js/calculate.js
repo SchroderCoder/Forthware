@@ -5,17 +5,25 @@
         const efectividad= document.getElementById("efectividad");
         const horascompleto= document.getElementById("horascompleto");
         const horasmedio= document.getElementById("horasmedio");
+        const ausentescompleto= document.getElementById("ausentescompleto");
+        const ausentesmedio= document.getElementById("ausentesmedio");
 
         let proyectos=[] 
-        proyectos= document.getElementById("proyectos");
+        let proyecto =0 ;
         
-        // for( i=1; i<)
-        // proyectos= document.getElementById("proyectos");
+        let horastotales =0;
+        let horasausencia =0; 
+        let horasesperadas =0;
 
-        console.log(horascompleto.value);
-        console.log(horasmedio.value);
-        console.log(tiempocompleto.value);
-        console.log(tiempomedio.value);
-        console.log(efectividad.value);
-        console.log(proyectos.length);
+        horastotales = (tiempocompleto.value *  horascompleto.value) + (tiempomedio.value * horasmedio.value);
+        horasausencia = (ausentescompleto.value *  horascompleto.value) + (ausentesmedio.value * horasmedio.value);
+        horasesperadas = horastotales - horasausencia;
+
+         for (i=0; i<iterar;i++){
+             proyecto = proyecto + document.getElementById("proyectos["+i+"]").value;
+             console.log(proyecto);
+            }
+
+        
     }
+
