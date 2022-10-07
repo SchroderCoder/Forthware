@@ -4,6 +4,8 @@ const Proyecto = require('../models/proyecto.model');
 const Tarea = require('../models/tarea.model');
 const Usuario = require('../models/user.model');
 const Realiza = require('../models/realiza.model');
+const PDF = require('pdfkit-table');
+const fs = require('fs');
 
 exports.getTareas = (request, response, next) => {
     Tarea.fetchAll()
@@ -85,6 +87,163 @@ exports.postCrearTareas = (request, response, next) => {
                         });
                     });
                 }
+
+                let doc = new PDF({margin: 30, size: 'A4'});
+
+                doc.pipe(fs.createWriteStream(__dirname + '/../public/pdf/reporte' + request.body.descripcion + '.pdf'));
+                
+                doc.image('./public/media/natgas-logo-simple.png', {
+                    scale: 0.1,
+                    align: 'left'
+                });
+                
+                doc.text('Nat Dev' , {
+                    align: 'right'
+                });
+
+                doc.text('REPORTE DE EFECTIVIDAD' , {
+                    align: 'center'
+                });
+
+                doc.text('FECHA1 - FECHA2' , {
+                    align: 'center'
+                });
+                
+                doc.moveDown();
+
+                var parrafo = 'Colaboradores:';
+
+                var parrafo2 = 'Tiempo Completo: ' + 11; 
+                
+                var parrafo3 = 'Tiempo Medio: ' + 9; 
+
+                doc.text(parrafo, {
+                    columns: 1,
+                    align: 'justify'
+                });
+
+                doc.moveDown();
+
+                doc.text(parrafo2, {
+                    columns: 1,
+                    align: 'justify'
+                });
+
+                doc.moveDown();
+
+                doc.text(parrafo3, {
+                    columns: 1,
+                    align: 'justify'
+                });
+
+                doc.moveDown();
+
+                ;(async function(){
+                    // table
+                    const table = {
+                      headers: [
+                        { label: "Proyectos", property: 'proyects', width: 60, renderer: null },
+                        { label: "Horas hombre", property: 'hours', width: 150, renderer: null,
+                          renderer: (value, indexColumn, indexRow, row, rectRow, rectCell) => { return value} 
+                        },
+                      ],
+                      // complex data
+                      datas: [
+                        { 
+                          proyects: 'bold:Altair', 
+                          hours: '80', 
+                        },
+                        { 
+                          proyects: 'bold:Oasis', 
+                          hours: '55', 
+                        },
+                        { 
+                            proyects: 'bold:Argos', 
+                            hours: '77', 
+                        },
+                        { 
+                            proyects: 'bold:Poseidon', 
+                            hours: '39', 
+                        },
+                        // {...},
+                      ],
+                    };
+                    doc.table(table, {
+                      prepareHeader: () => doc.font("Helvetica-Bold").fontSize(10),
+                      prepareRow: (row, indexColumn, indexRow, rectRow, rectCell) => {
+                        doc.font("Helvetica").fontSize(10);
+                        indexColumn === 0 && doc.addBackground(rectRow, 'green', 0.15);
+                      },
+                    });
+
+                })();
+
+                doc.moveDown();
+
+                ;(async function(){
+                    // table
+                    const table = {
+                      headers: [
+                        { label: "Resumen", property: 'Resumen', width: 60, renderer: null },
+                        { label: "Horas", property: 'Horas', width: 150, renderer: null,
+                          renderer: (value, indexColumn, indexRow, row, rectRow, rectCell) => { return value} 
+                        },
+                      ],
+                      // complex data
+                      datas: [
+                        { 
+                          Resumen: 'Horas totales de Tiempo Completo', 
+                          Horas: '385', 
+                        },
+                        { 
+                          Resumen: 'Horas totales de Tiempo Medio', 
+                          Horas: '117', 
+                        },
+                        { 
+                            Resumen: 'Horas totales', 
+                            Horas: '502', 
+                        },
+                        { 
+                            Resumen: 'Horas de ausencia', 
+                            Horas: '50', 
+                        },
+                        { 
+                            Resumen: 'Horas hábiles', 
+                            Horas: '452', 
+                        },
+                        { 
+                            Resumen: 'Porcentaje de efectividad', 
+                            Horas: '0.76', 
+                        },
+                        // {...},
+                      ],
+                    };
+                    doc.table(table, {
+                      prepareHeader: () => doc.font("Helvetica-Bold").fontSize(10),
+                      prepareRow: (row, indexColumn, indexRow, rectRow, rectCell) => {
+                        doc.font("Helvetica").fontSize(10);
+                        indexColumn === 0 && doc.addBackground(rectRow, 'green', 0.15);
+                      },
+                    });
+
+                })();
+
+                doc.moveDown();
+                doc.moveDown();
+
+                doc.text('Porcentaje de efectividad ajustada: ', {
+                    align: 'center'
+                })
+                .fillColor('green')
+                .text(92 + '%', {
+                    align: 'center'
+                })
+                ;
+
+                doc.end();
+                
+
+        
                 response.status(303).redirect('/tareas/main');
                 console.log("tarea creada con exito");
             })

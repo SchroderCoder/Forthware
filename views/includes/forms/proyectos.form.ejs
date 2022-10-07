@@ -5,7 +5,7 @@
 <% if (proyectos=="") { %>
     <form action="crearProyecto" method="POST" enctype="multipart/form-data">
 <% } else { %> 
-    <form action="/proyectos/editarProyecto" method="POST">
+    <form action="/proyectos/editarProyecto" method="POST" enctype="multipart/form-data">
 <%}%>
     <input type="hidden" id = "_csrf" name="_csrf" value="<%= csrfToken %>" >
 
@@ -97,7 +97,7 @@
                 <br>
             <!-- </div> -->
             <label for="imagen"> Imagen: </label>       
-            <input type="file" id="archivo" name="archivo"> 
+            <input type="file" id="archivo" name="archivo" accept="image/png, image/gif, image/jpeg"> 
     </fieldset>
     <% if (proyectos=="") { %>
         <input type="submit" class="btn btn-success" value="<%= titulo %>" onmouseover = "checkOne()">
