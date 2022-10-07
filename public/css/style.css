@@ -90,6 +90,12 @@ h2{
     justify-content: center;
     text-align: center;
 }
+.centered1 {
+
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
 
 .card{
     
@@ -128,6 +134,14 @@ h2{
     width: 100%;
     color: #FFFF;
     text-align: inherit;
+}
+
+.list-group-main {
+    position: relative;
+    display: block;
+    color: #FFFF;
+    text-decoration: none;
+    background-color:#25282B;
 }
 
 
@@ -205,3 +219,28 @@ bottom: 20px;
 right:60px;
 /* border: 1px rgb(0, 0, 0) solid; */
 }
+.circle-image{
+
+    width: 60%;
+    height: 200px;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+.circular--landscape {
+    display: inline-block;
+    position: relative;
+    width: 160px;
+    height: 160px;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+  
+  .circular--landscape-img {
+    width: auto;
+    height: 100%;
+    margin-left:-50%;
+  }

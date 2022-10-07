@@ -178,9 +178,10 @@ exports.getEditarTareas = (request, response, next) => {
 }
 
 exports.postEditarTareas = (request, response, next) => {
-
+    console.log(request.body)   
     Tarea.fetchOne(request.body.id)
     .then(([rows, fielData]) => {
+        console.log(rows)
         rows[0].fecha_creacion= request.body.fecha
         rows[0].descripcion= request.body.descripcion
         rows[0].id_proyecto= request.body.proyectos

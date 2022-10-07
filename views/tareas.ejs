@@ -53,14 +53,16 @@
                 </div>
             </div>
         </div>
-    </div>
-    <% } else { %>
-        <h2>No hay tareas registradas</h2>
-    <% } %>  
-<br>
+<% } else { %>
+    <h2>No hay proyectos registrados</h2>
+<% } %>  
 </div>
-<div>
 
-            <a href="/tareas/crearTarea" class="btn btn-success" button type="button">Crear tarea</a>
+<div>
+    <a href="/tareas/crearTarea">
+        <button type="button" class="btn btn-primary mx-auto d-block mt-2" >
+            Crear
+        </button>
+    </a>
 </div>
 <%- include('includes/foot.ejs') %>
