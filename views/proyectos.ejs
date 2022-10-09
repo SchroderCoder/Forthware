@@ -64,8 +64,18 @@
 
                                                 </div>
                                                 <div class="row pt-2"  >
-                                                    <p class="card-text col-sm pt-1 over mx-auto align-middle py-auto  list-group-item">Horas</p>
-                                                    <p style="background-color: #1a191b !important;" class="card-text col-sm  over mx-auto align-middle py-auto  list-group-item">40</p>
+                                                    <p class="card-text col-sm pt-1 over mx-auto align-middle py-auto  list-group-item">Horas: </p>
+                                                    <% let check %>
+                                                    <% for (let h of horas) { %>
+                                                        <% if (p.nombre == h.nombre && h.es_etiqueta == 0) { %>
+                                                            <p style="background-color: #1a191b !important;" class="card-text col-sm  over mx-auto align-middle py-auto  list-group-item"><%=h.horas.toFixed(2)%></p>
+                                                            <% check = true; %>
+                                                        <% }%>
+                                                    <% } %>
+                                                    <% if (check) { %>
+                                                    <% } else { %>
+                                                        <p style="background-color: #1a191b !important;" class="card-text col-sm  over mx-auto align-middle py-auto  list-group-item">0</p>
+                                                    <% } %> 
                                                 </div>
                                                 <p class="card-text"></p>
                                                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
@@ -94,9 +104,20 @@
                     <% if (etiquetas.length > 0) { %>
                         <% for (let  e of etiquetas) { %>
                           <a href="/proyectos/editarEtiqueta/<%= e.id_proyecto %>"> <li class="list-group-item border-bottom border-dark" style="width:50rem;"> <a class="p-3" href="/proyectos/editarEtiqueta/<%= e.id_proyecto %>" ><%= e.nombre %></a></li></a> 
+                          <% let check %>
+                                <% for (let h of horas) { %>
+                                    <% if (e.nombre == h.nombre && h.es_etiqueta == 1) { %>
+                                        <p style="background-color: #1a191b !important;" class="card-text col-sm  over mx-auto align-middle py-auto  list-group-item"><%=h.horas.toFixed(2)%></p>
+                                        <% check = true; %>
+                                    <% }%>
+                                <% } %>
+                                <% if (check) { %>
+                                <% } else { %>
+                                    <p style="background-color: #1a191b !important;" class="card-text col-sm  over mx-auto align-middle py-auto  list-group-item">0</p>
+                                <% } %> 
                         <% } %>
                     <% } else { %>
-                        <h2>No hay proyectos registrados</h2>
+                        <h2>No hay Etiquetas registrados</h2>
                     <% } %> 
                 </ul>
             </div>

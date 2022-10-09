@@ -39,10 +39,9 @@
 
         proyecto = proyecto.toFixed(2);     
 
-        proporcion = proyecto / horasesperadas;
-        console.log(proporcion);
+        proporcion = ((proyecto / horasesperadas)*100).toFixed(2);
 
-        efectividadaj= proporcion/(efectividad/100);
+        efectividadaj= (proporcion/(efectividad/100)).toFixed(2);
 
         document.getElementById("preview").innerHTML = 
         ' <div id="preview">' +
@@ -77,11 +76,13 @@
                 '<td><label for="completo"> porcentaje efectividad: </label></td> ' +
                 ' <input id="efectividad" name="efectividad" type="hidden" value = '+ proporcion+' ></td> '+
                 '<td>'+proporcion+' </td> ' +
+                '<td> % </td> ' +
                 '</tr> ' +
                 '<tr>  ' +
                 '<td><label for="completo"> efectividad ajustada: </label></td> ' +
                 ' <input id="efectividadA" name="efectividadA" type="hidden" value = '+ efectividadaj+' ></td> ' +
                 '<td>'+efectividadaj+' </td> ' +
+                '<td> % </td> ' +
                 '</tr> ' +
                 ' <input id="horas" name="horas" type="hidden" value = '+ horas+' ></td> '+
                 ' <input id="suma" name="suma" type="hidden" value = '+ proyecto+' ></td> ' +
