@@ -1,15 +1,25 @@
+<%- include('includes/head_form.ejs') %>
 <%- include('includes/head.ejs') %>
 <%- include('includes/nav.ejs') %>      
 <%- include('includes/sidebar.ejs') %>   
 
 <h1>Generar reporte</h1>
     
-    <div class="p-3">
-    <h3>Reporte semanal</h3>
-    <%- include('includes/forms/reportes.form.ejs') %>  
+<div class="pl-4">
+    <body>
+        <div class="wrapper wrapper--w790">
+            <div class="card card-5">
+                <div class="card-heading bg-success">
+                    <h2 class="title text-center">Generar Reporte</h2>
+                </div>
+                <div class="card-body">
+                    <%- include('includes/forms/reportes.form.ejs') %>  
+                </div>
 
-    <a href="/reportes/main" class="btn btn-danger" button type="button">Cancelar</a> 
-    </div>
+                 <!-- <a href="/reportes/main" class="btn btn-danger" button type="button">Cancelar</a>  -->
+            </div>
+        </div>
+</div>
 
 
     <script>
@@ -226,3 +236,6 @@
         // }
 
     </script>
+
+<%- include('includes/foot.ejs') %>
+<%- include('includes/foot_form.ejs') %> 

@@ -9,21 +9,23 @@
 <input id="id" name="id" type="hidden" value="<%= tareas.id_tarea %>">
 
 <fieldset>
-    <legend>Datos de la tarea</legend>
+    
+    <legend class="text-white">Datos de la tarea</legend>
     <div class="pl-4"> 
         <% if (tareas=="") { %>
             <div class="py-3">
                 <div class="dropdown pb-2">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" onclick="showCheckboxes()">
+                    <button class="btn btn--radius-2 btn-success dropdown-toggle" type="button" onclick="showCheckboxes()">
                         Colaboradores
                     </button>
                 </div>
                 <div id="checkBoxes" style="display:none ;" aria-expanded="false" >
+                    <!-- rs-select2 js-select-simple select--no-search -->
                     <div class="col-sm list-group-item" >
                         <% for (let e of empleados) { %>
                             <div class="badge badge-light m-1 px-3"  >
                                 <input type="checkbox" id="empleados" name="empleados" value="<%= e.id_empleado %>">
-                                <label for="empleados" class="pl-3" ><%= e.nombre %></label>  
+                                <label for="empleados" class="pl-3"><%= e.nombre %></label>
                             </div>
                         <% } %> 
                     </div>
@@ -35,14 +37,13 @@
                     <button class="btn btn-secondary dropdown-toggle" type="button" onclick="showCheckboxes()">
                         Eliminar Colaboradores
                     </button>
-                    <div class="overSelect"></div>
                 </div>
                 <div id="checkBoxes" style="display:none ;" aria-expanded="false" >
                     <div class="col-sm list-group-item" >
                         <% for (let t of registrados) { %>
                             <div class="badge badge-light m-1 px-3"  >
                                 <input type="checkbox" id="registrados" name="registrados" value="<%= t.id_empleado %>">
-                                <label for="regsitrados" class="pl-3"><%= t.nombre %></label>
+                                <label for="registrados" class="pl-3"><%= t.nombre %></label>
                             </div>
                         <% } %>  
                     </div>
@@ -67,32 +68,36 @@
                 </div>
             </div>                
         <%}%>
+        <br>
         <div class="pb-3">
-            
-            <table class="table border-dark text-white">
+
+            <table class="table border-dark text-white " style="border-bottom-width: 0px !important;">
                 <tbody>
                     <tr>
-                        <th scope="row"><label class="pr-3" for="duracion">Etiqueta:  </label></th>
-                        <td>
-                            <select class="btn btn-secondary dropdown-toggle" type="button" name="proyectos" id="proyectos" required>
-                                <option value="" disabled selected>Etiquetas</option>
-                                <% for (let p of proyectos) { %>
-                                    <option value="<%= p.id_proyecto %>"><%= p.nombre %></option>
-                                <% } %>
-                            </select>
-                        </td>
+                        <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important;" scope="row"><label class="pr-3" for="duracion">Etiqueta:  </label></th>
+                                    <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
+                                        <select class="btn btn-secondary dropdown-toggle" type="button" name="proyectos" id="proyectos" required>
+                                            
+                                            <option value="" disabled selected>Etiquetas</option>
+                                            <% for (let p of proyectos) { %>
+                                                <div class="text-black">
+                                                <option value="<%= p.id_proyecto %>"><%= p.nombre %></option>
+                                                </div>
+                                            <% } %>
+                                        </select>
+                                    </td>
+                    </tr>
+                    <tr >
+                        <th scope="row" style="border-bottom-width: 0px !important; border-top-width: 0cm !important;"><label for="descripcion">Descripción: </label></th>
+                        <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;"><input placeholder="Junta" id="descripcion" name="descripcion" maxlength="40" type="text" required></td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="descripcion">Descripción: </label></th>
-                        <td><input placeholder="Junta" id="descripcion" name="descripcion" maxlength="40" type="text" required></td>
+                        <th scope="row" style="border-bottom-width: 0px !important; border-top-width: 0cm !important;"><label for="fecha"> Fecha: </label></th>
+                        <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;"><input id="fecha" name="fecha" type="date" min="2000-01-01" required> </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="fecha"> Fecha: </label></th>
-                        <td><input id="fecha" name="fecha" type="date" min="2000-01-01" required> </td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><label for="duracion">Tiempo (hrs): </label></th>
-                        <td>   <input placeholder=" 0.15" id="duracion" name="duracion" type="number" min = "0" max = "10"  step= "0.1" required></td>
+                        <th scope="row" style="border-bottom-width: 0px !important; border-top-width: 0cm !important;"><label for="duracion">Tiempo (hrs): </label></th>
+                        <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">   <input placeholder=" 0.15" id="duracion" name="duracion" type="number" min = "0" max = "10"  step= "0.1" required></td>
                     </tr>
                 </tbody>
             </table>
@@ -102,7 +107,7 @@
 
 <div class="pl-4"> 
     <% if (tareas=="") { %>
-        <input type="submit" class="btn btn-success btn-lg ml-5 d-block mx-auto mt-3" value="<%= titulo %>" onmouseover = "checkOne()" >
+        <input type="submit" class="btn btn-success btn-lg ml-5 d-block mx-auto mt-3" value="<%= titulo %>" onclick = "checkOne()" >
     <% } else { %>  
         <div class="col-sm 5" style="display: -webkit-box;; box-sizing: content-box;">
             <input type="submit" class="btn btn-success btn-lg  mx-auto my-2 " style="display: -webkit-box; box-sizing: content-box;" value="Registrar Cambios">
@@ -116,10 +121,10 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Eliminar Tarea</h5>
+                        <h5 class="modal-title text-white" id="exampleModalLabel">Eliminar Tarea</h5>
                         <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body text-white">
                         <p> ¿Estás seguro de que quieres eliminar esta tarea?</p>
                     </div>
                     <div class="modal-footer">
