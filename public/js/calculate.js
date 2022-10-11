@@ -1,8 +1,5 @@
 
     const calculate = () => {   
-
-        const fecha_fin = document.getElementById('fecha_fin').value;
-        const fecha_inicio = document.getElementById('fecha_inicio').value;
         const tiempocompleto= document.getElementById("completo");
         const tiempomedio= document.getElementById("medio");
         const efectividad= document.getElementById("efectividad1").value;
@@ -32,10 +29,6 @@
         for (i=0; i<iterar;i++){
              
             proyecto += parseFloat(document.getElementById("proyectos["+i+"]").value);
-            horas.push(document.getElementById("proyectos["+i+"]").value);
-            nombres.push(String(document.getElementById("proyectos["+i+"]").name));
-            
-            asignaciones.push({nombre: document.getElementById("proyectos["+i+"]").name, horas: document.getElementById("proyectos["+i+"]").value});
        }   
 
        proyecto = proyecto.toFixed(2);     

@@ -1,5 +1,5 @@
 
- const calculate = () => {   
+ const postreportes = () => {   
 
     const fecha_fin = document.getElementById('fecha_fin').value;
     const fecha_inicio = document.getElementById('fecha_inicio').value;
@@ -8,25 +8,17 @@
     const horas_totales = document.getElementById('horastotales').value;
     const horas_ausencia = document.getElementById('horasausencia').value;
     const horas_esperadas = document.getElementById('horasesperadas').value;
-    const efectividad = document.getElementById('efectividad').value;
-    const tiempo_completo= document.getElementById("completo");
-    const tiempo_medio= document.getElementById("medio");
+    const tiempo_completo= document.getElementById("completo").value;
+    const tiempo_medio= document.getElementById("medio").value;
+    const proyecto = document.getElementById("suma").value;
+    const efectividad = document.getElementById("efectividad").value;
+    const efectividadaj =  document.getElementById("efectividadA").value;
 
     let asignaciones = [];
-    let proyecto =0 ;
-    let efectividadaj= 0;
 
     for (i=0; i<iterar;i++){
-             
-        proyecto += parseFloat(document.getElementById("proyectos["+i+"]").value);
         asignaciones.push({nombre: document.getElementById("proyectos["+i+"]").name, horas: document.getElementById("proyectos["+i+"]").value});
    }   
-
-   proyecto = proyecto.toFixed(2);     
-
-   proporcion = ((proyecto / horas_esperadas)*100).toFixed(2);
-
-   efectividadaj= (proporcion/(efectividad/100)).toFixed(2);
 
     data = new Object ();
 
@@ -37,12 +29,12 @@
     data.horastotales = horas_totales;
     data.horasausencia = horas_ausencia;
     data.horasesperadas = horas_esperadas;
-    data.proporcion = proporcion;
+    data.efectividad = efectividad;
     data.efectividadaj = efectividadaj;
     data.asignaciones = asignaciones;
-    data.efectividad = efectividad;
     data.tiempocompleto = tiempo_completo;
     data.tiempomedio = tiempo_medio;
+    data.total = proyecto;
 
     const csrf = document.getElementById('_csrf').value;
 
