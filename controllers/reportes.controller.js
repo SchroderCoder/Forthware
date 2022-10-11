@@ -37,7 +37,8 @@ exports.getCrearReporte = (request, response, next) => {
 };
 
 exports.postCrearReporte = (request, response, next) => {
-
+    console.log(request.body);
+    
     const reporte = new Reporte(request.body.fecha_inicio, request.body.fecha_fin, request.body.efectividad, request.body.horastotales, request.body.suma, request.body.horasausencia, request.body.efectividad, 2, '/pdf/reporte' + request.body.fecha_inicio + "-" + request.body.fecha_fin + '.pdf');
     reporte.save()
         .then(() => {

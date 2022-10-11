@@ -3,18 +3,16 @@ const router = express.Router();
 const { requiresAuth } = require('express-openid-connect');
 const proyectoController = require('../controllers/proyectos.controller');
 const jwtAuthz= require ("express-jwt-authz");
+const { auth, requiredScopes } = require('express-oauth2-jwt-bearer');
+const jwt = require('express-jwt');
+const jwks = require('jwks-rsa');
 
-const checkEtiquetas = jwtAuthz(["crear:etiquetas"],{
-    costumeScopeKey: "permissions"
-    }       
-);
+const checkJwt = auth({
+    audience: 'https://permissions/api',
+    issuerBaseURL: `http://localhost:3000`,
+  });
 
-const checkProyectos = jwtAuthz(["crear:proyectos"],{
-    costumeScopeKey: "permissions"
-    }           
-);
-
-
+const checkScopes = requiredScopes('crear:proyectos');
 
 router.get('/main',requiresAuth(), proyectoController.getProyectos);
 
@@ -24,7 +22,7 @@ router.post('/crearProyecto',requiresAuth(), proyectoController.postCrearProyect
 
 router.get('/crearEtiqueta',requiresAuth(), proyectoController.getCrearEtiqueta);
 
-router.post('/crearEtiqueta', requiresAuth(),proyectoController.postCrearEtiqueta);
+router.post('/crearEtiqueta', requiresAuth(),  proyectoController.postCrearEtiqueta);
 
 router.get('/editarProyecto/:id',requiresAuth(), proyectoController.getEditarProyecto);
 

@@ -9,7 +9,6 @@ const fs = require('fs');
 
 exports.getTareas = (request, response, next) => {
     Tarea.fetchAll()
-
     .then(([rows, fielData]) => {
         response.render(path.join('..',"views", "tareas.ejs"), {
             tareas: rows,

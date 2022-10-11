@@ -1,5 +1,8 @@
 
-    function calculate() {
+    const calculate = () => {   
+
+        const fecha_fin = document.getElementById('fecha_fin').value;
+        const fecha_inicio = document.getElementById('fecha_inicio').value;
         const tiempocompleto= document.getElementById("completo");
         const tiempomedio= document.getElementById("medio");
         const efectividad= document.getElementById("efectividad1").value;
@@ -18,30 +21,28 @@
         let horastotalescompleto = 0;
         let horastotalesmedio = 0;
         let nombres2 = [];
+        let asignaciones = [];
+
         horastotalescompleto =(tiempocompleto.value *  horascompleto.value);
         horastotalesmedio = (tiempomedio.value * horasmedio.value);
         horastotales = horastotalescompleto + horastotalesmedio;
         horasausencia = (ausentescompleto.value *  horascompleto.value) + (ausentesmedio.value * horasmedio.value);
         horasesperadas = horastotales - horasausencia;
-
-        for (i=0; i<iterar;i++){
-             proyecto += parseFloat(document.getElementById("proyectos["+i+"]").value);
-             horas.push(document.getElementById("proyectos["+i+"]").value);
-             nombres.push(String(document.getElementById("proyectos["+i+"]").name));
-        }   
-
-        for (let i of nombres ){
-            console.log(i);
-            nombres2.push(String(i));
-        }
         
-        console.log("xdddd");
+        for (i=0; i<iterar;i++){
+             
+            proyecto += parseFloat(document.getElementById("proyectos["+i+"]").value);
+            horas.push(document.getElementById("proyectos["+i+"]").value);
+            nombres.push(String(document.getElementById("proyectos["+i+"]").name));
+            
+            asignaciones.push({nombre: document.getElementById("proyectos["+i+"]").name, horas: document.getElementById("proyectos["+i+"]").value});
+       }   
 
-        proyecto = proyecto.toFixed(2);     
+       proyecto = proyecto.toFixed(2);     
 
-        proporcion = ((proyecto / horasesperadas)*100).toFixed(2);
+       proporcion = ((proyecto / horasesperadas)*100).toFixed(2);
 
-        efectividadaj= (proporcion/(efectividad/100)).toFixed(2);
+       efectividadaj= (proporcion/(efectividad/100)).toFixed(2);
 
         document.getElementById("preview").innerHTML = 
         ' <div id="preview">' +
@@ -84,6 +85,7 @@
                 '<td>'+efectividadaj+' </td> ' +
                 '<td> % </td> ' +
                 '</tr> ' +
+                ' <input id="data" name="data" type="hidden" value = '+ data+' ></td> '+
                 ' <input id="horas" name="horas" type="hidden" value = '+ horas+' ></td> '+
                 ' <input id="suma" name="suma" type="hidden" value = '+ proyecto+' ></td> ' +
                 ' <input id="nombres" name="nombres" type="hidden" value = '+nombres2+' ></td> ' +
