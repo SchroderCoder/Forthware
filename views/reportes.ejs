@@ -21,10 +21,10 @@
                                         - <%= new Date(r.fecha_fin).toLocaleDateString("ES-mx")  %></a>
                                         <div class="parent">
                                             <img src="/media/templatereportes.png" class=" p-1 w-75 image1 card-img-top mx-auto d-block" style="position:relative ;  " alt="reporte" />
+                                            <a href="<%= r.pdf_reportes%>"" class="btn-sm btn-primary image3" type="button" >Descargar</a>
                                             <button id="<%= r.id_reporte %>" type="button" class="image2 btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal" onclick = "eliminareporte(id)" >
                                                 Eliminar Reporte
                                             </button>
-                                            <a href="<%= r.pdf_reportes%>"" class="btn-sm btn-primary image3" type="button" >Descargar</a>
                                           </div>
                                     </div>
                                 </div>

@@ -51,6 +51,11 @@ module.exports = class Proyecto {
         return db.execute('SELECT * FROM proyectos p WHERE p.is_deleted= 0 AND p.es_etiqueta= 0 GROUP BY id_proyecto ORDER BY id_proyecto DESC');
     }
 
+    static fetchHorasProyectos() {
+        return db.execute('SELECT P.nombre, P.id_proyecto, P.is_deleted, P.es_etiqueta, SUM(H.duracion) AS horas FROM horas_tarea H, tareas T, proyectos P WHERE P.id_proyecto = H.id_proyecto AND T.id_tarea = H.id_tarea AND P.is_deleted= 0 GROUP BY H.id_proyecto ORDER BY P.id_proyecto DESC');
+    }
+    
+
     static fetchAllEtiquetas() {
         return db.execute('SELECT * FROM proyectos p WHERE p.is_deleted= 0 AND p.es_etiqueta= 1 GROUP BY id_proyecto ORDER BY id_proyecto DESC');
     }

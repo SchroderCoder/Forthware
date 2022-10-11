@@ -12,12 +12,22 @@ exports.getProyectos = (request, response, next) => {
     .then(([rows, fielData]) => {
         Proyecto.fetchAllEtiquetas()
         .then(([cols, fielData]) => {
-            response.render(path.join('..',"views", "proyectos.ejs"), {
-                proyectos: rows,
-                etiquetas: cols,
-                privilegios: request.session.privilegios,
-                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
-            });
+            Proyecto.fetchHorasProyectos()
+            .then(([cols1, fielData]) => {
+                response.render(path.join('..',"views", "proyectos.ejs"), {
+                    proyectos: rows,
+                    etiquetas: cols,
+                    horas: cols1,
+                    privilegios: request.session.privilegios,
+                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                response.render('error.ejs', {
+                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                });
+            });   
         })
         .catch(err => {
             console.log(err);
