@@ -64,8 +64,12 @@
 
                                                 </div>
                                                 <div class="row pt-2"  >
-                                                    <p class="card-text col-sm pt-1 over mx-auto align-middle py-auto  list-group-item">Horas</p>
-                                                    <p style="background-color: #1a191b !important;" class="card-text col-sm  over mx-auto align-middle py-auto  list-group-item">40</p>
+                                                    <p class="card-text col-sm pt-1 over mx-auto align-middle py-auto  list-group-item" >Horas</p>
+                                                    <% if (p.horas == null) { %>
+                                                        <p style="background-color: #1a191b !important;" class="card-text col-sm  over mx-auto align-middle py-auto  list-group-item" >0</p>
+                                                    <% } else {%>
+                                                        <p style="background-color: #1a191b !important;" class="card-text col-sm  over mx-auto align-middle py-auto  list-group-item" ><%= p.horas %></p>
+                                                    <% } %>
                                                 </div>
                                                 <p class="card-text"></p>
                                                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->

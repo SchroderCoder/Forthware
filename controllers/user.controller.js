@@ -89,10 +89,21 @@ exports.getLogin = (request, response, next) => {
 exports.getMain = (request, response, next) => {
     Proyecto.fetchProyectosImportancia()
     .then(([rows, fielData]) => {
+        Usuario.fetchTareasMain()
+        .then(([cols, fielData]) => {
         response.render(path.join('..',"views", "main.ejs"), {
-            proyectos: rows,
+            proyectos: rows.slice(0,3),
+            proyectos2: rows.slice(3,6),
+            tareas: cols,
             privilegios: request.session.privilegios,
             isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            response.render('error.ejs', {
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+            });
         });
     })
     .catch(err => {

@@ -30,7 +30,7 @@ module.exports = class Proyecto {
     }
 
     static fetchAll() {
-        return db.execute('SELECT * FROM proyectos P WHERE P.is_deleted= 0 ');
+        return db.execute('SELECT * FROM proyectos P WHERE P.is_deleted= 0 ORDER BY nombre asc');
     }
 
     static fetchOne(un_id) {
@@ -71,6 +71,6 @@ module.exports = class Proyecto {
     // main 
 
     static fetchProyectosImportancia() {
-        return db.execute('SELECT * FROM proyectos p WHERE p.is_deleted= 0 AND p.es_etiqueta= 0 GROUP BY id_proyecto ORDER BY importancia ASC, id_proyecto DESC LIMIT 5 ');
+        return db.execute('SELECT * FROM proyectos p WHERE p.is_deleted= 0 AND p.es_etiqueta= 0 GROUP BY id_proyecto ORDER BY CASE WHEN importancia="Alto" THEN 1 WHEN importancia="Medio" THEN 2 ELSE 3 END, id_proyecto desc limit 6;');
     }
 }
