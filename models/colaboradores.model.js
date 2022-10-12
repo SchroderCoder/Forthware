@@ -16,6 +16,10 @@ module.exports = class Colaboradores {
         return db.execute('SELECT * FROM `empleados`');
     }
 
+    static fetchOne(un_id) {
+        return db.execute('SELECT * FROM empleados WHERE id_empleado = ?', [un_id]);
+    }
+
 
 
 

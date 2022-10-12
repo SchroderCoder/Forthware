@@ -16,7 +16,7 @@ module.exports = class Reporte {
     }
 
     save() {
-        return db.execute('INSERT INTO reportes (fecha_inicio, fecha_fin, efectividad, horas_base, horas_hombre, horas_ausencia, proporcion_horas, id_empleado, pdf_reportes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+        return db.execute('INSERT INTO reportes (fecha_inicio, fecha_fin, efectividad_ajustada, horas_base, horas_hombre, horas_ausencia, efectividad, id_empleado, pdf_reportes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', 
         [this.fecha_inicio, this.fecha_fin, this.efectividad, this.horas_base, this.horas_hombre, this.horas_ausencia, this.proporcion_horas, this.id_empleado, this.pdf_reportes]);
     }
 

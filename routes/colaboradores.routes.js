@@ -6,5 +6,7 @@ const jwtAuthz = require ("express-jwt-authz");
 
 router.get('/main',requiresAuth(), colabController.getColaboradores);
 
+router.post('/OneColaborador', requiresAuth(), colabController.postoneColaborador);
+
 
 module.exports = router;

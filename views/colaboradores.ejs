@@ -8,7 +8,8 @@
         <div class="row">
             <% for (let  p of colaboradores) { %>
                 <div class="col-sm-3 pt-1 over">
-                    <a href="/colaboradores/perfil/<%= p.id_empleado %>"><img src="<%= p.image_url %>" class="img-circle mx-auto d-block img-fluid" alt="Imagen de Perfil Colaborador" onerror="this.onerror=null; this.src='https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png'"> </a>
+                    <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
+                    <button id="<%= p.id_empleado %>" name="<%= p.nombre %>" data-toggle="modal" data-target="#exampleModal" onclick = "mostrarperfil(id)"><img src="<%= p.image_url %>" class="img-circle mx-auto d-block img-fluid" alt="Imagen de Perfil Colaborador" onerror="this.onerror=null; this.src='https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png'"> </button>
                     <h5 class="card-title text-light text-center align-middle pt-2 " style="height:15% ;"><%= p.nombre %></h5> 
                 </div>
             <% } %>
@@ -28,5 +29,10 @@
     </li>
   </ul>
 </nav>
+
+<div id = "modal"></div>
+
+<script src="/js/mostrarperfil.js"> </script>
+
 <%- include('includes/foot.ejs') %>  
 
