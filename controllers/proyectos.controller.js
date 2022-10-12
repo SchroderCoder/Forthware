@@ -12,12 +12,22 @@ exports.getProyectos = (request, response, next) => {
     .then(([rows, fielData]) => {
         Proyecto.fetchAllEtiquetas()
         .then(([cols, fielData]) => {
-            response.render(path.join('..',"views", "proyectos.ejs"), {
-                proyectos: rows,
-                etiquetas: cols,
-                privilegios: request.session.privilegios,
-                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
-            });
+            Proyecto.fetchHorasProyectos()
+            .then(([cols1, fielData]) => {
+                response.render(path.join('..',"views", "proyectos.ejs"), {
+                    proyectos: rows,
+                    etiquetas: cols,
+                    horas: cols1,
+                    privilegios: request.session.privilegios,
+                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                response.render('error.ejs', {
+                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                });
+            });   
         })
         .catch(err => {
             console.log(err);
@@ -62,7 +72,12 @@ exports.getCrearProyecto = (request, response, next) => {
 
 exports.postCrearProyecto = (request, response, next) => {
 
-    const proyecto = new Proyecto(request.body.nombre,request.body.descripcion, request.body.stack,request.body.importancia, request.body.estatus,0,'/project_images/' + request.file.filename);
+    if(request.file) { 
+        imagen = request.file.filename;
+    } else {
+        imagen = "";
+    }
+    const proyecto = new Proyecto(request.body.nombre,request.body.descripcion, request.body.stack,request.body.importancia, request.body.estatus,0,'/project_images/' + imagen);
 
     proyecto.save()
         .then(() => {
@@ -182,7 +197,12 @@ exports.getEditarProyecto = (request, response, next) => {
 
 
 exports.postEditarProyecto = (request, response, next) => {
-
+    if(request.file) { 
+        imagen = request.file.filename;
+    } else {
+        imagen = "";
+    }
+    console.log(imagen)
     Proyecto.fetchOne(request.body.id)
     .then(([rows, fielData]) => {
         rows[0].nombre= request.body.nombre
@@ -190,7 +210,7 @@ exports.postEditarProyecto = (request, response, next) => {
         rows[0].stack_tecnologia= request.body.stack
         rows[0].importancia= request.body.importancia
         rows[0].estatus= request.body.estatus
-        rows[0].image_url= request.body.imagen
+        rows[0].image_url= '/project_images/' + imagen
         
         Proyecto.saveEdit(rows[0])
         .then(() => {

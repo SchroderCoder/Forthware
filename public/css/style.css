@@ -4,6 +4,15 @@ body{
     font-style: bolder;
     color: white;
 }
+#wrapper {
+    /* width: 1500px !important;
+    height: 50% !important; */
+    min-height: 100vh !important;
+    overflow: auto;
+    text-align: left; /* counteract the declaration on body */
+}
+
+
 
 
 h1{
@@ -244,5 +253,3 @@ right:60px;
     height: 100%;
     margin-left:-50%;
   }
-
-  

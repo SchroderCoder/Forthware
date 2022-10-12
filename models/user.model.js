@@ -26,7 +26,7 @@ module.exports = class Usuario {
     }
 
     static fetchAll() {
-        return db.execute('SELECT * FROM empleados');
+        return db.execute('SELECT * FROM empleados order by nombre ASC');
     }
 
     static fetchOne(a_correo) {
@@ -57,5 +57,11 @@ module.exports = class Usuario {
     static changeRol(ch_rol, ch_name) {
         return db.execute('UPDATE tiene SET id_rol = ? WHERE id_empleado = (SELECT e.id_empleado FROM empleados e WHERE e.nombre = ?)', [ch_rol, ch_name]);
     }
+
+        // main 
+
+        static fetchTareasMain(a_empleado) {
+            return db.execute('SELECT * FROM tareas T, realiza R where T.id_tarea=R.id_tarea AND id_empleado= 1 AND is_deleted=0 order by fecha_creacion desc LIMIT 4;');
+        }
 
 }

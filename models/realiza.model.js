@@ -26,11 +26,11 @@ module.exports = class Realiza {
     }
 
     static fetchRegistrados(un_id) {
-        return db.execute('SELECT E.nombre, E.id_empleado FROM empleados E, realiza R WHERE E.id_empleado = R.id_empleado AND R.id_tarea = ?', [un_id]);
+        return db.execute('SELECT E.nombre, E.id_empleado FROM empleados E, realiza R WHERE E.id_empleado = R.id_empleado AND R.id_tarea = ? order by E.NOMBRE ASC', [un_id]);
     }
 
     static fetchNoRegistrados(un_id) {
-        return db.execute('SELECT E.nombre, E.id_empleado FROM empleados E WHERE E.id_empleado NOT IN (SELECT E.id_empleado FROM empleados E, realiza R WHERE E.id_empleado = R.id_empleado AND R.id_tarea = ?) ', [un_id]);
+        return db.execute('SELECT E.nombre, E.id_empleado FROM empleados E WHERE E.id_empleado NOT IN (SELECT E.id_empleado FROM empleados E, realiza R WHERE E.id_empleado = R.id_empleado AND R.id_tarea = ?)order by E.NOMBRE ASC ', [un_id]);
     }
 
 }

@@ -10,7 +10,10 @@ const { requiresAuth } = require('express-openid-connect');
 const PDF = require('pdfkit');
 const fs = require('fs');
 const multer = require('multer');
-
+const jwtAuthz = require ("express-jwt-authz");
+const jwt = require('express-jwt');
+const jwks = require('jwks-rsa');
+const guard = require("express-jwt-permissions");
 
 const config = {
     authRequired: false,
@@ -20,6 +23,7 @@ const config = {
     clientID: 'VrY5U6QWknSE0ioauNNrG2gRuT2cHZc2',
     issuerBaseURL: 'https://dev-3du5p0pi.us.auth0.com'
   };
+
 
 const app = express();
 
@@ -42,45 +46,12 @@ const fileStorage = multer.diskStorage({
     },
 });
 
-const fileFilter = (request, file, callback) => {
-    if (file.mimetype == 'image/png' || 
-        file.mimetype == 'image/jpg' ||
-        file.mimetype == 'image/jpeg' ) {
-            callback(null, true);
-    } else {
-            callback(null, false);
-    }
-}
 
-app.use(multer({ storage: fileStorage, fileFilter: fileFilter }).single('archivo')); 
+app.use(multer({ storage: fileStorage }).single('archivo')); 
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser());
-
-var doc = new PDF();
-
-doc.pipe(fs.createWriteStream(__dirname + '/public/pdf/reporte'  + '.pdf'));
-
-doc.text('Reporte semanal Natdev' , {
-    align: 'center'
-});
-
-var parrafo = 'Este es un documento PDF'; 
-
-doc.image('./public/media/natgas-logo-simple.png', {
-    scale: 0.1
-});
-
-doc.text(parrafo, {
-    columns: 1,
-    align: 'justify'
-});
-
-
-doc.end();
-
-console.log('Archivo Generado');
 
 app.use(session({
     secret: 'skbfssopgdwkpgpoejgjoewgewnhgwiogowipwjifiwejfwiofrjwoi', 
@@ -103,7 +74,6 @@ app.use((request, response, next) => {
     response.locals.csrfToken = request.csrfToken();
     next();
 });
-
 
 const rutas_usuario = require('./routes/user.routes.js');
 app.use('/user', requiresAuth(), rutas_usuario);

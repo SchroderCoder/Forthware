@@ -4,10 +4,11 @@ const Proyecto = require('../models/proyecto.model');
 const Tarea = require('../models/tarea.model');
 const Usuario = require('../models/user.model');
 const Realiza = require('../models/realiza.model');
+const PDF = require('pdfkit-table');
+const fs = require('fs');
 
 exports.getTareas = (request, response, next) => {
     Tarea.fetchAll()
-
     .then(([rows, fielData]) => {
         response.render(path.join('..',"views", "tareas.ejs"), {
             tareas: rows,
@@ -176,9 +177,10 @@ exports.getEditarTareas = (request, response, next) => {
 }
 
 exports.postEditarTareas = (request, response, next) => {
-
+    console.log(request.body)   
     Tarea.fetchOne(request.body.id)
     .then(([rows, fielData]) => {
+        console.log(rows)
         rows[0].fecha_creacion= request.body.fecha
         rows[0].descripcion= request.body.descripcion
         rows[0].id_proyecto= request.body.proyectos
