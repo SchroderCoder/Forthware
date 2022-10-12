@@ -34,4 +34,6 @@ module.exports = class Tarea {
     static erase(un_id){
         return db.execute('UPDATE tareas SET is_deleted = 1 WHERE id_tarea = ?;', [un_id]);
     }
+
+
 }
