@@ -18,13 +18,13 @@
                         <input id="id" name="id" type="hidden" value="<%= proyectos.id_proyecto %>">
                         <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important;" scope="row"><label class="text-white" for="nombre">Nombre: </label></th>
                         <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
-                            <input id="nombre" name="nombre" maxlength="40" type="text" required>
+                            <input id="nombre" name="nombre" maxlength="40" type="text" value = "<%= proyectos.nombre %>" required>
                         </td>
                     </tr>
                     <tr>
                         <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important;" scope="row"><label class="text-white" for="descripcion">Descripción: </label></th>
                         <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
-                            <input placeholder="¿Qué se va a hacer?" id="descripcion" name="descripcion" maxlength="128" type="text" required>
+                            <input placeholder="¿Qué se va a hacer?" id="descripcion" name="descripcion" maxlength="128" type="text"  value = "<%= proyectos.descripcion %>"required>
                         </td>
                     </tr>
                 </tbody>
@@ -37,7 +37,7 @@
                             Colaboradores
                         </button>
                     </div>
-                    <div id="checkBoxes" style="display:none ;" aria-expanded="false" >
+                    <div id="checkBoxes"  aria-expanded="true" >
                         <!-- rs-select2 js-select-simple select--no-search -->
                         <div class="col-sm list-group-item" >
                             <% for (let e of empleados) { %>
@@ -58,7 +58,7 @@
                                         Eliminar colaboradores
                                 </button>
                         </div>
-                        <div id="checkBoxes" style="display:none ;" aria-expanded="false" >
+                        <div id="checkBoxes" aria-expanded="true" >
                             <div class="col-sm list-group-item" >
                                 <% for (let t of registrados) { %>
                                     <div class="badge badge-light m-1 px-3" >
@@ -78,7 +78,7 @@
                                             Agregar colaboradores
                                     </button>
                             </div>
-                            <div id="checkBoxes2" style="display:none ;" aria-expanded="false" >
+                            <div id="checkBoxes2" aria-expanded="true" >
                                 <div class="col-sm list-group-item" >
                                     <% for (let n of no_registrados) { %>
                                         <div class="badge badge-light m-1 px-3" >
@@ -97,7 +97,7 @@
                     <tr>
                         <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important;" scope="row"><label class="text-white" for="stack">Stack de tecnologías:</label></th>
                         <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
-                            <input placeholder="¿Qué tecnologías se van a utilizar?" id="stack" name="stack" maxlength="128" type="text" required>
+                            <input placeholder="¿Qué tecnologías se van a utilizar?" id="stack" name="stack" maxlength="128" type="text"  value = "<%= proyectos.stack_tecnologia %>" required>
                         </td>
                     </tr>
                     <tr>
@@ -132,7 +132,7 @@
             </table>
     </fieldset>
     <% if (proyectos=="") { %>
-        <input type="submit" class="btn btn-success btn-lg ml-5 d-block mx-auto mt-3" value="<%= titulo %>" onclick = "checkOne()">
+        <input type="submit" class="btn btn-success btn-lg ml-5 d-block mx-auto mt-3" value="<%= titulo %>" onmouseover = "checkOne()">
     <% } else { %>  
         <div class="col-sm 5" style="display: -webkit-box;; box-sizing: content-box;">
             <input type="submit" class="btn btn-success btn-lg  mx-auto my-2 " style="display: -webkit-box; box-sizing: content-box;" value="Registrar Cambios">

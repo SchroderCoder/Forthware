@@ -2,18 +2,14 @@ const express = require('express');
 const router = express.Router();
 const { requiresAuth } = require('express-openid-connect');
 const proyectoController = require('../controllers/proyectos.controller');
-const jwtAuthz= require ("express-jwt-authz");
 const { auth, requiredScopes } = require('express-oauth2-jwt-bearer');
-const jwt = require('express-jwt');
-const jwks = require('jwks-rsa');
 
-const checkJwt = auth({
-    audience: 'https://permissions/api',
-    issuerBaseURL: `http://localhost:3000`,
-  });
-
-const checkScopes = requiredScopes('crear:proyectos');
-
+const {
+  claimEquals,
+  claimIncludes,
+  claimCheck,
+} = require('express-openid-connect');
+  
 router.get('/main',requiresAuth(), proyectoController.getProyectos);
 
 router.get('/crearProyecto',requiresAuth(), proyectoController.getCrearProyecto);

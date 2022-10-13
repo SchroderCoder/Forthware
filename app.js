@@ -10,9 +10,12 @@ const { requiresAuth } = require('express-openid-connect');
 const PDF = require('pdfkit');
 const fs = require('fs');
 const multer = require('multer');
-const jwtAuthz = require ("express-jwt-authz");
-const jwt = require('express-jwt');
-const jwks = require('jwks-rsa');
+//=====//
+const { expressjwt: jwt } = require('express-jwt');
+const jwtAuthz = require('express-jwt-authz');
+const jwksRsa = require('jwks-rsa');
+//====//
+  
 const guard = require("express-jwt-permissions");
 
 const config = {
@@ -21,7 +24,8 @@ const config = {
     secret: 'a long, randomly-generated string stored in env',
     baseURL: 'http://localhost:3000',
     clientID: 'VrY5U6QWknSE0ioauNNrG2gRuT2cHZc2',
-    issuerBaseURL: 'https://dev-3du5p0pi.us.auth0.com'
+    issuerBaseURL: 'https://dev-3du5p0pi.us.auth0.com',
+    secret: 'uqyewfincosppÁEO{PWOjkoañseklmññikñhup',
   };
 
 
@@ -33,6 +37,23 @@ app.engine('html', require('ejs').renderFile);
 app.set('views', 'views');
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+// const checkJwt = jwt({
+//     secret: jwksRsa.expressJwtSecret({
+//       cache: true,
+//       rateLimit: true,
+//       jwksRequestsPerMinute: 5,
+//       jwksUri: 'https://dev-3du5p0pi.us.auth0.com/.well-known/jwks.json'
+//     }),
+//     audience: 'https://permissions/api',
+//     issuer: 'https://dev-3du5p0pi.us.auth0.com/',
+//     algorithms: ['RS256']
+//   });
+//   var options = { customScopeKey: 'permissions'};  // This is necessary to support the direct-user permissions
+//   const checkScopes = jwtAuthz([ 'crear:proyectos' ]);
+//   //...x    
+
+// app.use(checkJwt);
 
 const fileStorage = multer.diskStorage({
     destination: (request, file, callback) => {
