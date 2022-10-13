@@ -2,7 +2,13 @@ const express = require('express');
 const router = express.Router();
 const { requiresAuth } = require('express-openid-connect');
 const userController = require('../controllers/user.controller');
-const jwtAuthz = require ("express-jwt-authz");
+const {
+    auth,
+    claimEquals,
+    claimIncludes,
+    claimCheck,
+} = require('express-openid-connect');
+  
 
 router.get('/new',  requiresAuth(),userController.getNew);
 

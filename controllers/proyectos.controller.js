@@ -4,7 +4,7 @@ const Proyecto = require('../models/proyecto.model');
 const { fetchColaboradores, fetchLideres } = require('../models/proyecto.model');
 const Crea = require('../models/crea.model');
 const Usuario = require('../models/user.model');
-const { response } = require('express');
+const express = require('express');
 
 exports.getProyectos = (request, response, next) => {
     
@@ -15,11 +15,13 @@ exports.getProyectos = (request, response, next) => {
             Proyecto.fetchHorasProyectos()
             .then(([cols1, fielData]) => {
                 response.render(path.join('..',"views", "proyectos.ejs"), {
+                    user: request.oidc.user,
                     proyectos: rows,
                     etiquetas: cols,
                     horas: cols1,
                     privilegios: request.session.privilegios,
                     isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+
                 });
             })
             .catch(err => {
