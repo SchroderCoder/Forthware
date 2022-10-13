@@ -296,7 +296,7 @@ exports.getEditarEtiqueta = (request, response, next) => {
                 isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
             });
         } else {
-            console.log("no existe el id del equipo");
+            console.log("no existe el id de la etiqueta");
             response.render('error.ejs', {
                 isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
             });

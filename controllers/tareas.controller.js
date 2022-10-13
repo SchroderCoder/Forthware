@@ -292,3 +292,14 @@ exports.postoneTarea = (request, response, next) => {
             response.status(500).json({message: "ERROR 500"});
         });
 };
+
+exports.getBuscar = (request, response, next) => {
+    Tarea.find(request.params.valor)
+        .then(([rows, fieldData]) => {
+            response.status(200).json({tareas: rows});
+        })
+        .catch(err => { 
+            console.log(err);
+            response.status(500).json({message: "ERROR 500"});
+        });
+}

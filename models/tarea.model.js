@@ -40,4 +40,8 @@ module.exports = class Tarea {
         return db.execute('SELECT E.nombre FROM empleados E , realiza R WHERE R.id_empleado = E.id_empleado AND R.id_tarea = ?', [un_id]);
     }
 
+    static find(valor) {
+                return db.execute('SELECT * FROM tareas WHERE descripcion like ? OR fecha_creacion like ?', ['%' + valor + '%', '%' + valor + '%']);
+            }
+
 }

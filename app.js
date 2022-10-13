@@ -25,7 +25,7 @@ const config = {
     baseURL: 'http://localhost:3000',
     clientID: 'VrY5U6QWknSE0ioauNNrG2gRuT2cHZc2',
     issuerBaseURL: 'https://dev-3du5p0pi.us.auth0.com',
-    secret: 'uqyewfincosppÁEO{PWOjkoañseklmññikñhup'
+    secret: 'uqyewfincosppÁEO{PWOjkoañseklmññikñhup',
   };
 
 
