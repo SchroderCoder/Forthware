@@ -4,6 +4,7 @@ const Reporte = require('../models/reporte.model');
 const Proyecto = require('../models/proyecto.model');
 const PDF = require('pdfkit-table');
 const fs = require('fs');
+const database = require('../util/database');
 
 exports.getReportes = (request, response, next) => {
 
@@ -37,16 +38,29 @@ exports.getCrearReporte = (request, response, next) => {
 };
 
 exports.postCrearReporte = (request, response, next) => {
-    console.log(request.body);
 
-    const reporte = new Reporte(request.body.fecha_inicio, request.body.fecha_fin, request.body.efectividad, request.body.horastotales, request.body.suma, request.body.horasausencia, request.body.efectividadA, 2, '/pdf/reporte' + request.body.fecha_inicio + "-" + request.body.fecha_fin + '.pdf');
+    var nombreArray = []
+    var horasArray = []
+
+    let datas = new Array();
+
+    for (let a of request.body.asignaciones){
+
+        
+        datas.push({
+            proyects: a.nombre,
+            hours: a.horas
+        });
+    }
+
+    
+    console.log(request.body)
+
+
+    const reporte = new Reporte(request.body.fecha_inicio, request.body.fecha_fin, request.body.efectividadaj, request.body.horastotales, request.body.total, request.body.horasausencia, request.body.efectividad, 2, '/pdf/reporte' + request.body.fecha_inicio + "-" + request.body.fecha_fin + '.pdf');
     reporte.save()
         .then(() => {
-            Reporte.getHoras_proyectos(request.body.fecha_inicio, request.body.fecha_fin)
-            .then(([rows,fielData]) => {
-                console.log(rows);
-            })
-
+    
             let doc = new PDF({margin: 30, size: 'A4'});
 
                 doc.pipe(fs.createWriteStream(__dirname + '/../public/pdf/reporte' + request.body.fecha_inicio + "-" + request.body.fecha_fin + '.pdf'));
@@ -74,14 +88,15 @@ exports.postCrearReporte = (request, response, next) => {
 
                 var parrafo = 'Colaboradores:';
 
-                var parrafo2 = 'Tiempo Completo: ' + request.body.completo; 
+                var parrafo2 = 'Tiempo Completo: ' + request.body.tiempocompleto; 
                 
-                var parrafo3 = 'Tiempo Medio: ' + request.body.medio; 
+                var parrafo3 = 'Tiempo Medio: ' + request.body.tiempomedio; 
 
                 doc.text(parrafo, {
                     columns: 1,
                     align: 'justify'
                 });
+                console.log(horasArray)
 
                 doc.moveDown();
 
@@ -109,25 +124,8 @@ exports.postCrearReporte = (request, response, next) => {
                         },
                       ],
                       // complex data
-                      datas: [
-                        { 
-                          proyects: 'bold:Altair', 
-                          hours: '80', 
-                        },
-                        { 
-                          proyects: 'bold:Oasis', 
-                          hours: '55', 
-                        },
-                        { 
-                            proyects: 'bold:Argos', 
-                            hours: '77', 
-                        },
-                        { 
-                            proyects: 'bold:Poseidon', 
-                            hours: '39', 
-                        },
-                        // {...},
-                      ],
+                      datas: datas,
+                        //[{atributo: valor, atributo2: valor2}, {atributo: valor, atributo2: valor2}]
                     };
                     doc.table(table, {
                       prepareHeader: () => doc.font("Helvetica-Bold").fontSize(10),
@@ -154,11 +152,11 @@ exports.postCrearReporte = (request, response, next) => {
                       datas: [
                         { 
                           Resumen: 'Horas totales de Tiempo Completo', 
-                          Horas: request.body.horas_completos, 
+                          Horas: request.body.horastotalescompleto, 
                         },
                         { 
                           Resumen: 'Horas totales de Tiempo Medio', 
-                          Horas: request.body.horas_medios, 
+                          Horas: request.body.horastotalesmedio, 
                         },
                         { 
                             Resumen: 'Horas totales', 
@@ -196,7 +194,7 @@ exports.postCrearReporte = (request, response, next) => {
                     align: 'center'
                 })
                 .fillColor('green')
-                .text(request.body.efectividadA + '%', {
+                .text(request.body.efectividadaj + '%', {
                     align: 'center'
                 })
                 ;

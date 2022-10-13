@@ -38,22 +38,22 @@ app.set('views', 'views');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-const checkJwt = jwt({
-    secret: jwksRsa.expressJwtSecret({
-      cache: true,
-      rateLimit: true,
-      jwksRequestsPerMinute: 5,
-      jwksUri: 'https://dev-3du5p0pi.us.auth0.com/.well-known/jwks.json'
-    }),
-    audience: 'https://permissions/api',
-    issuer: 'https://dev-3du5p0pi.us.auth0.com/',
-    algorithms: ['RS256']
-  });
-  var options = { customScopeKey: 'permissions'};  // This is necessary to support the direct-user permissions
-  const checkScopes = jwtAuthz([ 'crear:proyectos' ]);
-  //...x    
+// const checkJwt = jwt({
+//     secret: jwksRsa.expressJwtSecret({
+//       cache: true,
+//       rateLimit: true,
+//       jwksRequestsPerMinute: 5,
+//       jwksUri: 'https://dev-3du5p0pi.us.auth0.com/.well-known/jwks.json'
+//     }),
+//     audience: 'https://permissions/api',
+//     issuer: 'https://dev-3du5p0pi.us.auth0.com/',
+//     algorithms: ['RS256']
+//   });
+//   var options = { customScopeKey: 'permissions'};  // This is necessary to support the direct-user permissions
+//   const checkScopes = jwtAuthz([ 'crear:proyectos' ]);
+//   //...x    
 
-app.use(checkJwt);
+// app.use(checkJwt);
 
 const fileStorage = multer.diskStorage({
     destination: (request, file, callback) => {
@@ -103,7 +103,7 @@ const rutas_colab = require('./routes/colaboradores.routes.js');
 app.use('/colaboradores',requiresAuth(), rutas_colab);
 
 const rutas_proyectos = require('./routes/proyectos.routes.js');
-app.use('/proyectos',requiresAuth(), checkScopes, rutas_proyectos);
+app.use('/proyectos',requiresAuth(), rutas_proyectos);
 
 const rutas_reportes = require('./routes/reportes.routes.js');
 app.use('/reportes', requiresAuth(), rutas_reportes);

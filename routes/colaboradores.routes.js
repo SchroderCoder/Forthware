@@ -5,5 +5,7 @@ const colabController = require('../controllers/colab.controller');
 
 router.get('/main',requiresAuth(), colabController.getColaboradores);
 
+router.post('/OneColaborador', requiresAuth(), colabController.postoneColaborador);
+
 
 module.exports = router;
