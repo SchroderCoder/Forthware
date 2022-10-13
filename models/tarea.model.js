@@ -31,9 +31,13 @@ module.exports = class Tarea {
             [tarea.fecha_creacion, tarea.descripcion, tarea.id_proyecto ,tarea.duracion, tarea.id_tarea]);
     }
 
-    static erase(un_id){
+    static erase(un_id) {
         return db.execute('UPDATE tareas SET is_deleted = 1 WHERE id_tarea = ?;', [un_id]);
     }
 
+
+    static fetchTareasEmpleados(un_id) {
+        return db.execute('SELECT E.nombre FROM empleados E , realiza R WHERE R.id_empleado = E.id_empleado AND R.id_tarea = ?', [un_id]);
+    }
 
 }

@@ -16,4 +16,6 @@ router.post('/editarTarea',requiresAuth(),  tareasController.postEditarTareas);
 
 router.get('/delete/:id',requiresAuth(),tareasController.getdeleteTareas);
 
+router.post('/OneTarea', requiresAuth(), tareasController.postoneTarea);
+
 module.exports = router;

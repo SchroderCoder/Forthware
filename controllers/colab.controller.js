@@ -24,7 +24,16 @@ exports.getColaboradores = (request, response, next) => {
 exports.postoneColaborador = (request, response, next) => {
     Colaboradores.fetchOne(request.body.id)
         .then(([rows, fieldData]) => {
-            response.status(200).json({empleados: rows});
+            Colaboradores.fetchProyectos(request.body.id)
+            .then(([filas, fieldData]) => {
+                console.log(filas)
+                response.status(200).json({empleados: rows , proyectos: filas});
+
+            })
+            .catch(err => { 
+                console.log(err);
+                response.status(500).json({message: "ERROR 500"});
+            });
         })
         .catch(err => { 
             console.log(err);

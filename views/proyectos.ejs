@@ -14,8 +14,9 @@
                                 <% for (let  p of proyectos) { %>
                                     <div class="col-sm-4 pb-3 over">
                                         <div class="card" style="width: auto;height: 29rem ; ">
+                                            <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
                                             <h5 class="card-title bg-success text-dark text-center align-middle py-auto  list-group-item" style="height:15% ;"><a href="/proyectos/editarProyecto/<%= p.id_proyecto %>" class="text-white" ><%= p.nombre %></a></h5>
-                                            <img src="<%= p.image_url %>" class="card-img-top" alt="" onerror="this.onerror=null; this.src='https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png'">
+                                            <button id="<%= p.id_proyecto %>" data-toggle="modal" data-target="#exampleModal" onclick = "mostrarproyecto(id)"><img src="<%= p.image_url %>" class="card-img-top" alt="" onerror="this.onerror=null; this.src='https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png'"></button>
                                             <div class="card-body textBlack">
                                                 <div class="row">
                                                         <p class="card-text col-sm pt-2 over mx-auto align-middle py-auto  list-group-item">Importancia:</p>
@@ -128,6 +129,11 @@
         </div>
     </div>
 </div>
+
+<div id = "modal"></div>
+
+<script src="/js/mostrarproyecto.js"> </script>
+
 <%- include('includes/foot.ejs') %>
 
 

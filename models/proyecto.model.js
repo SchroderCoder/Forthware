@@ -78,4 +78,12 @@ module.exports = class Proyecto {
     static fetchProyectosImportancia() {
         return db.execute('SELECT * FROM proyectos p WHERE p.is_deleted= 0 AND p.es_etiqueta= 0 GROUP BY id_proyecto ORDER BY CASE WHEN importancia="Alto" THEN 1 WHEN importancia="Medio" THEN 2 ELSE 3 END, id_proyecto desc limit 6;');
     }
+
+    static fetchProyectosHoras(un_id) {
+        return db.execute('SELECT P.nombre, P.id_proyecto, P.is_deleted, P.es_etiqueta, SUM(H.duracion) AS horas FROM horas_tarea H, tareas T, proyectos P WHERE P.id_proyecto = H.id_proyecto AND T.id_tarea = H.id_tarea AND P.is_deleted= 0 AND P.id_proyecto= ? GROUP BY H.id_proyecto ORDER BY P.id_proyecto DESC', [un_id])
+    }
+
+    static fetchProyectosEmpleados(un_id) {
+        return db.execute('SELECT E.nombre FROM empleados E , crea C WHERE C.id_empleado = E.id_empleado AND C.id_proyecto = ? AND is_active = 0', [un_id])
+    }
 }
