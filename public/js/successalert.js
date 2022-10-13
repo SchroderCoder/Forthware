@@ -1,0 +1,5 @@
+
+
+const successalert = () => {
+    alert("jijija")
+}

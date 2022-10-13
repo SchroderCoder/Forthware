@@ -1,0 +1,51 @@
+<%- include('includes/head.ejs') %>
+<%- include('includes/nav.ejs') %>   
+<%- include('includes/sidebar.ejs') %>   
+
+
+<h2 class="pt-2 pl-2" >Reportes</h2>
+
+<div class="p-3">
+    <div class="row">
+        <div class="col pt-1 list-group-item">
+            <div class="overflow-auto anyClass" style="height: 32rem !important;">
+                <% if (reportes.length > 0) { %>
+                    <div class="p-1">
+                        <div class="row">
+                            <% let id = 0; %>
+                        <% for (let  r of reportes) { %>
+                            <% id= r.id_reporte %>
+                                <div class="col-sm-4 pt-2 p-4 over">
+                                    <div class="card " style="width: auto; height: 28rem ;">
+                                        <p class="card-title bg-success text-dark h-25 text-center align-middle py-auto  list-group-item"><a class="text-white" ><%= new Date(r.fecha_inicio).toLocaleDateString("ES-mx")  %> 
+                                        - <%= new Date(r.fecha_fin).toLocaleDateString("ES-mx")  %></a>
+                                        <div class="parent">
+                                            <img src="/media/templatereportes.png" class=" p-1 w-75 image1 card-img-top mx-auto d-block" style="position:relative ;  " alt="reporte" />
+                                            <a href="<%= r.pdf_reportes%>"" class="btn-sm btn-primary image3" type="button" >Descargar</a>
+                                            <button id="<%= r.id_reporte %>" type="button" class="image2 btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal" onclick = "eliminareporte(id)" >
+                                                Eliminar Reporte
+                                            </button>
+                                          </div>
+                                    </div>
+                                </div>
+                        <% } %>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <h2>No hay reportes registrados</h2>
+                <% } %>  
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id = "modal"></div>
+
+<script src="/js/eliminarreporte.js"> </script>
+
+    <a href="/reportes/crearReporte">
+        <button type="button" class="btn btn-success mx-auto d-block " >
+            Crear
+        </button>
+    </a>
+<%- include('includes/foot.ejs') %>  
