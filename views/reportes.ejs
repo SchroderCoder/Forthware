@@ -2,29 +2,50 @@
 <%- include('includes/nav.ejs') %>   
 <%- include('includes/sidebar.ejs') %>   
 
-
-<h2 class="pt-2 pl-2" >Reportes</h2>
+<div class="row pt-2 ">
+    <div class="col-5 pl-3 " style="display:block ;">
+        <h2 class=" " >Reportes</h2>
+    </div>
+    <div class="col-sm-1 pt-1 pl-5" style="display:block ;">
+        <a href="/reportes/crearReporte" style="display:block ;">
+            <button type="button" class="btn btn-success mx-auto d-block " style="display:block ;" >
+                <span class="material-icons align-middle mr-2 mb-1">
+                    add
+                    </span>
+                Crear
+            </button>
+        </a>
+    </div>
+</div>
 
 <div class="p-3">
     <div class="row">
         <div class="col pt-1 list-group-item">
-            <div class="overflow-auto anyClass" style="height: 32rem !important;">
+            <div class="overflow-auto anyClass" style="height: 22rem !important;">
                 <% if (reportes.length > 0) { %>
                     <div class="p-1">
                         <div class="row">
                         <% for (let  r of reportes) { %>
-                                <div class="col-sm-4 pt-2 p-4 over">
-                                    <div class="card " style="width: auto; height: 28rem ;">
+                                <div class="col-xl-4 col-md-6 col-sm-12 pt-2 p-4 over">
+                                    <div class="card " style="width: auto; height: auto ;">
                                         <p class="card-title bg-success text-dark h-25 text-center align-middle py-auto  list-group-item"><a class="text-white" ><%= new Date(r.fecha_inicio).toLocaleDateString("ES-mx")  %> 
                                         - <%= new Date(r.fecha_fin).toLocaleDateString("ES-mx")  %></a><!-- <a href="/reportes/download" class="btn btn-primary btn-sm ml-3" button type="button">Descargar</a> --></p>
                                         <!-- <img src="/media/templatereportes.png" class="card-img-top" style="position:relative ;" alt="reporte"> -->
 
                                         <div class="parent">
-                                            <img src="/media/templatereportes.png" class=" p-1 w-75 image1 card-img-top mx-auto d-block" style="position:relative ;  " alt="reporte" />
-                                            <button id="<%= r.id_reporte %>" type="button" class="image2 btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal" value="<%= r.id_reporte %>" >
-                                                Eliminar Reporte
+                                            
+                                            <img src="/media/templatereportes.png"  class=" p-1  image1 card-img-top mx-auto d-block img-fluid" style="position:relative ; width:63% ;  " alt="reporte" />
+                                            <button href="/reportes/download" class="btn-sm btn-primary image2" type="button" > 
+                                                <span class="material-icons">
+                                                    file_download
+                                                </span></button>
+                                            <button id="<%= r.id_reporte %>"  type="button" class="image3 btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal" value="<%= r.id_reporte %>" >
+                                                <span class="material-icons">
+                                                    delete
+                                                    </span>
+                                                
                                             </button>
-                                            <a href="/reportes/download" class="btn-sm btn-primary image3" type="button" >Descargar</a>
+                                            
                                           </div>
 
                                         <!-- <button id="<%= r.id_reporte %>" type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" value="<%= r.id_reporte %>" >
@@ -61,9 +82,5 @@
     </div>
   </div>
 
-    <a href="/reportes/crearReporte">
-        <button type="button" class="btn btn-success mx-auto d-block " >
-            Crear
-        </button>
-    </a>
+    
 <%- include('includes/foot.ejs') %>  
