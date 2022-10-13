@@ -348,3 +348,28 @@ exports.getDeleteProyecto = (request, response, next) => {
         });
     }); 
 }
+
+exports.postoneProyecto = (request, response, next) => {
+    Proyecto.fetchOne(request.body.id)
+        .then(([rows, fieldData]) => {
+            Proyecto.fetchProyectosEmpleados(request.body.id)
+            .then(([filas, fieldData]) => {
+                Proyecto.fetchProyectosHoras(request.body.id)
+                .then(([rows2, fieldData]) => {
+                    response.status(200).json({proyectos: rows, empleados: filas, horas: rows2});
+                })
+                .catch(err => { 
+                    console.log(err);
+                    response.status(500).json({message: "ERROR 500"});
+                })
+            })
+            .catch(err => { 
+                console.log(err);
+                response.status(500).json({message: "ERROR 500"});
+            });
+        })
+        .catch(err => { 
+            console.log(err);
+            response.status(500).json({message: "ERROR 500"});
+        });
+};

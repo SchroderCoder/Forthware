@@ -27,12 +27,13 @@
                 <div class="overflow-auto anyClass" style="height: 28rem !important;">
                     <% for (let  t of tareas) { %>
                         <!-- <a href="/tareas/editarTarea/<%= t.id_tarea %>"> -->
+                            <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
                             <div class="row bg-light text-dark m-1 mt-2 border rounded">
                                 <div class="col border-right border-dark">
                                     <%=  new Date(t.fecha_creacion).toLocaleDateString("ES-mx") %>
                                 </div>
                                 <div class="col-5 border-right border-dark">
-                                    <%=  t.descripcion %>
+                                    <a type="button" id="<%= t.id_tarea %>" data-toggle="modal" data-target="#exampleModal" onclick = "mostrartarea(id)"><%=  t.descripcion %></a>
                                 </div>
                                 <div class="col border-right border-dark">
                                     <%=  t.duracion.toFixed(1) %>
@@ -71,5 +72,6 @@
 <div id = "modal"></div>
 
 <script src="/js/eliminartarea.js"> </script>
+<script src="/js/mostrartarea.js"> </script>
 
 <%- include('includes/foot.ejs') %>

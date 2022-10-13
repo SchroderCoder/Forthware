@@ -272,3 +272,23 @@ exports.getdeleteTareas = (request, response, next) => {
         });
     }); 
 }   
+
+exports.postoneTarea = (request, response, next) => {
+    Tarea.fetchOne(request.body.id)
+        .then(([rows, fieldData]) => {
+            Tarea.fetchTareasEmpleados(request.body.id)
+            .then(([filas, fieldData]) => {
+                console.log(rows)
+                console.log(filas)
+                response.status(200).json({tareas: rows, empleados: filas});
+            })
+            .catch(err => { 
+                console.log(err);
+                response.status(500).json({message: "ERROR 500"});
+            });
+        })
+        .catch(err => { 
+            console.log(err);
+            response.status(500).json({message: "ERROR 500"});
+        });
+};

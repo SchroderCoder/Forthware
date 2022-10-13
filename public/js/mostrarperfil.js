@@ -41,8 +41,9 @@ function mostrarperfil(id){
                     '            <p>Correro Electrónico: '+ data.empleados[0].correo_electronico + '</p> ' +
                     '            <p>Disponibilidad: '+ tiempo + '</p> ' +
                     '           <img src=" '+ data.empleados[0].image_url +' " class="img-circle mx-auto d-block img-fluid" alt="Imagen de Perfil Colaborador" onerror="this.onerror=null; this.src="https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png"></img>' +
-                    '          <br><button type="button" class="btn btn-success" data-dismiss="modal">Ver proyectos en los que esta trabajando</button> ' +
-                    '          <br><br><button type="button" class="btn btn-primary" data-dismiss="modal">Ver tareas en las que esta trabajando</button> ' +
+                    '            for(p of data.proyectos) {  ' + 
+                    '            <p>' +  data.proyectos[0].nombre + '</p> ' +
+                    '             }  ' +
                     '        </div> ' +
                     '     </div> ' +
                     '    </div> ' +
@@ -52,19 +53,4 @@ function mostrarperfil(id){
             console.log(err);
         });
         
-    // document.getElementById("modal").innerHTML =
-    // '<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">'+
-    // '   <div class="modal-dialog" role="document">'+
-    // '  <div class="modal-content">'+
-    // '        <div class="modal-header"> ' +
-    // '          <h5 class="modal-title" id="exampleModalLabel">' + id + '</h5> ' +
-    // '          <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Close"></button> ' +
-    // '        </div> ' +
-    // '        <div class="modal-body"> ' + 
-    // '            <p> ¿Estás seguro de que quieres eliminar este reporte?</p> ' +
-    // '        </div> ' +
-    // '     </div> ' +
-    // '    </div> ' +
-    // '</div> ' 
-
 }
