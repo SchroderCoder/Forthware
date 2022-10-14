@@ -28,37 +28,39 @@
                 Acciones
             </div>
         </div>
-        <div id = "tareas" class="row">
+        <div class="row">
             <div class="col-sm over list-group-item">
-                <div class="overflow-auto anyClass" style="height: 28rem !important;">
-                    <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
-                    <% for (let  t of tareas) { %>
+                <div id = "tareas" >
+                    <div class="overflow-auto anyClass" style="height: 28rem !important;">
+                        <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
+                        <% for (let  t of tareas) { %>
 
-                            <div class="row bg-light text-dark m-1 mt-2 border rounded">
-                                <div class="col border-right border-dark">
-                                    <%=  new Date(t.fecha_creacion).toLocaleDateString("ES-mx") %>
+                                <div class="row bg-light text-dark m-1 mt-2 border rounded">
+                                    <div class="col border-right border-dark">
+                                        <%=  new Date(t.fecha_creacion).toLocaleDateString("ES-mx") %>
+                                    </div>
+                                    <div class="col-5 border-right border-dark">
+                                        <a type="button" id="<%= t.id_tarea %>" data-toggle="modal" data-target="#exampleModal" onclick = "mostrartarea(id)"><%=  t.descripcion %></a>
+                                    </div>
+                                    <div class="col border-right border-dark">
+                                        <%=  t.duracion.toFixed(2) %>
+                                    </div>
+                                    <div class="col border-right border-dark">
+                                        <%=  t.nombre %>
+                                    </div>
+                                    <div class="col ">
+                                        <span class="material-symbols-outlined">
+                                        <a href="/tareas/editarTarea/<%= t.id_tarea %>"  >
+                                            <button class = "btn btn-primary" > <i class="material-icons" >edit</i> </button>
+                                            
+                                        </a>
+                                        </span>
+                                        <button  class = "btn btn-danger" id="<%= t.id_tarea %>" type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea(id)" ><i class="material-icons" >delete</i></button>
+                                            
+                                    </div>
                                 </div>
-                                <div class="col-5 border-right border-dark">
-                                    <a type="button" id="<%= t.id_tarea %>" data-toggle="modal" data-target="#exampleModal" onclick = "mostrartarea(id)"><%=  t.descripcion %></a>
-                                </div>
-                                <div class="col border-right border-dark">
-                                    <%=  t.duracion.toFixed(2) %>
-                                </div>
-                                <div class="col border-right border-dark">
-                                    <%=  t.nombre %>
-                                </div>
-                                <div class="col ">
-                                    <span class="material-symbols-outlined">
-                                    <a href="/tareas/editarTarea/<%= t.id_tarea %>"  >
-                                        <button class = "btn btn-primary" > <i class="material-icons" >edit</i> </button>
-                                        
-                                    </a>
-                                    </span>
-                                    <button  class = "btn btn-danger" id="<%= t.id_tarea %>" type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea(id)" ><i class="material-icons" >delete</i></button>
-                                        
-                                </div>
-                            </div>
-                    <% } %>
+                        <% } %>
+                    </div>
                 </div>
             </div>
         </div>
@@ -98,10 +100,8 @@
         }).then(data => {                
             console.log(data);
             let html = '';
+            html += '<div class="overflow-auto anyClass" style="height: 28rem !important;">'
             if (data.tareas.length > 0) { 
-                html += '<div id = tareas class="row">'
-                    html += '<div class="col-sm over list-group-item">'
-                        html += '<div class="overflow-auto anyClass" style="height: 28rem !important;">'
                              html += '<input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >'
                 for (t of data.tareas) {
                     html +=        '<div class="row bg-light text-dark m-1 mt-2 border rounded">'

@@ -16,7 +16,7 @@
                                         <div class="card" style="width: auto;height: 29rem ; ">
                                             <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
                                             <h5 class="card-title bg-success text-dark text-center align-middle py-auto  list-group-item" style="height:15% ;"><a href="/proyectos/editarProyecto/<%= p.id_proyecto %>" class="text-white" ><%= p.nombre %></a></h5>
-                                            <button id="<%= p.id_proyecto %>" data-toggle="modal" data-target="#exampleModal" onclick = "mostrarproyecto(id)"><img src="<%= p.image_url %>" class="card-img-top" alt="" onerror="this.onerror=null; this.src='https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png'"></button>
+                                            <a id="<%= p.id_proyecto %>" data-toggle="modal" data-target="#exampleModal" onclick = "mostrarproyecto(id)"><img src="<%= p.image_url %>" class="card-img-top" alt="" onerror="this.onerror=null; this.src='https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png'"></a>
                                             <div class="card-body textBlack">
                                                 <div class="row">
                                                         <p class="card-text col-sm pt-2 over mx-auto align-middle py-auto  list-group-item">Importancia:</p>
@@ -96,7 +96,7 @@
                 <a class="align-middle m-auto center-block text-center text-white" style="display: -webkit-box;; box-sizing: content-box; " href="/proyectos/crearProyecto" button type="button"><i class="material-icons iconSide p-1 " style="font-size:60px;color:green;">add_circle</i> <br> Crear proyecto</a>
         </div>
     </div>
-   <div> <%= JSON.stringify(user,null,2) %></div>
+   <!-- <div> <%= JSON.stringify(user,null,2) %></div> -->
     
     <h1 class=" pt-1 font-weight-bold">Etiquetas</h1>
     <div class="row ">
