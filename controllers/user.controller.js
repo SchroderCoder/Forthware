@@ -123,7 +123,7 @@ exports.postLogin = (request, response, next) => {
                     .then(doMatch => {
                         if (doMatch) {
                             request.session.isLoggedIn = true;
-                            request.session.user = rows[0].nombre;
+                            request.session.user = rows[0].nombre;  
                             request.session.id_empleado= rows[0].id_empleado;
                             return request.session.save(err => {
                                 //Obtener los permisos del usuario

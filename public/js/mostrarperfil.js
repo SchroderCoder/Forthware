@@ -1,6 +1,8 @@
 
 function mostrarperfil(id){
 
+        document.getElementById("modal_contenido").innerHTML = '';
+    
         data = new Object ();
 
         data.id = id;
@@ -17,8 +19,6 @@ function mostrarperfil(id){
         }).then(result => {
             return result.json(); //Regresa otra promesa
         }).then(data => {
-                console.log(data)
-
                     tiempo = ''
 
                     if(data.empleados[0].disponibilidad = 35){
@@ -27,11 +27,9 @@ function mostrarperfil(id){
                         tiempo = 'Tiempo Medio';
                     }
 
+                    let html = '';
                 
-                    document.getElementById("modal").innerHTML =
-                    '<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">'+
-                    '   <div class="modal-dialog" role="document">'+
-                    '  <div class="modal-content">'+
+                    html +=
                     '        <div class="modal-header"> ' +
                     '          <h5 class="modal-title" id="exampleModalLabel"> <i class="material-icons iconSide">account_circle</i>' + data.empleados[0].nombre + '</h5> ' +
                     '          <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Close"></button> ' +
@@ -40,15 +38,22 @@ function mostrarperfil(id){
                     '            <p>Nombre: '+ data.empleados[0].nombre + '</p> ' +
                     '            <p>Correro Electrónico: '+ data.empleados[0].correo_electronico + '</p> ' +
                     '            <p>Disponibilidad: '+ tiempo + '</p> ' +
-                    '           <img src=" '+ data.empleados[0].image_url +' " class="img-circle mx-auto d-block img-fluid" alt="Imagen de Perfil Colaborador" onerror="this.onerror=null; this.src="https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png"></img>' +
-                    '            for(p of data.proyectos) {  ' + 
-                    '            <p>' +  data.proyectos[0].nombre + '</p> ' +
-                    '             }  ' +
-                    '        </div> ' +
-                    '     </div> ' +
-                    '    </div> ' +
-                    '</div> ' 
-                
+                    '           <img src=" '+ data.empleados[0].image_url +' " class="img-circle mx-auto d-block img-fluid" alt="Imagen de Perfil Colaborador" onerror="this.onerror=null; this.src="https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png"></img>';
+
+                    html += '<li class= "bold-text">Proyectos: </li>'
+                    if(data.proyectos.length > 0) {
+                        for(p of data.proyectos) {  
+                            html += '<li>' +  p.nombre + '</li> ';
+                        }
+                    } else {
+                        html += '<p>Sin proyectos asignados</p>';
+                    }
+
+
+                    html += '</div> ';
+                    
+                    document.getElementById("modal_contenido").innerHTML = html;
+
         }).catch(err => {
             console.log(err);
         });

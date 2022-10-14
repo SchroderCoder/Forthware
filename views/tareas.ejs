@@ -76,7 +76,14 @@
     </a>
 </div>
 
-<div id = "modal"></div>
+<div id = "modal">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" id="modal_contenido">
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="/js/eliminartarea.js"> </script>
 <script src="/js/mostrartarea.js"> </script>
@@ -118,7 +125,7 @@
                     html +=                    
                     html +=                '</a>'
                     html +=               '</span>'
-                    html +=                '<button  class = "btn btn-danger" id='+ t.id_tarea + ' type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea(id)" ><i class="material-icons" >delete</i></button>              
+                    html +=                '<button  class = "btn btn-danger" id='+ t.id_tarea + ' type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea(id)" ><i class="material-icons" >delete</i></button>'            
                     html +=           '</div>'
                     html +=       ' </div>'
                 }
