@@ -2,7 +2,7 @@
 
     <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
     <input type="hidden" name="csrf_" id="csrf_" value="<%= csrfToken %>" >
-<fieldset>
+<fieldset class="text-white">
     <legend class="text-white">Datos del reporte</legend>
     <div class="input-field">
 
@@ -70,7 +70,7 @@
                     <% for (let  p of proyectos) { %>
                         <tr>
                         <td>
-                        <p><%= p %></p>
+                        <p class="pr-3 " ><%= p %></p>
                         </td>
                         <td>horas</td>
                         <td><label for="proyectos_horas_adj"></label>
@@ -81,7 +81,7 @@
                 <% } else { %>
                     <h2>No hay proyectos registrados</h2>
                 <% } %> 
-            <tr>
+            <tr class="text-white">
                 <% let horasajutadas = 220 %>
                 <td>Total:</td>
                 <td>horas suma</td>

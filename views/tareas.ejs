@@ -35,26 +35,27 @@
                     <% for (let  t of tareas) { %>
 
                             <div class="row bg-light text-dark m-1 mt-2 border rounded">
-                                <div class="col border-right border-dark">
+                                <div class="col-2 border-right border-dark">
                                     <%=  new Date(t.fecha_creacion).toLocaleDateString("ES-mx") %>
                                 </div>
-                                <div class="col-5 border-right border-dark">
+                                <div class="col-3 border-right border-dark text-truncate">
                                     <a type="button" id="<%= t.id_tarea %>" data-toggle="modal" data-target="#exampleModal" onclick = "mostrartarea(id)"><%=  t.descripcion %></a>
                                 </div>
                                 <div class="col border-right border-dark">
                                     <%=  t.duracion.toFixed(2) %>
                                 </div>
-                                <div class="col border-right border-dark">
+                                <div class="col-3 border-right border-dark text-truncate">
                                     <%=  t.nombre %>
                                 </div>
-                                <div class="col ">
+                                <div class="col-lg-2 col-md-3 col-sm-4" >
                                     <span class="material-symbols-outlined">
-                                    <a href="/tareas/editarTarea/<%= t.id_tarea %>"  >
-                                        <button class = "btn btn-primary" > <i class="material-icons" >edit</i> </button>
+                                    <a href="/tareas/editarTarea/<%= t.id_tarea %>"  style="size: 1vmax;">
+                                        <button class = "btn btn-primary" > <i class="material-icons" style="font-size:1vmax " >edit</i> </button>
                                         
                                     </a>
                                     </span>
-                                    <button  class = "btn btn-danger" id="<%= t.id_tarea %>" type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea(id)" ><i class="material-icons" >delete</i></button>
+                                    <button style="size: 1vmax;"  class = "btn btn-danger" id="<%= t.id_tarea %>" type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea(id)" >
+                                        <i style="font-size:1vmax ;" class="material-icons" >delete</i></button>
                                         
                                 </div>
                             </div>
