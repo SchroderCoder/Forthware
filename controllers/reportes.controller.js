@@ -202,6 +202,7 @@ exports.postCrearReporte = (request, response, next) => {
                 doc.end();
             
             response.status(200).json({mensaje: 'pdf generado'});
+            console.log(reporte);
             console.log("reporte creado con exito");
         })
         .catch(err => {
