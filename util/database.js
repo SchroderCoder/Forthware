@@ -13,7 +13,7 @@ const pool = mysql.createPool({
     host: '35.232.62.89',
     user: 'root',
     database: 'NatDev',
-    password: '1234',
+    password: 'PFAhX4ocZC52x6n3Ydho',
     port: 3306,
 });
 
