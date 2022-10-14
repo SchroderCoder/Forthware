@@ -32,21 +32,18 @@
                                         - <%= new Date(r.fecha_fin).toLocaleDateString("ES-mx")  %></a><!-- <a href="/reportes/download" class="btn btn-primary btn-sm ml-3" button type="button">Descargar</a> --></p>
                                         <!-- <img src="/media/templatereportes.png" class="card-img-top" style="position:relative ;" alt="reporte"> -->
                                         <div class="parent">
-                                            
                                             <img src="/media/templatereportes.png"  class=" p-1  image1 card-img-top mx-auto d-block img-fluid" style="position:relative ; width:63% ;  " alt="reporte" />
-                                            <button href="/reportes/download" class="btn-sm btn-primary image2" type="button" > 
+                                            <button href="<%= r.pdf_reportes%>" class="btn-sm btn-primary image2" type="button" > 
                                                 <span class="material-icons">
                                                     file_download
-                                                </span></button>
+                                                </span>
+                                            </button>
                                             <button id="<%= r.id_reporte %>"  type="button" class="image3 btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal" onclick="eliminareporte(id)" >
                                                 <span class="material-icons">
                                                     delete
                                                 </span>  
                                             </button>
-                                          </div>
-                                        <!-- <button id="<%= r.id_reporte %>" type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" value="<%= r.id_reporte %>" >
-                                            Eliminar Reporte
-                                        </button> -->
+                                        </div>
                                     </div>
                                 </div>
                         <% } %>
