@@ -28,35 +28,36 @@
                 Acciones
             </div>
         </div>
-        <div id = "tareas" class="row">
+        <div class="row">
             <div class="col-sm over list-group-item">
-                <div class="overflow-auto anyClass" style="height: 28rem !important;">
+                <div id = "tareas" class="overflow-auto anyClass" style="height: 28rem !important;">
                     <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
                     <% for (let  t of tareas) { %>
 
                             <div class="row bg-light text-dark m-1 mt-2 border rounded">
-                                <div class="col-2 border-right border-dark">
+                                <div class="col-2  col-md col-sm border-right border-dark text-truncate">
                                     <%=  new Date(t.fecha_creacion).toLocaleDateString("ES-mx") %>
                                 </div>
-                                <div class="col-3 border-right border-dark text-truncate">
+                                <div class=" col-md border-right border-dark text-truncate ">
                                     <a type="button" id="<%= t.id_tarea %>" data-toggle="modal" data-target="#exampleModal" onclick = "mostrartarea(id)"><%=  t.descripcion %></a>
                                 </div>
-                                <div class="col border-right border-dark">
+                                <div class="col d-none d-lg-block d-md-block d-xl-block border-right border-dark">
                                     <%=  t.duracion.toFixed(2) %>
                                 </div>
-                                <div class="col-3 border-right border-dark text-truncate">
+                                <div class="col-3 d-none d-lg-block d-md-block d-xl-block border-right border-dark text-truncate">
                                     <%=  t.nombre %>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4" >
+                                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5 col-xs-0" >
                                     <span class="material-symbols-outlined">
-                                    <a href="/tareas/editarTarea/<%= t.id_tarea %>"  style="size: 1vmax;">
-                                        <button class = "btn btn-primary" > <i class="material-icons" style="font-size:1vmax " >edit</i> </button>
+                                    <a href="/tareas/editarTarea/<%= t.id_tarea %>"  >
+                                        <button  style="float:left !important; display: block  !important; " class = "btn btn-sm btn-primary" > 
+                                            <i class="material-icons" style="font-size:2vh; " >edit</i> </button>
                                         
                                     </a>
                                     </span>
-                                    <button style="size: 1vmax;"  class = "btn btn-danger" id="<%= t.id_tarea %>" type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea(id)" >
-                                        <i style="font-size:1vmax ;" class="material-icons" >delete</i></button>
-                                        
+                                    <button style="float:right !important; display: block  !important;"  class = "btn btn-danger" id="<%= t.id_tarea %>" type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea(id)" >
+                                        <i style="font-size: 2vh ;" class="material-icons" >delete</i></button>
+                                        <!-- style="width: 20%;height: 20%; display: block;" -->
                                 </div>
                             </div>
                     <% } %>
@@ -93,10 +94,9 @@
             console.log(data);
             let html = '';
             if (data.tareas.length > 0) { 
-                html += '<div id = tareas class="row">'
-                    html += '<div class="col-sm over list-group-item">'
-                        html += '<div class="overflow-auto anyClass" style="height: 28rem !important;">'
-                             html += '<input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >'
+                
+                        // html += '<div id = tareas class="overflow-auto anyClass" style="height: 28rem !important;">'
+                        // html += '<input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >'
                 for (t of data.tareas) {
                     html +=        '<div class="row bg-light text-dark m-1 mt-2 border rounded">'
                     html +=            '<div class="col border-right border-dark">'
@@ -118,7 +118,7 @@
                     html +=                    
                     html +=                '</a>'
                     html +=               '</span>'
-                    html +=                '<button  class = "btn btn-danger" id='+ t.id_tarea + ' type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea(id)" ><i class="material-icons" >delete</i></button>              
+                    html +=                '<button  class = "btn btn-danger" id='+ t.id_tarea + ' type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea(id)" ><i class="material-icons" >delete</i></button>'  
                     html +=           '</div>'
                     html +=       ' </div>'
                 }
