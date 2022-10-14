@@ -218,14 +218,15 @@ position: relative;
 .image2 {
 position: absolute;
 bottom: 20px;
-left: 60px;
+left:1vh; 
+
 /* border: 1px rgb(0, 0, 0) solid; */
 }
 
 .image3 {
 position: absolute;
 bottom: 20px;
-right:60px;
+right:1vh;
 /* border: 1px rgb(0, 0, 0) solid; */
 }
 .circle-image{
