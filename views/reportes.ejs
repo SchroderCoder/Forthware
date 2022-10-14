@@ -2,7 +2,6 @@
 <%- include('includes/nav.ejs') %>   
 <%- include('includes/sidebar.ejs') %>   
 
-
 <div class="row pt-2 ">
     <div class="col-5 pl-3 " style="display:block ;">
         <h2 class=" " >Reportes</h2>
@@ -27,22 +26,30 @@
                     <div class="p-1">
                         <div class="row">
                             <% let id = 0; %>
-                        <% for (let  r of reportes) { %>
-                            <% id= r.id_reporte %>
-                                <div class="col-sm-4 pt-2 p-4 over">
-                                    <div class="card " style="width: auto; height: 28rem ;">
-                                        <p class="card-title bg-success text-dark h-25 text-center align-middle py-auto  list-group-item"><a class="text-white" ><%= new Date(r.fecha_inicio).toLocaleDateString("ES-mx")  %> 
-                                        - <%= new Date(r.fecha_fin).toLocaleDateString("ES-mx")  %></a>
-                                        <div class="parent">
-                                            <img src="/media/templatereportes.png" class=" p-1 w-75 image1 card-img-top mx-auto d-block" style="position:relative ;  " alt="reporte" />
-                                            <button id="<%= r.id_reporte %>" type="button" class="image2 btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal" onclick = "eliminareporte(id)" >
-                                                Eliminar Reporte
-                                            </button>
-                                            <a href="<%= r.pdf_reportes%>"" class="btn-sm btn-primary image3" type="button" >Descargar</a>
-                                          </div>
-                                    </div>
-                                </div>
-                        <% } %>
+                                <% for (let  r of reportes) { %>
+                                    <% id= r.id_reporte %>
+                                        <div class="col-sm-4 pt-2 p-4 over">
+                                            <div class="card " style="width: auto; height: auto ;">
+                                                <p class="card-title bg-success text-dark h-25 text-center align-middle py-auto  list-group-item"><a class="text-white" ><%= new Date(r.fecha_inicio).toLocaleDateString("ES-mx")  %> 
+                                                - <%= new Date(r.fecha_fin).toLocaleDateString("ES-mx")  %></a><!-- <a href="/reportes/download" class="btn btn-primary btn-sm ml-3" button type="button">Descargar</a> --></p>
+                                                <!-- <img src="/media/templatereportes.png" class="card-img-top" style="position:relative ;" alt="reporte"> -->
+                                                <div class="parent">
+                                                    <img src="/media/templatereportes.png"  class=" p-1  image1 card-img-top mx-auto d-block img-fluid" style="position:relative ; width:63% ;  " alt="reporte" />
+                                                    <button href="/reportes/download" class="btn-sm btn-primary image2" type="button" > 
+                                                        <span class="material-icons">
+                                                            file_download
+                                                        </span></button>
+                                                    <button id="<%= r.id_reporte %>"  type="button" class="image3 btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal" onclick = "eliminareporte(id)" >
+                                                        <span class="material-icons">
+                                                            delete
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% } %>
+                                <% } %>
+                            <% } %>
                         </div>
                     </div>
                 <% } else { %>
