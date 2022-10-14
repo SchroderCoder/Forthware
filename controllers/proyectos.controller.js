@@ -121,7 +121,7 @@ exports.postCrearProyecto = (request, response, next) => {
 
 exports.getCrearEtiqueta = (request, response, next) => {
     
-    response.render(path.join('..',"views", "CrearEtiqueta.ejs"), {
+    response.render(path.join('..',"views", "crearEtiqueta.ejs"), {
         privilegios: request.session.privilegios,
         isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
         etiquetas: "",
@@ -289,7 +289,7 @@ exports.getEditarEtiqueta = (request, response, next) => {
     Proyecto.fetchOne(request.params.id)
     .then(([rows, fielData]) => { 
         if (rows.length > 0) {
-            response.render(path.join('..',"views", "CrearEtiqueta.ejs"), {
+            response.render(path.join('..',"views", "crearEtiqueta.ejs"), {
                 proyectos: rows[0],
                 titulo: "Editar etiqueta " + rows[0].nombre,
                 etiquetas :rows[0],
