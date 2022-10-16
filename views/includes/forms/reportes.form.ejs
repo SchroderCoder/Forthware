@@ -1,9 +1,7 @@
-
-
-    <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
+<input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
     <input type="hidden" name="csrf_" id="csrf_" value="<%= csrfToken %>" >
-<fieldset class="text-white">
-    <legend class="text-white">Datos del reporte</legend>
+<fieldset>
+    <legend class="text-white" style="font-weight:bolder !important;">Datos del reporte</legend>
     <div class="input-field">
 
     <label for="fecha_inicio" class="text-white"> Fecha de inicio: </label>    
@@ -13,31 +11,31 @@
     
     </div>
     <br><br>
-    <h5 class="text-white">Personal</h5>
-    <table class="table border-dark text-white " style="border-bottom-width: 0px !important;">
+    <h5 class="text-white" style="font-weight:bolder !important;">Personal</h5>
+    <table class="table border-dark text-white " style="border-bottom-width: 0px !important; font-weight: normal !important;">
         <tbody>
-            <tr>
-                <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important;" scope="row"><label for="completo">Tiempo completo: </label></th>
+            <tr style>
+                <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row"><label for="completo">Tiempo completo: </label></th>
                 <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
                 <input id="completo" name="completo" min="0" max="100" type="int"  value = 12 required></td>
             </tr>
             <tr>
-                <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important;" scope="row"><label for="medio">Tiempo medio: </label></th>
+                <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row"><label for="medio">Tiempo medio: </label></th>
                 <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
                 <input id="medio" name="medio" min="0" max="100" type="int" value = 6 required></td>
             </tr>
             <tr>
-                <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important;" scope="row"><label for="completo">Horas esperadas semanales tiempo completo: </label></th>
+                <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row"><label for="completo">Horas esperadas semanales tiempo completo: </label></th>
                 <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
                 <input id="horascompleto1" name="horascompleto1" min="0" max="100" type="int" value = 35 required></td>
             </tr>
             <tr>
-                <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important;" scope="row"><label for="completo">Horas esperadas semanales tiempo medio: </label></th>
+                <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row"><label for="completo">Horas esperadas semanales tiempo medio: </label></th>
                 <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
                 <input id="horasmedio1" name="horasmedio1" min="0" max="100" type="int"  value= 18 required></td>
             </tr>
             <tr>
-                <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important;" scope="row"><label for="efectividad">Efectividad: </label></th>
+                <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row"><label for="efectividad">Efectividad: </label></th>
                 <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
                 <input placeholder="85% " id="efectividad1" name="efectividad1" min="50" max="100" type="int" value = 85  required></td>
                 <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">%</td>
@@ -45,48 +43,56 @@
         </tbody>
     </table>
 
-    <h5>Personal en ausencia</h5>
-    <table>
-        <tr>
-            <td><label for="completo">Tiempo completo: </label></td>
-            <td><input id="ausentescompleto" name="ausentescompleto" min="0" max="100" type="int" value = 1 required></td>
-        </tr>
-        <tr>
-            <td><label for="medio">Tiempo medio: </label></td>
-            <td><input id="ausentesmedio" name="ausentesmedio" min="0" max="100" type="int" value = 2  required></td>
-        </tr>
+    <br>
+    <h5 class="text-white" style="font-weight:bolder !important;">Personal en ausencia</h5>
+    <table class="table border-dark text-white " style="border-bottom-width: 0px !important;">
+        <tbody>
+            <tr>
+                <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row"><label for="completo">Tiempo completo: </label></th>
+                <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
+                <input id="ausentescompleto" name="ausentescompleto" min="0" max="100" type="int" value = 1 required></td>
+            </tr>
+            <tr>
+                <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row"><label for="medio">Tiempo medio: </label></th>
+                <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
+                <input id="ausentesmedio" name="ausentesmedio" min="0" max="100" type="int" value = 2  required></td>
+            </tr>
+        </tbody>
     </table>
 
     <br><br>
     <div id="lista_proyectos">
-        <table>
-            <% let proyectos = ['Proyecto 1', 'Proyecto 2']; %>
-            <tr>
-                <th>Proyectos</th>
-                <th>Horas hombre</th>
-                <!-- <th>Horas ajustadas</th> -->
-            </tr>
-            <% if (proyectos.length > 0) { %>
-                    <% for (let  p of proyectos) { %>
-                        <tr>
-                        <td>
-                        <p class="pr-3 " ><%= p %></p>
-                        </td>
-                        <td>horas</td>
-                        <td><label for="proyectos_horas_adj"></label>
-                        <input placeholder="500" id="proyectos_horas_adj" name="proyectos_horas_adj" type="int" required></td></td> 
-                        </tr>
-                    <% } %>
-                
-                <% } else { %>
-                    <h2>No hay proyectos registrados</h2>
-                <% } %> 
-            <tr class="text-white">
-                <% let horasajutadas = 220 %>
-                <td>Total:</td>
-                <td>horas suma</td>
-                <td><%= horasajutadas %></td>
-            </tr>
+        <table class="table border-dark text-white " style="border-bottom-width: 0px !important;">
+            <tbody>
+                <% let proyectos = ['Proyecto 1', 'Proyecto 2']; %>
+                <tr>
+                    <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row">Proyectos</th>
+                    <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row">Horas hombre</th>
+                    <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row">Horas ajustadas</th>
+                    <!-- <th>Horas ajustadas</th> -->
+                </tr>
+                <% if (proyectos.length > 0) { %>
+                        <% for (let  p of proyectos) { %>
+                            <tr>
+                            <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
+                            <p><%= p %></p>
+                            </td>
+                            <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" >horas</td>
+                            <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;"><label for="proyectos_horas_adj"></label>
+                            <input placeholder="500" id="proyectos_horas_adj" name="proyectos_horas_adj" type="int" required></td> 
+                            </tr>
+                        <% } %>
+                    
+                    <% } else { %>
+                        <h2>No hay proyectos registrados</h2>
+                    <% } %> 
+                <tr>
+                    <% let horasajutadas = 220 %>
+                    <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;">Total:</td>
+                    <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;">horas suma</td>
+                    <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;"><%= horasajutadas %></td>
+                </tr>
+            </tbody>
         </table>
     </div>
 
@@ -99,16 +105,20 @@
 </fieldset>
 
 <br>
-<input type="submit" class="btn btn-success" value="Generar" onclick = "postreportes()" >
+<div class="col-sm 5" style="display: -webkit-box;; box-sizing: content-box;">
+    <button type="button" class="btn btn-info   mx-auto my-2" style="display: -webkit-box; box-sizing: content-box;" onclick = "calculate()">
+        Actualizar Datos
+    </button>
+    <input type="submit" class="btn btn-success btn-lg  mx-auto my-2 " style="display: -webkit-box; box-sizing: content-box;" value="Generar" onclick = "postreportes()" >
+</div>
 
 <div id="preview">
     
 </div>  
 
-<a href="/reportes/main" class="btn btn-danger" button type="button">Cancelar</a>
 
-<button class="btn btn-info" onclick = "calculate()">Actualizar Datos</button>
+
+
 
 <script src="/js/calculate.js" ></script>
 <script src="/js/postreportes.js" ></script>
-

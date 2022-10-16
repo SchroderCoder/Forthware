@@ -1,4 +1,4 @@
-var show = true;
+var show = false;
 
 function showCheckboxes() {
     const  checkboxes =  document.getElementById("checkBoxes");
@@ -11,7 +11,7 @@ function showCheckboxes() {
     }
 }
 
-var show2 = true;
+var show2 = false;
 
 function showCheckboxes2() {
     const  checkboxes =  document.getElementById("checkBoxes2");

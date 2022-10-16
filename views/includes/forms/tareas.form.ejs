@@ -15,11 +15,11 @@
         <% if (tareas=="") { %>
             <div class="py-3">
                 <div class="dropdown pb-2">
-                    <button class="btn btn--radius-2 btn-success dropdown-toggle" type="button" onclick="showCheckboxes()">
+                    <button class="btn btn--radius-2 btn-secondary dropdown-toggle" type="button" onclick="showCheckboxes()">
                         Colaboradores
                     </button>
                 </div>
-                <div id="checkBoxes" style="display:none ;" aria-expanded="false" >
+                <div id="checkBoxes" aria-expanded="true" >
                     <!-- rs-select2 js-select-simple select--no-search -->
                     <div class="col-sm list-group-item" >
                         <% for (let e of empleados) { %>

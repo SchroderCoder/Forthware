@@ -30,17 +30,27 @@ function mostrarperfil(id){
                     let html = '';
                 
                     html +=
-                    '        <div class="modal-header"> ' +
-                    '          <h5 class="modal-title" id="exampleModalLabel"> <i class="material-icons iconSide">account_circle</i>' + data.empleados[0].nombre + '</h5> ' +
+                    '        <div class="modal-header main-nav"> ' +
+                    '          <h5 class="modal-title" id="exampleModalLabel"> <img src="/media/natgas-logo-simple.png" width="40" alt=" Logo NatGas"> ' + data.empleados[0].nombre + '</h5> ' +
                     '          <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Close"></button> ' +
                     '        </div> ' +
                     '        <div class="modal-body text-center"> ' + 
-                    '            <p>Nombre: '+ data.empleados[0].nombre + '</p> ' +
+                    '           <div class="container"> ' +
+                    '           <div class="row"> ' +
+                    '           <div class="col"> <img src=" '+ data.empleados[0].image_url +' " class="img-circle mx-auto d-block img-fluid" alt="Imagen de Perfil Colaborador" onerror="this.onerror=null; this.src="https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png"></img>' +
+                    '           </div> ' +
+                    '           <div class="col"> ' +
+                    '            <p class="bg-danger">Nombre: '+ data.empleados[0].nombre + '</p> ' +
                     '            <p>Correro Electrónico: '+ data.empleados[0].correo_electronico + '</p> ' +
                     '            <p>Disponibilidad: '+ tiempo + '</p> ' +
-                    '           <img src=" '+ data.empleados[0].image_url +' " class="img-circle mx-auto d-block img-fluid" alt="Imagen de Perfil Colaborador" onerror="this.onerror=null; this.src="https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png"></img>';
+                    '           </div> ' +
+                    '           </div> ' +
+                    '           </div><br> ' ;
 
-                    html += '<li class= "bold-text">Proyectos: </li>'
+                    html +=   
+                    '  <div class="container"> ' +
+                    '           <div class="row"> ' +
+                    '<div class="col"> <li class= "bold-text text-success">Proyectos activos: </li>';
                     if(data.proyectos.length > 0) {
                         for(p of data.proyectos) {  
                             html += '<li>' +  p.nombre + '</li> ';
@@ -48,8 +58,9 @@ function mostrarperfil(id){
                     } else {
                         html += '<p>Sin proyectos asignados</p>';
                     }
-
-
+                    html += '</div>'
+                    html += ' <div class="col"> <li class= "bold-text text-success">Proyectos pasados: </li>';
+                    html += '<li>Sin proyectos pasados</li></div> ';
                     html += '</div> ';
                     
                     document.getElementById("modal_contenido").innerHTML = html;
