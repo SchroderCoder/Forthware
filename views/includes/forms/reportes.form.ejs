@@ -1,6 +1,4 @@
-
-
-    <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
+<input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
     <input type="hidden" name="csrf_" id="csrf_" value="<%= csrfToken %>" >
 <fieldset>
     <legend class="text-white" style="font-weight:bolder !important;">Datos del reporte</legend>
@@ -54,26 +52,6 @@
                 <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
                 <input id="ausentescompleto" name="ausentescompleto" min="0" max="100" type="int" value = 1 required></td>
             </tr>
-            <% if (proyectos.length > 0) { %>
-                    <% for (let  p of proyectos) { %>
-                        <tr>
-                        <td>
-                        <p class="pr-3 " ><%= p %></p>
-                        </td>
-                        <td>horas</td>
-                        <td><label for="proyectos_horas_adj"></label>
-                        <input placeholder="500" id="proyectos_horas_adj" name="proyectos_horas_adj" type="int" required></td></td> 
-                        </tr>
-                    <% } %>
-                
-                <% } else { %>
-                    <h2>No hay proyectos registrados</h2>
-                <% } %> 
-            <tr class="text-white">
-                <% let horasajutadas = 220 %>
-                <td>Total:</td>
-                <td>horas suma</td>
-                <td><%= horasajutadas %></td>
             <tr>
                 <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row"><label for="medio">Tiempo medio: </label></th>
                 <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
@@ -109,6 +87,7 @@
                         <h2>No hay proyectos registrados</h2>
                     <% } %> 
                 <tr>
+                    <% let horasajutadas = 220 %>
                     <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;">Total:</td>
                     <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;">horas suma</td>
                     <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;"><%= horasajutadas %></td>
@@ -119,7 +98,8 @@
 
     <br>
     
-    <div id="preview">          
+    <div id="preview">
+           
     </div>
     
 </fieldset>
@@ -142,4 +122,3 @@
 
 <script src="/js/calculate.js" ></script>
 <script src="/js/postreportes.js" ></script>
-
