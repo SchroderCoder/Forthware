@@ -2,13 +2,8 @@
 
     <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
     <input type="hidden" name="csrf_" id="csrf_" value="<%= csrfToken %>" >
-<<<<<<< HEAD
-<fieldset class="text-white">
-    <legend class="text-white">Datos del reporte</legend>
-=======
 <fieldset>
     <legend class="text-white" style="font-weight:bolder !important;">Datos del reporte</legend>
->>>>>>> lalo
     <div class="input-field">
 
     <label for="fecha_inicio" class="text-white"> Fecha de inicio: </label>    
@@ -59,7 +54,6 @@
                 <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
                 <input id="ausentescompleto" name="ausentescompleto" min="0" max="100" type="int" value = 1 required></td>
             </tr>
-<<<<<<< HEAD
             <% if (proyectos.length > 0) { %>
                     <% for (let  p of proyectos) { %>
                         <tr>
@@ -80,12 +74,10 @@
                 <td>Total:</td>
                 <td>horas suma</td>
                 <td><%= horasajutadas %></td>
-=======
             <tr>
                 <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row"><label for="medio">Tiempo medio: </label></th>
                 <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
                 <input id="ausentesmedio" name="ausentesmedio" min="0" max="100" type="int" value = 2  required></td>
->>>>>>> lalo
             </tr>
         </tbody>
     </table>
@@ -128,8 +120,7 @@
 
     <br>
     
-    <div id="preview">
-           
+    <div id="preview">          
     </div>
     
 </fieldset>
