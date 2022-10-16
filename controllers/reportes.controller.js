@@ -11,6 +11,7 @@ exports.getReportes = (request, response, next) => {
 
     Reporte.fetchAll()
     .then(([rows, fielData]) => {
+        console.log(rows),
         response.render(path.join('..',"views", "reportes.ejs"), {
             reportes: rows,
             privilegios: request.session.privilegios,
