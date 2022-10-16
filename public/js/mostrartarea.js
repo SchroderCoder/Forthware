@@ -1,5 +1,7 @@
 function mostrartarea(id){
 
+    document.getElementById("modal_contenido").innerHTML = '';
+
     data = new Object ();
 
     data.id = id;
@@ -18,11 +20,8 @@ function mostrartarea(id){
     }).then(data => {
             console.log(data)
 
-            
-                document.getElementById("modal").innerHTML =
-                '<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">'+
-                '   <div class="modal-dialog" role="document">'+
-                '  <div class="modal-content">'+
+                let html = '';
+                html +=
                 '        <div class="modal-header"> ' +
                 '          <h5 class="modal-title" id="exampleModalLabel"> <i class="material-icons iconSide">assignment</i>Tarea ' + data.tareas[0].id_tarea + '</h5> ' +
                 '          <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Close"></button> ' +
@@ -30,14 +29,15 @@ function mostrartarea(id){
                 '        <div class="modal-body text-center"> ' + 
                 '            <p>Descripción de la tarea: '+ data.tareas[0].descripcion + '</p> ' +
                 '            <p>Duración: '+ (data.tareas[0].duracion).toFixed(2) + ' Hrs</p> ' +
-                '            for(e of data.empleados) {  ' + 
-                '            <p>' +  data.empleados[0].nombre + '</p> ' +
-                '             }  ' +
-                '        </div> ' +
-                '     </div> ' +
-                '    </div> ' +
-                '</div> ' 
+                ' <li>Colaboradores:</li>';
+                for(e of data.empleados) {  
+                    html += '            <li>' + e.nombre + '</li> ';
+                }  
+
+                html += '        </div> ';
             
+                document.getElementById("modal_contenido").innerHTML = html;
+
     }).catch(err => {
         console.log(err);
     });

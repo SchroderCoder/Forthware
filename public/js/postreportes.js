@@ -48,6 +48,7 @@
     }).then(result => {
         return result.json();
     }).then(data => {
+        window.location.assign('/reportes/main')
         
     }).catch(err => {
         console.log(err);
