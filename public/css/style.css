@@ -147,6 +147,15 @@ h2{
     background-color:#25282B;
 }
 
+.list-group-check{
+    
+    padding: 0.5rem 1rem;
+    color: #FFFF;
+    text-decoration: none;
+    background-color:#25282B;
+    width: 100%;
+}
+
 .list-group-item-action {
     width: 100%;
     color: #FFFF;
@@ -247,6 +256,40 @@ right:1vh;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
+}
+
+.imagePerfil {
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    bottom: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.container2:hover .imagePerfil {
+    opacity: 0.3;
+}
+  
+.container2:hover .middle {
+    opacity: 1;
+}
+
+.text {
+    color: white;
+    font-size: 16px;
+    padding: 16px 32px;
 }
 
 .circular--landscape {

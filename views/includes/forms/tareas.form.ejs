@@ -21,11 +21,14 @@
                 </div>
                 <div id="checkBoxes" aria-expanded="true" >
                     <!-- rs-select2 js-select-simple select--no-search -->
-                    <div class="col-sm list-group-item" >
+                    <div class="row list-group-check" >
                         <% for (let e of empleados) { %>
-                            <div class="badge badge-light m-1 px-3"  >
-                                <input type="checkbox" id="empleados" name="empleados" value="<%= e.id_empleado %>">
-                                <label for="empleados" class="pl-3"><%= e.nombre %></label>
+                            
+                            <div class="col-4 ">
+                                <div class="badge badge-light py-1 m-1  d-block"  >
+                                <input type="checkbox" class=" align-middle" style="display:-webkit-inline-box ;" id="empleados" name="empleados" value="<%= e.id_empleado %>">
+                                <label for="empleados"  ><%= e.nombre %></label>
+                                </div>
                             </div>
                         <% } %> 
                     </div>
