@@ -11,12 +11,21 @@ exports.getReportes = (request, response, next) => {
 
     Reporte.fetchAll()
     .then(([rows, fielData]) => {
-        console.log(rows),
-        response.render(path.join('..',"views", "reportes.ejs"), {
-            reportes: rows,
-            privilegios: request.session.privilegios,
-            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
-        });
+        Reporte.fetchEfectividad()
+        .then(([cols, fielData]) => {
+            response.render(path.join('..',"views", "reportes.ejs"), {
+                reportes: rows,
+                efectividad:cols,
+                privilegios: request.session.privilegios,
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            response.render('error.ejs', {
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+            });
+        })
 
     })
     .catch(err => {
@@ -226,17 +235,14 @@ exports.postBuscar = (request, response, next) => {
 };
 
 exports.postCompleto = (request, response, next) => {
-    console.log(request.body)
     response.status(200).json({completos: request.body});
 };
 
 exports.postHorasHombre = (request, response, next) => {
-    console.log(request.body)
     response.status(200).json({horasHombre: request.body});
 };
 
 exports.getDeleteReporte = (request, response, next) => {
-    console.log(request.params.id);
     Reporte.erase(request.params.id)
     .then(([]) => {
         console.log("Reporte eliminado con éxito");
