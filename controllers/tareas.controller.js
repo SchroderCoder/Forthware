@@ -10,10 +10,15 @@ const fs = require('fs');
 exports.getTareas = (request, response, next) => {
     Tarea.fetchAll()
     .then(([rows, fielData]) => {
+
+        let alert = request.session.alerta ? request.session.alerta : "";
+        request.session.alerta = ""; 
+
         response.render(path.join('..',"views", "tareas.ejs"), {
             tareas: rows,
             privilegios: request.session.privilegios,
             isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+            alert: alert,
         });
     })
     .catch(err => {
@@ -86,6 +91,7 @@ exports.postCrearTareas = (request, response, next) => {
                         });
                     });
                 }
+                request.session.alerta = "Tarea: "+ request.body.descripcion + " creada con éxito!";
                 response.status(303).redirect('/tareas/main');
                 console.log("tarea creada con exito");
             })
@@ -177,10 +183,8 @@ exports.getEditarTareas = (request, response, next) => {
 }
 
 exports.postEditarTareas = (request, response, next) => {
-    console.log(request.body)   
     Tarea.fetchOne(request.body.id)
     .then(([rows, fielData]) => {
-        console.log(rows)
         rows[0].fecha_creacion= request.body.fecha
         rows[0].descripcion= request.body.descripcion
         rows[0].id_proyecto= request.body.proyectos
@@ -238,7 +242,8 @@ exports.postEditarTareas = (request, response, next) => {
                     });
                 });
             }
-            
+
+            request.session.alerta = "Tarea: "+ request.body.descripcion + " editada con éxito!";
             response.status(303).redirect('/tareas/main');
                         
         })
@@ -262,7 +267,7 @@ exports.postEditarTareas = (request, response, next) => {
 exports.getdeleteTareas = (request, response, next) => {    
     Tarea.erase(request.params.id)
     .then(([]) => {
-        console.log("Tarea eliminada con éxito");
+        request.session.alerta = "Tarea eliminada con éxito!";
         response.redirect('/tareas/main');
     })  
     .catch(err => {
@@ -278,8 +283,6 @@ exports.postoneTarea = (request, response, next) => {
         .then(([rows, fieldData]) => {
             Tarea.fetchTareasEmpleados(request.body.id)
             .then(([filas, fieldData]) => {
-                console.log(rows)
-                console.log(filas)
                 response.status(200).json({tareas: rows, empleados: filas});
             })
             .catch(err => { 
