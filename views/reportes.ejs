@@ -77,16 +77,15 @@
 <script>
     var ctxL = document.getElementById("myChart").getContext('2d');
     let fechas = document.getElementById("fechas");
-    console.log(fechas.value);
     let efectividad = document.getElementById("efectividad");
-    console.log(efectividad.value);
+    
     var myLineChart = new Chart(ctxL, {
     type: 'line',
     data: {
-        labels: fechas,
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [{
         label: "Efectividad a través del tiempo",
-        data: efectividad,
+        data: [65, 59, 80, 81, 56, 55, 40],
         backgroundColor: [
             'rgba(84, 179, 71, .2)',
         ],
@@ -98,7 +97,9 @@
         ]
     },
     options: {
+
         responsive: true
+        
     }
     });
 
