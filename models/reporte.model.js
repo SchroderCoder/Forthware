@@ -37,5 +37,10 @@ module.exports = class Reporte {
         return db.execute('UPDATE reportes SET is_deleted = 1 WHERE id_reporte = ?', [un_id]);
     }
 
+    static fetchEfectividad() {
+        return db.execute('SELECT efectividad_ajustada, fecha_fin FROM reportes WHERE is_deleted = 0 ORDER BY fecha_fin DESC LIMIT 8');
+    }
+
+
 
 }

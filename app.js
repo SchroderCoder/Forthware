@@ -15,7 +15,7 @@ const { expressjwt: jwt } = require('express-jwt');
 const jwtAuthz = require('express-jwt-authz');
 const jwksRsa = require('jwks-rsa');
 //====//
-  
+
 const guard = require("express-jwt-permissions");
 
 // const config = {
@@ -32,11 +32,11 @@ const config = {
     authRequired: false,
     auth0Logout: true,
     secret: 'a long, randomly-generated string stored in env',
-    baseURL: 'http://localhost:3000/',
+    baseURL: 'http://localhost:3000',
     clientID: 'VrY5U6QWknSE0ioauNNrG2gRuT2cHZc2',
     issuerBaseURL: 'https://dev-3du5p0pi.us.auth0.com/',
     secret: 'uqyewfincosppÁEO{PWOjkoañseklmññikñhup',
-  };
+};
 
 
 const app = express();
@@ -131,4 +131,4 @@ app.get("/logout",(req, response, next) => {
     response.render(path.join(__dirname,"views","logout.ejs"));
  });
 
-app.listen(3000);
+app.listen(3000);   
