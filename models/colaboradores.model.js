@@ -21,6 +21,6 @@ module.exports = class Colaboradores {
     }
 
     static fetchProyectos(un_id) {
-        return db.execute('SELECT P.nombre, estatus FROM proyectos P , crea C WHERE C.id_proyecto = P.id_proyecto AND C.id_empleado = ? AND is_deleted = 0', [un_id]);
+        return db.execute('SELECT P.nombre, estatus, P.is_deleted FROM proyectos P, crea C WHERE C.id_proyecto = P.id_proyecto AND C.id_empleado = ?', [un_id]);
     }
 }

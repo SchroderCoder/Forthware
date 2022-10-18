@@ -53,10 +53,13 @@ function mostrarperfil(id){
                 '<div class="col"> <li class= "bold-text text-success">Proyectos activos: </li>';
                 if(data.proyectos.length > 0) {
                     for(p of data.proyectos) {
-                        if (p.estatus != "Terminado") {
-                            html += '<li>' + p.nombre + '</li> ';
-                            flag = true;
+                        if(p.is_deleted){
+                            continue;
                         }
+                        if (p.estatus != "Terminado") {
+                            html += '<li>' +  p.nombre + '</li> ';
+                            flag = true;
+                        }   
                     }
                     if (!flag){
                         html += '<p>Sin proyectos asignados</p>';
@@ -72,7 +75,7 @@ function mostrarperfil(id){
                         if (p.estatus == "Terminado") {
                             html += '<li>' +  p.nombre + '</li> ';
                             flag = true;
-                        }
+                        }   
                     }
                     if (!flag){
                         html += '<p>Sin proyectos pasados</p>';
