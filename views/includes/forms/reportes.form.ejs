@@ -17,12 +17,12 @@
             <tr style>
                 <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row"><label for="completo">Tiempo completo: </label></th>
                 <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
-                <input id="completo" name="completo" min="0" max="100" type="int"  value = 12 required></td>
+                <input id="completo" name="completo" min="0" max="100" type="int"  value = 12 oninput = "checkTiempoCompleto()" required></td>
             </tr>
             <tr>
                 <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row"><label for="medio">Tiempo medio: </label></th>
                 <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
-                <input id="medio" name="medio" min="0" max="100" type="int" value = 6 required></td>
+                <input id="medio" name="medio" min="0" max="100" type="int" value = 6  oninput = "checkTiempoMedio()" required></td>
             </tr>
             <tr>
                 <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row"><label for="completo">Horas esperadas semanales tiempo completo: </label></th>
@@ -32,12 +32,12 @@
             <tr>
                 <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row"><label for="completo">Horas esperadas semanales tiempo medio: </label></th>
                 <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
-                <input id="horasmedio1" name="horasmedio1" min="0" max="100" type="int"  value= 18 required></td>
+                <input id="horasmedio1" name="horasmedio1" min="0" max="100" type="int"  value= 18  required></td>
             </tr>
             <tr>
                 <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row"><label for="efectividad">Efectividad: </label></th>
                 <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
-                <input placeholder="85% " id="efectividad1" name="efectividad1" min="50" max="100" type="int" value = 85  required></td>
+                <input placeholder="85% " id="efectividad1" name="efectividad1" min="50" max="100" type="int" value = 85 oninput = "checkEfectividad()" required></td>
                 <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">%</td>
             </tr>
         </tbody>
@@ -106,7 +106,7 @@
 
 <br>
 <div class="col-sm 5" style="display: -webkit-box;; box-sizing: content-box;">
-    <button type="button" class="btn btn-info   mx-auto my-2" style="display: -webkit-box; box-sizing: content-box;" onclick = "calculate()">
+    <button type="button" class="btn btn-info   mx-auto my-2" style="display: -webkit-box; box-sizing: content-box;" onclick = "calculate()" onmouseenter = "checkValue()">
         Actualizar Datos
     </button>
     <input type="submit" class="btn btn-success btn-lg  mx-auto my-2 " style="display: -webkit-box; box-sizing: content-box;" value="Generar" onclick = "postreportes()" >
@@ -119,6 +119,6 @@
 
 
 
-
+<script src="/js/checkValue.js" ></script>
 <script src="/js/calculate.js" ></script>
 <script src="/js/postreportes.js" ></script>
