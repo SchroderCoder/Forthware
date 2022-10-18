@@ -64,6 +64,9 @@
                                                         <% if (p.estatus == "Desarrollo") { %>
                                                             <p style="background-color: #48041b !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
                                                         <% } %>
+                                                        <% if (p.estatus == "Terminado") { %>
+                                                            <p style="background-color: #281091 !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                                        <% } %>
 
                                                 </div>
                                                 <div class="row pt-2"  >

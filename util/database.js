@@ -11,10 +11,10 @@ const mysql = require('mysql2');
 
 const pool = mysql.createPool({
     
-    host: '34.171.63.83',
+    host: '35.232.62.89',
     user: 'root',
     database: 'NatDev',
-    password: 'forthware2',
+    password: 'PFAhX4ocZC52x6n3Ydho',
     port: 3306,
 
 });
