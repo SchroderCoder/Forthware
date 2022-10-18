@@ -7,15 +7,16 @@ const fs = require('fs');
 const database = require('../util/database');
 
 exports.getReportes = (request, response, next) => {
-
-
     Reporte.fetchAll()
     .then(([rows, fielData]) => {
         Reporte.fetchEfectividad()
         .then(([cols, fielData]) => {
+        let alert = request.session.alerta ? request.session.alerta : "";
+        request.session.alerta = ""; 
             response.render(path.join('..',"views", "reportes.ejs"), {
+                alert: alert,
                 reportes: rows,
-                efectividad:cols,
+                efectividad:cols.reverse(),
                 privilegios: request.session.privilegios,
                 isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
             });
@@ -63,9 +64,6 @@ exports.postCrearReporte = (request, response, next) => {
         });
     }
 
-    
-    console.log(request.body)
-
 
     const reporte = new Reporte(request.body.fecha_inicio, request.body.fecha_fin, request.body.efectividadaj, request.body.horastotales, request.body.total, request.body.horasausencia, request.body.efectividad, 2, '/pdf/reporte' + request.body.fecha_inicio + "-" + request.body.fecha_fin + '.pdf');
     reporte.save()
@@ -106,7 +104,6 @@ exports.postCrearReporte = (request, response, next) => {
                     columns: 1,
                     align: 'justify'
                 });
-                console.log(horasArray)
 
                 doc.moveDown();
 
@@ -184,7 +181,6 @@ exports.postCrearReporte = (request, response, next) => {
                             Resumen: 'Porcentaje de efectividad', 
                             Horas: request.body.efectividad, 
                         },
-                        // {...},
                       ],
                     };
                     doc.table(table, {
@@ -210,9 +206,10 @@ exports.postCrearReporte = (request, response, next) => {
                 ;
 
                 doc.end();
-            
+
+            privilegios: request.session.privilegios
+            request.session.alerta = "Reporte: "+ request.body.fecha_inicio + " / "+ request.body.fecha_fin + " creado con éxito!";
             response.status(200).json({mensaje: 'pdf generado'});
-            console.log("reporte creado con exito");
         })
         .catch(err => {
             console.log(err);
@@ -226,6 +223,7 @@ exports.postCrearReporte = (request, response, next) => {
 exports.postBuscar = (request, response, next) => {
     Reporte.getHoras_proyectos(request.body.fecha_inicio, request.body.fecha_fin)
         .then(([rows, fieldData]) => {
+            privilegios: request.session.privilegios
             response.status(200).json({proyectos: rows});
         })
         .catch(err => { 
@@ -235,17 +233,20 @@ exports.postBuscar = (request, response, next) => {
 };
 
 exports.postCompleto = (request, response, next) => {
+    privilegios: request.session.privilegios
     response.status(200).json({completos: request.body});
 };
 
 exports.postHorasHombre = (request, response, next) => {
+    privilegios: request.session.privilegios
     response.status(200).json({horasHombre: request.body});
 };
 
 exports.getDeleteReporte = (request, response, next) => {
     Reporte.erase(request.params.id)
     .then(([]) => {
-        console.log("Reporte eliminado con éxito");
+        privilegios: request.session.privilegios
+        request.session.alerta = "Reporte eliminado con éxito!";
         response.redirect('/reportes/main');
     })  
     .catch(err => {

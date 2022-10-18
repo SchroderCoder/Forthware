@@ -14,11 +14,14 @@ exports.getProyectos = (request, response, next) => {
         .then(([cols, fielData]) => {
             Proyecto.fetchHorasProyectos()
             .then(([cols1, fielData]) => {
+                let alert = request.session.alerta ? request.session.alerta : "";
+                request.session.alerta = "";         
                 response.render(path.join('..',"views", "proyectos.ejs"), {
                     user: request.oidc.user,
                     proyectos: rows,
                     etiquetas: cols,
                     horas: cols1,
+                    alert: alert,
                     privilegios: request.session.privilegios,
                     isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
 
@@ -98,9 +101,8 @@ exports.postCrearProyecto = (request, response, next) => {
                         });
                     });
                 }
-
-                console.log("proyecto creado con exito");
-                
+                privilegios: request.session.privilegios
+                request.session.alerta = "Proyecto : "+ request.body.nombre + " creado con éxito!"; 
                 response.status(303).redirect('/proyectos/main');
             })
             .catch(err => {
@@ -133,8 +135,9 @@ exports.postCrearEtiqueta = (request, response, next) => {
 
     Proyecto.saveEtiqueta(request.body.nombre,1)
         .then(() => {
+            privilegios: request.session.privilegios
+            request.session.alerta = "Etiqueta : "+ request.body.nombre + " creada con éxito!"; 
             response.status(303).redirect('/proyectos/main');
-            console.log("etiqueta creada con exito");
         })
         .catch(err => {
             console.log(err);
@@ -161,6 +164,7 @@ exports.getEditarProyecto = (request, response, next) => {
                             request.session.empleados_no_r.push(empleado);
                         }
                         response.render(path.join('..',"views", "CrearProyecto.ejs"), {
+                            privilegios: request.session.privilegios,
                             proyectos: rows[0],
                             registrados: request.session.empleados_r,
                             no_registrados: request.session.empleados_no_r,
@@ -204,7 +208,6 @@ exports.postEditarProyecto = (request, response, next) => {
     } else {
         imagen = "";
     }
-    console.log(imagen)
     Proyecto.fetchOne(request.body.id)
     .then(([rows, fielData]) => {
         rows[0].nombre= request.body.nombre
@@ -267,7 +270,8 @@ exports.postEditarProyecto = (request, response, next) => {
                     });
                 });
             }
-            
+            privilegios: request.session.privilegios
+            request.session.alerta = "Proyecto : "+ request.body.nombre + " editado con éxito!"; 
             response.status(303).redirect('/proyectos/main');
         })
         .catch(err => {
@@ -290,6 +294,7 @@ exports.getEditarEtiqueta = (request, response, next) => {
     .then(([rows, fielData]) => { 
         if (rows.length > 0) {
             response.render(path.join('..',"views", "crearEtiqueta.ejs"), {
+                privilegios: request.session.privilegios,
                 proyectos: rows[0],
                 titulo: "Editar etiqueta " + rows[0].nombre,
                 etiquetas :rows[0],
@@ -320,6 +325,8 @@ exports.postEditarEtiqueta = (request, response, next) => {
         
         Proyecto.saveEdit(rows[0])
         .then(() => {
+            privilegios: request.session.privilegios
+            request.session.alerta = "Etiqueta : "+ request.body.nombre + " editada con éxito!"; 
             response.status(303).redirect('/proyectos/main');
         })
         .catch(err => {
@@ -341,6 +348,8 @@ exports.postEditarEtiqueta = (request, response, next) => {
 exports.getDeleteProyecto = (request, response, next) => {
     Proyecto.erase(request.params.id)
     .then(() => {
+        privilegios: request.session.privilegios
+        request.session.alerta = "Eliminado con éxito"; 
         response.status(303).redirect('/proyectos/main');
     })  
     .catch(err => {
@@ -358,6 +367,7 @@ exports.postoneProyecto = (request, response, next) => {
             .then(([filas, fieldData]) => {
                 Proyecto.fetchProyectosHoras(request.body.id)
                 .then(([rows2, fieldData]) => {
+                    privilegios: request.session.privilegios
                     response.status(200).json({proyectos: rows, empleados: filas, horas: rows2});
                 })
                 .catch(err => { 

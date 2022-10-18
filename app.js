@@ -15,7 +15,7 @@ const { expressjwt: jwt } = require('express-jwt');
 const jwtAuthz = require('express-jwt-authz');
 const jwksRsa = require('jwks-rsa');
 //====//
-  
+
 const guard = require("express-jwt-permissions");
 
 // const config = {
@@ -36,7 +36,7 @@ const config = {
     clientID: 'VrY5U6QWknSE0ioauNNrG2gRuT2cHZc2',
     issuerBaseURL: 'https://dev-3du5p0pi.us.auth0.com/',
     secret: 'uqyewfincosppÁEO{PWOjkoañseklmññikñhup',
-  };
+};
 
 
 const app = express();
