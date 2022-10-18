@@ -1,5 +1,7 @@
 
     const calculate = () => {   
+
+            
         const tiempocompleto= document.getElementById("completo");
         const tiempomedio= document.getElementById("medio");
         const efectividad= document.getElementById("efectividad1").value;
@@ -32,6 +34,7 @@
        }   
 
        proyecto = proyecto.toFixed(2);     
+
 
        proporcion = ((proyecto / horasesperadas)*100).toFixed(2);
 
