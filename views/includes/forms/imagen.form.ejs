@@ -1,0 +1,49 @@
+    <form action="crearEtiqueta" method="POST">
+    <input type="hidden" id="_csrf" name="_csrf" value="<%= csrfToken %>" >
+    <fieldset class="pl-4">
+        <legend class="text-white">Datos de la etiqueta</legend>
+        <div class="pl-5">
+
+          <table class="table border-dark text-white " style="border-bottom-width: 0px !important;">
+            <tbody>
+              <tr>
+                <th style="border-bottom-width: 0px !important; border-top-width: 0cm !important;" scope="row"><label for="nombre">Nombre: </label></th>
+                  <td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">
+                    <input id="nombre" name="nombre" maxlength="40" type="text" value= "<%= etiquetas.nombre %>" required>
+                    <input id="id" name="id" type="hidden" value="<%= etiquetas.id_proyecto %>">
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>    
+    </fieldset>
+    <% if (etiquetas=="") { %>
+        <input type="submit" class="btn btn-success btn-lg ml-5 d-block mx-auto mt-3" value="<%= titulo %>">
+    <% } else { %>  
+      <div class="col-sm 5" style="display: -webkit-box;; box-sizing: content-box;">
+          <input type="submit" class="btn btn-success btn-lg  mx-auto my-2 " style="display: -webkit-box; box-sizing: content-box;" value="Registrar Cambios">
+          <button type="button" class="btn btn-danger   mx-auto my-2" style="display: -webkit-box; box-sizing: content-box;" data-toggle="modal" data-target="#exampleModal" >
+            Eliminar Etiqueta
+          </button>
+      </div>
+        
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-white" id="exampleModalLabel">Eliminar Etiqueta </h5>
+                  <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-white">
+                    <p> ¿Estás seguro de que quieres eliminar esta Etiqueta?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <a href="/proyectos/delete/<%= proyectos.id_proyecto %>" class="btn btn-danger" id="eliminar">Eliminar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+    <%}%>
+
+</form>

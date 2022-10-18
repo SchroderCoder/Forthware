@@ -70,3 +70,82 @@ function mostrarperfil(id){
         });
         
 }
+
+function mostrarperfilpersonal(id){
+
+    document.getElementById("modal_contenido").innerHTML = '';
+
+    data = new Object ();
+
+    data.id = id;
+
+    const csrf = document.getElementById('_csrf').value;
+
+    fetch('/colaboradores/OneColaborador', {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json',
+            'csrf-token': csrf  
+        },
+        body: JSON.stringify(data),
+    }).then(result => {
+        return result.json(); //Regresa otra promesa
+    }).then(data => {
+                tiempo = ''
+
+                let html = '';
+            
+                html +=
+                '        <div class="modal-header main-nav"> ' +
+                '          <h5 class="modal-title" id="exampleModalLabel"> <img src="/media/natgas-logo-simple.png" width="40" alt=" Logo NatGas"> Camilo White </h5> ' +
+                '          <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Close"></button> ' +
+                '        </div> ' +
+                '        <div class="modal-body text-center"> ' + 
+                '           <div class="container"> ' +
+                '           <div class="row"> ' +
+                '           <div class="col">' +
+                '            <div class = "container2">' +
+                '           <img src="https://media.tenor.com/qg-URwo5C30AAAAC/xdd-cat-xdd-twitch.gif" class="img-circle mx-auto d-block img-fluid imagePerfil" alt="Imagen de Perfil Colaborador" onerror="this.onerror=null; this.src="https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png"></img><div id = "imagen"></img>' +
+                '            <div class="middle">' +
+                '            <div class="text"><a href="/proyectos/editarEtiqueta/<%= 2 %>"><i class="material-icons iconSide">add_circle</i></a></div>' +
+                '            </div> ' +
+                '            </div> ' +
+                '            </div> ' +
+                '           </div> ' +
+                '           <div class="col"> ' +
+                '            <p class="bg-danger">Nombre: Camilo White</p> ' +
+                '            <p>Correro Electrónico: camilo@gmail.com</p> ' +
+                '            <p>Disponibilidad: Tiempo Completo</p> ' +
+                '           </div> ' +
+                '           </div> ' +
+                '           </div><br> ' ;
+
+                
+                document.getElementById("modal_contenido").innerHTML = html;
+
+    }).catch(err => {
+        console.log(err);
+    });
+    
+}
+
+function mostrarIcono(){
+
+    document.getElementById("imagen").innerHTML = '';
+
+        let html = '';
+
+        html += '<a href="#" class="btn btn-primary" type="button">Editar Imagen de perfil</a>';
+
+    document.getElementById("imagen").innerHTML = html;
+
+}
+
+function esconderIcono(){
+
+    document.getElementById("imagen").innerHTML = '';
+
+        let html = '';
+
+    document.getElementById("imagen").innerHTML = html;
+}
