@@ -91,6 +91,7 @@ exports.postCrearTareas = (request, response, next) => {
                         });
                     });
                 }
+                privilegios: request.session.privilegios,
                 request.session.alerta = "Tarea: "+ request.body.descripcion + " creada con éxito!";
                 response.status(303).redirect('/tareas/main');
             })
@@ -135,6 +136,7 @@ exports.getEditarTareas = (request, response, next) => {
                             request.session.empleados_no_r.push(empleado);
                         }
                         response.render(path.join('..',"views", "CrearTarea.ejs"), {
+                            privilegios: request.session.privilegios,
                             tareas: rows[0],
                             registrados: request.session.empleados_r,
                             no_registrados: request.session.empleados_no_r,
@@ -241,7 +243,7 @@ exports.postEditarTareas = (request, response, next) => {
                     });
                 });
             }
-
+            privilegios: request.session.privilegios,
             request.session.alerta = "Tarea: "+ request.body.descripcion + " editada con éxito!";
             response.status(303).redirect('/tareas/main');
                         
@@ -266,6 +268,7 @@ exports.postEditarTareas = (request, response, next) => {
 exports.getdeleteTareas = (request, response, next) => {    
     Tarea.erase(request.params.id)
     .then(([]) => {
+        privilegios: request.session.privilegios,
         request.session.alerta = "Tarea eliminada con éxito!";
         response.redirect('/tareas/main');
     })  
@@ -282,6 +285,7 @@ exports.postoneTarea = (request, response, next) => {
         .then(([rows, fieldData]) => {
             Tarea.fetchTareasEmpleados(request.body.id)
             .then(([filas, fieldData]) => {
+                privilegios: request.session.privilegios,
                 response.status(200).json({tareas: rows, empleados: filas});
             })
             .catch(err => { 
@@ -298,6 +302,7 @@ exports.postoneTarea = (request, response, next) => {
 exports.getBuscar = (request, response, next) => {
     Tarea.find(request.params.valor)
         .then(([rows, fieldData]) => {
+            privilegios: request.session.privilegios,
             response.status(200).json({tareas: rows});
         })
         .catch(err => { 

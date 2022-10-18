@@ -92,6 +92,7 @@ exports.getMain = (request, response, next) => {
         Usuario.fetchTareasMain()
         .then(([cols, fielData]) => {
         response.render(path.join('..',"views", "main.ejs"), {
+            privilegios: request.session.privilegios,
             proyectos: rows.slice(0,3),
             proyectos2: rows.slice(3,6),
             tareas: cols,
@@ -137,7 +138,6 @@ exports.postLogin = (request, response, next) => {
                                         Usuario.getRol(rows[0].id_empleado)
                                             .then(([consulta_roles, fielData]) => {  
                                                 request.session.roles = []; 
-                                                
                                                 request.session.roles.push(consulta_roles[0].descripcion);                                                                 
                                             })
                                             .catch(err => {

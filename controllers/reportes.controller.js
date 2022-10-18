@@ -11,10 +11,8 @@ exports.getReportes = (request, response, next) => {
     .then(([rows, fielData]) => {
         Reporte.fetchEfectividad()
         .then(([cols, fielData]) => {
-
         let alert = request.session.alerta ? request.session.alerta : "";
         request.session.alerta = ""; 
-
             response.render(path.join('..',"views", "reportes.ejs"), {
                 alert: alert,
                 reportes: rows,
@@ -209,6 +207,7 @@ exports.postCrearReporte = (request, response, next) => {
 
                 doc.end();
 
+            privilegios: request.session.privilegios
             request.session.alerta = "Reporte: "+ request.body.fecha_inicio + " / "+ request.body.fecha_fin + " creado con éxito!";
             response.status(200).json({mensaje: 'pdf generado'});
         })
@@ -224,6 +223,7 @@ exports.postCrearReporte = (request, response, next) => {
 exports.postBuscar = (request, response, next) => {
     Reporte.getHoras_proyectos(request.body.fecha_inicio, request.body.fecha_fin)
         .then(([rows, fieldData]) => {
+            privilegios: request.session.privilegios
             response.status(200).json({proyectos: rows});
         })
         .catch(err => { 
@@ -233,16 +233,19 @@ exports.postBuscar = (request, response, next) => {
 };
 
 exports.postCompleto = (request, response, next) => {
+    privilegios: request.session.privilegios
     response.status(200).json({completos: request.body});
 };
 
 exports.postHorasHombre = (request, response, next) => {
+    privilegios: request.session.privilegios
     response.status(200).json({horasHombre: request.body});
 };
 
 exports.getDeleteReporte = (request, response, next) => {
     Reporte.erase(request.params.id)
     .then(([]) => {
+        privilegios: request.session.privilegios
         request.session.alerta = "Reporte eliminado con éxito!";
         response.redirect('/reportes/main');
     })  
