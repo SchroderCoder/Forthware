@@ -299,10 +299,30 @@ right:1vh;
     height: 160px;
     overflow: hidden;
     border-radius: 50%;
-  }
-  
-  .circular--landscape-img {
-    width: auto;
-    height: 100%;
-    margin-left:-50%;
-  }
+}
+
+.circular--landscape-img {
+width: auto;
+height: 100%;
+margin-left:-50%;
+}
+
+
+.boxTarea {
+position: relative;
+
+}
+
+.contentTarea {
+
+overflow:visible ;    
+width: 100%;
+height: 100%;
+}
+
+.BotonCrear {
+position: fixed;
+bottom: 2rem;
+right: 2rem;
+}
+
