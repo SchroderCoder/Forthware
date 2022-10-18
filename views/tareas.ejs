@@ -1,146 +1,171 @@
+
 <%- include('includes/head.ejs') %>
-<%- include('includes/nav.ejs') %>     
-<%- include('includes/sidebar.ejs') %>   
 
-<div class="input-field">
-    <i class="material-icons prefix">search</i>
-    <input id="buscar" type="text">
-    <label for="buscar">Buscar...</label>
-</div>
-
-<h1 class=" py-2 pl-2 font-weight-bold">Tareas</h1>
-<% if (tareas.length > 0) { %>
-    <div class="container text-center">
-        <div class="row bg-success text-white m-2 rounded">
-            <div class="col">
-                Fecha de creación
-            </div>
-            <div class="col-5">
-                Descripción
-            </div>
-            <div class="col">
-                Duración
-            </div>
-            <div class="col" >
-                Nombre de proyecto
-            </div>
-            <div class="col ">
-                Acciones
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm over list-group-item">
-                <div id = "tareas" class="overflow-auto anyClass" style="height: 28rem !important;">
-                    <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
-                    <% for (let  t of tareas) { %>
-
-                            <div class="row bg-light text-dark m-1 mt-2 border rounded">
-                                <div class="col-2  col-md col-sm border-right border-dark text-truncate">
-                                    <%=  new Date(t.fecha_creacion).toLocaleDateString("ES-mx") %>
-                                </div>
-                                <div class=" col-md border-right border-dark text-truncate ">
-                                    <a type="button" id="<%= t.id_tarea %>" data-toggle="modal" data-target="#exampleModal" onclick = "mostrartarea(id)"><%=  t.descripcion %></a>
-                                </div>
-                                <div class="col d-none d-lg-block d-md-block d-xl-block border-right border-dark">
-                                    <%=  t.duracion.toFixed(2) %>
-                                </div>
-                                <div class="col-3 d-none d-lg-block d-md-block d-xl-block border-right border-dark text-truncate">
-                                    <%=  t.nombre %>
-                                </div>
-                                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5 col-xs-0" >
-                                    <span class="material-symbols-outlined">
-                                    <a href="/tareas/editarTarea/<%= t.id_tarea %>"  >
-                                        <button  style="float:left !important; display: block  !important; " class = "btn btn-sm btn-primary" > 
-                                            <i class="material-icons" style="font-size:2vh; " >edit</i> </button>
-                                        
-                                    </a>
-                                    </span>
-                                    <button style="float:right !important; display: block  !important;"  class = "btn btn-danger" id="<%= t.id_tarea %>" type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea(id)" >
-                                        <i style="font-size: 2vh ;" class="material-icons" >delete</i></button>
-                                        <!-- style="width: 20%;height: 20%; display: block;" -->
-                                </div>
-                            </div>
-                    <% } %>
+<%- include('includes/nav.ejs') %>  
+  
+<%- include('includes/sidebar.ejs') %>
+<body class="boxTarea">
+    <div class="contentTarea">   
+        <div class="row py-2">
+            <div class="col-8">
+                <h1 class="  pl-2 font-weight-bold">Tareas</h1>
+            </div>  
+            <div class="col-4 pt-3 ">
+                <div class="input-field  " style="align-items:flex-end ;">
+                    <i class="material-icons prefix align-middle ">search</i>
+                    <input id="buscar" type="text" style="width:60% ;">
+                    <!-- <label for="buscar">Buscar...</label> -->
                 </div>
             </div>
         </div>
+        
+        <div class="px-4 pb-3">
+            <% if (tareas.length > 0) { %>
+                <div class=" text-center">
+                    <div class="row bg-success text-white m-2 rounded">
+                        <div class="col-2  d-none d-lg-block d-md-block d-xl-block  text-truncate my-auto">
+                            Fecha de creación
+                        </div>
+                        <div class="col-xl-5 col-lg-5 col-md-4 col-sm-7 col-xs-4    my-auto">
+                            Descripción
+                        </div>
+                        <div class="col-xl-1 col-lg-1 col-md-1 text-truncate d-none d-lg-block d-md-block d-xl-block   my-auto ">
+                            Duración
+                        </div>
+                        <div class="col-xl-2 col-md-2 d-none d-lg-block d-md-block d-xl-block text-truncate my-auto" >
+                            Nombre de proyecto
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5 col-xs-5  my-auto ">
+                            Acciones
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm over  ">
+                            <div id = "tareas" class="" style="height: auto !important;">
+                                <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
+                                <% for (let  t of tareas) { %>
 
-<% } else { %>
-    <h2>No hay tareas registradas</h2>
-<% } %>  
-</div>
-<div>
-    <a href="/tareas/crearTarea">
-        <button type="button" class="btn btn-primary mx-auto d-block mt-2" >
-            Crear
-        </button>
-    </a>
-</div>
+                                        <div class="row text-light m-1 mt-2  rounded" style="height: 45px;background-color: rgba(0, 0, 0, 0.20) ;">
+                                            <div class="col-2  d-none d-lg-block d-md-block d-xl-block border-right border-light text-truncate my-auto">
+                                                <%=  new Date(t.fecha_creacion).toLocaleDateString("ES-mx") %>
+                                            </div>
+                                            <div class=" col-xl-5 col-lg-5 col-md-4 col-sm-6 col-xs-1 border-right border-light text-truncate  my-auto">
+                                                <a type="button" id="<%= t.id_tarea %>" data-toggle="modal" data-target="#exampleModal" onclick = "mostrartarea(id)"><%=  t.descripcion %></a>
+                                            </div>
+                                            <div class="col-xl-1 col-lg-1 col-md-1 text-truncate d-none d-lg-block d-md-block d-xl-block border-right border-light  my-auto ">
+                                                <%=  t.duracion.toFixed(2) %>
+                                            </div>
+                                            <div class="col-xl-2 col-md-2 d-none d-lg-block d-md-block d-xl-block border-right light text-truncate my-auto">
+                                                <%=  t.nombre %>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5 col-xs-6 my-auto"  style="overflow: hidden ;" >
+                                                <div class="row" >
+                                                   <div class="col " style="justify-content:end !important ;" >
+                                                    <a href="/tareas/editarTarea/<%= t.id_tarea %>" style="flex:none ;" >
+                                                        <button  style=" flex: none; " class = "btn btn-sm btn-primary " > 
+                                                            <i class="material-icons" style="font-size:125% ; " >edit</i> </button>
+                                                    </a>
+                                                    <button style="flex: none; "  class = "btn btn-sm btn-danger" id="<%= t.id_tarea %>" type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea(id)" >
+                                                        <i style="font-size:125% ;" class="material-icons " >delete</i></button>
+                                                        
+                                            
+                                                             
+                                                        
+                                                   </div>
+                                                       
+                                                            <!-- style="width: 20%;height: 20%; display: block;" -->
+                                                </div>
+                                               
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
 
-<div id = "modal">
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" id="modal_contenido">
+            <% } else { %>
+                <h2>No hay tareas registradas</h2>
+            <% } %>  
+            </div>
+            <div>
+                <a href="/tareas/crearTarea" class="BotonCrear"  >         
+                        <span class="material-icons  " style="font-size:75px;color:white; background-color: #28a745; 
+                        border-radius: 50%; filter: drop-shadow(8px 4px 4px rgba(0, 0, 0, 0.50)); ">
+                            add
+                        </span>
+                </a>
+            </div>
+           
+        </div>
+        <div id = "modal">
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content" id="modal_contenido">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<script src="/js/eliminartarea.js"> </script>
-<script src="/js/mostrartarea.js"> </script>
-
-<script>
-    const accion_asincrona = () => {
-        const valor = document.getElementById('buscar').value;
-        
-        fetch('/tareas/buscar/' + valor, {
-        method: 'GET',
-        }).then(result => {
-            return result.json();
-        }).then(data => {                
-            console.log(data);
-            let html = '';
-            if (data.tareas.length > 0) { 
-                
-                        // html += '<div id = tareas class="overflow-auto anyClass" style="height: 28rem !important;">'
-                        // html += '<input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >'
-                for (t of data.tareas) {
-                    html +=        '<div class="row bg-light text-dark m-1 mt-2 border rounded">'
-                    html +=            '<div class="col border-right border-dark">'
-                    html +=                '<%=  new Date('+t.fecha_creacion+').toLocaleDateString("ES-mx") %>'
-                    html +=            '</div>'
-                    html +=           ' <div class="col-5 border-right border-dark">'
-                    html +=                '<a type="button" id="'+t.id_tarea+'" data-toggle="modal" data-target="#exampleModal" onclick = "mostrartarea(id)">'+  t.descripcion +'</a>'
-                    html +=            '</div>'
-                    html +=            '<div class="col border-right border-dark">'
-                    html +=                +  t.duracion.toFixed(2) 
-                    html +=            '</div>'
-                    html +=            '<div class="col border-right border-dark">'
-                    html +=               + t.nombre 
-                    html +=            '</div>'
-                    html +=            '<div class="col ">'
-                    html +=               '<span class="material-symbols-outlined">'
-                    html +=                '<a href="/tareas/editarTarea/'+ t.id_tarea+ '  >'
-                    html +=                    '<button class = "btn btn-primary" > <i class="material-icons" >edit</i> </button>'
-                    html +=                    
-                    html +=                '</a>'
-                    html +=               '</span>'
-                    html +=                '<button  class = "btn btn-danger" id='+ t.id_tarea + ' type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea(id)" ><i class="material-icons" >delete</i></button>'  
-                    html +=           '</div>'
-                    html +=       ' </div>'
-                }
-            } else {
-                html = '<h2>No hay tareas que coincidan </h2>';
-            }
-        
-            document.getElementById("tareas").innerHTML = html;
-            }).catch(err => {
-                console.log(err);
-            });
-    };
+</body>
     
-    document.getElementById('buscar').onkeyup = accion_asincrona;
 
-</script>
+        <script src="/js/eliminartarea.js"> </script>
+        <script src="/js/mostrartarea.js"> </script>
 
-<%- include('includes/foot.ejs') %>
+        <script>
+            const accion_asincrona = () => {
+                const valor = document.getElementById('buscar').value;
+                
+                fetch('/tareas/buscar/' + valor, {
+                method: 'GET',
+                }).then(result => {
+                    return result.json();
+                }).then(data => {                
+                    console.log(data);
+                    let html = '';
+                    if (data.tareas.length > 0) { 
+                        
+                                // html += '<div id = tareas class="overflow-auto anyClass" style="height: 28rem !important;">'
+                                // html += '<input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >'
+                        for (t of data.tareas) {
+                            html +=        '<div class="row bg-light text-dark m-1 mt-2 border rounded">'
+                            html +=            '<div class="col border-right border-dark">'
+                            html +=                '<%=  new Date('+t.fecha_creacion+').toLocaleDateString("ES-mx") %>'
+                            html +=            '</div>'
+                            html +=           ' <div class="col-5 border-right border-dark">'
+                            html +=                '<a type="button" id="'+t.id_tarea+'" data-toggle="modal" data-target="#exampleModal" onclick = "mostrartarea(id)">'+  t.descripcion +'</a>'
+                            html +=            '</div>'
+                            html +=            '<div class="col border-right border-dark">'
+                            html +=                +  t.duracion.toFixed(2) 
+                            html +=            '</div>'
+                            html +=            '<div class="col border-right border-dark">'
+                            html +=               + t.nombre 
+                            html +=            '</div>'
+                            html +=            '<div class="col ">'
+                            html +=               '<span class="material-symbols-outlined">'
+                            html +=                '<a href="/tareas/editarTarea/'+ t.id_tarea+ '  >'
+                            html +=                    '<button class = "btn btn-primary" > <i class="material-icons" >edit</i> </button>'
+                            html +=                    
+                            html +=                '</span>'
+                            html +=               '</span>'
+                            html +=                '<button  class = "btn btn-danger" id='+ t.id_tarea + ' type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea(id)" ><i class="material-icons" >delete</i></button>'  
+                            html +=           '</div>'
+                            html +=       ' </div>'
+                        }
+                    } else {
+                        html = '<h2>No hay tareas que coincidan </h2>';
+                    }
+                
+                    document.getElementById("tareas").innerHTML = html;
+                    }).catch(err => {
+                        console.log(err);
+                    });
+            };
+            
+            document.getElementById('buscar').onkeyup = accion_asincrona;
+
+        </script>
+
+        <%- include('includes/foot.ejs') %>
