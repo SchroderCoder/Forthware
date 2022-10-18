@@ -122,12 +122,14 @@ exports.postLogin = (request, response, next) => {
     return Usuario.fetchOne(request.body.correo)
         .then(([rows, fielData]) => {
             if (rows.length == 1) {
+                request.session.isLoggedIn = true;
+                request.session.user = rows[0].nombre; 
+                nombreUsuario = request.session.user;                
+                request.session.id_empleado= rows[0].id_empleado;
+                console.log(request.session);
                 bcrypt.compare(request.body.password, rows[0].contraseña)
                     .then(doMatch => {
                         if (doMatch) {
-                            request.session.isLoggedIn = true;
-                            request.session.user = rows[0].nombre;  
-                            request.session.id_empleado= rows[0].id_empleado;
                             return request.session.save(err => {
                                 //Obtener los permisos del usuario
                                 Usuario.getPermisos(rows[0].id_empleado)
