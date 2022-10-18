@@ -1,6 +1,14 @@
 <%- include('includes/head.ejs') %>
 <%- include('includes/nav.ejs') %>   
 <%- include('includes/sidebar.ejs') %>   
+<%  if (alert.includes("cread")) { %> 
+    <%- include('includes/successalert.ejs') %>
+<%  } %> 
+
+<%  if (alert.includes("eliminad")) { %> 
+    <%- include('includes/deletealert.ejs') %>
+<%  } %> 
+
 
 <div class="row pt-2 ">
     <div class="col-5 pl-3 " style="display:block ;">
@@ -21,7 +29,6 @@
 <div class="p-3">
     <div class="row">
         <div class="col pt-1 list-group-item">
-            <div class="overflow-auto anyClass" style="height: 22rem !important;">
                 <% if (reportes.length > 0) { %>
                     <div class="p-1">
                         <div class="row">
@@ -33,12 +40,11 @@
                                         <!-- <img src="/media/templatereportes.png" class="card-img-top" style="position:relative ;" alt="reporte"> -->
                                         <div class="parent">
                                             <img src="/media/templatereportes.png"  class=" p-1  image1 card-img-top mx-auto d-block img-fluid" style="position:relative ; width:63% ;  " alt="reporte" />
-                                            <a type="button" href="<%=r.pdf_reportes%>" class="btn-sm btn-primary image2" type="button" > 
+                                            <a href="<%= r.pdf_reportes%>" class="btn-sm btn-primary image2" type="button" > 
                                                 <span class="material-icons">
                                                     file_download
-                                                </span>
-                                            </a>
-                                            <button id="<%= r.id_reporte %>"  type="button" class="image3 btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal" onclick="eliminareporte(id)" >
+                                                </span></a>
+                                            <button id="<%= r.id_reporte %>"  type="button" class="image3 btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal" value="<%= r.id_reporte %>" onclick = "eliminareporte(id)">
                                                 <span class="material-icons">
                                                     delete
                                                 </span>  
@@ -52,20 +58,92 @@
                 <% } else { %>
                     <h2>No hay reportes registrados</h2>
                 <% } %>  
+        </div>
+    </div>
+</div>
+
+<div id = "modal">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" id="modal_contenido">
             </div>
         </div>
     </div>
 </div>
 
-<div id = "modal"></div>
 
-<script src="/js/eliminarreporte.js"> </script>
+<% const efectividad_aj = [];%>
+<% const fechas = [];%>
+<% for (let e of efectividad){ %> 
+             
+    <% efectividad_aj.push(e.efectividad_ajustada)%> 
+    <% fechas.push(new Date(e.fecha_fin).toLocaleDateString("ES-mx"))%>
 
-    <a href="/reportes/crearReporte">
-        <button type="button" class="btn btn-success mx-auto d-block " >
-            Crear
-        </button>
-    </a>
+<% } %>  
+
+
+<div class="col-md-5">
+    <canvas id="myChart" width="1000" height = "1000"></canvas>
+</div>  
+
+<script>
+    var ctxL = document.getElementById("myChart").getContext('2d');
+    let fechas = document.getElementById("fechas");
+    let efectividad = document.getElementById("efectividad");
     
+    var myLineChart = new Chart(ctxL, {
+    type: 'line',
+    data: {
+        labels: [<% for (let f of fechas) { %>"<%= f %>", <% } %>],
+        datasets: [{
+        label: "Efectividad a través del tiempo",
+        data: [<% for (let e of efectividad_aj) { %>"<%= e %>", <% } %>],
+        backgroundColor: [
+            'rgba(84, 179, 71, .2)',
+        ],
+        borderColor: [
+            'rgba(84, 179, 71, .9)',
+        ],
+        borderWidth: 2
+        },
+        ]
+    },
+    
+    options: {
+                responsive: true,
+                legend: {
+                    position: 'bottom',
+                },
+                hover: {
+                    mode: 'label'
+                },
+                scales: {
+                    xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Month'
+                            }
+                        }],
+                    yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                steps: 10,
+                                stepValue: 5,
+                                max: 100
+                            }
+                        }]
+                },
+                title: {
+                    display: true,
+                    text: 'Chart.js Line Chart - Legend'
+                }
+            }
+    });
+
+</script>
+<script src = "/js/hidediv.js"></script>
+<script src="/js/eliminarreporte.js"> </script>
 <%- include('includes/foot.ejs') %>  
 

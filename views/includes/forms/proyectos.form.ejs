@@ -1,6 +1,5 @@
-
 <% const importancia = ["Alto", "Medio", "Bajo"] %>
-<% const estatus = ["Planficación", "Análisis", "Diseño","Desarrollo", "Pruebas","Mantenimiento"] %>
+<% const estatus = ["Planficación", "Análisis", "Diseño","Desarrollo", "Pruebas","Mantenimiento", "Terminado"] %>
 
 <% if (proyectos=="") { %>
     <form action="crearProyecto" method="POST" enctype="multipart/form-data">
@@ -33,17 +32,20 @@
             <% if (proyectos=="") { %>
                 <div class="py-3">
                     <div class="dropdown pb-2">
-                        <button class="btn btn--radius-2 btn-success dropdown-toggle" type="button" onclick="showCheckboxes()">
+                        <button class="btn btn--radius-2 btn-secondary dropdown-toggle" type="button" onclick="showCheckboxes()">
                             Colaboradores
                         </button>
                     </div>
-                    <div id="checkBoxes"  aria-expanded="true" >
+                    <div id="checkBoxes" aria-expanded="true" >
                         <!-- rs-select2 js-select-simple select--no-search -->
-                        <div class="col-sm list-group-item" >
+                        <div class="row list-group-check" >
                             <% for (let e of empleados) { %>
-                                <div class="badge badge-light m-1 px-3"  >
-                                    <input type="checkbox" id="empleados" name="empleados" value="<%= e.id_empleado %>">
-                                    <label for="empleados" class="pl-3"><%= e.nombre %></label>
+                                
+                                <div class="col-4 ">
+                                    <div class="badge badge-light py-1 m-1  d-block"  >
+                                    <input type="checkbox" class=" align-middle" style="display:-webkit-inline-box ;" id="empleados" name="empleados" value="<%= e.id_empleado %>">
+                                    <label for="empleados"  ><%= e.nombre %></label>
+                                    </div>
                                 </div>
                             <% } %> 
                         </div>
@@ -59,11 +61,13 @@
                                 </button>
                         </div>
                         <div id="checkBoxes" aria-expanded="true" >
-                            <div class="col-sm list-group-item" >
+                            <div class="row list-group-check" >
                                 <% for (let t of registrados) { %>
-                                    <div class="badge badge-light m-1 px-3" >
-                                        <input type="checkbox" id="registrados" name="registrados" value="<%= t.id_empleado %>">
-                                        <label for="regsitrados"><%= t.nombre %></label>
+                                    <div class="col-4 ">
+                                        <div class="badge badge-light py-1 m-1  d-block" >
+                                        <input type="checkbox" class=" align-middle" style="display:-webkit-inline-box ;" id="registrados" name="registrados" value="<%= t.id_empleado %>">
+                                        <label for="registrados"><%= t.nombre %></label>
+                                        </div>
                                     </div>
                                 <% } %>
                             </div>
@@ -79,11 +83,14 @@
                                     </button>
                             </div>
                             <div id="checkBoxes2" aria-expanded="true" >
-                                <div class="col-sm list-group-item" >
+                                <div class="row list-group-check" >
                                     <% for (let n of no_registrados) { %>
-                                        <div class="badge badge-light m-1 px-3" >
-                                            <input type="checkbox" id="no_registrados" name="no_registrados" value="<%= n.id_empleado %>">
-                                            <label for="no_registrados"><%= n.nombre %></label>
+
+                                        <div class="col-4 ">
+                                            <div class="badge badge-light py-1 m-1  d-block" >
+                                                <input type="checkbox" class=" align-middle" style="display:-webkit-inline-box ;" id="no_registrados" name="no_registrados" value="<%= n.id_empleado %>">
+                                                <label for="no_registrados" ><%= n.nombre %></label>
+                                            </div>
                                         </div>
                                     <% } %>
                                 </div>

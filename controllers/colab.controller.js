@@ -8,7 +8,6 @@ exports.getColaboradores = (request, response, next) => {
     .then(([rows, fielData]) => {
         response.render(path.join('..',"views", "colaboradores.ejs"), {
             colaboradores: rows,
-            
             privilegios: request.session.privilegios,
             isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
         });
@@ -26,9 +25,8 @@ exports.postoneColaborador = (request, response, next) => {
         .then(([rows, fieldData]) => {
             Colaboradores.fetchProyectos(request.body.id)
             .then(([filas, fieldData]) => {
-                console.log(filas)
                 response.status(200).json({empleados: rows , proyectos: filas});
-
+                privilegios: request.session.privilegios
             })
             .catch(err => { 
                 console.log(err);
