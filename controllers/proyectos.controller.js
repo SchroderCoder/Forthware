@@ -206,7 +206,6 @@ exports.postEditarProyecto = (request, response, next) => {
     } else {
         imagen = "";
     }
-    console.log(imagen)
     Proyecto.fetchOne(request.body.id)
     .then(([rows, fielData]) => {
         rows[0].nombre= request.body.nombre

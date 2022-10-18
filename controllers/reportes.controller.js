@@ -183,7 +183,6 @@ exports.postCrearReporte = (request, response, next) => {
                             Resumen: 'Porcentaje de efectividad', 
                             Horas: request.body.efectividad, 
                         },
-                        // {...},
                       ],
                     };
                     doc.table(table, {

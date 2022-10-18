@@ -2,13 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { requiresAuth } = require('express-openid-connect');
 const proyectoController = require('../controllers/proyectos.controller');
-const { auth, requiredScopes } = require('express-oauth2-jwt-bearer');
-
-const {
-  claimEquals,
-  claimIncludes,
-  claimCheck,
-} = require('express-openid-connect');
   
 router.get('/main',requiresAuth(), proyectoController.getProyectos);
 
