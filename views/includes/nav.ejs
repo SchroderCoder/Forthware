@@ -6,7 +6,7 @@
         <form class="form-inline" style="display: -webkit-box;; box-sizing: content-box;">
             <h3 class="rolnav" style="display:block ;width:auto;"> Coordinador : Manuel Flores </h3>
             <!--Campo dependiente de el ususario ingresado-->
-            
+            <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
             <li class="nav-item dropdown">
                 <a class="nav-link" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      <i class="material-icons iconSide" style="display:block ; width:auto; font-size: 40px; " >account_circle</i></a>
@@ -20,3 +20,13 @@
     </nav>
 </header>
 <div class="d-flex" id="wrapper">
+
+    <div id = "modal">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" id="modal_perfil">
+                </div>
+            </div>
+        </div>
+    </div>
+    

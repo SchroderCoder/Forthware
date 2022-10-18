@@ -1,5 +1,0 @@
-
-
-const successalert = () => {
-    alert("jijija")
-}

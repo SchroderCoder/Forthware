@@ -73,7 +73,7 @@ function mostrarperfil(id){
 
 function mostrarperfilpersonal(id){
 
-    document.getElementById("modal_contenido").innerHTML = '';
+    document.getElementById("modal_perfil").innerHTML = '';
 
     data = new Object ();
 
@@ -121,7 +121,7 @@ function mostrarperfilpersonal(id){
                 '           </div><br> ' ;
 
                 
-                document.getElementById("modal_contenido").innerHTML = html;
+                document.getElementById("modal_perfil").innerHTML = html;
 
     }).catch(err => {
         console.log(err);
