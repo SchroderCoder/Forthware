@@ -91,7 +91,7 @@ exports.getLogin = (request, response, next) => {
 exports.getMain = (request, response, next) => {
     Proyecto.fetchProyectosImportancia()
     .then(([rows, fielData]) => {
-        Usuario.fetchTareasMain()
+        Usuario.fetchTareasMain(id_usuario)
         .then(([cols, fielData]) => {
         response.render(path.join('..',"views", "main.ejs"), {
             proyectos: rows.slice(0,3),
