@@ -27,67 +27,67 @@
                                     <div class="col-sm-4 pb-3 over">
                                         <div class="card" style="width: auto;height: 29rem ; ">
                                             <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
-                                            <h5 class="card-title bg-success text-dark text-center align-middle py-auto  list-group-item" style="height:15% ;"><a href="/proyectos/editarProyecto/<%= p.id_proyecto %>" class="text-white" ><%= p.nombre %></a></h5>
+                                            <h5 class=" text-truncate card-title bg-success text-light text-center align-middle py-auto  list-group-item" style="height:10% ;"><a href="/proyectos/editarProyecto/<%= p.id_proyecto %>" class="text-white" ><%= p.nombre %></a></h5>
                                             <a id="<%= p.id_proyecto %>" data-toggle="modal" data-target="#exampleModal" onclick = "mostrarproyecto(id)"><img src="<%= p.image_url %>" class="card-img-top" alt="" onerror="this.onerror=null; this.src='https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png'"></a>
                                             <div class="card-body textBlack">
                                                 <div class="row">
-                                                        <p class="card-text col-sm pt-2 over mx-auto align-middle py-auto  list-group-item">Importancia:</p>
+                                                        <p class="text-truncate card-text col-sm pt-2 over mx-auto align-middle py-auto  rounded-left etiquetaInfo">Importancia:</p>
                                                         <% if (p.importancia == "Alto") { %>
-                                                            <p class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.importancia %></p>
+                                                            <p class="text-truncate card-text bg-success col-sm px-auto over mx-auto align-middle py-auto rounded-right etiquetaInfo"><%= p.importancia %></p>
                                                         <% } %>
                                                         <% if (p.importancia == "Medio") { %>
-                                                            <p class="card-text bg-warning col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.importancia %></p>
+                                                            <p class="text-truncate card-text bg-warning col-sm px-auto over mx-auto align-middle py-auto rounded-right etiquetaInfo"><%= p.importancia %></p>
                                                         <% } %>
                                                         <% if (p.importancia == "Bajo") { %>
-                                                            <p class="card-text bg-light text-dark col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.importancia %></p>
+                                                            <p class="text-truncate card-text bg-light text-dark col-sm px-auto over mx-auto align-middle py-auto rounded-right etiquetaInfo"><%= p.importancia %></p>
                                                         <% } %>
                                                 </div>
                                                 <div class="row pt-2"  >
-                                                    <p class="card-text col-sm pt-1 over mx-auto align-middle py-auto  list-group-item">Estatus:</p>
+                                                    <p class="text-truncate card-text col-sm pt-1 over mx-auto align-middle py-auto rounded-left etiquetaInfo">Estatus:</p>
                                                         <% if (p.estatus == "Planeación") { %>
-                                                            <p style="background-color: #9B38CA !important;" class="card-text col-sm  over mx-auto align-middle py-auto  list-group-item" ><%= p.estatus %></p>
+                                                            <p style="background-color: #9B38CA !important;" class="text-truncate card-text col-sm  over mx-auto align-middle py-auto rounded-right etiquetaInfo" ><%= p.estatus %></p>
                                                         <% } %>
                                                         <% if (p.estatus == "Diseño") { %>
-                                                            <p style="background-color: #00C4D0 !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                                            <p style="background-color: #00C4D0 !important;" class="text-truncate card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  rounded-right etiquetaInfo"><%= p.estatus %></p>
                                                         <% } %>
                                                         <% if (p.estatus == "Análisis") { %>
-                                                            <p style="background-color: #1A02AC !important;"class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                                            <p style="background-color: #1A02AC !important;"class="text-truncate card-text bg-success col-sm px-auto over mx-auto align-middle py-auto rounded-right etiquetaInfo"><%= p.estatus %></p>
                                                         <% } %>
                                                         <% if (p.estatus == "Pruebas") { %>
-                                                            <p style="background-color: #ca3838 !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                                            <p style="background-color: #ca3838 !important;" class="text-truncate card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  rounded-right etiquetaInfo"><%= p.estatus %></p>
                                                         <% } %>
                                                         <% if (p.estatus == "Mantenimiento") { %>
-                                                            <p style="background-color: #e0ce04 !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                                            <p style="background-color: #e0ce04 !important;" class="text-truncate card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  rounded-right etiquetaInfo"><%= p.estatus %></p>
                                                         <% } %>
                                                         <% if (p.estatus == "Construcción") { %>
-                                                            <p style="background-color: #DC6F0B !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                                            <p style="background-color: #DC6F0B !important;" class="text-truncate card-text bg-success col-sm px-auto over mx-auto align-middle py-auto rounded-right etiquetaInfo"><%= p.estatus %></p>
                                                         <% } %>
                                                         <% if (p.estatus == "Documentación") { %>
-                                                            <p style="background-color: #434342 !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                                            <p style="background-color: #434342 !important;" class="text-truncate card-text bg-success col-sm px-auto over mx-auto align-middle py-auto rounded-right etiquetaInfo"><%= p.estatus %></p>
                                                         <% } %>
                                                         <% if (p.estatus == "Despliegue") { %>
-                                                            <p style="background-color: #0a752c !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                                            <p style="background-color: #0a752c !important;" class="text-truncate card-text bg-success col-sm px-auto over mx-auto align-middle py-auto rounded-right etiquetaInfo"><%= p.estatus %></p>
                                                         <% } %>
                                                         <% if (p.estatus == "Planficación") { %>
-                                                            <p style="background-color: #000000 !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                                            <p style="background-color: #000000 !important;" class="text-truncate card-text bg-success col-sm px-auto over mx-auto align-middle py-auto rounded-right etiquetaInfo"><%= p.estatus %></p>
                                                         <% } %>
                                                         <% if (p.estatus == "Desarrollo") { %>
-                                                            <p style="background-color: #48041b !important;" class="card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  list-group-item"><%= p.estatus %></p>
+                                                            <p style="background-color: #48041b !important;" class="text-truncate card-text bg-success col-sm px-auto over mx-auto align-middle py-auto  rounded-right etiquetaInfo"><%= p.estatus %></p>
                                                         <% } %>
 
                                                 </div>
                                                 <div class="row pt-2"  >
-                                                    <p class="card-text col-sm pt-1 over mx-auto align-middle py-auto  list-group-item">Horas: </p>
+                                                    <p class=" text-truncate card-text col-sm pt-1 over mx-auto align-middle py-auto rounded-left etiquetaInfo">Horas: </p>
                                                     <% let check %>
                                                     <% for (let h of horas) { %>
                                                         <% if (p.nombre == h.nombre && h.es_etiqueta == 0) { %>
-                                                            <p style="background-color: #1a191b !important;" class="card-text col-sm  over mx-auto align-middle py-auto  list-group-item"><%=h.horas.toFixed(2)%></p>
+                                                            <p style="background-color: #1a191b !important;" class="text-truncate card-text col-sm  over mx-auto align-middle py-auto  rounded-right etiquetaInfo"><%=h.horas.toFixed(2)%></p>
                                                             <% check = true; %>
                                                         <% }%>
                                                     <% } %>
                                                     <% if (check) { %>
                                                     <% } else { %>
-                                                        <p style="background-color: #1a191b !important;" class="card-text col-sm  over mx-auto align-middle py-auto  list-group-item">0</p>
+                                                        <p style="background-color: #1a191b !important;" class="text-truncate card-text col-sm  over mx-auto align-middle py-auto  rounded-right etiquetaInfo">0</p>
                                                     <% } %> 
                                                 </div>
                                                 <p class="card-text"></p>
@@ -144,7 +144,7 @@
 
 <div id = "modal">
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" id="modal_contenido">
             </div>
         </div>
