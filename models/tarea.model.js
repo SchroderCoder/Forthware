@@ -41,7 +41,7 @@ module.exports = class Tarea {
     }
 
     static find(valor) {
-                return db.execute('SELECT * FROM tareas WHERE descripcion like ? OR fecha_creacion like ?', ['%' + valor + '%', '%' + valor + '%']);
+                return db.execute('SELECT * FROM tareas WHERE descripcion like ? OR fecha_creacion like ? ORDER BY id_tarea DESC', ['%' + valor + '%', '%' + valor + '%']);
             }
 
 }

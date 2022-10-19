@@ -105,29 +105,28 @@
                         // html += '<div id = tareas class="overflow-auto anyClass" style="height: 28rem !important;">'
                         // html += '<input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >'
                 for (t of data.tareas) {
-                    html +=        '<div class="row bg-light text-dark m-1 mt-2 border rounded">'
-                    html +=            '<div class="col border-right border-dark">'
-                    html +=                '<%=  new Date('+t.fecha_creacion+').toLocaleDateString("ES-mx") %>'
-                    html +=            '</div>'
-                    html +=           ' <div class="col-5 border-right border-dark">'
-                    html +=                '<a type="button" id="'+t.id_tarea+'" data-toggle="modal" data-target="#exampleModal" onclick = "mostrartarea(id)">'+  t.descripcion +'</a>'
-                    html +=            '</div>'
-                    html +=            '<div class="col border-right border-dark">'
-                    html +=                +  t.duracion.toFixed(2) 
-                    html +=            '</div>'
-                    html +=            '<div class="col border-right border-dark">'
-                    html +=               + t.nombre 
-                    html +=            '</div>'
-                    html +=            '<div class="col ">'
-                    html +=               '<span class="material-symbols-outlined">'
-                    html +=                '<a href="/tareas/editarTarea/'+ t.id_tarea+ '  >'
-                    html +=                    '<button class = "btn btn-primary" > <i class="material-icons" >edit</i> </button>'
-                    html +=                    
-                    html +=                '</a>'
-                    html +=               '</span>'
-                    html +=                '<button  class = "btn btn-danger" id='+ t.id_tarea + ' type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea(id)" ><i class="material-icons" >delete</i></button>'  
-                    html +=           '</div>'
-                    html +=       ' </div>'
+                    html += '<div class="row bg-light text-dark m-1 mt-2 border rounded">';
+                    html +=     '<div class="col-2  col-md col-sm border-right border-dark text-truncate">';
+                    html +=         new Date(t.fecha_creacion).toLocaleDateString("ES-mx");
+                    html +=     '</div>';
+                    html +=     '<div class="col-md border-right border-dark text-truncate">';
+                    html +=         '<a type="button" id="' + t.id_tarea + '" data-toggle="modal" data-target="#exampleModal" onclick = "mostrartarea(id)">' +  t.descripcion + '</a>';
+                    html +=      '</div>';
+                    html +=       '<div class="col border-right border-dark">';
+                    html +=               t.duracion.toFixed(2); 
+                    html +=       '</div>';
+                    html +=       '<div class="col border-right border-dark">';
+                    html +=               t.descripcion; 
+                    html +=        '</div>';
+                    html +=        '<div class="col">';
+                    html +=               '<span class="material-symbols-outlined">';
+                    html +=                '<a href="/tareas/editarTarea/'+ t.id_tarea + '  >';
+                    html +=                    '<button class="btn btn-primary"><i class="material-icons">edit</i></button>';
+                    html +=                '</a>';
+                    html +=               '</span>';
+                    html +=                '<button  class = "btn btn-danger" id='+ t.id_tarea + ' type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea('+ t.id_tarea +')" ><i class="material-icons" >delete</i></button>';  
+                    html +=         '</div>';
+                    html += '</div>';
                 }
             } else {
                 html = '<h2>No hay tareas que coincidan </h2>';

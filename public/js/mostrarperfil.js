@@ -105,9 +105,9 @@ function mostrarperfilpersonal(id){
                 '           <div class="row"> ' +
                 '           <div class="col">' +
                 '            <div class = "container2">' +
-                '           <img src="https://media.tenor.com/qg-URwo5C30AAAAC/xdd-cat-xdd-twitch.gif" class="img-circle mx-auto d-block img-fluid imagePerfil" alt="Imagen de Perfil Colaborador" onerror="this.onerror=null; this.src="https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png"></img><div id = "imagen"></img>' +
+                '           <img src="https://st.depositphotos.com/2218212/2938/i/450/depositphotos_29387653-stock-photo-facebook-profile.jpg" class="img-circle mx-auto d-block img-fluid imagePerfil" alt="Imagen de Perfil Colaborador" onerror="this.onerror=null; this.src="https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png"></img><div id = "imagen"></img>' +
                 '            <div class="middle">' +
-                '            <div class="text"><a href="/proyectos/editarEtiqueta/<%= 2 %>"><i class="material-icons iconSide">add_circle</i></a></div>' +
+                '            <div class="text"><a href="/proyectos/editarEtiqueta/<%= 2 %>"><button class="btn btn-info" >Editar imagen</button></a></div>' +
                 '            </div> ' +
                 '            </div> ' +
                 '            </div> ' +

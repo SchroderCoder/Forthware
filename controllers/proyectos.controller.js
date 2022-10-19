@@ -150,12 +150,14 @@ exports.getEditarProyecto = (request, response, next) => {
         if (rows.length > 0) {
             Crea.fetchRegistrados(request.params.id)
                 .then(([registered, fielData]) => {
+                    console.log(registered)
                     request.session.empleados_r = [];
                     for(let empleado of registered) {
                         request.session.empleados_r.push(empleado);
                     }
                     Crea.fetchNoRegistrados(request.params.id)
                     .then(([noregistered, fielData]) => {
+                        console.log(noregistered)
                         request.session.empleados_no_r = [];
                         for(let empleado of noregistered) {
                             request.session.empleados_no_r.push(empleado);
@@ -199,76 +201,82 @@ exports.getEditarProyecto = (request, response, next) => {
 
 
 exports.postEditarProyecto = (request, response, next) => {
+    
     if(request.file) { 
+        console.log("primer if");
         imagen = request.file.filename;
-    } else {
-        imagen = "";
-    }
-    console.log(imagen)
-    Proyecto.fetchOne(request.body.id)
-    .then(([rows, fielData]) => {
-        rows[0].nombre= request.body.nombre
-        rows[0].descripcion= request.body.descripcion
-        rows[0].stack_tecnologia= request.body.stack
-        rows[0].importancia= request.body.importancia
-        rows[0].estatus= request.body.estatus
-        rows[0].image_url= '/project_images/' + imagen
-        
-        Proyecto.saveEdit(rows[0])
-        .then(() => {
-            if (request.body.registrados){
-                Proyecto.fetchRecent()
-                .then(([cols, fielData]) => {
-                    let id_reciente= cols[0].reciente;
-                    let id_empleados = request.body.registrados;
 
-                    for (e of id_empleados){    
-                        Crea.eliminar(e,id_reciente)
-                        .then(() => {
-                        })
-                        .catch(err => {
-                            console.log(err);
-                            response.render('error.ejs', {
-                                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
-                            });
-                        });
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                    response.render('error.ejs', {
-                        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
-                    });
-                });
-            }
-
-            if (request.body.no_registrados){
-                Proyecto.fetchRecent()
-                .then(([cols, fielData]) => {
-                    let id_reciente= cols[0].reciente;
-                    let id_empleados = request.body.no_registrados;
-
-                    for (e of id_empleados){    
-                        Crea.registrar(e,id_reciente)
-                        .then(() => {
-                        })
-                        .catch(err => {
-                            console.log(err);
-                            response.render('error.ejs', {
-                                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
-                            });
-                        });
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                    response.render('error.ejs', {
-                        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
-                    });
-                });
-            }
+        Proyecto.fetchOne(request.body.id)
+            .then(([rows, fielData]) => {
+            rows[0].nombre= request.body.nombre
+            rows[0].descripcion= request.body.descripcion
+            rows[0].stack_tecnologia= request.body.stack
+            rows[0].importancia= request.body.importancia
+            rows[0].estatus= request.body.estatus
+            rows[0].image_url= '/project_images/' + imagen
             
-            response.status(303).redirect('/proyectos/main');
+            Proyecto.saveEdit(rows[0])
+            .then(() => {
+                if (request.body.registrados){
+                    Proyecto.fetchRecent()
+                    .then(([cols, fielData]) => {
+                        let id_reciente= cols[0].reciente;
+                        let id_empleados = request.body.registrados;
+
+                        for (e of id_empleados){    
+                            Crea.eliminar(e,id_reciente)
+                            .then(() => {
+                            })
+                            .catch(err => {
+                                console.log(err);
+                                response.render('error.ejs', {
+                                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                                });
+                            });
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        response.render('error.ejs', {
+                            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                        });
+                    });
+                }
+
+                if (request.body.no_registrados){
+                    Proyecto.fetchRecent()
+                    .then(([cols, fielData]) => {
+                        let id_reciente= cols[0].reciente;
+                        let id_empleados = request.body.no_registrados;
+
+                        for (e of id_empleados){    
+                            Crea.registrar(e,id_reciente)
+                            .then(() => {
+                            })
+                            .catch(err => {
+                                console.log(err);
+                                response.render('error.ejs', {
+                                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                                });
+                            });
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        response.render('error.ejs', {
+                            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                        });
+                    });
+                }
+
+                response.status(303).redirect('/proyectos/main');
+            })
+            .catch(err => {
+                console.log(err);
+                response.render('error.ejs', {
+                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                });
+            });
         })
         .catch(err => {
             console.log(err);
@@ -276,13 +284,92 @@ exports.postEditarProyecto = (request, response, next) => {
                 isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
             });
         });
-    })
-    .catch(err => {
-        console.log(err);
-        response.render('error.ejs', {
-            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+
+    } 
+    
+    if (!(request.file)){
+        console.log("segundo if");
+        imagen = "";
+        Proyecto.fetchOne(request.body.id)
+        .then(([rows, fielData]) => {
+            rows[0].nombre= request.body.nombre
+            rows[0].descripcion= request.body.descripcion
+            rows[0].stack_tecnologia= request.body.stack
+            rows[0].importancia= request.body.importancia
+            rows[0].estatus= request.body.estatus
+            
+            Proyecto.saveEdit_NoImage(rows[0])
+            .then(() => {
+                if (request.body.registrados){
+                    Proyecto.fetchRecent()
+                    .then(([cols, fielData]) => {
+                        let id_reciente= cols[0].reciente;
+                        let id_empleados = request.body.registrados;
+
+                        for (e of id_empleados){    
+                            Crea.eliminar(e,id_reciente)
+                            .then(() => {
+                            })
+                            .catch(err => {
+                                console.log(err);
+                                response.render('error.ejs', {
+                                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                                });
+                            });
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        response.render('error.ejs', {
+                            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                        });
+                    });
+                }
+
+                if (request.body.no_registrados){
+                    Proyecto.fetchRecent()
+                    .then(([cols, fielData]) => {
+                        let id_reciente= cols[0].reciente;
+                        let id_empleados = request.body.no_registrados;
+
+                        for (e of id_empleados){    
+                            Crea.registrar(e,id_reciente)
+                            .then(() => {
+                            })
+                            .catch(err => {
+                                console.log(err);
+                                response.render('error.ejs', {
+                                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                                });
+                            });
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        response.render('error.ejs', {
+                            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                        });
+                    });
+                }
+                
+                
+                response.status(303).redirect('/proyectos/main');
+            })
+            .catch(err => {
+                console.log(err);
+                response.render('error.ejs', {
+                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                });
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            response.render('error.ejs', {
+                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+            });
         });
-    });
+    }
+    
 };
 
 exports.getEditarEtiqueta = (request, response, next) => {
@@ -313,7 +400,6 @@ exports.getEditarEtiqueta = (request, response, next) => {
 
 
 exports.postEditarEtiqueta = (request, response, next) => {
-    
     Proyecto.fetchOne(request.body.id)
     .then(([rows, fielData]) => {
         rows[0].nombre= request.body.nombre
