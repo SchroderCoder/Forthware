@@ -6,7 +6,6 @@ const { request } = require('http');
 const Proyecto = require('../models/proyecto.model');
 const Tarea = require('../models/tarea.model');
 
-
 exports.getNew = (request, response, next) => {
     response.render(path.join('new.ejs'), {
         isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
@@ -181,4 +180,6 @@ exports.logout = (request, response, next) => {
     request.session.destroy(() => {
         response.redirect('/user/login'); 
     });
+
+    
 };
