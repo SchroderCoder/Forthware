@@ -31,7 +31,9 @@
         for (i=0; i<iterar;i++){
              
             proyecto += parseFloat(document.getElementById("proyectos["+i+"]").value);
-       }   
+            asignaciones.push({nombre: document.getElementById("proyectos["+i+"]").name, horas: document.getElementById("proyectos["+i+"]").value});
+        }   
+    
 
        proyecto = proyecto.toFixed(2);     
 
@@ -39,6 +41,30 @@
        proporcion = ((proyecto / horasesperadas)*100).toFixed(2);
 
        efectividadaj= (proporcion/(efectividad/100)).toFixed(2);
+
+    //    var ctxL = document.getElementById("myChart").getContext('2d');
+    //    var myLineChart = new Chart(ctxL, {
+    //    type: 'line',
+    //    data: {
+    //        labels: asignaciones.nombres,
+    //        datasets: [{
+    //        label: "Efectividad a través del tiempo",
+    //        data: asignaciones.horas,
+    //        backgroundColor: [
+    //            'rgba(84, 179, 71, .2)',
+    //        ],
+    //        borderColor: [
+    //            'rgba(84, 179, 71, .9)',
+    //        ],
+    //        borderWidth: 2
+    //        },
+    //        ]
+    //    },
+    //    options: {
+    //        responsive: true
+    //    }
+    //    });
+
 
         document.getElementById("preview").innerHTML = 
         ' <div id="preview">' +

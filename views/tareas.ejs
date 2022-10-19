@@ -86,6 +86,26 @@
     </div>
 </div>
 
+<% /* %>
+<%  if (alerta == "yes") { %> 
+    <div id = "alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        <button id = "close" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<%  } %> 
+
+<% */ %>
+
+<script>
+    function hidediv(){
+        document.getElementById("close").click();;
+
+    }
+    setTimeout("hidediv()", 2500);
+</script>
+
 <script src="/js/eliminartarea.js"> </script>
 <script src="/js/mostrartarea.js"> </script>
 
