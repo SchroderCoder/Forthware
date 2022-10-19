@@ -65,7 +65,7 @@ exports.postCrearReporte = (request, response, next) => {
     }
 
 
-    const reporte = new Reporte(request.body.fecha_inicio, request.body.fecha_fin, request.body.efectividadaj, request.body.horastotales, request.body.total, request.body.horasausencia, request.body.efectividad, 2, '/pdf/reporte' + request.body.fecha_inicio + "-" + request.body.fecha_fin + '.pdf');
+    const reporte = new Reporte(request.body.fecha_inicio, request.body.fecha_fin, request.body.efectividadaj, request.body.horastotales, request.body.total, request.body.horasausencia, request.body.efectividad, idUsuario, '/pdf/reporte' + request.body.fecha_inicio + "-" + request.body.fecha_fin + '.pdf');
     reporte.save()
         .then(() => {
     
