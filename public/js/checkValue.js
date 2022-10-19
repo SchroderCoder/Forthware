@@ -37,12 +37,10 @@ function checkTiempoMedio() {
 
     const tiempomedio= document.getElementById("medio").value;
 
-    if (tiempomedio >= 1 && tiempomedio <= 100) {
-
-    } else {
+    if (!(tiempomedio >= 1 && tiempomedio <= 100)) {
         const errorMessage = "No puedes elegir a más de 100 colaboradores";
         alert(errorMessage);
-
+        document.getElementById("medio").value = 6;
     }
 
 }
@@ -51,12 +49,10 @@ function checkEfectividad() {
 
     const efectividad= document.getElementById("efectividad1").value;
 
-    if (efectividad >= 0 && efectividad <= 100) {
-
-    } else {
-        const errorMessage = "No puedes elegir números menores a 0 o mayores a 100";
+    if (!(efectividad >= 0 && efectividad <= 100)) {
+        const errorMessage = "No puedes elegir números menores a 0 o mayores a 100, regresando al ";
         alert(errorMessage);
-
+        document.getElementById("efectividad1").value = 85;
     }
 
 }

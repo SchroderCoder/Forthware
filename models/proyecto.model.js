@@ -47,6 +47,12 @@ module.exports = class Proyecto {
             [proyecto.nombre, proyecto.descripcion,proyecto.stack_tecnologia,proyecto.importancia,proyecto.estatus,proyecto.image_url,proyecto.id_proyecto]);
     }
 
+    static saveEdit_NoImage(proyecto) {
+        return db.execute(
+            'UPDATE proyectos SET nombre = ?, descripcion= ?, stack_tecnologia= ?, importancia =?, estatus= ?  WHERE id_proyecto = ?', 
+            [proyecto.nombre, proyecto.descripcion,proyecto.stack_tecnologia,proyecto.importancia,proyecto.estatus,proyecto.id_proyecto]);
+    }
+
     static fetchAllProyectos() {
         return db.execute('SELECT * FROM proyectos p WHERE p.is_deleted= 0 AND p.es_etiqueta= 0 GROUP BY id_proyecto ORDER BY id_proyecto DESC');
     }
