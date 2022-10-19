@@ -35,7 +35,7 @@ const config = {
     baseURL: 'http://localhost:3000',
     clientID: '8auvzODUBeQN95tGqRcCWm2rDvW2ksqK',
     issuerBaseURL: 'https://dev-wrm9w-qh.us.auth0.com'
-  };
+};
 
 
 const app = express();
