@@ -3,7 +3,6 @@ const router = express.Router();
 const { requiresAuth } = require('express-openid-connect');
 const tareasController = require('../controllers/tareas.controller');
 
-
 router.get('/main', requiresAuth(), tareasController.getTareas);
 
 router.get('/crearTarea', requiresAuth(), tareasController.getCrearTareas);

@@ -1,6 +1,14 @@
 <%- include('includes/head.ejs') %>
 <%- include('includes/nav.ejs') %>   
 <%- include('includes/sidebar.ejs') %>   
+<%  if (alert.includes("cread")) { %> 
+    <%- include('includes/successalert.ejs') %>
+<%  } %> 
+
+<%  if (alert.includes("eliminad")) { %> 
+    <%- include('includes/deletealert.ejs') %>
+<%  } %> 
+
 
 <div class="row pt-2 ">
     <div class="col-5 pl-3 " style="display:block ;">
@@ -54,11 +62,18 @@
     </div>
 </div>
 
-<div id = "modal"></div>
+<div id = "modal">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" id="modal_contenido">
+            </div>
+        </div>
+    </div>
+</div>
 
 
-<% efectividad_aj = [];%>
-<% fechas = [];%>
+<% const efectividad_aj = [];%>
+<% const fechas = [];%>
 <% for (let e of efectividad){ %> 
              
     <% efectividad_aj.push(e.efectividad_ajustada)%> 
@@ -66,9 +81,6 @@
 
 <% } %>  
 
-
-<input id="efectividad" name="efectividad" type="hidden" value = "<% efectividad_aj %>" >
-<input id="fechas" name="fechas" type="hidden" value = "<% fechas %>" >
 
 <div class="col-md-5">
     <canvas id="myChart" width="1000" height = "1000"></canvas>
@@ -82,10 +94,10 @@
     var myLineChart = new Chart(ctxL, {
     type: 'line',
     data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: [<% for (let f of fechas) { %>"<%= f %>", <% } %>],
         datasets: [{
         label: "Efectividad a través del tiempo",
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data: [<% for (let e of efectividad_aj) { %>"<%= e %>", <% } %>],
         backgroundColor: [
             'rgba(84, 179, 71, .2)',
         ],
@@ -96,15 +108,42 @@
         },
         ]
     },
+    
     options: {
-
-        responsive: true
-        
-    }
+                responsive: true,
+                legend: {
+                    position: 'bottom',
+                },
+                hover: {
+                    mode: 'label'
+                },
+                scales: {
+                    xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Month'
+                            }
+                        }],
+                    yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                steps: 10,
+                                stepValue: 5,
+                                max: 100
+                            }
+                        }]
+                },
+                title: {
+                    display: true,
+                    text: 'Chart.js Line Chart - Legend'
+                }
+            }
     });
 
 </script>
-
+<script src = "/js/hidediv.js"></script>
 <script src="/js/eliminarreporte.js"> </script>
 <%- include('includes/foot.ejs') %>  
 
