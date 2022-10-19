@@ -64,7 +64,10 @@ function mostrarproyecto(id){
                  } 
                  if (data.proyectos[0].estatus == "Desarrollo") { 
                     html +=  '<p style="background-color: #48041b !important;" class="card-text ">Estatus: '+ data.proyectos[0].estatus + ' </p>'
-                 } 
+                 }
+                 if (data.proyectos[0].estatus == "Terminado") { 
+                  html +=  '<p style="background-color:  #281091 !important;" class="card-text ">Estatus: '+ data.proyectos[0].estatus + ' </p>'
+                 }
                 
                 html += '            </div> ' +
                 '            </div> ' ;

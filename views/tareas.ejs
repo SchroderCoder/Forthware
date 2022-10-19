@@ -71,14 +71,14 @@
                                             </div>
                                             <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5 my-auto  "  style="overflow: hidden ;" >
                                                 <div class="row" >
-                                                   <div class="col " style="justify-content:end !important ;" >
+                                                    <div class="col " style="justify-content:end !important ;" >
                                                     <a href="/tareas/editarTarea/<%= t.id_tarea %>" style="flex:none ;" >
                                                         <button  style=" flex: none; " class = "btn btn-sm btn-primary " > 
                                                             <i class="material-icons" style="font-size:125% ; " >edit</i> </button>
                                                     </a>
                                                     <button style="flex: none; "  class = "btn btn-sm btn-danger" id="<%= t.id_tarea %>" type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea(id)" >
                                                         <i style="font-size:125% ;" class="material-icons " >delete</i></button>
-                                                   </div>              <!-- style="width: 20%;height: 20%; display: block;" -->
+                                                    </div>              <!-- style="width: 20%;height: 20%; display: block;" -->
                                                 </div>
                                             </div>
                                             
@@ -95,14 +95,13 @@
             <% } %>  
             </div>
             <div>
-                <a href="/tareas/crearTarea" class="BotonCrear"  >         
-                        <span class="material-icons  " style="font-size:75px;color:white; background-color: #28a745; 
-                        border-radius: 50%; filter: drop-shadow(8px 4px 4px rgba(0, 0, 0, 0.50)); ">
+                <a href="/tareas/crearTarea" type="button" class="BotonCrear " >         
+                        <span class="material-icons hoverCrear " style="font-size:75px;color:white; background-color: #28a745; 
+                        border-radius: 50%; filter: drop-shadow(6px 4px 4px rgba(0, 0, 0, 0.50)); ">
                             add
                         </span>
                 </a>
             </div>
-           
         </div>
         <div id = "modal">
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -114,10 +113,6 @@
         </div>
     </div>
 </body>
-    
-
-
-
 
 <script src = "/js/hidediv.js"></script>
 <script src="/js/eliminartarea.js"> </script>
@@ -176,5 +171,13 @@
             document.getElementById('buscar').onkeyup = accion_asincrona;
 
         </script>
+        <div id = "modal">
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content" id="modal_contenido">
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <%- include('includes/foot.ejs') %>

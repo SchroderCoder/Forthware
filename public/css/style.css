@@ -23,6 +23,12 @@ body{
     color: white;
 }
 
+.hoverCrear:hover{
+    background-color: #1a6a2d !important;
+    color: white;
+    
+}
+
 h1{
     font-family: "Inter", Extra Bold, monospace;
     color: white;

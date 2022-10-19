@@ -80,7 +80,10 @@ exports.postRol = (request, response, next) => {
 };
 
 exports.getLogin = (request, response, next) => {
+    let alert = request.session.alerta ? request.session.alerta : "";
+    request.session.alerta = ""; 
     response.render(path.join('login.ejs'), {
+        alert: alert,
         isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
     });
 };
@@ -133,18 +136,6 @@ exports.postLogin = (request, response, next) => {
                                         for(let privilegio of consulta_privilegios) {
                                             request.session.privilegios.push(privilegio.descripcion);
                                         }
-                                        Usuario.getRol(rows[0].id_empleado)
-                                            .then(([consulta_roles, fielData]) => {  
-                                                request.session.roles = []; 
-                                                
-                                                request.session.roles.push(consulta_roles[0].descripcion);                                                                 
-                                            })
-                                            .catch(err => {
-                                                console.log(err);
-                                                response.render('error.ejs', {
-                                                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
-                                                });
-                                            });
                                         response.redirect('/user/main');
                                     })
                                     .catch(err => {
@@ -157,6 +148,7 @@ exports.postLogin = (request, response, next) => {
                                 
                             });
                         } else {
+                            request.session.alerta = "El usuario o contraseña no existe";
                             console.log("El usuario o contraseña no existe");
                             return response.redirect('/user/login');
                         }
@@ -167,6 +159,7 @@ exports.postLogin = (request, response, next) => {
                         });
                     });
             } else {
+                request.session.alerta = "El usuario o contraseña no existe";
                 console.log("El usuario o contraseña no existe");
                 return response.render("error.ejs", {
                     isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,

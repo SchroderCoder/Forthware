@@ -101,7 +101,7 @@ exports.postCrearProyecto = (request, response, next) => {
                         });
                     });
                 }
-
+                privilegios: request.session.privilegios
                 request.session.alerta = "Proyecto : "+ request.body.nombre + " creado con éxito!"; 
                 response.status(303).redirect('/proyectos/main');
             })
@@ -135,6 +135,7 @@ exports.postCrearEtiqueta = (request, response, next) => {
 
     Proyecto.saveEtiqueta(request.body.nombre,1)
         .then(() => {
+            privilegios: request.session.privilegios
             request.session.alerta = "Etiqueta : "+ request.body.nombre + " creada con éxito!"; 
             response.status(303).redirect('/proyectos/main');
         })
@@ -163,6 +164,7 @@ exports.getEditarProyecto = (request, response, next) => {
                             request.session.empleados_no_r.push(empleado);
                         }
                         response.render(path.join('..',"views", "CrearProyecto.ejs"), {
+                            privilegios: request.session.privilegios,
                             proyectos: rows[0],
                             registrados: request.session.empleados_r,
                             no_registrados: request.session.empleados_no_r,
@@ -268,6 +270,7 @@ exports.postEditarProyecto = (request, response, next) => {
                     });
                 });
             }
+            privilegios: request.session.privilegios
             request.session.alerta = "Proyecto : "+ request.body.nombre + " editado con éxito!"; 
             response.status(303).redirect('/proyectos/main');
         })
@@ -291,6 +294,7 @@ exports.getEditarEtiqueta = (request, response, next) => {
     .then(([rows, fielData]) => { 
         if (rows.length > 0) {
             response.render(path.join('..',"views", "crearEtiqueta.ejs"), {
+                privilegios: request.session.privilegios,
                 proyectos: rows[0],
                 titulo: "Editar etiqueta " + rows[0].nombre,
                 etiquetas :rows[0],
@@ -321,6 +325,7 @@ exports.postEditarEtiqueta = (request, response, next) => {
         
         Proyecto.saveEdit(rows[0])
         .then(() => {
+            privilegios: request.session.privilegios
             request.session.alerta = "Etiqueta : "+ request.body.nombre + " editada con éxito!"; 
             response.status(303).redirect('/proyectos/main');
         })
@@ -343,6 +348,7 @@ exports.postEditarEtiqueta = (request, response, next) => {
 exports.getDeleteProyecto = (request, response, next) => {
     Proyecto.erase(request.params.id)
     .then(() => {
+        privilegios: request.session.privilegios
         request.session.alerta = "Eliminado con éxito"; 
         response.status(303).redirect('/proyectos/main');
     })  
@@ -361,6 +367,7 @@ exports.postoneProyecto = (request, response, next) => {
             .then(([filas, fieldData]) => {
                 Proyecto.fetchProyectosHoras(request.body.id)
                 .then(([rows2, fieldData]) => {
+                    privilegios: request.session.privilegios
                     response.status(200).json({proyectos: rows, empleados: filas, horas: rows2});
                 })
                 .catch(err => { 

@@ -29,75 +29,85 @@
             const fecha_fin = document.getElementById('fecha_fin').value;
             const fecha_inicio = document.getElementById('fecha_inicio').value;
 
-            data = new Object ();
+            if (fecha_inicio > fecha_fin) {
+                const errorMessage = "La fecha de inicio no puede ser mayor que la fecha final";
+                alert(errorMessage);
+            }
+            else {
+                
+                data = new Object ();
 
-            data.fecha_fin=fecha_fin;
-            data.fecha_inicio=fecha_inicio;
+                    data.fecha_fin=fecha_fin;
+                    data.fecha_inicio=fecha_inicio;
 
-            const csrf = document.getElementById('_csrf').value;
-        
-            fetch('/reportes/buscar', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'csrf-token': csrf  
-                },
-                body: JSON.stringify(data),
-            }).then(result => {
-                return result.json(); //Regresa otra promesa
-            }).then(data => {
-                //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
-                let html = '';
 
-                html += '<table class="table border-dark text-white " style="border-bottom-width: 0px !important;">';
-                html += '<tbody>';
-                html += '<tr>';
-                html += '<th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row">Proyectos</th>' +
-                        '<th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row">Horas hombre</th>' +
-                        '<th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row">Horas ajustadas</th>';
-                // html += '<th>Horas ajustadas</th>';
-                html += '</tr>';
-                    let horas =0;
-                if (data.proyectos.length > 0) {
-                    let count= 0;
-                    for (p of data.proyectos) {
-                        horas = p.horas + horas;
+                    const csrf = document.getElementById('_csrf').value;
+
+                    fetch('/reportes/buscar', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'csrf-token': csrf  
+                        },
+                        body: JSON.stringify(data),
+                    }).then(result => {
+                        return result.json(); //Regresa otra promesa
+                    }).then(data => {
+                        //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
+                        let html = '';
+
+                        html += '<table class="table border-dark text-white " style="border-bottom-width: 0px !important;">';
+                        html += '<tbody>';
                         html += '<tr>';
-                        html += '<td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">';
-                        html += '<p>';
-                        html += p.nombre;
-                        html += '</p>';
+                        html += '<th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row">Proyectos</th>' +
+                                '<th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row">Horas hombre</th>' +
+                                '<th style="border-bottom-width: 0px !important; border-top-width: 0cm !important; font-weight: normal !important;" scope="row">Horas ajustadas</th>';
+                        // html += '<th>Horas ajustadas</th>';
+                        html += '</tr>';
+                            let horas =0;
+                        if (data.proyectos.length > 0) {
+                            let count= 0;
+                            for (p of data.proyectos) {
+                                horas = p.horas + horas;
+                                html += '<tr>';
+                                html += '<td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">';
+                                html += '<p>';
+                                html += p.nombre;
+                                html += '</p>';
+                                html += '</td>';
+                                html += '<td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">';
+                                html += p.horas.toFixed(2);
+                                html += '</td>';
+                                html += '<td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;"><label for="proyectos_horas_adj2"></label>';
+                                html += '<input placeholder="500" id= "proyectos[' +count+']" name=" '+p.nombre+' " type="number" step = 0.1 value = "' + p.horas.toFixed(2)+ '" min = "0.1" max = "1000" required></td></td>';
+                                html += '</tr>'; 
+                                count++;
+                            }  
+                            
+                            iterar= count;
+
+                            iterar = count;
+
+                        } else {
+                            html += '<h2>No hay proyectos registrados</h2>';                
+                        }
+                        html += '<tr>';
+                        html += '<td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">Total:</td>';
+                        html += '<td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;"><label for="horas_hombre"></label>';
+                        html += horas.toFixed(2);
                         html += '</td>';
-                        html += '<td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">';
-                        html += p.horas.toFixed(2);
-                        html += '</td>';
-                        html += '<td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;"><label for="proyectos_horas_adj2"></label>';
-                        html += '<input placeholder="500" id= "proyectos[' +count+']" name=" '+p.nombre+' " type="number" step = 0.1 value = "' + p.horas.toFixed(2)+ '" min = 0.1 max = 1000 required></td></td>';
-                        html += '</tr>'; 
-                        count++;
-                    }  
-                    
-                    iterar= count;
+                        html += '<td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;"><int id="horas_hombre" name="horas_hombre" type="double"></td>';
+                        html += '</tr>';
+                        html += '</tbody>';
+                        html += '</table>';
 
-                    iterar = count;
+                        document.getElementById("lista_proyectos").innerHTML = html;
+                    }).catch(err => {
+                        console.log(err);
+                    });
+            }
 
-                } else {
-                    html += '<h2>No hay proyectos registrados</h2>';                
-                }
-                html += '<tr>';
-                html += '<td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;">Total:</td>';
-                html += '<td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;"><label for="horas_hombre"></label>';
-                html += horas.toFixed(2);
-                html += '</td>';
-                html += '<td style="border-bottom-width: 0px !important; border-top-width: 0cm !important;"><int id="horas_hombre" name="horas_hombre" type="double"></td>';
-                html += '</tr>';
-                html += '</tbody>';
-                html += '</table>';
-
-                document.getElementById("lista_proyectos").innerHTML = html;
-            }).catch(err => {
-                console.log(err);
-            });
+           
         };
 
         document.getElementById('fecha_fin').oninput = accion_asincrona;
