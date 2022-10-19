@@ -139,7 +139,6 @@
         </div> 
     </div>
     <% if (privilegios.indexOf('Crear etiqueta') > -1 ) { %> 
-        <% if (privilegios.indexOf('Crear proyecto') > -1 ) { %> 
             <div>
                 <li class="dropdown">
                     <a type="button" class="BotonCrear " id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >         
@@ -149,13 +148,14 @@
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="CrearDropdown">
-                        <a class="dropdown-item " href="/proyectos/crearProyecto">Proyecto</a>
-                        <div class="dropdown-divider"></div>
+                        <% if (privilegios.indexOf('Crear proyecto') > -1 ) { %> 
+                            <a class="dropdown-item " href="/proyectos/crearProyecto">Proyecto</a>
+                            <div class="dropdown-divider"></div>
+                        <% } %>  
                         <a class="dropdown-item" href="/proyectos/crearEtiqueta">Etiqueta</a>
                     </div>
                 </li>
             </div>
-        <% } %>  
     <% } %>  
 </div>
 

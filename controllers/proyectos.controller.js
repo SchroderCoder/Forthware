@@ -51,7 +51,7 @@ exports.getProyectos = (request, response, next) => {
 };
 
 exports.getCrearProyecto = (request, response, next) => {
-    Usuario.fetchAll()
+    Usuario.fetchAll(idUsuario)
         .then(([rows, fielData]) => {
             request.session.isLoggedIn = true;
             request.session.empleados = [];
@@ -89,7 +89,9 @@ exports.postCrearProyecto = (request, response, next) => {
             Proyecto.fetchRecent()
             .then(([cols, fielData]) => {
                 let id_reciente= cols[0].reciente;
-                let id_empleados = request.body.empleados;
+                let id_empleados = [];
+                id_empleados.push(request.body.empleados);
+                id_empleados.push(idUsuario);
 
                 for (e of id_empleados){    
                     Crea.registrar(e,id_reciente)

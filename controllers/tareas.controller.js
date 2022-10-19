@@ -30,7 +30,7 @@ exports.getTareas = (request, response, next) => {
 };
 
 exports.getCrearTareas = (request, response, next) => {
-    Usuario.fetchAll()
+    Usuario.fetchAll(idUsuario)
         .then(([rows, fielData]) => {
             request.session.isLoggedIn = true;
             request.session.empleados = [];
@@ -78,22 +78,49 @@ exports.postCrearTareas = (request, response, next) => {
             Tarea.fetchRecent()
             .then(([cols, fielData]) => {
                 let id_reciente= cols[0].reciente;
-                let id_empleados = request.body.empleados;
-
-                for (e of id_empleados){    
-                    Realiza.registrar(e,id_reciente)
-                    .then(() => {
-                    })
-                    .catch(err => {
-                        console.log(err);
-                        response.render('error.ejs', {
-                            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                let id_empleados = [];
+                if(request.body.empleados){
+                    id_empleados.push(request.body.empleados);
+                    id_empleados.push(idUsuario);
+                    for (e of id_empleados){    
+                        Realiza.registrar(e,id_reciente)
+                        .then(() => {
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            response.render('error.ejs', {
+                                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                            });
                         });
-                    });
-                }
-                privilegios: request.session.privilegios,
-                request.session.alerta = "Tarea: "+ request.body.descripcion + " creada con éxito!";
-                response.status(303).redirect('/tareas/main');
+                    }
+                    privilegios: request.session.privilegios,
+                    request.session.alerta = "Tarea: "+ request.body.descripcion + " creada con éxito!";
+                    response.status(303).redirect('/tareas/main');
+
+                } else{
+                    id_empleados.push(idUsuario);
+                    id_empleados.push(0);
+                    for (e of id_empleados){   
+                        if(e ==0){
+                            console.log("jijaija");
+                        } else{
+                            console.log("xd");
+                            Realiza.registrar(e,id_reciente)
+                            .then(() => {
+                            })
+                            .catch(err => {
+                                console.log(err);
+                                response.render('error.ejs', {
+                                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                                });
+                            });
+                        }
+                    }
+                    privilegios: request.session.privilegios,
+                    request.session.alerta = "Tarea: "+ request.body.descripcion + " creada con éxito!";
+                    response.status(303).redirect('/tareas/main');
+
+                }             
             })
             .catch(err => {
                 console.log(err);
