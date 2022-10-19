@@ -78,11 +78,12 @@ exports.postCrearTareas = (request, response, next) => {
             Tarea.fetchRecent()
             .then(([cols, fielData]) => {
                 let id_reciente= cols[0].reciente;
-                let id_empleados = [];
-                if(request.body.empleados){
-                    id_empleados.push(request.body.empleados);
-                    id_empleados.push(idUsuario);
+                let id_empleados = request.body.empleados;
+
+                if (Array.isArray(request.body.empleados)) {
+
                     for (e of id_empleados){    
+                        console.log(e);
                         Realiza.registrar(e,id_reciente)
                         .then(() => {
                         })
@@ -93,34 +94,42 @@ exports.postCrearTareas = (request, response, next) => {
                             });
                         });
                     }
-                    privilegios: request.session.privilegios,
-                    request.session.alerta = "Tarea: "+ request.body.descripcion + " creada con éxito!";
-                    response.status(303).redirect('/tareas/main');
 
-                } else{
-                    id_empleados.push(idUsuario);
-                    id_empleados.push(0);
-                    for (e of id_empleados){   
-                        if(e ==0){
-                            console.log("jijaija");
-                        } else{
-                            console.log("xd");
-                            Realiza.registrar(e,id_reciente)
-                            .then(() => {
-                            })
-                            .catch(err => {
-                                console.log(err);
-                                response.render('error.ejs', {
-                                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
-                                });
+                    Realiza.registrar(idUsuario,id_reciente)
+                        .then(() => {
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            response.render('error.ejs', {
+                                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
                             });
-                        }
-                    }
-                    privilegios: request.session.privilegios,
-                    request.session.alerta = "Tarea: "+ request.body.descripcion + " creada con éxito!";
-                    response.status(303).redirect('/tareas/main');
+                        });
 
-                }             
+                } else {
+
+                    Realiza.registrar(request.body.empleados,id_reciente)
+                        .then(() => {
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            response.render('error.ejs', {
+                                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                            });
+                        });
+
+                    Realiza.registrar(idUsuario,id_reciente)
+                        .then(() => {
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            response.render('error.ejs', {
+                                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                            });
+                        });
+
+                }           
+                request.session.alerta = "Tarea : "+ request.body.descripcion + " creado con éxito!";
+                response.status(303).redirect('/tareas/main');
             })
             .catch(err => {
                 console.log(err);
@@ -225,8 +234,23 @@ exports.postEditarTareas = (request, response, next) => {
                     let id_reciente= cols[0].reciente;
                     let id_empleados = request.body.registrados;
 
-                    for (e of id_empleados){    
-                        Realiza.eliminar(e,id_reciente)
+                    if (Array.isArray(request.body.registrados)) {
+                        
+                        for (e of id_empleados){    
+                            Realiza.eliminar(e,id_reciente)
+                            .then(() => {
+                            })
+                            .catch(err => {
+                                console.log(err);
+                                response.render('error.ejs', {
+                                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                                });
+                            });
+                        }
+
+                    } else {
+
+                        Realiza.eliminar(request.body.registrados,id_reciente)
                         .then(() => {
                         })
                         .catch(err => {
@@ -235,6 +259,7 @@ exports.postEditarTareas = (request, response, next) => {
                                 isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
                             });
                         });
+            
                     }
                 })
                 .catch(err => {
@@ -251,8 +276,22 @@ exports.postEditarTareas = (request, response, next) => {
                     let id_reciente= cols[0].reciente;
                     let id_empleados = request.body.no_registrados;
 
-                    for (e of id_empleados){    
-                        Realiza.registrar(e,id_reciente)
+                    if (Array.isArray(request.body.no_registrados)) {
+
+                        for (e of id_empleados){    
+                            Realiza.registrar(e,id_reciente)
+                            .then(() => {
+                            })
+                            .catch(err => {
+                                console.log(err);
+                                response.render('error.ejs', {
+                                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                                });
+                            });
+                        }
+                    } else {
+
+                        Realiza.registrar(request.body.no_registrados,id_reciente)
                         .then(() => {
                         })
                         .catch(err => {
@@ -261,6 +300,7 @@ exports.postEditarTareas = (request, response, next) => {
                                 isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
                             });
                         });
+
                     }
                 })
                 .catch(err => {

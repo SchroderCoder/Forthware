@@ -89,19 +89,52 @@ exports.postCrearProyecto = (request, response, next) => {
             Proyecto.fetchRecent()
             .then(([cols, fielData]) => {
                 let id_reciente= cols[0].reciente;
-                let id_empleados = [];
-                id_empleados.push(request.body.empleados);
-                id_empleados.push(idUsuario);
+                let id_empleados = request.body.empleados;
 
-                for (e of id_empleados){    
-                    Crea.registrar(e,id_reciente)
-                    .then(() => {})
-                    .catch(err => {
-                        console.log(err);
-                        response.render('error.ejs', {
-                            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                if (Array.isArray(request.body.empleados)) {
+
+                    for (e of id_empleados){    
+                        Crea.registrar(e,id_reciente)
+                        .then(() => {})
+                        .catch(err => {
+                            console.log(err);
+                            response.render('error.ejs', {
+                                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                            });
                         });
-                    });
+                    }
+
+                    Crea.registrar(idUsuario,id_reciente)
+                        .then(() => {})
+                        .catch(err => {
+                            console.log(err);
+                            response.render('error.ejs', {
+                                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                            });
+                        });
+
+                } else {
+
+                    Crea.registrar(request.body.empleados,id_reciente)
+                        .then(() => {
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            response.render('error.ejs', {
+                                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                            });
+                        });
+
+                    Crea.registrar(idUsuario,id_reciente)
+                        .then(() => {
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            response.render('error.ejs', {
+                                isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                            });
+                        });
+
                 }
                 privilegios: request.session.privilegios
                 request.session.alerta = "Proyecto : "+ request.body.nombre + " creado con éxito!"; 
@@ -230,17 +263,32 @@ exports.postEditarProyecto = (request, response, next) => {
                         id_empleados.push(request.body.registrados);
                         console.log(id_empleados)
 
+                        if (Array.isArray(request.body.registrados)) {
 
-                        for (e of request.body.registrados){    
-                            Crea.eliminar(e,id_reciente)
-                            .then(() => {
-                            })
-                            .catch(err => {
-                                console.log(err);
-                                response.render('error.ejs', {
-                                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                            for (e of request.body.registrados){    
+                                Crea.eliminar(e,id_reciente)
+                                .then(() => {
+                                })
+                                .catch(err => {
+                                    console.log(err);
+                                    response.render('error.ejs', {
+                                        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                                    });
                                 });
-                            });
+                            }
+
+                        } else {
+
+                            Crea.eliminar(request.body.registrados,id_reciente)
+                                .then(() => {
+                                })
+                                .catch(err => {
+                                    console.log(err);
+                                    response.render('error.ejs', {
+                                        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                                    });
+                                });
+
                         }
                     })
                     .catch(err => {
@@ -254,22 +302,33 @@ exports.postEditarProyecto = (request, response, next) => {
                 if (request.body.no_registrados){
                     Proyecto.fetchRecent()
                     .then(([cols, fielData]) => {
-                        let id_empleados = []
                         let id_reciente= cols[0].reciente;
-                        id_empleados.push (request.body.no_registrados);
-                        console.log(id_empleados)
+                        let id_empleados = request.body.no_registrados;
 
+                        if (Array.isArray(request.body.no_registrados)) {
 
-                        for (e of request.body.no_registrados){    
-                            Crea.registrar(e,id_reciente)
-                            .then(() => {
-                            })
-                            .catch(err => {
-                                console.log(err);
-                                response.render('error.ejs', {
-                                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                            for (e of id_empleados){    
+                                Crea.registrar(e,id_reciente)
+                                .then(() => {
+                                })
+                                .catch(err => {
+                                    console.log(err);
+                                    response.render('error.ejs', {
+                                        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                                    });
                                 });
-                            });
+                            }
+                        } else {
+
+                            Crea.registrar(request.body.no_registrados,id_reciente)
+                                .then(() => {
+                                })
+                                .catch(err => {
+                                    console.log(err);
+                                    response.render('error.ejs', {
+                                        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                                    });
+                                });
                         }
                     })
                     .catch(err => {
@@ -319,12 +378,11 @@ exports.postEditarProyecto = (request, response, next) => {
                         let id_empleados = []
                         let id_reciente= cols[0].reciente;
                         id_empleados.push(request.body.registrados);
+                        console.log(id_empleados)
 
-                        console.log(request.body.registrados[1])
+                        if (Array.isArray(request.body.registrados)) {
 
-                        if(request.body.registrados[1]) {
-
-                            for (e of request.body.registrados){  
+                            for (e of request.body.registrados){    
                                 Crea.eliminar(e,id_reciente)
                                 .then(() => {
                                 })
@@ -335,18 +393,18 @@ exports.postEditarProyecto = (request, response, next) => {
                                     });
                                 });
                             }
-                        
+
                         } else {
 
                             Crea.eliminar(request.body.registrados,id_reciente)
-                            .then(() => {
-                            })
-                            .catch(err => {
-                                console.log(err);
-                                response.render('error.ejs', {
-                                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                                .then(() => {
+                                })
+                                .catch(err => {
+                                    console.log(err);
+                                    response.render('error.ejs', {
+                                        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                                    });
                                 });
-                            });
 
                         }
                     })
@@ -361,16 +419,12 @@ exports.postEditarProyecto = (request, response, next) => {
                 if (request.body.no_registrados){
                     Proyecto.fetchRecent()
                     .then(([cols, fielData]) => {
-                        let id_empleados = []
                         let id_reciente= cols[0].reciente;
-                        id_empleados.push(request.body.no_registrados);
-                        console.log(id_empleados)
+                        let id_empleados = request.body.no_registrados;
 
-                        console.log(request.body.no_registrados[1])
-                        
-                        if(request.body.no_registrados[1]) {
+                        if (Array.isArray(request.body.no_registrados)) {
 
-                            for (e of request.body.no_registrados){
+                            for (e of id_empleados){    
                                 Crea.registrar(e,id_reciente)
                                 .then(() => {
                                 })
@@ -381,18 +435,17 @@ exports.postEditarProyecto = (request, response, next) => {
                                     });
                                 });
                             }
-                        
                         } else {
 
-                            Crea.registrar(request.body.no_registrados[0],id_reciente)
-                            .then(() => {
-                            })
-                            .catch(err => {
-                                console.log(err);
-                                response.render('error.ejs', {
-                                    isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                            Crea.registrar(request.body.no_registrados,id_reciente)
+                                .then(() => {
+                                })
+                                .catch(err => {
+                                    console.log(err);
+                                    response.render('error.ejs', {
+                                        isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
+                                    });
                                 });
-                            });
                         }
                     })
                     .catch(err => {
