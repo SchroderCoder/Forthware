@@ -6,7 +6,6 @@ const { request } = require('http');
 const Proyecto = require('../models/proyecto.model');
 const Tarea = require('../models/tarea.model');
 
-
 exports.getNew = (request, response, next) => {
     response.render(path.join('new.ejs'), {
         isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
@@ -92,7 +91,7 @@ exports.getLogin = (request, response, next) => {
 exports.getMain = (request, response, next) => {
     Proyecto.fetchProyectosImportancia()
     .then(([rows, fielData]) => {
-        Usuario.fetchTareasMain()
+        Usuario.fetchTareasMain(id_usuario)
         .then(([cols, fielData]) => {
         response.render(path.join('..',"views", "main.ejs"), {
             proyectos: rows.slice(0,3),
@@ -194,4 +193,6 @@ exports.logout = (request, response, next) => {
     request.session.destroy(() => {
         response.redirect('/user/login'); 
     });
+
+    
 };

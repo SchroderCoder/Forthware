@@ -61,7 +61,7 @@ module.exports = class Usuario {
         // main 
 
         static fetchTareasMain(a_empleado) {
-            return db.execute('SELECT * FROM tareas T, realiza R , proyectos P where T.id_tarea=R.id_tarea AND P.id_proyecto=T.id_proyecto AND R.id_empleado=3 AND T.is_deleted=0 order by fecha_creacion desc LIMIT 4;');
+            return db.execute('SELECT * FROM tareas T, realiza R , proyectos P where T.id_tarea=R.id_tarea AND P.id_proyecto=T.id_proyecto AND R.id_empleado= ? AND T.is_deleted=0 order by fecha_creacion desc LIMIT 4;', [a_empleado]);
         }
 
 }
