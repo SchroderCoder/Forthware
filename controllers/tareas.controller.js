@@ -300,7 +300,7 @@ exports.postoneTarea = (request, response, next) => {
 };
 
 exports.getBuscar = (request, response, next) => {
-    Tarea.find(request.params.valor)
+    Tarea.find(request.params.valor ? request.params.valor : '')
         .then(([rows, fieldData]) => {
             privilegios: request.session.privilegios,
             response.status(200).json({tareas: rows});

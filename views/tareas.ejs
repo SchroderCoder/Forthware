@@ -181,4 +181,101 @@
             </div>
         </div>
 
-        <%- include('includes/foot.ejs') %>
+<% } else { %>
+    <h2>No hay tareas registradas</h2>
+<% } %>  
+</div>
+<div>
+    <a href="/tareas/crearTarea">
+        <button type="button" class="btn btn-primary mx-auto d-block mt-2" >
+            Crear
+        </button>
+    </a>
+</div>
+
+<div id = "modal">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" id="modal_contenido">
+            </div>
+        </div>
+    </div>
+</div>
+
+<% /* %>
+<%  if (alerta == "yes") { %> 
+    <div id = "alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        <button id = "close" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<%  } %> 
+
+<% */ %>
+
+<script>
+    function hidediv(){
+        document.getElementById("close").click();;
+
+    }
+    setTimeout("hidediv()", 2500);
+</script>
+
+<script src="/js/eliminartarea.js"> </script>
+<script src="/js/mostrartarea.js"> </script>
+
+<script>
+    const accion_asincrona = () => {
+        const valor = document.getElementById('buscar').value;
+        
+        fetch('/tareas/buscar/' + valor, {
+        method: 'GET',
+        }).then(result => {
+            return result.json();
+        }).then(data => {                
+            console.log(data);
+            let html = '';
+            if (data.tareas.length > 0) { 
+                
+                        // html += '<div id = tareas class="overflow-auto anyClass" style="height: 28rem !important;">'
+                        // html += '<input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >'
+                for (t of data.tareas) {
+                    html += '<div class="row bg-light text-dark m-1 mt-2 border rounded">';
+                    html +=     '<div class="col-2  col-md col-sm border-right border-dark text-truncate">';
+                    html +=         new Date(t.fecha_creacion).toLocaleDateString("ES-mx");
+                    html +=     '</div>';
+                    html +=     '<div class="col-md border-right border-dark text-truncate">';
+                    html +=         '<a type="button" id="' + t.id_tarea + '" data-toggle="modal" data-target="#exampleModal" onclick = "mostrartarea(id)">' +  t.descripcion + '</a>';
+                    html +=      '</div>';
+                    html +=       '<div class="col border-right border-dark">';
+                    html +=               t.duracion.toFixed(2); 
+                    html +=       '</div>';
+                    html +=       '<div class="col border-right border-dark">';
+                    html +=               t.descripcion; 
+                    html +=        '</div>';
+                    html +=        '<div class="col">';
+                    html +=               '<span class="material-symbols-outlined">';
+                    html +=                '<a href="/tareas/editarTarea/'+ t.id_tarea + '  >';
+                    html +=                    '<button class="btn btn-primary"><i class="material-icons">edit</i></button>';
+                    html +=                '</a>';
+                    html +=               '</span>';
+                    html +=                '<button  class = "btn btn-danger" id='+ t.id_tarea + ' type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea('+ t.id_tarea +')" ><i class="material-icons" >delete</i></button>';  
+                    html +=         '</div>';
+                    html += '</div>';
+                }
+            } else {
+                html = '<h2>No hay tareas que coincidan </h2>';
+            }
+        
+            document.getElementById("tareas").innerHTML = html;
+            }).catch(err => {
+                console.log(err);
+            });
+    };
+    
+    document.getElementById('buscar').onkeyup = accion_asincrona;
+
+</script>
+
+<%- include('includes/foot.ejs') %>
