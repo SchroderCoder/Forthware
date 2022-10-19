@@ -6,7 +6,6 @@ const { request } = require('http');
 const Proyecto = require('../models/proyecto.model');
 const Tarea = require('../models/tarea.model');
 
-
 exports.getNew = (request, response, next) => {
     response.render(path.join('new.ejs'), {
         isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
@@ -92,8 +91,9 @@ exports.getLogin = (request, response, next) => {
 exports.getMain = (request, response, next) => {
     Proyecto.fetchProyectosImportancia()
     .then(([rows, fielData]) => {
-        Usuario.fetchTareasMain()
+        Usuario.fetchTareasMain(idUsuario)
         .then(([cols, fielData]) => {
+            console.log(cols);
         response.render(path.join('..',"views", "main.ejs"), {
             proyectos: rows.slice(0,3),
             proyectos2: rows.slice(3,6),
@@ -164,7 +164,7 @@ exports.postLogin = (request, response, next) => {
                                     });
                             });
                         } else {
-                            request.session.alerta = "El usuario o contraseña no existe";
+                            request.session.alerta = "El usuario o contraseña  es incorrecto / no existe";
                             return response.redirect('/user/login');
                         }
                     }).catch(err => {
@@ -174,7 +174,7 @@ exports.postLogin = (request, response, next) => {
                         });
                     });
             } else {
-                request.session.alerta = "El usuario o contraseña no existe";   
+                request.session.alerta = "El usuario o contraseña  es incorrecto / no existe";
                 return response.render("error.ejs", {
                     isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
                 });
@@ -194,4 +194,6 @@ exports.logout = (request, response, next) => {
     request.session.destroy(() => {
         response.redirect('/user/login'); 
     });
+
+    
 };

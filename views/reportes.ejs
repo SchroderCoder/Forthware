@@ -14,16 +14,6 @@
     <div class="col-5 pl-3 " style="display:block ;">
         <h2 class=" " >Reportes</h2>
     </div>
-    <div class="col-sm-1 pt-1 pl-5" style="display:block ;">
-        <a href="/reportes/crearReporte" style="display:block ;">
-            <button type="button" class="btn btn-success mx-auto d-block " style="display:block ;" >
-                <span class="material-icons align-middle mr-2 mb-1">
-                    add
-                    </span>
-                Crear
-            </button>
-        </a>
-    </div>
 </div>
 
 <div class="p-3">
@@ -60,6 +50,14 @@
                 <% } %>  
         </div>
     </div>
+    <div>
+        <a href="/reportes/crearReporte" type="button" class="BotonCrear " >         
+            <span class="material-icons hoverCrear " style="font-size:75px;color:white; background-color: #28a745; 
+            border-radius: 50%; filter: drop-shadow(6px 4px 4px rgba(0, 0, 0, 0.50)); ">
+                add
+            </span>
+        </a>
+    </div>
 </div>
 
 <div id = "modal">
@@ -75,7 +73,7 @@
 <% const efectividad_aj = [];%>
 <% const fechas = [];%>
 <% for (let e of efectividad){ %> 
-             
+
     <% efectividad_aj.push(e.efectividad_ajustada)%> 
     <% fechas.push(new Date(e.fecha_fin).toLocaleDateString("ES-mx"))%>
 
@@ -145,5 +143,6 @@
 </script>
 <script src = "/js/hidediv.js"></script>
 <script src="/js/eliminarreporte.js"> </script>
+
 <%- include('includes/foot.ejs') %>  
 

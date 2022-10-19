@@ -23,6 +23,12 @@ body{
     color: white;
 }
 
+.hoverCrear:hover{
+    background-color: #1a6a2d !important;
+    color: white;
+    
+}
+
 h1{
     font-family: "Inter", Extra Bold, monospace;
     color: white;
@@ -169,7 +175,29 @@ h2{
     text-decoration: none;
     background-color:#25282B;
 }
+.list-group-card-main {
+    position: relative;
+    border-radius: 4%;
+    display: block;
+    color: #FFFF;
+    text-decoration: none !important;
+    
+    
+}
 
+.etiquetaInfo {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    width: max-content;
+    position: relative;
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #FFFF;
+    text-decoration: none;
+    background-color:#25282B;
+}
 
 .logo{
     /*position: absolute;
@@ -295,8 +323,8 @@ right:1vh;
 .circular--landscape {
     display: inline-block;
     position: relative;
-    width: 160px;
-    height: 160px;
+    width: 130px;
+    height: 130px;
     overflow: hidden;
     border-radius: 50%;
 }
@@ -304,7 +332,7 @@ right:1vh;
 .circular--landscape-img {
 width: auto;
 height: 100%;
-margin-left:-50%;
+margin-left:-25%;
 }
 
 
