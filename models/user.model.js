@@ -10,10 +10,7 @@ module.exports = class Usuario {
         this.disponibilidad = una_disponibilidad;
         this.imagen = una_imagen;
     }
-
     
-
-
     save() {
         return bcrypt.hash(this.password, 12)
             .then((newPassword) => {

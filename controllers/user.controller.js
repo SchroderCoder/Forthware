@@ -93,6 +93,7 @@ exports.getMain = (request, response, next) => {
     .then(([rows, fielData]) => {
         Usuario.fetchTareasMain(idUsuario)
         .then(([cols, fielData]) => {
+            console.log(cols)
         response.render(path.join('..',"views", "main.ejs"), {
             proyectos: rows.slice(0,3),
             proyectos2: rows.slice(3,6),
