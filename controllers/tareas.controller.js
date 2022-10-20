@@ -44,7 +44,7 @@ exports.getCrearTareas = (request, response, next) => {
                     for(let proyecto of consulta) {
                         request.session.proyectos.push(proyecto);
                     }
-                    
+
                     response.render(path.join('..',"views", "CrearTarea.ejs"), {
                         privilegios: request.session.privilegios,
                         empleados: request.session.empleados,
