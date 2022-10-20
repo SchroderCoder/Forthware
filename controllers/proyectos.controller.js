@@ -241,7 +241,6 @@ exports.postEditarProyecto = (request, response, next) => {
 
     
     if(request.file) { 
-        console.log("primer if");
         imagen = request.file.filename;
 
         Proyecto.fetchOne(request.body.id)
@@ -261,7 +260,6 @@ exports.postEditarProyecto = (request, response, next) => {
                         let id_empleados = []
                         let id_reciente= cols[0].reciente;
                         id_empleados.push(request.body.registrados);
-                        console.log(id_empleados)
 
                         if (Array.isArray(request.body.registrados)) {
 
@@ -361,7 +359,6 @@ exports.postEditarProyecto = (request, response, next) => {
     }
     
     if (!(request.file)){
-        console.log("segundo if");
         imagen = "";
         Proyecto.fetchOne(request.body.id)
         .then(([rows, fielData]) => {
@@ -379,7 +376,6 @@ exports.postEditarProyecto = (request, response, next) => {
                         let id_empleados = []
                         let id_reciente= cols[0].reciente;
                         id_empleados.push(request.body.registrados);
-                        console.log(id_empleados)
 
                         if (Array.isArray(request.body.registrados)) {
 

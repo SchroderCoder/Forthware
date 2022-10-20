@@ -83,7 +83,6 @@ exports.postCrearTareas = (request, response, next) => {
                 if (Array.isArray(request.body.empleados)) {
 
                     for (e of id_empleados){    
-                        console.log(e);
                         Realiza.registrar(e,id_reciente)
                         .then(() => {
                         })
