@@ -116,7 +116,7 @@ exports.postCrearTareas = (request, response, next) => {
                                 isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
                             });
                         });
-
+                    
                     Realiza.registrar(idUsuario,id_reciente)
                         .then(() => {
                         })
@@ -128,7 +128,7 @@ exports.postCrearTareas = (request, response, next) => {
                         });
 
                 }           
-                
+
                 request.session.alerta = "Tarea : "+ request.body.descripcion + " creado con éxito!";
                 response.status(303).redirect('/tareas/main');
             })
