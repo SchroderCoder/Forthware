@@ -44,7 +44,7 @@ exports.getCrearTareas = (request, response, next) => {
                     for(let proyecto of consulta) {
                         request.session.proyectos.push(proyecto);
                     }
-                    
+
                     response.render(path.join('..',"views", "CrearTarea.ejs"), {
                         privilegios: request.session.privilegios,
                         empleados: request.session.empleados,
@@ -128,6 +128,7 @@ exports.postCrearTareas = (request, response, next) => {
                         });
 
                 }           
+                
                 request.session.alerta = "Tarea : "+ request.body.descripcion + " creado con éxito!";
                 response.status(303).redirect('/tareas/main');
             })
