@@ -10,10 +10,7 @@ module.exports = class Usuario {
         this.disponibilidad = una_disponibilidad;
         this.imagen = una_imagen;
     }
-
     
-
-
     save() {
         return bcrypt.hash(this.password, 12)
             .then((newPassword) => {
@@ -61,7 +58,7 @@ module.exports = class Usuario {
         // main 
 
         static fetchTareasMain(a_empleado) {
-            return db.execute('SELECT * FROM tareas T, realiza R , proyectos P where T.id_tarea=R.id_tarea AND P.id_proyecto=T.id_proyecto AND R.id_empleado= ? AND T.is_deleted=0 order by fecha_creacion desc LIMIT 4;', [a_empleado]);
+            return db.execute('SELECT T.id_tarea, T.descripcion, P.nombre, T.duracion, T.fecha_creacion FROM tareas T, realiza R , proyectos P where T.id_tarea=R.id_tarea AND P.id_proyecto=T.id_proyecto AND R.id_empleado= ? AND T.is_deleted=0 order by fecha_creacion desc LIMIT 4;', [a_empleado]);
         }
 
 }

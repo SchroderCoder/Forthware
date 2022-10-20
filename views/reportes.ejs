@@ -30,10 +30,13 @@
                                         <!-- <img src="/media/templatereportes.png" class="card-img-top" style="position:relative ;" alt="reporte"> -->
                                         <div class="parent">
                                             <img src="/media/templatereportes.png"  class=" p-1  image1 card-img-top mx-auto d-block img-fluid" style="position:relative ; width:63% ;  " alt="reporte" />
-                                            <a href="<%= r.pdf_reportes%>" class="btn-sm btn-primary image2" type="button" > 
-                                                <span class="material-icons">
-                                                    file_download
-                                                </span></a>
+                                            <a href="<%= r.pdf_reportes%>" class="text-white" type="button" > 
+                                                <button class="btn-sm btn-primary image2 ">
+                                                    <span class="material-icons">
+                                                        file_download
+                                                    </span></a>
+                                                </button>
+                                           
                                             <button id="<%= r.id_reporte %>"  type="button" class="image3 btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal" value="<%= r.id_reporte %>" onclick = "eliminareporte(id)">
                                                 <span class="material-icons">
                                                     delete
@@ -51,11 +54,12 @@
         </div>
     </div>
     <div>
-        <a href="/reportes/crearReporte" type="button" class="BotonCrear " >         
-            <span class="material-icons hoverCrear " style="font-size:75px;color:white; background-color: #28a745; 
+        <a href="/reportes/crearReporte" type="button" class="BotonCrear " >      
+                <span class="material-icons hoverCrear " style="font-size:75px;color:white; background-color: #28a745; 
             border-radius: 50%; filter: drop-shadow(6px 4px 4px rgba(0, 0, 0, 0.50)); ">
                 add
             </span>
+            
         </a>
     </div>
 </div>

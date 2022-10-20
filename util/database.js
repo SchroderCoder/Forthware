@@ -32,7 +32,6 @@
 
 const mysql = require('mysql2');
 const pool = mysql.createPool({
-    
     host: '34.171.63.83',
     user: 'root',
     database: 'NatDev',
