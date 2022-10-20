@@ -119,7 +119,7 @@ function mostrarperfilpersonal(id){
             
                 html +=
                 '        <div class="modal-header main-nav"> ' +
-                '          <h5 class="modal-title" id="exampleModalLabel"> <img src="/media/natgas-logo-simple.png" width="40" alt=" Logo NatGas"> Camilo White </h5> ' +
+                '          <h5 class="modal-title" id="exampleModalLabel"> <img src="/media/natgas-logo-simple.png" width="40" alt=" Logo NatGas"> '+ nombreUsuario +' </h5> ' +
                 '          <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Close"></button> ' +
                 '        </div> ' +
                 '        <div class="modal-body text-center"> ' + 
@@ -127,7 +127,7 @@ function mostrarperfilpersonal(id){
                 '           <div class="row"> ' +
                 '           <div class="col">' +
                 '            <div class = "container2">' +
-                '           <img src="https://st.depositphotos.com/2218212/2938/i/450/depositphotos_29387653-stock-photo-facebook-profile.jpg" class="img-circle mx-auto d-block img-fluid imagePerfil" alt="Imagen de Perfil Colaborador" onerror="this.onerror=null; this.src="https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png"></img><div id = "imagen"></img>' +
+                '           <img src=" ' + imagenUsuario  + ' " class="img-circle mx-auto d-block img-fluid imagePerfil" alt="Imagen de Perfil Colaborador" onerror="this.onerror=null; this.src="https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png"></img><div id = "imagen"></img>' +
                 '            <div class="middle">' +
                 '            <div class="text"><a href="/proyectos/editarEtiqueta/<%= 2 %>"><button class="btn btn-info" >Editar imagen</button></a></div>' +
                 '            </div> ' +

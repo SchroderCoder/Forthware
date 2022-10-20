@@ -122,7 +122,7 @@ exports.postLogin = (request, response, next) => {
     
     return Usuario.fetchOne(request.body.correo)
         .then(([rows, fielData]) => {
-            console.log(rows[0])
+            console.log(rows)
             if (rows.length == 1) {
                 request.session.isLoggedIn = true;
                 request.session.user = rows[0].nombre; 
@@ -143,6 +143,7 @@ exports.postLogin = (request, response, next) => {
                                         for(let privilegio of consulta_privilegios) {
                                             request.session.privilegios.push(privilegio.descripcion);
                                         }
+                                        console.log(imagenUsuario)
                                         response.redirect('/user/main');
                                     })
                                     .catch(err => {
