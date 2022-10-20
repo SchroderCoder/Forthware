@@ -128,7 +128,7 @@ exports.postCrearTareas = (request, response, next) => {
                         });
 
                 }           
-                request.session.alerta = "Tarea : "+ request.body.descripcion + " creado con éxito!";
+                request.session.alerta = "Tarea : "+ request.body.descripcion + " creada con éxito!";
                 response.status(303).redirect('/tareas/main');
             })
             .catch(err => {

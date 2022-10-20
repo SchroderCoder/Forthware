@@ -338,7 +338,7 @@ exports.postEditarProyecto = (request, response, next) => {
                         });
                     });
                 }
-
+                request.session.alerta = "Proyecto  : "+ request.body.nombre + " editado con éxito!";
                 response.status(303).redirect('/proyectos/main');
             })
             .catch(err => {
@@ -456,7 +456,7 @@ exports.postEditarProyecto = (request, response, next) => {
                     });
                 }
                 
-                
+                request.session.alerta = "Proyecto  : "+ request.body.nombre + " editado con éxito!";
                 response.status(303).redirect('/proyectos/main');
             })
             .catch(err => {
