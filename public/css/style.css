@@ -344,6 +344,21 @@ height: 100%;
 margin-left:-25%;
 }
 
+.circularNav--landscape {
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.circularNav--landscape-img {
+    width: auto;
+    height: 100%;
+    margin-left:-25%;
+}
+
 
 .boxTarea {
 position: relative;
@@ -394,7 +409,7 @@ right: 2rem;
 .imagenColabs-landscape {
     display: inline-block;
     position: relative;
-    width:fit-content ;
+    width: 388px;
     height: 194px;
     overflow: hidden;
     border-radius: 0% !important;

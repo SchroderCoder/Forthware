@@ -89,11 +89,12 @@ exports.getLogin = (request, response, next) => {
 };
 
 exports.getMain = (request, response, next) => {
+    
     Proyecto.fetchProyectosImportancia()
     .then(([rows, fielData]) => {
         Usuario.fetchTareasMain(idUsuario)
         .then(([cols, fielData]) => {
-            console.log(cols)
+            console.log(imagenUsuario)
         response.render(path.join('..',"views", "main.ejs"), {
             proyectos: rows.slice(0,3),
             proyectos2: rows.slice(3,6),
@@ -121,6 +122,7 @@ exports.postLogin = (request, response, next) => {
     
     return Usuario.fetchOne(request.body.correo)
         .then(([rows, fielData]) => {
+            console.log(rows[0])
             if (rows.length == 1) {
                 request.session.isLoggedIn = true;
                 request.session.user = rows[0].nombre; 

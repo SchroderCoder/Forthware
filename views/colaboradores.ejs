@@ -10,7 +10,7 @@
                 <% for (let  p of colaboradores) { %>
                     <div class=" col-lg-4 col-xl-3 col-md-5 pt-1 over" style="cursor:pointer;">
                         <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
-                        <a id="<%= p.id_empleado %>" name="<%= p.nombre %>" data-toggle="modal" data-target="#exampleModal" onclick = "mostrarperfil(id)"><img src="<%= p.image_url %>" class="img-circle  d-block img-fluid imagenColabs-landscape px-auto" alt="Imagen de Perfil Colaborador" onerror="this.onerror=null; this.src='https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png'"> </a>
+                        <a id="<%= p.id_empleado %>" name="<%= p.nombre %>" data-toggle="modal" data-target="#exampleModal" onclick = "mostrarperfil(id)"><img src="<%= p.image_url %>" class="img-circle  d-block img-fluid imagenColabs-landscape px-auto" alt="Imagen de Perfil Colaborador" onerror="this.onerror=null; this.src='/media/image-not-found-scaled.png'"> </a>
                         <h5 class="card-title text-light text-center align-middle pt-2 bg-secondary" style="height:15% ;"><%= p.nombre %></h5> 
                     </div>
                 <% } %>
