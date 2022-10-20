@@ -22,9 +22,9 @@ module.exports = class Crea {
     }
 
     static fetchRegistrados(un_id) {
-        return db.execute('SELECT E.nombre, E.id_empleado FROM empleados E, crea C WHERE E.id_empleado = C.id_empleado AND C.id_proyecto = ?', [un_id]);
+        return db.execute('SELECT E.nombre, E.id_empleado FROM empleados E, crea C WHERE E.id_empleado = C.id_empleado AND C.id_proyecto = ? order by E.NOMBRE ASC', [un_id]);
     }
-
+    
     static fetchNoRegistrados(un_id) {
         return db.execute('SELECT E.nombre, E.id_empleado FROM empleados E WHERE E.id_empleado NOT IN (SELECT E.id_empleado FROM empleados E, crea C WHERE E.id_empleado = C.id_empleado AND C.id_proyecto = ?) ', [un_id]);
     }

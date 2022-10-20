@@ -23,6 +23,12 @@ body{
     color: white;
 }
 
+.hoverCrear:hover{
+    background-color: #1a6a2d !important;
+    color: white;
+    
+}
+
 h1{
     font-family: "Inter", Extra Bold, monospace;
     color: white;
@@ -136,6 +142,15 @@ h2{
 
 .list-group-flush {
     border-radius: 0;
+    
+}
+.list-etiquetas {
+    
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    border-radius: 0.25r;
+    width: max-content;
 }
 
 .list-group-item {
@@ -329,6 +344,21 @@ height: 100%;
 margin-left:-25%;
 }
 
+.circularNav--landscape {
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.circularNav--landscape-img {
+    width: auto;
+    height: 100%;
+    margin-left:-25%;
+}
+
 
 .boxTarea {
 position: relative;
@@ -348,3 +378,62 @@ bottom: 2rem;
 right: 2rem;
 }
 
+.nav-tabs .nav-item {
+
+    margin-bottom: none;
+}
+
+.nav-link{
+    transition: none;
+}
+
+.nav-tabs .nav-item .nav-link.active {
+    border: none !important;
+    background-color: #0000004c;
+}
+
+.nav-link:focus, .nav-link:hover{
+    border: none;
+    --bs-nav-tabs-border-width: -1px;
+}
+
+.imagen-landscape {
+    display: inline-block;
+    position: relative;
+    width: 388px;
+    height: 215px;
+    overflow: hidden;
+    border-radius: 0% !important;
+}
+
+.imagenColabs-landscape {
+    display: inline-block;
+    position: relative;
+    width: 388px;
+    height: 194px;
+    overflow: hidden;
+    border-radius: 0% !important;
+}
+
+/* .circular--landscape-img {
+width: auto;
+height: 100%;
+margin-left:-25%;
+} */
+
+.container-footer 
+{   
+    padding-right: 15px;
+    padding-left: 35px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.site-footer
+{
+  background-color:#26272b;
+  padding:45px 0 20px;
+  font-size:15px;
+  line-height:24px;
+  color:#737373;
+}

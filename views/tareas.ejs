@@ -3,9 +3,10 @@
 <%- include('includes/nav.ejs') %>  
 <%- include('includes/sidebar.ejs') %>
 
-<%  if (alert.includes("creada")) { %> 
+<%  if (alert.includes("cread")) { %> 
     <%- include('includes/successalert.ejs') %>
 <%  } %> 
+
 
 <%  if (alert.includes("editada")) { %> 
     <%- include('includes/editalert.ejs') %>
@@ -70,16 +71,20 @@
                                                 <%=  t.nombre %>
                                             </div>
                                             <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5 my-auto  "  style="overflow: hidden ;" >
+                                                <%  if (t.id_creador == idUsuario){ %>
                                                 <div class="row" >
-                                                   <div class="col " style="justify-content:end !important ;" >
+                                                    <div class="col " style="justify-content:end !important ;" >
                                                     <a href="/tareas/editarTarea/<%= t.id_tarea %>" style="flex:none ;" >
                                                         <button  style=" flex: none; " class = "btn btn-sm btn-primary " > 
                                                             <i class="material-icons" style="font-size:125% ; " >edit</i> </button>
                                                     </a>
                                                     <button style="flex: none; "  class = "btn btn-sm btn-danger" id="<%= t.id_tarea %>" type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea(id)" >
                                                         <i style="font-size:125% ;" class="material-icons " >delete</i></button>
-                                                   </div>              <!-- style="width: 20%;height: 20%; display: block;" -->
+                                                    </div>              <!-- style="width: 20%;height: 20%; display: block;" -->
                                                 </div>
+                                                <% } else { %>
+
+                                                <% } %>
                                             </div>
                                             
                             
@@ -95,14 +100,13 @@
             <% } %>  
             </div>
             <div>
-                <a href="/tareas/crearTarea" class="BotonCrear"  >         
-                        <span class="material-icons  " style="font-size:75px;color:white; background-color: #28a745; 
-                        border-radius: 50%; filter: drop-shadow(8px 4px 4px rgba(0, 0, 0, 0.50)); ">
+                <a href="/tareas/crearTarea" type="button" class="BotonCrear " >         
+                        <span class="material-icons hoverCrear " style="font-size:75px;color:white; background-color: #28a745; 
+                        border-radius: 50%; filter: drop-shadow(6px 4px 4px rgba(0, 0, 0, 0.50)); ">
                             add
                         </span>
                 </a>
             </div>
-           
         </div>
         <div id = "modal">
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -119,57 +123,59 @@
 <script src="/js/eliminartarea.js"> </script>
 <script src="/js/mostrartarea.js"> </script>
 
-        <script>
-            const accion_asincrona = () => {
-                const valor = document.getElementById('buscar').value;
+<script>
+    const accion_asincrona = () => {
+        const valor = document.getElementById('buscar').value;
+        
+        fetch('/tareas/buscar/' + valor, {
+        method: 'GET',
+        }).then(result => {
+            return result.json();
+        }).then(data => {                
+            let html = '';
+            if (data.tareas.length > 0) { 
                 
-                fetch('/tareas/buscar/' + valor, {
-                method: 'GET',
-                }).then(result => {
-                    return result.json();
-                }).then(data => {                
-                    console.log(data);
-                    let html = '';
-                    if (data.tareas.length > 0) { 
-                        
-                                // html += '<div id = tareas class="overflow-auto anyClass" style="height: 28rem !important;">'
-                                // html += '<input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >'
-                        for (t of data.tareas) {
-                            html +=        '<div class="row bg-light text-dark m-1 mt-2 border rounded">'
-                            html +=            '<div class="col border-right border-dark">'
-                            html +=                '<%=  new Date('+t.fecha_creacion+').toLocaleDateString("ES-mx") %>'
-                            html +=            '</div>'
-                            html +=           ' <div class="col-5 border-right border-dark">'
-                            html +=                '<a type="button" id="'+t.id_tarea+'" data-toggle="modal" data-target="#exampleModal" onclick = "mostrartarea(id)">'+  t.descripcion +'</a>'
-                            html +=            '</div>'
-                            html +=            '<div class="col border-right border-dark">'
-                            html +=                +  t.duracion.toFixed(2) 
-                            html +=            '</div>'
-                            html +=            '<div class="col border-right border-dark">'
-                            html +=               + t.nombre 
-                            html +=            '</div>'
-                            html +=            '<div class="col ">'
-                            html +=               '<span class="material-symbols-outlined">'
-                            html +=                '<a href="/tareas/editarTarea/'+ t.id_tarea+ '  >'
-                            html +=                    '<button class = "btn btn-primary" > <i class="material-icons" >edit</i> </button>'
-                            html +=                    
-                            html +=                '</span>'
-                            html +=               '</span>'
-                            html +=                '<button  class = "btn btn-danger" id='+ t.id_tarea + ' type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea(id)" ><i class="material-icons" >delete</i></button>'  
-                            html +=           '</div>'
-                            html +=       ' </div>'
-                        }
-                    } else {
-                        html = '<h2>No hay tareas que coincidan </h2>';
-                    }
-                
-                    document.getElementById("tareas").innerHTML = html;
-                    }).catch(err => {
-                        console.log(err);
-                    });
-            };
-            
-            document.getElementById('buscar').onkeyup = accion_asincrona;
+                        // html += '<div id = tareas class="overflow-auto anyClass" style="height: 28rem !important;">'
+                        // html += '<input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >'
+                for (t of data.tareas) {
+                    html += '<div class="row text-light m-1 mt-2  rounded" style="height: 45px;background-color: rgba(0, 0, 0, 0.20) ;">';
+                    html +=     '<div class="col-2  d-none d-lg-block d-md-block d-xl-block border-right border-light text-truncate my-auto">';
+                    html +=         new Date(t.fecha_creacion).toLocaleDateString("ES-mx");
+                    html +=     '</div>';
+                    html +=     '<div class=" col-xl-5 col-lg-5 col-md-4 col-sm-6 col-xs-1 border-right border-light text-truncate  my-auto">';
+                    html +=         '<a type="button" id="' + t.id_tarea + '" data-toggle="modal" data-target="#exampleModal" onclick = "mostrartarea(id)">' +  t.descripcion + '</a>';
+                    html +=      '</div>';
+                    html +=       '<div class="col-xl-1 col-lg-1 col-md-1 text-truncate d-none d-lg-block d-md-block d-xl-block border-right border-light  my-auto ">';
+                    html +=               t.duracion.toFixed(2); 
+                    html +=       '</div>';
+                    html +=       '<div class="col-xl-2 col-md-2 d-none d-lg-block d-md-block d-xl-block border-right light text-truncate my-auto">';
+                    html +=               t.descripcion; 
+                    html +=        '</div>';
+                    html +=        '<div class="col-xl-2 col-lg-2 col-md-3 col-sm-5 my-auto  "  style="overflow: hidden ;" >';
+                    html +=         '<div class="row"> '
+                    html +=               '<div class="col " style="justify-content:end !important ;" >';
+                    html +=                '<a href="/tareas/editarTarea/'+ t.id_tarea + '" style="flex:none ;" >';
+                    html +=                     '<button  style=" flex: none; " class = "btn btn-sm btn-primary " >';
+                    html +=                         '<i class="material-icons" style="font-size:125% ; " >edit</i> </button>';
+                    html +=                '</a>';
+                    html +=               '<button style="flex: none; "  class = "btn btn-sm btn-danger" id='+ t.id_tarea + ' type="button" class="bi bi-trash" data-toggle="modal" data-target="#exampleModal" onclick = "eliminartarea('+ t.id_tarea +')" >';
+                    html +=                     '<i style="font-size:125% ;" class="material-icons " >delete</i></button>';  
+                    html +=                '</div>';
+                    html +=            '</div>';
+                    html +=         '</div>';
+                    html += '</div>';
+                }
+            } else {
+                html = '<h2>No hay tareas que coincidan </h2>';
+            }
+        
+            document.getElementById("tareas").innerHTML = html;
+            }).catch(err => {
+                console.log(err);
+            });
+    };
+    
+    document.getElementById('buscar').onkeyup = accion_asincrona;
 
         </script>
         <div id = "modal">

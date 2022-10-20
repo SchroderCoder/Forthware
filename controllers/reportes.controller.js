@@ -5,6 +5,7 @@ const Proyecto = require('../models/proyecto.model');
 const PDF = require('pdfkit-table');
 const fs = require('fs');
 const database = require('../util/database');
+const { ClientRequest } = require('http');
 
 exports.getReportes = (request, response, next) => {
     Reporte.fetchAll()
@@ -65,7 +66,7 @@ exports.postCrearReporte = (request, response, next) => {
     }
 
 
-    const reporte = new Reporte(request.body.fecha_inicio, request.body.fecha_fin, request.body.efectividadaj, request.body.horastotales, request.body.total, request.body.horasausencia, request.body.efectividad, 2, '/pdf/reporte' + request.body.fecha_inicio + "-" + request.body.fecha_fin + '.pdf');
+    const reporte = new Reporte(request.body.fecha_inicio, request.body.fecha_fin, request.body.efectividadaj, request.body.horastotales, request.body.total, request.body.horasausencia, request.body.efectividad, idUsuario, '/pdf/reporte' + request.body.fecha_inicio + "-" + request.body.fecha_fin + '.pdf');
     reporte.save()
         .then(() => {
     
@@ -125,8 +126,8 @@ exports.postCrearReporte = (request, response, next) => {
                     // table
                     const table = {
                       headers: [
-                        { label: "Proyectos", property: 'proyects', width: 60, renderer: null },
-                        { label: "Horas hombre", property: 'hours', width: 150, renderer: null,
+                        { label: "Proyectos", property: 'proyects', width: 120, align:'center', renderer: null },
+                        { label: "Horas hombre", property: 'hours', width: 150, align:'center', renderer: null,
                           renderer: (value, indexColumn, indexRow, row, rectRow, rectCell) => { return value} 
                         },
                       ],
@@ -135,6 +136,7 @@ exports.postCrearReporte = (request, response, next) => {
                         //[{atributo: valor, atributo2: valor2}, {atributo: valor, atributo2: valor2}]
                     };
                     doc.table(table, {
+                    
                       prepareHeader: () => doc.font("Helvetica-Bold").fontSize(10),
                       prepareRow: (row, indexColumn, indexRow, rectRow, rectCell) => {
                         doc.font("Helvetica").fontSize(10);
