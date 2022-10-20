@@ -89,12 +89,10 @@ exports.getLogin = (request, response, next) => {
 };
 
 exports.getMain = (request, response, next) => {
-    
     Proyecto.fetchProyectosImportancia()
     .then(([rows, fielData]) => {
         Usuario.fetchTareasMain(idUsuario)
         .then(([cols, fielData]) => {
-            console.log(imagenUsuario)
         response.render(path.join('..',"views", "main.ejs"), {
             proyectos: rows.slice(0,3),
             proyectos2: rows.slice(3,6),
@@ -122,15 +120,14 @@ exports.postLogin = (request, response, next) => {
     
     return Usuario.fetchOne(request.body.correo)
         .then(([rows, fielData]) => {
-            console.log(rows[0])
             if (rows.length == 1) {
                 request.session.isLoggedIn = true;
                 request.session.user = rows[0].nombre; 
-                nombreUsuario = request.session.user;                
+                nombreUsuario = request.session.user;         
+                request.session.image = rows[0].image_url;
+                imagenUsuario = request.session.image;       
                 request.session.id_empleado= rows[0].id_empleado;
                 idUsuario= request.session.id_empleado;
-                request.session.image = rows[0].image_url;
-                imagenUsuario = request.session.image;
                 bcrypt.compare(request.body.password, rows[0].contraseña)
                     .then(doMatch => {
                         if (doMatch) {
