@@ -63,12 +63,16 @@
                         <div id="checkBoxes" aria-expanded="true" >
                             <div class="row list-group-check" >
                                 <% for (let t of registrados) { %>
-                                    <div class="col-4 ">
-                                        <div class="badge badge-light py-1 m-1  d-block" >
-                                        <input type="checkbox" class=" align-middle" style="display:-webkit-inline-box ;" id="registrados" name="registrados" value="<%= t.id_empleado %>">
-                                        <label for="registrados"><%= t.nombre %></label>
+                                    <% if (t.id_empleado == idUsuario){ %>
+                                        
+                                    <% } else { %>
+                                        <div class="col-4 ">
+                                            <div class="badge badge-light py-1 m-1  d-block" >
+                                            <input type="checkbox" class=" align-middle" style="display:-webkit-inline-box ;" id="registrados" name="registrados" value="<%= t.id_empleado %>">
+                                            <label for="registrados"><%= t.nombre %></label>
+                                            </div>
                                         </div>
-                                    </div>
+                                    <%}%>
                                 <% } %>
                             </div>
                         </div>
@@ -85,7 +89,7 @@
                             <div id="checkBoxes2" aria-expanded="true" >
                                 <div class="row list-group-check" >
                                     <% for (let n of no_registrados) { %>
-
+                                        
                                         <div class="col-4 ">
                                             <div class="badge badge-light py-1 m-1  d-block" >
                                                 <input type="checkbox" class=" align-middle" style="display:-webkit-inline-box ;" id="no_registrados" name="no_registrados" value="<%= n.id_empleado %>">

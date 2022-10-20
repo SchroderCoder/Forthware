@@ -90,6 +90,6 @@ module.exports = class Proyecto {
     }
 
     static fetchProyectosEmpleados(un_id) {
-        return db.execute('SELECT E.nombre FROM empleados E , crea C WHERE C.id_empleado = E.id_empleado AND C.id_proyecto = ? AND is_active = 0', [un_id])
+        return db.execute('SELECT E.nombre, E.id_empleado FROM empleados E, crea C WHERE E.id_empleado = C.id_empleado AND C.id_proyecto = ? order by E.NOMBRE ASC', [un_id])
     }
 }
