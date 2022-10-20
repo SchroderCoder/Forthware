@@ -15,7 +15,7 @@ module.exports = class Proyecto {
     }
 
     save() {
-        return db.execute('INSERT INTO proyectos (nombre, descripcion, stack_tecnologia, importancia, estatus, es_etiqueta, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)', [this.nombre, this.descripcion, this.stack,this.importancia,this.un_estatus,this.etiqueta, this.imagen]);
+        return db.execute('INSERT INTO proyectos (nombre, descripcion, stack_tecnologia, importancia, estatus, es_etiqueta, image_url, id_empleado) VALUES (?, ?, ?, ?, ?, ?, ?,?)', [this.nombre, this.descripcion, this.stack,this.importancia,this.un_estatus,this.etiqueta, this.imagen, this.id]);
     }
 
     static saveEtiqueta(un_nombre, un_bool) {
@@ -90,6 +90,6 @@ module.exports = class Proyecto {
     }
 
     static fetchProyectosEmpleados(un_id) {
-        return db.execute('SELECT E.nombre FROM empleados E , crea C WHERE C.id_empleado = E.id_empleado AND C.id_proyecto = ? AND is_active = 0', [un_id])
+        return db.execute('SELECT E.nombre, E.id_empleado FROM empleados E, crea C WHERE E.id_empleado = C.id_empleado AND C.id_proyecto = ? order by E.NOMBRE ASC', [un_id])
     }
 }

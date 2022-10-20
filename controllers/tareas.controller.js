@@ -72,7 +72,7 @@ exports.getCrearTareas = (request, response, next) => {
 
 exports.postCrearTareas = (request, response, next) => {
         
-        const tarea = new Tarea(request.body.descripcion,request.body.duracion,request.body.proyectos,request.body.fecha);
+        const tarea = new Tarea(request.body.descripcion,request.body.duracion,request.body.proyectos,request.body.fecha, idUsuario);
         tarea.save()
         .then(() => {
             Tarea.fetchRecent()
@@ -128,8 +128,7 @@ exports.postCrearTareas = (request, response, next) => {
                         });
 
                 }           
-
-                request.session.alerta = "Tarea : "+ request.body.descripcion + " creado con éxito!";
+                request.session.alerta = "Tarea : "+ request.body.descripcion + " creada con éxito!";
                 response.status(303).redirect('/tareas/main');
             })
             .catch(err => {
