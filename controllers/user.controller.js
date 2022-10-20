@@ -163,7 +163,7 @@ exports.postLogin = (request, response, next) => {
                                     });
                             });
                         } else {
-                            request.session.alerta = "El usuario o contraseña no existe";
+                            request.session.alerta = "El usuario o contraseña  es incorrecto / no existe";
                             return response.redirect('/user/login');
                         }
                     }).catch(err => {
@@ -173,7 +173,7 @@ exports.postLogin = (request, response, next) => {
                         });
                     });
             } else {
-                request.session.alerta = "El usuario o contraseña no existe";   
+                request.session.alerta = "El usuario o contraseña  es incorrecto / no existe";
                 return response.render("error.ejs", {
                     isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
                 });

@@ -22,8 +22,8 @@ module.exports = class Usuario {
             });
     }
 
-    static fetchAll() {
-        return db.execute('SELECT * FROM empleados order by nombre ASC');
+    static fetchAll(un_id) {
+        return db.execute('SELECT * FROM empleados WHERE id_empleado != ? order by nombre ASC', [un_id]);
     }
 
     static fetchOne(a_correo) {
@@ -58,7 +58,7 @@ module.exports = class Usuario {
         // main 
 
         static fetchTareasMain(a_empleado) {
-            return db.execute('SELECT T.id_tarea, T.descripcion, P.nombre, T.duracion, T.fecha_creacion FROM tareas T, realiza R , proyectos P where T.id_tarea=R.id_tarea AND P.id_proyecto=T.id_proyecto AND R.id_empleado= ? AND T.is_deleted=0 order by fecha_creacion desc LIMIT 4;', [a_empleado]);
+            return db.execute('SELECT T.fecha_creacion, T.duracion, P.nombre, T.descripcion FROM tareas T, realiza R , proyectos P where T.id_tarea=R.id_tarea AND P.id_proyecto=T.id_proyecto AND R.id_empleado= ? AND T.is_deleted=0 order by fecha_creacion desc LIMIT 4;', [a_empleado]);
         }
 
 }

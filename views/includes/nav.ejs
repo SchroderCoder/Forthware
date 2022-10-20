@@ -14,6 +14,7 @@
                     <% if (imagenUsuario == null) { %>
                         <i class="material-icons iconSide pb-1" style="display:block ; width:auto; font-size: 40px; " >account_circle</i>
                     <% } else { %>
+                    <%  console.log(imagenUsuario) %>
                         <div class="circularNav--landscape mx-auto img-fluid "><img src='<%= imagenUsuario %>'  alt="ImagenPerfilProyecto" onerror="this.onerror=null; this.src='/media/default-profile.jpg'; style='margin-left:0%;' "; class="circularNav--landscape-img" ></div>
                     <% } %> 
                 </a>

@@ -1,17 +1,31 @@
-<div class="p-5">
-<i class="material-icons iconSide"style="display:block ; width:auto; font-size: 250px; " >account_circle</i>
-<h1>Acceder</h1>
-<form action="login" method="POST">
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
-    <fieldset>
-        <legend>Datos del usuario</legend>
-            <label for="correo">Correo electronico</label>
-            <input placeholder="Pinguino Rodriguez" id="correo" name="correo" type="text" required><br><br>
-            <label for="password">Password</label>
-            <input placeholder="***" id="password" name="password" type="password" required>
-            
-    </fieldset>
-    <br>
-    <input type="submit" class="btn btn-success" value="Entrar">
-</form>
-</div>
+<div class="container">
+	<div class="screen">
+		<div class="screen__content">
+			<form action="login" method="POST" class="login">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+                <img src="/media/Imagen2.png" width="200" height="32"></img>
+                <h1>Ingresar</h1>
+				<div class="login__field">
+					    <i class="login__icon fas fa-user">
+                    </i>
+                        <input type="text" class="login__input" id="correo" name="correo" placeholder="Correo electrónico">
+                    </div>
+                    <div class="login__field">
+                        <i class="login__icon fas fa-lock"></i>
+                        <input type="password" class="login__input" id="password" name="password" placeholder="Contraseña">
+                    </div>
+                    <button class="button login__submit">
+                        <span class="button__text">Entrar</span>
+                        <i class="button__icon fas fa-chevron-right"></i>
+                    </button>				
+                </form>
+            </div>
+            <div class="screen__background">
+                <span class="screen__background__shape screen__background__shape4"></span>
+                <span class="screen__background__shape screen__background__shape3"></span>		
+                <span class="screen__background__shape screen__background__shape2"></span>
+                <span class="screen__background__shape screen__background__shape1"></span>
+            </div>		
+        </div>
+    </div>
+                        

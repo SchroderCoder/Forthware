@@ -19,4 +19,6 @@ router.post('/OneTarea', requiresAuth(), tareasController.postoneTarea);
 
 router.get('/buscar/:valor', requiresAuth(), tareasController.getBuscar);
 
+router.get('/buscar/', requiresAuth(), tareasController.getBuscar);
+
 module.exports = router;

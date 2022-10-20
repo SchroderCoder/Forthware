@@ -101,10 +101,15 @@
                                                         <p style="background-color: #1a191b !important;" class="text-truncate card-text col-sm  over mx-auto align-middle py-auto  rounded-right etiquetaInfo">0</p>
                                                     <% } %> 
                                                 </div>
-                                                <div class="row"  >
+                                
+                                                <div class="row" style="height: 49px ;"  >
+                                                    <%  if (p.id_empleado == idUsuario){ %>
                                                     <a  href="/proyectos/editarProyecto/<%= p.id_proyecto %>" class="btn btn-primary btn-sm mt-3 mx-auto" style=" width:25% ; display: -webkit-box; box-sizing: content-box;" role="button" aria-disabled="true">
                                                         <i class="material-icons mx-auto mb-1 " style="font-size:135%; display: block; " >edit</i>
                                                     </a>
+                                                    <%} else{ %>
+                                                       
+                                                    <%}%>
                                                 </div>
                                                 <p class="card-text"></p>
                                                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
@@ -152,7 +157,6 @@
     </div>
     
     <% if (privilegios.indexOf('Crear etiqueta') > -1 ) { %> 
-        <% if (privilegios.indexOf('Crear proyecto') > -1 ) { %> 
             <div>
                 <li class="dropdown">
                     <a type="button" class="BotonCrear " id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >         
@@ -162,13 +166,14 @@
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="CrearDropdown">
-                        <a class="dropdown-item " href="/proyectos/crearProyecto">Proyecto</a>
-                        <div class="dropdown-divider"></div>
+                        <% if (privilegios.indexOf('Crear proyecto') > -1 ) { %> 
+                            <a class="dropdown-item " href="/proyectos/crearProyecto">Proyecto</a>
+                            <div class="dropdown-divider"></div>
+                        <% } %>  
                         <a class="dropdown-item" href="/proyectos/crearEtiqueta">Etiqueta</a>
                     </div>
                 </li>
             </div>
-        <% } %>  
     <% } %>  
 </div>
 
@@ -183,9 +188,6 @@
 
 <script src = "/js/hidediv.js"></script>
 <script src="/js/mostrarproyecto.js"> </script>
-
-
-
 
 </body>
 

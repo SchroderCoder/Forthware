@@ -36,12 +36,15 @@
                                                         file_download
                                                     </span></a>
                                                 </button>
-                                           
+                                            <%  if (r.id_empleado == idUsuario){ %>
                                             <button id="<%= r.id_reporte %>"  type="button" class="image3 btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal" value="<%= r.id_reporte %>" onclick = "eliminareporte(id)">
                                                 <span class="material-icons">
                                                     delete
                                                 </span>  
-                                            </button>
+                                            </button> 
+                                            <% } else { %>
+                                                
+                                            <% } %>
                                         </div>
                                     </div>
                                 </div>
@@ -147,5 +150,7 @@
 </script>
 <script src = "/js/hidediv.js"></script>
 <script src="/js/eliminarreporte.js"> </script>
+
+<%- include('includes/footer.ejs') %>
 <%- include('includes/foot.ejs') %>  
 

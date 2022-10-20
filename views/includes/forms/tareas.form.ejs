@@ -16,7 +16,7 @@
             <div class="py-3">
                 <div class="dropdown pb-2">
                     <button class="btn btn--radius-2 btn-secondary dropdown-toggle" type="button" onclick="showCheckboxes()">
-                        Colaboradores
+                        Añadir Colaboradores
                     </button>
                 </div>
                 <div id="checkBoxes" aria-expanded="true" >
@@ -38,16 +38,22 @@
             <div class="py-3">
                 <div class="dropdown pb-2">
                     <button class="btn btn-secondary dropdown-toggle" type="button" onclick="showCheckboxes()">
-                        Eliminar Colaboradores
+                        Eliminar Colaboradores 
                     </button>
                 </div>
                 <div id="checkBoxes"  aria-expanded="false" >
-                    <div class="col-sm list-group-item" >
+                    <div class="row list-group-check" >
                         <% for (let t of registrados) { %>
-                            <div class="badge badge-light m-1 px-3"  >
-                                <input type="checkbox" id="registrados" name="registrados" value="<%= t.id_empleado %>">
-                                <label for="registrados" class="pl-3"><%= t.nombre %></label>
-                            </div>
+                            <% if (t.id_empleado == idUsuario){ %>
+                                
+                            <% } else { %>
+                                <div class="col-4 ">
+                                    <div class="badge badge-light py-1 m-1  d-block"  >
+                                        <input type="checkbox"  class=" align-middle" style="display:-webkit-inline-box ;" id="registrados" name="registrados" value="<%= t.id_empleado %>">
+                                        <label for="registrados" class="pl-3"><%= t.nombre %></label>
+                                    </div>
+                                </div>
+                            <%}%>
                         <% } %>  
                     </div>
                 </div>
@@ -60,11 +66,13 @@
                     <div class="overSelect"></div>
                 </div>
                 <div id="checkBoxes2"  aria-expanded="false" >
-                    <div class="col-sm list-group-item text" >
+                    <div class="row list-group-check" >
                         <% for (let n of no_registrados) { %>
-                            <div class="badge badge-light m-1 px-3"  >
-                                <input type="checkbox" id="no_registrados" name="no_registrados" value="<%= n.id_empleado %>">
-                                <label for="no_registrados"><%= n.nombre %></label>
+                            <div class="col-4 ">
+                                <div class="badge badge-light py-1 m-1  d-block"  >
+                                    <input type="checkbox" class=" align-middle" style="display:-webkit-inline-box ;" id="no_registrados" name="no_registrados" value="<%= n.id_empleado %>">
+                                    <label for="no_registrados"><%= n.nombre %></label>
+                                </div>
                             </div>
                         <% } %>  
                     </div>
@@ -110,7 +118,7 @@
 
 <div class="pl-4"> 
     <% if (tareas=="") { %>
-        <input type="submit" class="btn btn-success btn-lg ml-5 d-block mx-auto mt-3" value="<%= titulo %>" onclick = "checkOne()" >
+        <input type="submit" class="btn btn-success btn-lg ml-5 d-block mx-auto mt-3" value="<%= titulo %>">
     <% } else { %>  
         <div class="col-sm 5" style="display: -webkit-box;; box-sizing: content-box;">
             <input type="submit" class="btn btn-success btn-lg  mx-auto my-2 " style="display: -webkit-box; box-sizing: content-box;" value="Registrar Cambios">
@@ -141,6 +149,4 @@
 </div>     
 
 <script src="/js/checkbox.js"></script>
-<script src="/js/checkedone.js"> </script>
-
 </form>
