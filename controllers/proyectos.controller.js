@@ -82,7 +82,7 @@ exports.postCrearProyecto = (request, response, next) => {
     } else {
         imagen = "";
     }
-    const proyecto = new Proyecto(request.body.nombre,request.body.descripcion, request.body.stack,request.body.importancia, request.body.estatus,0,'/project_images/' + imagen);
+    const proyecto = new Proyecto(request.body.nombre,request.body.descripcion, request.body.stack,request.body.importancia, request.body.estatus,0,'/project_images/' + imagen, idUsuario);
 
     proyecto.save()
         .then(() => {

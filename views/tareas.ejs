@@ -71,6 +71,7 @@
                                                 <%=  t.nombre %>
                                             </div>
                                             <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5 my-auto  "  style="overflow: hidden ;" >
+                                                <%  if (t.id_creador == idUsuario){ %>
                                                 <div class="row" >
                                                     <div class="col " style="justify-content:end !important ;" >
                                                     <a href="/tareas/editarTarea/<%= t.id_tarea %>" style="flex:none ;" >
@@ -81,6 +82,9 @@
                                                         <i style="font-size:125% ;" class="material-icons " >delete</i></button>
                                                     </div>              <!-- style="width: 20%;height: 20%; display: block;" -->
                                                 </div>
+                                                <% } else { %>
+
+                                                <% } %>
                                             </div>
                                             
                             
