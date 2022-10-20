@@ -32,10 +32,10 @@ const config = {
     authRequired: false,
     auth0Logout: true,
     secret: 'a long, randomly-generated string stored in env',
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://35.226.122.38:8080',
     clientID: '8auvzODUBeQN95tGqRcCWm2rDvW2ksqK',
     issuerBaseURL: 'https://dev-wrm9w-qh.us.auth0.com'
-};
+  };
 
 
 const app = express();
@@ -113,4 +113,4 @@ app.get("/logout",(req, response, next) => {
     response.render(path.join(__dirname,"views","logout.ejs"));
  });
 
-app.listen(3000);
+app.listen(8080);
