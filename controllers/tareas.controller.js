@@ -115,7 +115,7 @@ exports.postCrearTareas = (request, response, next) => {
                                 isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
                             });
                         });
-
+                    
                     Realiza.registrar(idUsuario,id_reciente)
                         .then(() => {
                         })
