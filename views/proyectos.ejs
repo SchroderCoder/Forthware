@@ -101,10 +101,15 @@
                                                         <p style="background-color: #1a191b !important;" class="text-truncate card-text col-sm  over mx-auto align-middle py-auto  rounded-right etiquetaInfo">0</p>
                                                     <% } %> 
                                                 </div>
-                                                <div class="row"  >
+                                
+                                                <div class="row" style="height: 49px ;"  >
+                                                    <%  if (p.id_empleado == idUsuario){ %>
                                                     <a  href="/proyectos/editarProyecto/<%= p.id_proyecto %>" class="btn btn-primary btn-sm mt-3 mx-auto" style=" width:25% ; display: -webkit-box; box-sizing: content-box;" role="button" aria-disabled="true">
                                                         <i class="material-icons mx-auto mb-1 " style="font-size:135%; display: block; " >edit</i>
                                                     </a>
+                                                    <%} else{ %>
+                                                       
+                                                    <%}%>
                                                 </div>
                                                 <p class="card-text"></p>
                                                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->

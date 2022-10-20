@@ -11,9 +11,10 @@
             <li class="nav-item dropdown">
                 
                 <a class="nav-link " id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <% if (imagenUsuario = null) { %>
+                    <% if (imagenUsuario == null) { %>
                         <i class="material-icons iconSide pb-1" style="display:block ; width:auto; font-size: 40px; " >account_circle</i>
                     <% } else { %>
+                    <%  console.log(imagenUsuario) %>
                         <div class="circularNav--landscape mx-auto img-fluid "><img src='<%= imagenUsuario %>'  alt="ImagenPerfilProyecto" onerror="this.onerror=null; this.src='/media/default-profile.jpg'; style='margin-left:0%;' "; class="circularNav--landscape-img" ></div>
                     <% } %> 
                 </a>
