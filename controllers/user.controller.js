@@ -57,13 +57,13 @@ exports.postRol = (request, response, next) => {
     let rol = request.body.rol;
     let empleado = request.body.empleados;
 
-    if(rol == 'coordinador') {
+    if(rol == 'Coordinador') {
         rol = 3;
     } 
-    else if(rol == 'lider') {
+    else if(rol == 'Lider') {
         rol = 2;
     }
-    else if(rol == 'colaborador') {
+    else if(rol == 'Colaborador') {
         rol = 1;
     }
 
@@ -89,10 +89,12 @@ exports.getLogin = (request, response, next) => {
 };
 
 exports.getMain = (request, response, next) => {
+    
     Proyecto.fetchProyectosImportancia()
     .then(([rows, fielData]) => {
-        Usuario.fetchTareasMain()
+        Usuario.fetchTareasMain(idUsuario)
         .then(([cols, fielData]) => {
+            console.log(imagenUsuario)
         response.render(path.join('..',"views", "main.ejs"), {
             proyectos: rows.slice(0,3),
             proyectos2: rows.slice(3,6),
@@ -120,13 +122,18 @@ exports.postLogin = (request, response, next) => {
     
     return Usuario.fetchOne(request.body.correo)
         .then(([rows, fielData]) => {
+            console.log(rows[0])
             if (rows.length == 1) {
+                request.session.isLoggedIn = true;
+                request.session.user = rows[0].nombre; 
+                nombreUsuario = request.session.user;                
+                request.session.id_empleado= rows[0].id_empleado;
+                idUsuario= request.session.id_empleado;
+                request.session.image = rows[0].image_url;
+                imagenUsuario = request.session.image;
                 bcrypt.compare(request.body.password, rows[0].contraseña)
                     .then(doMatch => {
                         if (doMatch) {
-                            request.session.isLoggedIn = true;
-                            request.session.user = rows[0].nombre;  
-                            request.session.id_empleado= rows[0].id_empleado;
                             return request.session.save(err => {
                                 //Obtener los permisos del usuario
                                 Usuario.getPermisos(rows[0].id_empleado)
@@ -145,11 +152,21 @@ exports.postLogin = (request, response, next) => {
                                         });
                                     });
                                 
-                                
+                                    Usuario.getRol(rows[0].id_empleado)	
+                                    .then(([consulta_roles, fielData]) => {  	
+                                        request.session.roles = ""; 	
+                                        request.session.roles = consulta_roles[0].descripcion;
+                                        rolUsuario= request.session.roles;                                                                 	
+                                    })	
+                                    .catch(err => {	
+                                        console.log(err);	
+                                        response.render('error.ejs', {	
+                                            isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,	
+                                        });	
+                                    });
                             });
                         } else {
-                            request.session.alerta = "El usuario o contraseña no existe";
-                            console.log("El usuario o contraseña no existe");
+                            request.session.alerta = "El usuario o contraseña  es incorrecto / no existe";
                             return response.redirect('/user/login');
                         }
                     }).catch(err => {
@@ -159,8 +176,7 @@ exports.postLogin = (request, response, next) => {
                         });
                     });
             } else {
-                request.session.alerta = "El usuario o contraseña no existe";
-                console.log("El usuario o contraseña no existe");
+                request.session.alerta = "El usuario o contraseña  es incorrecto / no existe";
                 return response.render("error.ejs", {
                     isLoggedIn: request.session.isLoggedIn ? request.session.isLoggedIn : false,
                 });

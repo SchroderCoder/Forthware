@@ -2,19 +2,20 @@ const db = require('../util/database');
 
 module.exports = class Tarea {
 
-    constructor(una_descripcion, una_duracion, id_proyecto, una_fecha) {
+    constructor(una_descripcion, una_duracion, id_proyecto, una_fecha, un_id) {
         this.descripcion = una_descripcion;
         this.duracion = una_duracion;
         this.id_proyecto = id_proyecto;
         this.fecha = una_fecha;
+        this.id = un_id
     }
 
     save() {
-        return db.execute('INSERT INTO tareas (descripcion, duracion, id_proyecto, fecha_creacion) VALUES (?, ?, ?, ?)', [this.descripcion, this.duracion,this.id_proyecto,this.fecha]);
+        return db.execute('INSERT INTO tareas (descripcion, duracion, id_proyecto, fecha_creacion, id_creador) VALUES (?, ?, ?, ?,?)', [this.descripcion, this.duracion,this.id_proyecto,this.fecha,this.id]);
     }
 
     static fetchAll() {
-        return db.execute('SELECT t.id_tarea, t.fecha_creacion , t.descripcion, t.duracion, t.id_proyecto, p.nombre FROM tareas t, proyectos p WHERE t.id_proyecto = p.id_proyecto AND t.is_deleted= 0 GROUP BY id_tarea ORDER BY id_tarea DESC');
+        return db.execute('SELECT t.id_tarea, t.fecha_creacion , t.descripcion, t.duracion, t.id_proyecto, t.id_creador , p.nombre FROM tareas t, proyectos p WHERE t.id_proyecto = p.id_proyecto AND t.is_deleted= 0 GROUP BY id_tarea ORDER BY id_tarea DESC');
     }
 
     static fetchOne(un_id) {

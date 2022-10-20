@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { requiresAuth } = require('express-openid-connect');
 const userController = require('../controllers/user.controller');
-const proyectoController = require('../controllers/proyectos.controller');
 
 router.get('/new',  requiresAuth(), userController.getNew);
 

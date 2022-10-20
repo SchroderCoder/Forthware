@@ -17,18 +17,26 @@
 <body style="padding-right: 0px !important;">
 
     <h1 class=" pt-1 font-weight-bold">Proyectos</h1>
-    <div class="row ">
-        <div class="col-sm-10 over list-group-item m-2">
-                <div class="overflow-auto anyClass">
-                    <% if (proyectos.length > 0) { %>
+    <div class="pl-4 pt-2" >
+        <ul class="nav nav-tabs" style="border: none;" id="myTab" role="tablist">
+            <li class="nav-item " role="presentation">
+                <button class="nav-link active text-light" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Proyectos</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link text-light"  id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Etiquetas</button>
+            </li>
+        </ul>
+        <div class="tab-content mb-5" style=" background-color: #0000004c; ;" id="myTabContent">
+            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                <% if (proyectos.length > 0) { %>
                         <div class="p-2">
                             <div class="row">
                                 <% for (let  p of proyectos) { %>
-                                    <div class="col-sm-4 pb-3 over">
-                                        <div class="card" style="width: auto;height: 29rem ; ">
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 pb-3 over">
+                                        <div class="card" style="width: auto;height: auto ; ">
                                             <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
-                                            <h5 class=" text-truncate card-title bg-success text-light text-center align-middle py-auto  list-group-item" style="height:10% ;"><a href="/proyectos/editarProyecto/<%= p.id_proyecto %>" class="text-white" ><%= p.nombre %></a></h5>
-                                            <a id="<%= p.id_proyecto %>" data-toggle="modal" data-target="#exampleModal" onclick = "mostrarproyecto(id)"><img src="<%= p.image_url %>" class="card-img-top" alt="" onerror="this.onerror=null; this.src='https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png'"></a>
+                                            <h5 class=" text-truncate card-title bg-success text-light text-center align-middle py-2 rounded-top " style="height:10% ;"><%= p.nombre %></h5>
+                                            <a type="button" id="<%= p.id_proyecto %>" data-toggle="modal" data-target="#exampleModal" onclick = "mostrarproyecto(id)"><img src="<%= p.image_url %>" class="card-img-top imagen-landscape d-block mx-auto img-fluid" alt="" onerror="this.onerror=null; this.src='/media/image-not-found-scaled.png'"></a>
                                             <div class="card-body textBlack">
                                                 <div class="row">
                                                         <p class="text-truncate card-text col-sm pt-2 over mx-auto align-middle py-auto  rounded-left etiquetaInfo">Importancia:</p>
@@ -43,7 +51,7 @@
                                                         <% } %>
                                                 </div>
                                                 <div class="row pt-2"  >
-                                                    <p class="text-truncate card-text col-sm pt-1 over mx-auto align-middle py-auto rounded-left etiquetaInfo">Estatus:</p>
+                                                    <p class="text-truncate card-text col-sm pt-1 over mx-auto align-middle py-auto rounded-left etiquetaInfo " >Estatus:</p>
                                                         <% if (p.estatus == "Planeación") { %>
                                                             <p style="background-color: #9B38CA !important;" class="text-truncate card-text col-sm  over mx-auto align-middle py-auto rounded-right etiquetaInfo" ><%= p.estatus %></p>
                                                         <% } %>
@@ -93,6 +101,16 @@
                                                         <p style="background-color: #1a191b !important;" class="text-truncate card-text col-sm  over mx-auto align-middle py-auto  rounded-right etiquetaInfo">0</p>
                                                     <% } %> 
                                                 </div>
+                                
+                                                <div class="row" style="height: 49px ;"  >
+                                                    <%  if (p.id_empleado == idUsuario){ %>
+                                                    <a  href="/proyectos/editarProyecto/<%= p.id_proyecto %>" class="btn btn-primary btn-sm mt-3 mx-auto" style=" width:25% ; display: -webkit-box; box-sizing: content-box;" role="button" aria-disabled="true">
+                                                        <i class="material-icons mx-auto mb-1 " style="font-size:135%; display: block; " >edit</i>
+                                                    </a>
+                                                    <%} else{ %>
+                                                       
+                                                    <%}%>
+                                                </div>
                                                 <p class="card-text"></p>
                                                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                                             </div>
@@ -106,47 +124,57 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <% if (privilegios.indexOf('Crear proyecto') > -1) { %> 
-            <div class="col-sm over align-middle py-auto  m-2" style="display: -webkit-box;; " >
-                    <a class="align-middle m-auto center-block text-center text-white" style="display: -webkit-box;; box-sizing: content-box; " href="/proyectos/crearProyecto" button type="button"><i class="material-icons iconSide p-1 " style="font-size:60px;color:green; ">add_circle</i> <br> Crear proyecto</a>
-            </div>
-        <% } %>  
-    </div>
-   <!-- <div> <%= JSON.stringify(user,null,2) %></div> -->
-    
-    <h1 class=" pt-1 font-weight-bold">Etiquetas</h1>
-    <div class="row ">
-        <div class="col-sm-8 over m-2">
-            <div class="card" style="width: 50rem;">
-                <ul class="list-group list-group-flush">
-                    <% if (etiquetas.length > 0) { %>
-                        <% for (let  e of etiquetas) { %>
-                          <a href="/proyectos/editarEtiqueta/<%= e.id_proyecto %>"> <li class="list-group-item border-bottom border-dark" style="width:50rem;"> <a class="p-3" href="/proyectos/editarEtiqueta/<%= e.id_proyecto %>" ><%= e.nombre %></a></li></a> 
-                          <% let check %>
-                                <% for (let h of horas) { %>
-                                    <% if (e.nombre == h.nombre && h.es_etiqueta == 1) { %>
-                                        <p style="background-color: #1a191b !important;" class="card-text col-sm  over mx-auto align-middle py-auto  list-group-item"><%=h.horas.toFixed(2)%></p>
-                                        <% check = true; %>
-                                    <% }%>
-                                <% } %>
-                                <% if (check) { %>
+            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                <div class="row ">
+                    <div class="col over m-2">
+                        <div class="card" style="width: 50rem;">
+                            <ul class="list-etiquetas">
+                                <% if (etiquetas.length > 0) { %>
+                                    <% for (let  e of etiquetas) { %>
+                                        <a href="/proyectos/editarEtiqueta/<%= e.id_proyecto %>"> <li class="list-group-item border-bottom border-dark" style="width:50rem;"> <a class="p-3" href="/proyectos/editarEtiqueta/<%= e.id_proyecto %>" ><%= e.nombre %></a></li></a> 
+                                        <% let check %>
+                                            <% for (let h of horas) { %>
+                                                <% if (e.nombre == h.nombre && h.es_etiqueta == 1) { %>
+                                                    <p style="background-color: #1a191b !important;" class="card-text col-sm  over mx-auto align-middle py-auto  list-group-item"><%=h.horas.toFixed(2)%></p>
+                                                    <% check = true; %>
+                                                <% }%>
+                                            <% } %>
+                                            <% if (check) { %>
+                                            <% } else { %>
+                                                <p style="background-color: #1a191b !important;" class="card-text col-sm over mx-auto align-middle py-auto list-group-item">0</p>
+                                            <% } %> 
+                                    <% } %>
                                 <% } else { %>
-                                    <p style="background-color: #1a191b !important;" class="card-text col-sm  over mx-auto align-middle py-auto  list-group-item">0</p>
+                                    <h2>No hay Etiquetas registrados</h2>
                                 <% } %> 
-                        <% } %>
-                    <% } else { %>
-                        <h2>No hay Etiquetas registrados</h2>
-                    <% } %> 
-                </ul>
+                            </ul>
+                        </div>
+                    </div> 
+                </div>
+                <!-- FIN DE ETIQUETAS -->
             </div>
         </div>
-        <% if (privilegios.indexOf('Crear etiqueta') > -1) { %> 
-        <div class="col-sm over align-middle py-auto  m-2" style="display: -webkit-box;; box-sizing: content-box;" >
-            <a class="align-middle m-auto center-block text-center text-white" style="display: -webkit-box;; box-sizing: content-box; " href="/proyectos/crearEtiqueta" button type="button"><i class="material-icons iconSide p-1 " style="font-size:60px;color:green;">add_circle</i> <br> Crear Etiqueta</a>
-        </div>
-        <% } %>  
     </div>
+    
+    <% if (privilegios.indexOf('Crear etiqueta') > -1 ) { %> 
+            <div>
+                <li class="dropdown">
+                    <a type="button" class="BotonCrear " id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >         
+                        <span class="material-icons hoverCrear " style="font-size:75px;color:white; background-color: #28a745; 
+                        border-radius: 50%; filter: drop-shadow(6px 2px 10px rgba(0, 0, 0, 1)); ">
+                            add
+                        </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="CrearDropdown">
+                        <% if (privilegios.indexOf('Crear proyecto') > -1 ) { %> 
+                            <a class="dropdown-item " href="/proyectos/crearProyecto">Proyecto</a>
+                            <div class="dropdown-divider"></div>
+                        <% } %>  
+                        <a class="dropdown-item" href="/proyectos/crearEtiqueta">Etiqueta</a>
+                    </div>
+                </li>
+            </div>
+    <% } %>  
 </div>
 
 <div id = "modal">
@@ -160,9 +188,6 @@
 
 <script src = "/js/hidediv.js"></script>
 <script src="/js/mostrarproyecto.js"> </script>
-
-
-
 
 </body>
 

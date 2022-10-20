@@ -14,16 +14,6 @@
     <div class="col-5 pl-3 " style="display:block ;">
         <h2 class=" " >Reportes</h2>
     </div>
-    <div class="col-sm-1 pt-1 pl-5" style="display:block ;">
-        <a href="/reportes/crearReporte" style="display:block ;">
-            <button type="button" class="btn btn-success mx-auto d-block " style="display:block ;" >
-                <span class="material-icons align-middle mr-2 mb-1">
-                    add
-                    </span>
-                Crear
-            </button>
-        </a>
-    </div>
 </div>
 
 <div class="p-3">
@@ -40,15 +30,21 @@
                                         <!-- <img src="/media/templatereportes.png" class="card-img-top" style="position:relative ;" alt="reporte"> -->
                                         <div class="parent">
                                             <img src="/media/templatereportes.png"  class=" p-1  image1 card-img-top mx-auto d-block img-fluid" style="position:relative ; width:63% ;  " alt="reporte" />
-                                            <a href="<%= r.pdf_reportes%>" class="btn-sm btn-primary image2" type="button" > 
-                                                <span class="material-icons">
-                                                    file_download
-                                                </span></a>
+                                            <a href="<%= r.pdf_reportes%>" class="text-white" type="button" > 
+                                                <button class="btn-sm btn-primary image2 ">
+                                                    <span class="material-icons">
+                                                        file_download
+                                                    </span></a>
+                                                </button>
+                                            <%  if (r.id_empleado == idUsuario){ %>
                                             <button id="<%= r.id_reporte %>"  type="button" class="image3 btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal" value="<%= r.id_reporte %>" onclick = "eliminareporte(id)">
                                                 <span class="material-icons">
                                                     delete
                                                 </span>  
-                                            </button>
+                                            </button> 
+                                            <% } else { %>
+                                                
+                                            <% } %>
                                         </div>
                                     </div>
                                 </div>
@@ -59,6 +55,15 @@
                     <h2>No hay reportes registrados</h2>
                 <% } %>  
         </div>
+    </div>
+    <div>
+        <a href="/reportes/crearReporte" type="button" class="BotonCrear " >      
+                <span class="material-icons hoverCrear " style="font-size:75px;color:white; background-color: #28a745; 
+            border-radius: 50%; filter: drop-shadow(6px 4px 4px rgba(0, 0, 0, 0.50)); ">
+                add
+            </span>
+            
+        </a>
     </div>
 </div>
 
@@ -75,7 +80,7 @@
 <% const efectividad_aj = [];%>
 <% const fechas = [];%>
 <% for (let e of efectividad){ %> 
-             
+
     <% efectividad_aj.push(e.efectividad_ajustada)%> 
     <% fechas.push(new Date(e.fecha_fin).toLocaleDateString("ES-mx"))%>
 
@@ -144,5 +149,7 @@
 </script>
 <script src = "/js/hidediv.js"></script>
 <script src="/js/eliminarreporte.js"> </script>
+
+<%- include('includes/footer.ejs') %>
 <%- include('includes/foot.ejs') %>  
 
