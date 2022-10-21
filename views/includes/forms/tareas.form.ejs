@@ -48,6 +48,7 @@
                             <% if (t.id_empleado == idUsuario){ %>
                                 
                             <% } else { %>
+                                <% if (!t.is_deleted){ %>
                                 <div class="col-4 ">
                                     <div class="badge badge-light py-1 m-1  d-block"  >
                                         <input type="checkbox"  class=" align-middle" style="display:-webkit-inline-box ;" id="registrados" name="registrados" value="<%= t.id_empleado %>">
