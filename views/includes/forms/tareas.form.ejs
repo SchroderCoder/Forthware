@@ -23,7 +23,7 @@
                     <!-- rs-select2 js-select-simple select--no-search -->
                     <div class="row list-group-check" >
                         <% for (let e of empleados) { %>
-                            <% if (e.is_active == 0) { %>
+                            <% if (!e.is_active) { %>
                                 <div class="col-4 ">
                                     <div class="badge badge-light py-1 m-1  d-block"  >
                                     <input type="checkbox" class=" align-middle" style="display:-webkit-inline-box ;" id="empleados" name="empleados" value="<%= e.id_empleado %>">
@@ -69,7 +69,7 @@
                 <div id="checkBoxes2"  aria-expanded="false" >
                     <div class="row list-group-check" >
                         <% for (let n of no_registrados) { %>
-                            <% if (e.is_active == 0) { %>
+                            <% if (!e.is_active) { %>
                                 <div class="col-4 ">
                                     <div class="badge badge-light py-1 m-1  d-block"  >
                                         <input type="checkbox" class=" align-middle" style="display:-webkit-inline-box ;" id="no_registrados" name="no_registrados" value="<%= n.id_empleado %>">
