@@ -431,7 +431,9 @@ margin-left:-25%;
 
 .site-footer
 {
-  background-color:#26272b;
+    border-top:  1px solid #1c1c1c !important;;
+   
+    background-color: #25282B !important;
   padding:45px 0 20px;
   font-size:15px;
   line-height:24px;
