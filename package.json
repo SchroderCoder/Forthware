@@ -1,0 +1,47 @@
+{
+  "name": "forthware",
+  "version": "1.0.0",
+  "description": "Natdev",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SchroderCoder/Forthware.git"
+  },
+  "keywords": [
+    "Administrador",
+    "de",
+    "proyectos"
+  ],
+  "author": "José Eduardo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SchroderCoder/Forthware/issues"
+  },
+  "homepage": "https://github.com/SchroderCoder/Forthware#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "chart.js": "^3.9.1",
+    "cookie-parser": "^1.4.6",
+    "csurf": "^1.11.0",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "express-jwt": "^7.7.5",
+    "express-jwt-authz": "^2.4.1",
+    "express-jwt-permissions": "^1.3.7",
+    "express-oauth2-jwt-bearer": "^1.1.0",
+    "express-openid-connect": "^2.9.0",
+    "express-session": "^1.17.3",
+    "jwks-rsa": "^2.1.5",
+    "moment": "^2.29.4",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.19",
+    "pdfkit": "^0.13.0",
+    "pdfkit-table": "^0.1.99"
+  }
+}

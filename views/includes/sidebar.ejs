@@ -1,0 +1,27 @@
+<!-- Sidebar-->
+<div class="border-end bg-white" id="sidebar-wrapper">
+            
+    <div class="list-group list-group-flush">
+        <!--<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Dashboard</a>-->
+        
+        <a class="list-group-item p-3 BotonMain" href="/user/main">
+            <i class="material-icons iconSide" >home</i>Pagina principal</a>
+        <a class="list-group-item p-3 BotonMain" href="/proyectos/main">
+            <i class="material-icons iconSide" >view_list</i>Proyectos</a>
+        <% if (privilegios.indexOf('Generar reporte') > -1) { %> 
+        <a class="list-group-item p-3 BotonMain" href="/reportes/main">
+                <i class="material-icons iconSide" >insights</i>Reportes
+        </a>
+        <% } %>  
+        <a class="list-group-item p-3 BotonMain" href="/tareas/main">
+            <i class="material-icons iconSide" >assignment</i>Tareas
+        </a>
+        <a class="list-group-item p-3 BotonMain" href="/colaboradores/main">
+            <i class="material-icons iconSide" >group</i>Colaboradores
+        </a>
+        <a class="list-group-item"></a>
+    </div>
+</div>
+
+<!-- Page content-->
+<div class="container-fluid">

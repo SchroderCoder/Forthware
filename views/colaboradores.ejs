@@ -1,0 +1,48 @@
+<%- include('includes/head.ejs') %>
+<%- include('includes/nav.ejs') %>   
+<%- include('includes/sidebar.ejs') %>   
+
+<body style="padding-right: 0px !important;">
+    <h1 class=" pt-1 font-weight-bold">Colaboradores</h1>
+    <div class="col-sm over m-2">
+        <div class="p-2">
+            <div class="row">
+                <% for (let  p of colaboradores) { %>
+                    <div class=" col-lg-4 col-xl-3 col-md-5 pt-1 over" style="cursor:pointer;">
+                        <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
+                        <a id="<%= p.id_empleado %>" name="<%= p.nombre %>" data-toggle="modal" data-target="#exampleModal" onclick = "mostrarperfil(id)"><img src="<%= p.image_url %>" class="img-circle  d-block img-fluid imagenColabs-landscape px-auto" alt="Imagen de Perfil Colaborador" onerror="this.onerror=null; this.src='/media/image-not-found-scaled.png'"> </a>
+                        <h5 class="card-title text-light text-center align-middle pt-2 bg-secondary" style="height:15% ;"><%= p.nombre %></h5> 
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end ">
+        <li class="page-item">
+            <a class="page-link bg-secondary border-white text-white" href="#" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link bg-secondary border-white text-white" href="#">1</a></li>
+        <li class="page-item"><a class="page-link bg-secondary border-white text-white" href="#">2</a></li>
+        <li class="page-item"><a class="page-link bg-secondary border-white text-white" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link bg-secondary border-white text-white" href="#">Next</a>
+        </li>
+    </ul>
+    </nav>
+
+    <div id = "modal">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" id="modal_contenido">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/mostrarperfil.js"> </script>
+
+</body>
+<%- include('includes/footer.ejs') %>
+<%- include('includes/foot.ejs') %>  
+

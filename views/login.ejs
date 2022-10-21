@@ -1,0 +1,14 @@
+<%- include('includes/head_login.ejs') %>
+<%- include('includes/navLogin.ejs') %>
+
+
+<%- include('includes/forms/login.form.ejs') %> 
+
+
+<%  if (alert.includes("existe")) { %> 
+    <%- include('includes/deletealert.ejs') %>
+<%  } %> 
+
+<script src = "/js/hidediv.js"></script>
+
+<%- include('includes/footer.ejs') %>
