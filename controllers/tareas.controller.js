@@ -157,7 +157,6 @@ exports.getEditarTareas = (request, response, next) => {
                 for(let proyecto of consulta) {
                     request.session.proyectos.push(proyecto);
                 }   
-
                 Realiza.fetchRegistrados(request.params.id)
                 .then(([registered, fielData]) => {
                     request.session.empleados_r = [];

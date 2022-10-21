@@ -128,9 +128,6 @@ function mostrarperfilpersonal(id){
                 '           <div class="col">' +
                 '            <div class = "container2">' +
                 '            <img src="'+ data.empleados[0].image_url +'" class="img-circle mx-auto d-block img-fluid imagePerfil" alt="Imagen de Perfil Colaborador" ></img><div id = "imagen"></img>' +
-                '            <div class="middle">' +
-                '            <div class="text"><a href="/proyectos/editarEtiqueta/<%= 2 %>"><button class="btn btn-info" >Editar imagen</button></a></div>' +
-                '            </div> ' +
                 '            </div> ' +
                 '            </div> ' +
                 '           </div> ' +
