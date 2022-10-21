@@ -1,6 +1,6 @@
 function mostrartarea(id){
 
-    document.getElementById("modal_contenido").innerHTML = '';
+    document.getElementById("modal_contenidoT").innerHTML = '';
 
     data = new Object ();
 
@@ -36,7 +36,7 @@ function mostrartarea(id){
 
                 html += '        </div> ';
             
-                document.getElementById("modal_contenido").innerHTML = html;
+                document.getElementById("modal_contenidoT").innerHTML = html;
 
     }).catch(err => {
         console.log(err);

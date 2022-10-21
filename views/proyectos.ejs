@@ -33,7 +33,7 @@
                             <div class="row">
                                 <% for (let  p of proyectos) { %>
                                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 pb-3 over">
-                                        <div class="card" style="width: auto;height: auto ; ">
+                                        <div class="card rounded-top" style="width: auto;height: auto ; ">
                                             <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" >
                                             <h5 class=" text-truncate card-title bg-success text-light text-center align-middle py-2 rounded-top " style="height:10% ;"><%= p.nombre %></h5>
                                             <a type="button" id="<%= p.id_proyecto %>" data-toggle="modal" data-target="#exampleModal" onclick = "mostrarproyecto(id)"><img src="<%= p.image_url %>" class="card-img-top imagen-landscape d-block mx-auto img-fluid" alt="" onerror="this.onerror=null; this.src='/media/image-not-found-scaled.png'"></a>
@@ -126,24 +126,50 @@
             </div>
             <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
                 <div class="row ">
-                    <div class="col over m-2">
-                        <div class="card" style="width: 50rem;">
-                            <ul class="list-etiquetas">
+                    <div class="col-sm over  ">
+                        <div style="height: auto !important;">
+                            <ul class="">
+                                <div class="row text-light mx-4 mt-2 rounded" style="height: auto; width: auto; ;background-color: rgba(0, 0, 0, 0.40) ;  ">
+                                    <div class="col-6 text-center text-truncate my-auto">
+                                        Nombre
+                                    </div>    
+                                    <div class="col-3 card-text text-truncate text-center px-auto align-middle my-auto">
+                                        Horas Dedicadas
+                                    </div>
+                                    <div class="col-3 my-auto">
+                                            
+                                    </div>
+                                </div>  
+
                                 <% if (etiquetas.length > 0) { %>
-                                    <% for (let  e of etiquetas) { %>
-                                        <a href="/proyectos/editarEtiqueta/<%= e.id_proyecto %>"> <li class="list-group-item border-bottom border-dark" style="width:50rem;"> <a class="p-3" href="/proyectos/editarEtiqueta/<%= e.id_proyecto %>" ><%= e.nombre %></a></li></a> 
-                                        <% let check %>
-                                            <% for (let h of horas) { %>
-                                                <% if (e.nombre == h.nombre && h.es_etiqueta == 1) { %>
-                                                    <p style="background-color: #1a191b !important;" class="card-text col-sm  over mx-auto align-middle py-auto  list-group-item"><%=h.horas.toFixed(2)%></p>
-                                                    <% check = true; %>
-                                                <% }%>
-                                            <% } %>
-                                            <% if (check) { %>
-                                            <% } else { %>
-                                                <p style="background-color: #1a191b !important;" class="card-text col-sm over mx-auto align-middle py-auto list-group-item">0</p>
-                                            <% } %> 
-                                    <% } %>
+                                    <% for (let e of etiquetas) { %>
+                                        <div class="row text-light mx-4 mt-2 rounded" style="height: 45px; width: auto; ;background-color: rgba(0, 0, 0, 0.30) ;">
+                                            <div class="col-6 border-right border-light text-truncate my-auto">
+                                                 <%= e.nombre %>
+                                            </div>    
+                                            <div class="col-3 card-text  text-center px-auto align-middle my-auto border-light border-right">
+                                                <% let check %>
+                                                    <% for (let h of horas) { %>
+                                                        <% if (e.nombre == h.nombre && h.es_etiqueta == 1) { %>
+                                                                <%=h.horas.toFixed(2)%>
+                                                            <% check = true; %>
+                                                        <% }%>
+                                                    <% } %>
+                                                    <% if (check) { %>
+                                                    <% } else { %>
+                                                        0
+                                                    <% } %>
+                                                
+                                            </div>
+                                            <div class="col-3 my-auto">
+                                                    <a  href="/proyectos/editarEtiqueta/<%= e.id_proyecto %>" class="btn btn-primary btn-sm mx-auto my-auto" style=" width:25% ; display: -webkit-box; box-sizing: content-box;" role="button" aria-disabled="true">
+                                                        <i class="material-icons mx-auto mb-1 " style="font-size:130%; display: block; " >edit</i>
+                                                    </a>
+                                                    
+                                                
+                                            </div>
+                                        </div>  
+                                    <%}%>                                           
                                 <% } else { %>
                                     <h2>No hay Etiquetas registrados</h2>
                                 <% } %> 
@@ -167,10 +193,10 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="CrearDropdown">
                         <% if (privilegios.indexOf('Crear proyecto') > -1 ) { %> 
-                            <a class="dropdown-item " href="/proyectos/crearProyecto">Proyecto</a>
+                            <a class="dropdown-item BotonMain " href="/proyectos/crearProyecto">Proyecto</a>
                             <div class="dropdown-divider"></div>
                         <% } %>  
-                        <a class="dropdown-item" href="/proyectos/crearEtiqueta">Etiqueta</a>
+                        <a class="dropdown-item BotonMain" href="/proyectos/crearEtiqueta">Etiqueta</a>
                     </div>
                 </li>
             </div>
@@ -190,7 +216,7 @@
 <script src="/js/mostrarproyecto.js"> </script>
 
 </body>
-
+<%- include('includes/footer.ejs') %>
 <%- include('includes/foot.ejs') %>
 
 

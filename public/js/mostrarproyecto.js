@@ -1,3 +1,5 @@
+
+
 function mostrarproyecto(id){
 
     document.getElementById("modal_contenido").innerHTML = '';
@@ -29,7 +31,7 @@ function mostrarproyecto(id){
                 '        <div class="modal-body text-center"> ' + 
                 '           <div class="container"> ' +
                 '           <div class="row"> ' +
-                '           <div class="col"><img src=" '+ data.proyectos[0].image_url +' " class="img-circle mx-auto d-block img-fluid" alt="Imagen de Perfil Colaborador" onerror="this.onerror=null; this.src="https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png"></img>' +
+                '           <div class="col"><img src="'+ data.proyectos[0].image_url +'" class="img-circle mx-auto d-block img-fluid" alt="Imagen de Perfil Colaborador"  ></img>' +
                 '           </div> ' +
                 '           <div class="col"> ' +
                 '            <p>Nombre del proyecto: '+ data.proyectos[0].nombre + '</p> ' +
