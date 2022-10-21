@@ -47,14 +47,14 @@
                         <% for (let t of registrados) { %>
                             <% if (t.id_empleado == idUsuario){ %>
                                 
-                            <% } else { %>
+                            <% } else if (!e.is_active) { %>
                                 <div class="col-4 ">
                                     <div class="badge badge-light py-1 m-1  d-block"  >
                                         <input type="checkbox"  class=" align-middle" style="display:-webkit-inline-box ;" id="registrados" name="registrados" value="<%= t.id_empleado %>">
                                         <label for="registrados" class="pl-3"><%= t.nombre %></label>
                                     </div>
                                 </div>
-                            <%}%>
+                            <% } %>
                         <% } %>  
                     </div>
                 </div>
