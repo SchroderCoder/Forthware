@@ -87,8 +87,8 @@
 <% } %>  
 
 
-<div class="col-md-5">
-    <canvas id="myChart" width="1000" height = "1000"></canvas>
+<div class=" mx-5 mb-4" style="background-color: rgb(0,0,0,0.3) ; ">
+    <canvas id="myChart" width="800" height = "200"></canvas>
 </div>  
 
 <script>
@@ -111,13 +111,16 @@
         ],
         borderWidth: 2
         },
+        
         ]
     },
     
     options: {
+                
                 responsive: true,
                 legend: {
                     position: 'bottom',
+                    
                 },
                 hover: {
                     mode: 'label'
@@ -125,6 +128,7 @@
                 scales: {
                     xAxes: [{
                             display: true,
+                            
                             scaleLabel: {
                                 display: true,
                                 labelString: 'Month'
